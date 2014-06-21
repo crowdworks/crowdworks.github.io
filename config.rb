@@ -1,14 +1,14 @@
 Time.zone = "Tokyo"
 
-activate :blog do |b|
-  b.blog_layout = 'blog_layout'
-  # blog.tag_template 'tag.html'
-  # blog.calendar_template 'calendar.html'
+activate :livereload
+
+activate :blog do |blog|
+  blog.tag_template = "tag.html"
+  blog.calendar_template = "calendar.html"
+  blog.layout = 'blog_layout'
 end
 
 page "/feeds.xml", layout: false
-
-activate :livereload
 
 set :css_dir, 'stylesheets'
 

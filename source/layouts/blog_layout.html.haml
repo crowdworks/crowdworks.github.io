@@ -36,13 +36,14 @@
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'grayscale'
     = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'blog'
   %body#page-top{class: current_page.data.body_class || 'page', "data-spy" => "scroll", "data-target" => ".navbar-custom"}
     %nav.navbar.navbar-custom.navbar-fixed-top{role: "navigation"}
       .container
         .navbar-header.page-scroll
           %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
             %i.fa.fa-bars
-          %a.navbar-brand{href: "#page-top"}
+          %a.navbar-brand{href: "/"}
             / %i.fa.fa-play-circle
             %img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
             クラウドワークス
@@ -66,50 +67,15 @@
         .container
           .row
             .col-md-8.col-md-offset-2
-              %h1.brand-heading Grayscale
-              %p.intro-text A free, premium quality, responsive one page Bootstrap theme created by Start Bootstrap.
+              %p.post-date= current_article.date.strftime('%Y/%m/%d')
+              %h1.post-title= current_article.data.title
               .page-scroll
-                %a.btn.btn-circle{href: "#about"}
+                %a.btn.btn-circle{href: "#body"}
                   %i.fa.fa-angle-double-down.animated
-    %section#about.container.content-section.text-center
+    %section#body.article-body.container.content-section.text-center
       .row
         .col-lg-8.col-lg-offset-2
-          %h2 About Grayscale
-          %p Grayscale is a premium quality, free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, all you need to do is download the template on the preview page. You can use this template for any purpose, personal or commercial.
-          %p
-            This striking, black and white theme features stock photographs by
-            %a{href: "http://gratisography.com/"} Gratisography
-            along with a custom Google Map skin courtesy of
-            = succeed "." do
-              %a{href: "http://snazzymaps.com/"} Snazzy Maps
-          %p With this template, just the slightest splash of color can make a huge impact on the overall presentation and design.
-    %section#download.content-section.text-center
-      .download-section
-        .container
-          .col-lg-8.col-lg-offset-2
-            %h2 Download Grayscale
-            %p You can download Grayscale for free on the download page at Start Bootstrap. You can also get the source code directly from GitHub if you prefer. Additionally, Grayscale is the first Start Bootstrap theme to come with a LESS file for easy color customization!
-            %a.btn.btn-default.btn-lg{href: "http://startbootstrap.com/grayscale"} Visit Download Page
-    %section#contact.container.content-section.text-center
-      .row
-        .col-lg-8.col-lg-offset-2
-          %h2 Contact Start Bootstrap
-          %p Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!
-          %p feedback@startbootstrap.com
-          %ul.list-inline.banner-social-buttons
-            %li
-              %a.btn.btn-default.btn-lg{href: "https://twitter.com/SBootstrap"}
-                %i.fa.fa-twitter.fa-fw
-                %span.network-name Twitter
-            %li
-              %a.btn.btn-default.btn-lg{href: "https://github.com/IronSummitMedia/startbootstrap"}
-                %i.fa.fa-github.fa-fw
-                %span.network-name Github
-            %li
-              %a.btn.btn-default.btn-lg{href: "https://plus.google.com/+Startbootstrap/posts"}
-                %i.fa.fa-google-plus.fa-fw
-                %span.network-name Google+
-    = yield
+          = yield
     -# Javascripts
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'

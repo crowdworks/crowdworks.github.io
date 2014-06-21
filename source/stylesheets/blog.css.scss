@@ -1,0 +1,20 @@
+//= require_tree ./vendor
+//= require_tree ./lib
+
+.intro-body {
+  vertical-align: bottom;
+}
+
+.article-title {
+  font-size: 50px;
+  margin: 0 0 50px 0;
+}
+
+.article-date {
+  font-size: 30px;
+  margin: 0;
+}
+
+.article-body {
+  padding-top: 100px;
+}
