@@ -37,6 +37,7 @@
     = stylesheet_link_tag 'grayscale'
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'blog'
+    = stylesheet_link_tag 'highlight-ruby'
   %body#page-top{class: current_page.data.body_class || 'page', "data-spy" => "scroll", "data-target" => ".navbar-custom"}
     %nav.navbar.navbar-custom.navbar-fixed-top{role: "navigation"}
       .container
@@ -45,8 +46,8 @@
             %i.fa.fa-bars
           %a.navbar-brand{href: "/"}
             / %i.fa.fa-play-circle
-            %img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
-            クラウドワークス
+            / %img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
+            %img{height: 24, src: 'http://crowdworks.co.jp/images/header-logo.png'}
             %span.light エンジニアブログ
         / Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse.navbar-right.navbar-main-collapse
@@ -55,23 +56,23 @@
             %li.hidden
               %a{href: "#page-top"}
             %li.page-scroll
-              %a{href: "#about"} About
+              %a{href: "/#about"} 最新の投稿
             %li.page-scroll
-              %a{href: "#download"} Download
+              %a{href: "/#download"} カテゴリ
             %li.page-scroll
-              %a{href: "#contact"} Contact
+              %a{href: "/#contact"} アーカイブ
         / /.navbar-collapse
       / /.container
-    %section.intro
-      .intro-body
-        .container
-          .row
-            .col-md-8.col-md-offset-2
-              %p.post-date= current_article.date.strftime('%Y/%m/%d')
-              %h1.post-title= current_article.data.title
-              .page-scroll
-                %a.btn.btn-circle{href: "#body"}
-                  %i.fa.fa-angle-double-down.animated
+    %section.article-intro
+      .row
+        .col-md-8.col-md-offset-2.blog-article
+          %p.article-date= current_article.date.strftime('%Y/%m/%d')
+          %h1.article-title= current_article.data.title
+          %div.author
+            - if current_page.data.gravatar
+              %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
+            - if current_page.data
+              %p.author-name= current_page.data.author
     %section#body.article-body.container.content-section.text-center
       .row
         .col-lg-8.col-lg-offset-2

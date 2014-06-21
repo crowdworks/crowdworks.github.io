@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://crowdworks.github.io/sitemap.xml

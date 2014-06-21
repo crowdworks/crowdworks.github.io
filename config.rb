@@ -8,7 +8,25 @@ activate :blog do |blog|
   blog.layout = 'blog_layout'
 end
 
+require 'digest/md5'
+
+helpers do
+  def gravatar_for(email)
+    hash = Digest::MD5.hexdigest(email.chomp.downcase)
+    "http://s.gravatar.com/avatar/#{hash}?s=32"
+  end
+end
+
+activate :syntax, :line_numbers => true
+
+set :haml, { ugly: true }
+
+set :markdown_engine, :redcarpet
+
+set :markdown, :fenced_code_blocks => true, :smartypants => true
+
 page "/feeds.xml", layout: false
+page "/sitemap.xml", layout: false
 
 set :css_dir, 'stylesheets'
 

@@ -1,20 +1,51 @@
 //= require_tree ./vendor
 //= require_tree ./lib
 
-.intro-body {
+$primary: #28c3ab;
+// $dark: #000;
+$text: #666;
+$dark: #44bbcc;
+$light: #f7f7f7;
+$back: #f7f7f7;
+$caution: #d4633b;
+
+.article-intro {
+  margin-top: 100px;
   vertical-align: bottom;
+  color: $dark;
 }
 
 .article-title {
   font-size: 50px;
-  margin: 0 0 50px 0;
+  margin: 0 0 10px 0;
+  font-weight: 300;
+}
+
+.blog-article:after {
+  padding: 10px 0px;
+  display: block;
+  margin: auto;
+  width: 100px;
+  border-bottom: 2px $dark solid;
+  content: " "
 }
 
 .article-date {
   font-size: 30px;
   margin: 0;
+  font-family: 'Avenir Next W02 Light',Avenir-Light,'Avenir Light',SegoeUI-Light,'Segoe UI Light',Helvetica-Light,'Helvetica Light',Avenir,'Segoe UI',Helvetica,'Hiragino Kaku Gothic ProN','Hiragino Kaku Gothic Pro','游ゴシック','Yu Gothic','Meiryo',sans-serif;
 }
 
 .article-body {
-  padding-top: 100px;
+  padding-top: 50px;
+  color: $text;
+}
+
+.article-body h2 {
+  font-weight: 300;
+  color: $caution;
+}
+
+.article-body h3 {
+  // color: $caution;
 }

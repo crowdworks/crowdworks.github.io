@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>クラウドワークスエンジニアブログ</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://crowdworks.github.io/</id>
+  <link href="http://crowdworks.github.io/"/>
+  <link href="http://crowdworks.github.io/feeds.xml" rel="self"/>
+  <updated>2014-06-23T00:00:00+09:00</updated>
+  <author>
+    <name>CrowdWorks, Inc.</name>
+  </author>
+  <entry>
+    <title>Markdownサンプル記事</title>
+    <link rel="alternate" href="http://crowdworks.github.io/2014/06/23/markdown-sample.html"/>
+    <id>http://crowdworks.github.io/2014/06/23/markdown-sample.html</id>
+    <published>2014-06-23T00:00:00+09:00</published>
+    <updated>2014-06-21T14:21:37+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;要約サンプル&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id="section"&gt;見出し1&lt;/h2&gt;
+
+&lt;p&gt;本文1&lt;/p&gt;
+
+&lt;h3 id="section-1"&gt;見出し2&lt;/h3&gt;
+
+&lt;p&gt;本文2&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ruby
+activate blog do |blog|
+  #
+end
+&lt;/code&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>サンプル記事2タイトル</title>
+    <link rel="alternate" href="http://crowdworks.github.io/2014/06/22/sample.html"/>
+    <id>http://crowdworks.github.io/2014/06/22/sample.html</id>
+    <published>2014-06-22T00:00:00+09:00</published>
+    <updated>2014-06-21T14:21:58+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;要約サンプル&lt;/p&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;サンプル記事2見出し1&lt;/h2&gt;
+  &lt;p&gt;サンプル記事2本文1&lt;/p&gt;
+&lt;/section&gt;
+</content>
+  </entry>
+  <entry>
+    <title>サンプル記事1タイトル</title>
+    <link rel="alternate" href="http://crowdworks.github.io/2014/06/21/sample.html"/>
+    <id>http://crowdworks.github.io/2014/06/21/sample.html</id>
+    <published>2014-06-21T00:00:00+09:00</published>
+    <updated>2014-06-21T15:51:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;要約サンプル&lt;/p&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;サンプル記事1見出し1&lt;/h2&gt;
+  &lt;p&gt;サンプル記事1本文1&lt;/p&gt;
+&lt;/section&gt;
+</content>
+  </entry>
+</feed>
