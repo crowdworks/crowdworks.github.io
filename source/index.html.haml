@@ -1,9 +1,26 @@
 ---
 title: Middleman is Watching
 body_class: index
+pageable: true
+per_page: 10
 ---
+- if paginate && num_pages > 1
+  %p
+    = "Page #{page_number} of #{num_pages}"
+  - if prev_page
+    %p= link_to 'Previous page', prev_page
+
+- page_articles.each_with_index do |article, i|
+  %h2
+    = link_to article.title, article
+    %span= article.date.strftime('%b %e')
+  = article.summary(250)
+
+- if paginate
+  - if next_page
+    %p= link_to 'Next page', next_page
 
 .welcome
-  %h1 Middleman is Watching
+  %h1 Middleman is Watching3
   %p.doc
     = link_to 'Read Online Documentation', 'http://middlemanapp.com/', title: 'Read Online Documentation', target: '_blank'
