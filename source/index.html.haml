@@ -15,7 +15,7 @@ per_page: 10
 
 - page_articles.each_with_index do |article, i|
   %section{class: 'summarized-article'}
-    %p= article.date.strftime('%Y/%m%d')
+    %p= "by #{article.data[:author] || 'Anonymous'} on #{article.date.strftime('%Y/%m/%d')}"
     %h3
       = link_to article.title, article
     = article.summary(100)
