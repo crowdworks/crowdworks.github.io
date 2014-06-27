@@ -39,29 +39,31 @@
   %body#page-top{class: current_page.data.body_class || 'page', "data-spy" => "scroll", "data-target" => ".navbar-custom"}
     %nav.navbar.navbar-custom.navbar-fixed-top{role: "navigation"}
       .container
-        .navbar-header.page-scroll
-          %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
-            %i.fa.fa-bars
-          %a.navbar-brand{href: "#page-top"}
-            / %i.fa.fa-play-circle
-            /%img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
-            %img{height: 24, src: 'http://crowdworks.co.jp/images/header-logo.png'}
-            /クラウドワークス
-            %span エンジニアブログ
-        / Collect the nav links, forms, and other content for toggling
-        .collapse.navbar-collapse.navbar-right.navbar-main-collapse
-          %ul.nav.navbar-nav
-            / Hidden li included to remove active class from about link when scrolled up past about section
-            %li.hidden
-              %a{href: "#page-top"}
-            %li.page-scroll
-              %a{href: "#about"} 最新の投稿
-            %li.page-scroll
-              %a{href: "#download"} カテゴリ
-            %li.page-scroll
-              %a{href: "#contact"} アーカイブ
-        / /.navbar-collapse
-      / /.container
+        .row
+          .col-md-8.col-md-offset-2
+            .navbar-header.page-scroll
+              %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
+                %i.fa.fa-bars
+              %a.navbar-brand{href: "#page-top"}
+                / %i.fa.fa-play-circle
+                /%img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
+                %img{height: 24, src: 'http://crowdworks.co.jp/images/header-logo.png'}
+                /クラウドワークス
+                %span エンジニアブログ
+            / Collect the nav links, forms, and other content for toggling
+            .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+              %ul.nav.navbar-nav
+                / Hidden li included to remove active class from about link when scrolled up past about section
+                %li.hidden
+                  %a{href: "#page-top"}
+                %li.page-scroll
+                  %a{href: "#about"} 最新の投稿
+                %li.page-scroll
+                  %a{href: "#download"} カテゴリ
+                %li.page-scroll
+                  %a{href: "#contact"} アーカイブ
+            / /.navbar-collapse
+          / /.container
     %section.intro
       .intro-overlay
         .container
