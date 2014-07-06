@@ -11,6 +11,7 @@ $light: #f7f7f7;
 $back: #f7f7f7;
 $transparentBack: rgba(247, 247, 247, 0.8);
 $secondary: #888;
+$caution: #d4633b;
 
 // LESS
 
@@ -79,7 +80,8 @@ a:focus {
 
 .navbar {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(238,238,238,0.3);
+    border-top: 1px solid $dark;
+    border-bottom: 1px solid rgba(238,238,238,0.2);
     text-transform: uppercase;
     font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: $back;
@@ -294,7 +296,6 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: $light;
-    background: url(../images/downloads-bg.jpg) no-repeat center center scroll;
     background-color: $dark;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -314,7 +315,7 @@ a:focus {
     }
 
     .download-section {
-        padding: 100px 0;
+        padding: 50px 0;
     }
 
     #map {
@@ -335,17 +336,17 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid $primary;
-    color: $primary;
+    border: 1px solid white;
+    color: white;
     background-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid $primary;
+    border: 1px solid white;
     outline: none;
-    color: $dark;
-    background-color: $primary;
+    color: white;
+    background-color: green;
 }
 
 .btn-huge {

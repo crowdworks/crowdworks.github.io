@@ -1,6 +1,11 @@
 //= require_tree ./vendor
 //= require_tree ./lib
 
+$caution: #d4633b
+
+.copyright
+  margin-top: 20px
+
 .summarized-article
   border-bottom: 1px solid rgba(0,0,0,0.05)
   text-align: left
@@ -20,6 +25,9 @@
   font-size: 300%
   font-weight: 700
   margin: 0
+
+.archive
+  margin-bottom: 70px
 
 .content-section
   padding-top: 0px
@@ -46,14 +54,17 @@ h2.header-recent-articles
 
 h2.section-title
   margin-top: 80px
-  color: #888
+  color: $caution
 
 h2.section-title:after
   content: " "
   margin: 5px auto
   display: block
   width: 150px
-  border-bottom: 1px solid #888
+//  border-bottom: 1px solid #888
+
+.tags
+  -webkit-padding-start: 0px
 
 .tag
   display: inline
@@ -61,13 +72,13 @@ h2.section-title:after
   padding: 5px 5px
   margin: 1px
   text-align: center
-  background: #333
+//  background: #333
 
 .tag a
-  color: white
+  color: black
 
 .tag a:hover
-  color: white
+  color: black
 
 .tag:hover
   background: #999
@@ -97,4 +108,4 @@ li.archive-article
   text-align: left
 
 .highlight table
-  margin: auto
+  margin: 0

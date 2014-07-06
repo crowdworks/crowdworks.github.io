@@ -73,11 +73,8 @@
                 %div クラウドワークス
                 %div エンジニアブログ
               /%p.intro-text エンジニアブログ
-              .page-scroll
-                %a.btn.btn-circle{href: "#about"}
-                  %i.fa.fa-angle-double-down.animated
       .intro-body
-    %section#about.container.content-section.text-center
+    %section#about.container.content-section
       .row
         .col-lg-8.col-lg-offset-2
           = yield
@@ -99,6 +96,8 @@
                 %a.btn.btn-default.btn-lg{href: "https://www.facebook.com/CrowdWorks"}
                   %i.fa.fa-facebook.fa-fw
                   %span.network-name Facebook
+          .col-lg-8.col-lg-offset-2.copyright
+            <div>©2014 CrowdWorks</div>
 
     -# Javascripts
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js'
