@@ -40,16 +40,13 @@
     %nav.navbar.navbar-custom.navbar-fixed-top{role: "navigation"}
       .container
         .row
-          .col-md-8.col-md-offset-2
+          .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
             .navbar-header.page-scroll
               %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
                 %i.fa.fa-bars
               %a.navbar-brand{href: "#page-top"}
-                / %i.fa.fa-play-circle
-                /%img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
-                %img{height: 24, src: 'http://crowdworks.co.jp/images/header-logo.png'}
-                /クラウドワークス
-                %span エンジニアブログ
+                %img{height: '24', src: '/images/crowdworks-logo.png'}
+                .navbar__title-text エンジニアブログ
             / Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
               %ul.nav.navbar-nav
@@ -64,25 +61,20 @@
                   %a{href: "#contact"} アーカイブ
             / /.navbar-collapse
           / /.container
-    %section.intro
-      .intro-overlay
-        .container
-          .row
-            .col-md-8.col-md-offset-2
-              %h1.blog-title
-                %div クラウドワークス
-                %div エンジニアブログ
-              /%p.intro-text エンジニアブログ
-      .intro-body
+    .cover-photo
+      .cover-photo__image a
     %section#about.container.content-section
-      .row
-        .col-lg-8.col-lg-offset-2
+      .row.content-section__body
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
+          .content__logo
+            %img.content__logo__image{width: '400', src: '/images/crowdworks-logo.png'}
+            %div.content__logo__text エンジニアブログ
           = yield
 
-    %section#download.content-section.text-center
+    %section#download.text-center
       .download-section
         .container
-          .col-lg-8.col-lg-offset-2
+          .col-lg-6.col-lg-offset-3
             %ul.list-inline.banner-social-buttons
               %li
                 %a.btn.btn-default.btn-lg{href: "https://twitter.com/crowdworksjp"}
@@ -96,7 +88,7 @@
                 %a.btn.btn-default.btn-lg{href: "https://www.facebook.com/CrowdWorks"}
                   %i.fa.fa-facebook.fa-fw
                   %span.network-name Facebook
-          .col-lg-8.col-lg-offset-2.copyright
+          .col-lg-6.col-lg-offset-3.copyright
             <div>©2014 CrowdWorks</div>
 
     -# Javascripts
