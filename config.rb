@@ -74,6 +74,68 @@ activate :deploy do |deploy|
   deploy.build_before = true
 end
 
+class Dot < Middleman::Extension
+  def initialize(app, options_hash={}, &block)
+    super
+  end
+
+  helpers do
+    def dot(&block)
+      content_tag('pre', class: 'dot', style: 'display: none;', &block)
+      contents = [
+        content_tag('svg', width: 800, height: 600) do
+          tag('g', transform: 'translate(20, 20)')
+        end
+      ]
+      contents.each do |c|
+        concat_content c
+      end
+      content_for :scripts do
+        <<-HTML
+          <script>
+            var dotElement = document.querySelector(".dot");
+
+            function tryDraw() {
+              var graphlibGraph;
+              var dotCode = dotElement.textContent;
+              try {
+                graphlibGraph = graphlibDot.parse(dotCode);
+              } catch (e) {
+                throw e;
+              }
+
+              if (graphlibGraph) {
+                var svg = d3.select("svg");
+                var renderer = new dagreD3.Renderer();
+
+                // Uncomment the following line to get straight edges
+                //renderer.edgeInterpolate('linear');
+
+                // Custom transition function
+                function transition(selection) {
+                  return selection.transition().duration(500);
+                }
+
+                renderer.transition(transition);
+
+                var layout = renderer.run(graphlibGraph, svg.select("g"));
+                transition(d3.select("svg"))
+                  .attr("width", layout.graph().width + 40)
+                  .attr("height", layout.graph().height + 40)
+              }
+            }
+            tryDraw();
+          </script>
+        HTML
+      end
+    end
+  end
+end
+
+::Middleman::Extensions.register(:dot, Dot)
+
+activate :dot
+
 activate :sync do |sync|
   sync.fog_provider = 'AWS' # Your storage provider
   sync.fog_directory = ENV['MIDDLEMAN_SYNC_BUCKET_NAME'] # Your bucket name

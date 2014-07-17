@@ -1,6 +1,6 @@
 ---
-title: GitHubベースで効率的にブログを運用する方法
-date: 2014-07-17 12:51 JST
+title: GitHubベースで手間のかからないブログ運用
+date: 2014-07-17 18:20 JST
 tags:
 ---
 
@@ -27,3 +27,24 @@ READMORE
 * 記事を変更するとブラウザ上でも変更点が自動的にリロードされる
 * 書き終わったらgit push・hub pull-request
 * マージされたらWerckerで自動的に公開
+
+<% dot do %>
+  digraph {
+      A [label="GitHubからソースをclone"];
+      B [label="middleman article <タイトル>"]
+      C [label="記事ソース編集"]
+      D [label="ブラウザで表示確認"];
+      E [label="GitHubへpush"];
+      F [label="レビュー"]
+      G [label="マージ"]
+      H [label="公開"]
+      A -> B -> C;
+      D -> C;
+      C -> D [label="middleman serverで自動リロード"];
+      D -> E;
+      E -> F [label="Werckerで自動デプロイ"]
+      F -> C;
+      F -> G;
+      G -> H [label="WerckerでGitHub Pagesへ自動デプロイ"];
+  }
+<% end %>
