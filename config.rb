@@ -5,7 +5,7 @@ activate :livereload
 activate :blog do |blog|
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
-  #blog.layout = 'blog_layout'
+  blog.layout = 'blog_layout'
 end
 
 require 'digest/md5'
