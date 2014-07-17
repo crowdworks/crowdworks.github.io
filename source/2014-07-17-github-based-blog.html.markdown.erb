@@ -2,6 +2,8 @@
 title: GitHubベースで手間のかからないブログ運用
 date: 2014-07-17 18:20 JST
 tags:
+author: Yusuke KUOKA
+gravatar: ykuoka@gmail.com
 ---
 
 こんにちは、クラウドワークスの九岡です。
@@ -10,13 +12,15 @@ tags:
 
 READMORE
 
-# Middleman
+## Middleman
+
+<%= image_tag 'middleman.svg' %>
 
 静的サイトジェネレータ。middleman-blogというプラグインを使うことで、ブログを運用することもできます。
 これが大変便利で、記事の執筆をHamlやらMarkdownやら、Middlemanが対応しているあらゆるフォーマットで行うことができつつ、
 公開に伴う承認フローをGitHubのプルリクエストで回すことができます。記事の取り下げも最近GitHubに追加されたプルリクエストのRevert機能で一発です。
 
-# ワークフロー
+## ワークフロー
 
 * git cloneする
 * `bundle exec middleman`でテストサーバを起動する
@@ -48,3 +52,21 @@ READMORE
       G -> H [label="WerckerでGitHub Pagesへ自動デプロイ"];
   }
 <% end %>
+
+## ビルド
+
+```bash
+$ MIDDLEMAN_SYNC_BUCKET_NAME=<Bucket> \
+  MIDDLEMAN_SYNC_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+  MIDDLEMAN_SYNC_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+  bundle exec middleman build
+```
+
+## Amazon S3へのデプロイ
+
+```bash
+$ MIDDLEMAN_SYNC_BUCKET_NAME=<Bucket名> \
+  MIDDLEMAN_SYNC_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+  MIDDLEMAN_SYNC_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+  bundle exec middleman sync
+```

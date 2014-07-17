@@ -32,8 +32,8 @@
     %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png")
 
     -# Stylesheets
-    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'
+    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css'
     = stylesheet_link_tag 'grayscale'
     = stylesheet_link_tag 'application'
   %body#page-top{class: current_page.data.body_class || 'page', "data-spy" => "scroll", "data-target" => ".navbar-custom"}
@@ -46,7 +46,7 @@
                 %i.fa.fa-bars
               %a.navbar-brand{href: "#page-top"}
                 = image_tag 'crowdworks-logo.png', height: 24
-                .navbar__title-text エンジニアブログ
+                %span.navbar__title-text エンジニアブログ
             / Collect the nav links, forms, and other content for toggling
             .collapse.navbar-collapse.navbar-right.navbar-main-collapse
               %ul.nav.navbar-nav
@@ -54,11 +54,11 @@
                 %li.hidden
                   %a{href: "#page-top"}
                 %li.page-scroll
-                  %a{href: "#about"} 最新の投稿
+                  %a.navbar__link{href: "#about"} 最新の投稿
                 %li.page-scroll
-                  %a{href: "#download"} カテゴリ
+                  %a.navbar__link{href: "#download"} カテゴリ
                 %li.page-scroll
-                  %a{href: "#contact"} アーカイブ
+                  %a.navbar__link{href: "#contact"} アーカイブ
             / /.navbar-collapse
           / /.container
     .cover-photo

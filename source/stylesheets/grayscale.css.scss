@@ -12,6 +12,7 @@ $back: white;
 $transparentBack: rgba(247, 247, 247, 0.8);
 $secondary: #888;
 $caution: #d4633b;
+$default_font_size: 18px;
 
 // LESS
 
@@ -37,7 +38,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 35px;
+    margin: 50px 0 20px;
     // text-transform: uppercase;
     // font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
     // font-weight: 700;
@@ -46,9 +47,9 @@ h6 {
 }
 
 p {
-    margin: 0 0 5px;
-    font-size: 18px;
+    margin: 0 0 20px;
     line-height: 1.5;
+    font-size: $default_font_size;
 }
 
 a {

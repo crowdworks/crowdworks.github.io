@@ -8,6 +8,7 @@ $green: rgb(50,190,19)
 $yellow: rgb(255,244,0)
 $gray: #555
 $text: #222222
+$default_font_size: 18px
 
 .cover-photo
   position: relative
@@ -34,16 +35,20 @@ $text: #222222
   z-index: 2
   content: ""
 
-.navbar-brand
+.navbar__brand
   margin-left: 0px
   padding-left: 0px
 
 .navbar__title-text
   vertical-align: 0px
-  margin-left: 28px
-  font-size: 1em
+  // margin-left: 28px
+  vertical-align: -3px
+  font-size: 0.8em
   font-weight: 700
   color: $primary
+
+.navbar__link
+  margin-top: 3px
 
 .content__logo__text
   vertical-align: 0px
@@ -95,6 +100,23 @@ $text: #222222
   margin-top: 0.4em
   color: $gray
 
+.article-body ul
+  list-style: none
+  font-size: $default_font_size
+
+.article-body li
+  position: relative
+
+.article-body li:before
+  content: ''
+  position: absolute
+  top: 1rem
+  left: -2rem
+  width: .5rem
+  height: .5rem
+  background-color: $primary
+  vertical-align: bottom
+
 .archives__year
   margin: 10px 0
   color: $primary
@@ -102,12 +124,13 @@ $text: #222222
 .archive
   padding: 0px
   margin-bottom: 70px
+  list-style: none
 
 .archive__article
-  font-size: 150%
   color: $text
   list-style-type: none
   padding: 5px 0px
+  font-size: $default_font_size
 
 .archive__article a
   color: inherit

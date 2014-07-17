@@ -1,4 +1,5 @@
-//= require_tree ./vendor
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300);
+
 //= require_tree ./lib
 
 $primary: #28c3ab;
@@ -7,7 +8,8 @@ $text: #666;
 $dark: #44bbcc;
 $light: #f7f7f7;
 $back: #f7f7f7;
-$caution: #d4633b;
+// $caution: #d4633b;
+$caution: #f28e0c;
 
 .article-intro {
   margin-top: 100px;
@@ -49,4 +51,24 @@ $caution: #d4633b;
 
 .article-body h3 {
   // color: $caution;
+}
+
+.article-body code {
+  font-family: 'Source Code Pro', sans-serif;
+  background: none;
+}
+
+.article-body pre {
+  border: 1px solid $primary;
+}
+
+.highlight, .highlight > code, code.highlight {
+  overflow: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  white-space: no-wrap !important;
+  font-family: 'Source Code Pro', sans-serif;
+  font-weight: bold;
+  color: black;
 }

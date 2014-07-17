@@ -17,7 +17,7 @@ helpers do
   end
 end
 
-activate :syntax, :line_numbers => true
+activate :syntax
 
 set :haml, { ugly: true }
 
