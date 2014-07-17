@@ -1,0 +1,30 @@
+---
+title: (仮称) WerckerとTest Kitchen・VagrantでCIを回す
+date: 2014-07-17 10:37 JST
+tags:
+---
+
+必要
+
+* プライベートレポジトリに対応している
+* ビルド環境をカスタマイズできる(パッケージのインストールや設定)
+* 比較的安全に仮想サーバの使い捨てを伴うテストをまわせる
+
+仕組み
+
+* Chefクックブックを変更してGitHubへpush
+* Werckerのビルドが自動で始まる
+* テスト結果がSlackで通知される(ネットワークエラーなど一時的な原因でビルドが落ちた場合は、Wercker上でビルドを再実行できる)
+
+やってること
+
+ * ビルド結果をSlackへ通知
+ * ベースboxはOSSとして公開
+ * Chefクックブック毎にVagrantやTest Kitchen + EC2でテスト
+
+所感
+
+ * ベータ版のため無料
+ * いつcloseされるかわからないという怖さは無くはないが、[2013年1月に$1 million投資](http://techcrunch.com/2013/01/23/wercker-makes-code-delivery-easy-gets-seed-funding-from-shamrock-ventures-greylock-venture-partners-and-a-list-technologists/)を受けていて、
+ * ベータ版とはいえ、プライベートレポジトリにも対応しているし、ビルドは並列実行されるし、boxの起動も１〜２分と高速なため、特にストレスを感じない
+ * git pushからCI実行までのレスポンスの早さは上々
