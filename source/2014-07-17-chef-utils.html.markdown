@@ -1,5 +1,5 @@
 ---
-title: (仮称) 知らなくて損したChef関連ツール
+title: 知らなくて損したChef関連ツール
 date: 2014-07-17 11:42 JST
 tags:
 author: Yusuke KUOKA

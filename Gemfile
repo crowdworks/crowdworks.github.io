@@ -6,6 +6,7 @@ gem "middleman-livereload", "~> 3.3.4"
 gem "middleman-syntax"
 gem "middleman-deploy"
 gem "middleman-sync"
+gem "middleman-disqus"
 
 gem "builder", "~> 3.0"
 gem "nokogiri"

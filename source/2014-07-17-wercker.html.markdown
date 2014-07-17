@@ -1,5 +1,5 @@
 ---
-title: (仮称) WerckerとTest Kitchen・VagrantでCIを回す
+title: WerckerとTest Kitchen・VagrantでCIを回す
 date: 2014-07-17 10:37 JST
 tags:
 ---

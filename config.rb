@@ -67,6 +67,10 @@ configure :build do
   end
 end
 
+activate :disqus do |d|
+  d.shortname = 'engineer-crowdworks-jp'
+end
+
 activate :deploy do |deploy|
   deploy.method = :git
   deploy.remote = "mumoshu"
