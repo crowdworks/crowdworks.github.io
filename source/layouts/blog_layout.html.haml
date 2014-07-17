@@ -45,9 +45,7 @@
           %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
             %i.fa.fa-bars
           %a.navbar-brand{href: "/"}
-            / %i.fa.fa-play-circle
-            / %img{height: 20, src: 'https://crowdworks.co.jp/recruit/img/logo-gnav.png'}
-            %img{height: 24, src: 'http://crowdworks.co.jp/images/header-logo.png'}
+            = image_tag 'crowdworks-logo.png', height: 24
             %span.light エンジニアブログ
         / Collect the nav links, forms, and other content for toggling
         .collapse.navbar-collapse.navbar-right.navbar-main-collapse
@@ -97,10 +95,10 @@
           .col-lg-8.col-lg-offset-2.copyright
             <div>©2014 CrowdWorks</div>
     -# Javascripts
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"
     = javascript_include_tag 'application'
     = javascript_include_tag 'grayscale'
 

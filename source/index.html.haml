@@ -5,6 +5,10 @@ pageable: true
 per_page: 10
 ---
 
+.content__logo
+  = image_tag 'crowdworks-logo.png', class: 'content__logo__image', width: '400'
+  %div.content__logo__text エンジニアブログ
+
 - if paginate && num_pages > 1
   %p
     = "Page #{page_number} of #{num_pages}"

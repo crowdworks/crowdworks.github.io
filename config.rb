@@ -61,6 +61,10 @@ configure :build do
 
   # Or use a different image path
   # set :http_path, "/Content/images/"
+
+  if ENV['MIDDLEMAN_SYNC_BUCKET_NAME'] != nil && ENV['MIDDLEMAN_SYNC_BUCKET_NAME'].size > 0
+    set :http_prefix, "/" + ENV['MIDDLEMAN_SYNC_BUCKET_NAME']
+  end
 end
 
 activate :deploy do |deploy|
@@ -68,4 +72,15 @@ activate :deploy do |deploy|
   deploy.remote = "mumoshu"
   deploy.branch ="gh-pages"
   deploy.build_before = true
+end
+
+activate :sync do |sync|
+  sync.fog_provider = 'AWS' # Your storage provider
+  sync.fog_directory = ENV['MIDDLEMAN_SYNC_BUCKET_NAME'] # Your bucket name
+  sync.fog_region = 'ap-northeast-1' # The region your storage bucket is in (eg us-east-1, us-west-1, eu-west-1, ap-southeast-1 )
+  sync.aws_access_key_id = ENV['MIDDLEMAN_SYNC_ACCESS_KEY_ID'] # Your Amazon S3 access key
+  sync.aws_secret_access_key = ENV['MIDDLEMAN_SYNC_SECRET_ACCESS_KEY'] # Your Amazon S3 access secret
+  sync.existing_remote_files = 'keep' # What to do with your existing remote files? ( keep or delete )
+  # sync.gzip_compression = false # Automatically replace files with their equivalent gzip compressed version
+  # sync.after_build = false # Disable sync to run after Middleman build ( defaults to true )
 end
