@@ -347,6 +347,9 @@ a:focus {
     margin-top: 0;
 }
 
+.banner-social-buttons .btn-lg {
+  font-size: 40px;
+}
 
 #disqus_thread {
   margin-top: 60px;
@@ -360,7 +363,6 @@ a:focus {
 
 @media(max-width:767px) {
     ul.banner-social-buttons > li {
-        display: block;
         margin-bottom: 20px;
         padding: 0;
     }
