@@ -1,0 +1,53 @@
+---
+title: Amazon S3でIPアドレスによるアクセス制限をかける
+date: 2014-07-18 23:14 JST
+tags: aws, s3
+---
+
+こんにちは、クラウドワークスの九岡です！Amazon S3のBucketに対して https://endpoint/bucket/key でアクセスできることは
+皆さんご存知だと思いますが、実はこれにIPアドレスによるアクセス制限をつけることができます。
+
+IPアドレスによるアクセス制限は別にセキュアなものではありませんが、
+「ちょっとデザインを共有したいが、不完全でお目汚しになるのでユーザさんにお見せしたくない」みたいなレベルのテストには便利です。
+IPアドレスによるアクセス制限は、AWS Consoleから簡単にできます。
+
+READMORE
+
+## S3 Bucketを作成したあとの初期状態
+
+Amazon S3でBucketを作成すると、初期状態ではAWSアカウントのオーナーとBucketの作成者に対してのみ「API経由ですべての操作」が可能な権限がついています。
+それはそれでいいのですが、アクセスキーID・シークレットが必要で、静的ページをちょっとS3で共有してアクセス制限つきで共有したい、みたいなことはできません。
+
+# IAMレベルのアクセス制限解除
+
+まず、READに関してはIPアドレスのみのアクセス制限にするため、AWSコンソール上でBucketに対してEveryoneユーザの
+READ権限をつけます。これですべての人(Everyone)が、IPアドレスの制限に引っかからない限り、BucketにHTTP経由でアクセスできます。
+
+手順は以下のとおりです。
+
+* Add more permissionsをクリック
+* GranteeとしてEveryoneを選択
+* Grantee:EveryoneのView Permissionsにだけチェックを入れる
+* Saveをクリック
+
+<%= image_tag 's3-bucket-permissions.png' %>
+
+# IPアドレスレベルのアクセス制限の設定
+
+次に、BucketにIPアドレスによるアクセス制限をつけます。
+「Add bucket policy」をクリックして、開いたダイアログに以下のJSONを入力して、Saveをクリックします。
+JSON中の`<UNIQUE_ID>`と`<CIDR>`はそれぞれユニークな数字と`IPアドレス/32`のようなCIDRに変更してください。
+
+<script src="https://gist.github.com/mumoshu/15a5a15a7d3c44ec8530.js"></script>
+
+# 表示確認
+
+ブラウザで`https://s3-ap-northeast-1.amazonaws.com/<BUCKET名>/キー`にアクセスして、ファイルが閲覧またはダウンロードできればOKです。
+
+# まとめ
+
+この記事では、Amazon S3のBucketにIPアドレスによるアクセス権限をつける方法をご説明しました。
+セキュアなものではありませんが、ちょっとしたテストなどには便利です。
+例えば、本ブログの公開前の表示確認は、この記事で紹介したようなIPアドレスでアクセス制限をかけたBucketに
+Middlemanのビルド結果をデプロイすることで行っています。
+ぜひ、ご活用ください！
