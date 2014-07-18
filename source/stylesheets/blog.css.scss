@@ -71,12 +71,14 @@ $caution: #f28e0c;
 }
 
 .article-body code {
-  font-family: 'Source Code Pro', sans-serif;
+  // font-family: 'Source Code Pro', sans-serif;
+  font-weight: bold;
   background: none;
+  color: inherit;
 }
 
 .article-body pre {
-  border: 1px solid $primary;
+  border: 0px;
 }
 
 .highlight, .highlight > code, code.highlight {
