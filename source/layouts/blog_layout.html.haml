@@ -103,6 +103,34 @@
                   po.src = 'https://apis.google.com/js/platform.js';
                   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
                 })();
+    %section.content-section.container
+      .row
+        .col-lg-8.col-lg-offset-2
+          - related_articles = blog.
+          -   tags.
+          -   select { |t| (current_page.data.tags || []).include? t }.
+          -   map { |tag, articles| articles }.
+          -   flatten.
+          -   reject { |a| a.title == current_page.title }
+          - if related_articles.size > 0
+            %h2.section-title
+              %i{ class: "fa fa-angle-double-down animated" }
+              関連する記事
+
+            %ul.archive
+              - related_articles.each do |article|
+                %li.archive__article
+                  %a{href: article.url}= article.title
+
+          %h2.section-title
+            %i{ class: "fa fa-angle-double-down animated" }
+            最近の記事
+
+          %ul.archive
+            - recent_articles = blog.articles.sort_by {|a| - a.date.to_i }
+            - recent_articles.each do |article|
+              %li.archive__article
+                %a{href: article.url}= article.title
     %section#download.content-section.text-center
       .download-section
         .container
