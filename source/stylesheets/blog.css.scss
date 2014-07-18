@@ -72,7 +72,7 @@ $caution: #f28e0c;
 
 .article-body code {
   // font-family: 'Source Code Pro', sans-serif;
-  font-weight: bold;
+  // font-weight: bold;
   background: none;
   color: inherit;
 }
@@ -92,7 +92,6 @@ $caution: #f28e0c;
   background: none;
   border: none;
   white-space: no-wrap !important;
-  font-family: 'Source Code Pro', sans-serif;
-  font-weight: bold;
-  color: black;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 13px;
 }
