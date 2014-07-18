@@ -106,6 +106,16 @@
                 -# GitHub Button
                 -# http://ghbtns.com/
                 %iframe{allowtransparency: "true", frameborder: "0", height: "20", scrolling: "0", src: "http://ghbtns.com/github-btn.html?user=#{current_page.data.github_user}&type=follow&count=true", width: "165"}
+            %li.article__body__share-buttons__share-button
+              .g-plusone{"data-size" => "medium"}
+              :javascript
+                window.___gcfg = {lang: 'ja'};
+
+                (function() {
+                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                  po.src = 'https://apis.google.com/js/platform.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                })();
     %section#download.content-section.text-center
       .download-section
         .container
