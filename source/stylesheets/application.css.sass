@@ -102,21 +102,11 @@ $default_font_size: 18px
   color: $gray
 
 .article-body ul
-  list-style: none
+  margin-left: -18px
   font-size: $default_font_size
 
 .article-body li
   position: relative
-
-.article-body li:before
-  content: ''
-  position: absolute
-  top: 1rem
-  left: -2rem
-  width: .5rem
-  height: .5rem
-  background-color: $primary
-  vertical-align: bottom
 
 .archives__year
   margin: 10px 0
@@ -219,3 +209,17 @@ h2.section-title:after
 
 .highlight table
   margin: 0
+
+.article-body .article__body__share-buttons
+  list-style: none
+  margin-left: -40px
+  margin-top: 50px
+
+.article-body .article__body__share-buttons__share-button
+  display: inline-block
+
+.fb_iframe_widget > span
+  vertical-align: baseline !important
+
+.twitter-share-button
+  width: 81px !important
