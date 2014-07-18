@@ -1,11 +1,20 @@
 svg
   border: 1px solid #999
   overflow: hidden
+  width: 100%
 
 text
   font-weight: 300
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serf
-  font-size: 14px
+  font-size: 12px
+
+@media(min-width: 468px)
+  text
+    font-size: 18px
+
+@media(min-width: 768px)
+  text
+    font-size: 24px
 
 .node rect
   stroke: #333

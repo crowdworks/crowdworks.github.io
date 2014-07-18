@@ -4,7 +4,7 @@
 
 $primary: #28c3ab;
 // $dark: #000;
-$text: #666;
+$text: #555;
 $dark: #44bbcc;
 $light: #f7f7f7;
 $back: #f7f7f7;
@@ -24,16 +24,9 @@ $caution: #f28e0c;
 .article-title {
   font-size: 50px;
   margin: 0 0 0 -4px;
-  font-weight: 300;
+  font-weight: bold;
   line-height: 1em;
-}
-
-.blog-article:after {
-  padding: 10px 0px;
-  display: block;
-  margin: auto;
-  border-bottom: 2px $dark solid;
-  content: " "
+  color: $primary;
 }
 
 .author {
@@ -49,24 +42,28 @@ $caution: #f28e0c;
 }
 
 .article-date {
-  font-size: 30px;
-  margin: 0;
+  font-size: 18px;
+  margin-bottom: 10px;
   font-family: 'Avenir Next W02 Light',Avenir-Light,'Avenir Light',SegoeUI-Light,'Segoe UI Light',Helvetica-Light,'Helvetica Light',Avenir,'Segoe UI',Helvetica,'Hiragino Kaku Gothic ProN','Hiragino Kaku Gothic Pro','游ゴシック','Yu Gothic','Meiryo',sans-serif;
+  color: #aaa;
 }
 
 .article-body {
-  padding-top: 50px;
+  margin-top: 20px;
   margin-bottom: 50px;
   color: $text;
 }
 
 .article-body h2 {
-  font-weight: 300;
+  font-weight: bold;
   color: $caution;
   margin-bottom: 5px;
+  font-size: 30px;
 }
 
 .article-body h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
   // color: $caution;
 }
 

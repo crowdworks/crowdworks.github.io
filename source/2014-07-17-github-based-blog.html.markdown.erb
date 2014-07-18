@@ -13,19 +13,19 @@ github_user: mumoshu
 
 READMORE
 
+<%= image_tag 'middleman.svg', class: "article__body__image_left_30" %>
 ## Middleman
-
-<%= image_tag 'middleman.svg' %>
-
 静的サイトジェネレータ。middleman-blogというプラグインを使うことで、ブログを運用することもできます。
 これが大変便利で、記事の執筆をHamlやらMarkdownやら、Middlemanが対応しているあらゆるフォーマットで行うことができつつ、
 公開に伴う承認フローをGitHubのプルリクエストで回すことができます。記事の取り下げも最近GitHubに追加されたプルリクエストのRevert機能で一発です。
+
+<div style="clear: both;"/>
 
 ## ワークフロー
 
 * git cloneする
 * `bundle exec middleman`でテストサーバを起動する
-* ブラウザで`http://localhost:4567/`にアクセスする
+* ブラウザで[http://localhost:4567/](http://localhost:4567/)にアクセスする
 * `bundle exec middleman article 英語タイトル`で新規記事を作成する
   * 九岡はAtomの[Run Commandパッケージ](https://github.com/kylewlacy/run-command)を使って、Atom内で完結させています
 * ブラウザ上で記事ページを開く(新規記事はMiddlemanが自動的にロードしてくれています！)
