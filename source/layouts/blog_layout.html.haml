@@ -50,13 +50,15 @@
         js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    %nav.navbar.navbar-custom.navbar-fixed-top{role: "navigation"}
-      .container
-        .navbar-header.page-scroll
-          %button.navbar-toggle{"data-target" => ".navbar-main-collapse", "data-toggle" => "collapse", type: "button"}
-            %i.fa.fa-bars
-          %a.navbar-brand{href: "/"}
-            = image_tag 'crowdworks-logo.png', height: 24
+    %div{style: "margin-top: 0px; border-top: 5px solid #44bbcc;"}
+    %section.article-intro.container{style: "margin-top: 0px"}
+      .row
+        .col-md-8.col-md-offset-2.blog-article
+          = image_tag 'crowdworks-logo.png', width: 64
+    %section.article-intro.container{style: "font-family: Verdana, \"游ゴシック\", YuGothic, \"Hiragino Kaku Gothic ProN\", Meiryo, sans-serif; color: #aaa; text-align: center; font-weight: 100; font-size: 30px; padding: 10px 15px;"}
+      .row
+        .col-md-8.col-md-offset-2
+          CrowdWorks エンジニアブログ
     %section.article-intro.container
       .row
         .col-md-8.col-md-offset-2.blog-article
