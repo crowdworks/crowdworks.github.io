@@ -66,14 +66,12 @@
         .col-md-8.col-md-offset-2.blog-article
           %p.article-date= current_article.date.strftime('%Y/%m/%d')
           %h1.article-title= current_article.data.title
-          %div.author
-            - if current_page.data.gravatar
-              %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
-            - if current_page.data
-              %p.author-name= current_page.data.author
     %section#body.article-body.container.content-section
       .row
         .col-lg-8.col-lg-offset-2
+          %div.author
+            - if current_page.data.gravatar
+              %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
           = yield
     %section#download.content-section.text-center
       .download-section
