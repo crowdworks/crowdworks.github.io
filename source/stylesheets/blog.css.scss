@@ -81,6 +81,11 @@ $caution: #f28e0c;
   border: 0px;
 }
 
+// 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
+.article-body img {
+  max-width: 100%;
+}
+
 .highlight, .highlight > code, code.highlight {
   overflow: auto;
   padding: 0;
