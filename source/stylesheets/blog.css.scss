@@ -17,19 +17,35 @@ $caution: #f28e0c;
   color: $dark;
 }
 
+.article-intro p {
+  line-height: 1.2em
+}
+
 .article-title {
   font-size: 50px;
-  margin: 0 0 10px 0;
+  margin: 0 0 0 -4px;
   font-weight: 300;
+  line-height: 1em;
 }
 
 .blog-article:after {
   padding: 10px 0px;
   display: block;
   margin: auto;
-  width: 100px;
   border-bottom: 2px $dark solid;
   content: " "
+}
+
+.author {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.author-name {
+  color: gray;
+  font-weight: bold;
+  font-size: 100%;
+  display: inline;
 }
 
 .article-date {
@@ -47,6 +63,7 @@ $caution: #f28e0c;
 .article-body h2 {
   font-weight: 300;
   color: $caution;
+  margin-bottom: 5px;
 }
 
 .article-body h3 {
