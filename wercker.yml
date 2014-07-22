@@ -1,0 +1,19 @@
+box: wercker/ubuntu12.04-ruby2.0.0
+build:
+  steps:
+    - bundle-install
+    - script:
+        name: middleman-build
+        code: bundle exec middleman build --verbose
+deploy :
+  steps :
+    - add-ssh-key:
+        keyname: SSH_KEY
+    - bundle-install
+    - script:
+        code: |
+          git config --global user.email "$MIDDLEMAN_DEPLOY_EMAIL"
+          git config --global user.name "$MIDDLEMAN_DEPLOY_NAME"
+    - script:
+        name: middleman-deploy
+        code: bundle exec middleman deploy
