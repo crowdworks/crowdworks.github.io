@@ -73,7 +73,7 @@ end
 
 activate :deploy do |deploy|
   deploy.method = :git
-  deploy.remote = "mumoshu"
+  deploy.remote = "origin"
   deploy.branch ="gh-pages"
   deploy.build_before = true
 end
