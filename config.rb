@@ -74,7 +74,9 @@ end
 activate :deploy do |deploy|
   deploy.method = :git
   deploy.remote = "origin"
-  deploy.branch ="gh-pages"
+  # Projectページの場合は"gh-pages"
+  # Organizationページの場合は"master"
+  deploy.branch ="master"
   deploy.build_before = true
 end
 
