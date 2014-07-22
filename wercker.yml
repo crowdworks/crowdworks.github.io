@@ -1,4 +1,4 @@
-box: wercker/ubuntu12.04-ruby2.0.0
+box: mumoshu/ubuntu12.04-ruby2.1.2-bundler1.6.4@0.0.1
 build:
   steps:
     - bundle-install
