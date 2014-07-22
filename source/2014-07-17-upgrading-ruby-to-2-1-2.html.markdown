@@ -2,6 +2,7 @@
 title: Rubyを安全に2.1.2へアップグレードする
 date: 2014-07-17 12:30 JST
 tags:
+published: false
 ---
 
 こんにちは、クラウドワークスの九岡です。
