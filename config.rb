@@ -23,7 +23,21 @@ set :haml, { ugly: true }
 
 set :markdown_engine, :redcarpet
 
-set :markdown, :fenced_code_blocks => true, :smartypants => true
+set :markdown, :fenced_code_blocks => true, :smartypants => true, with_toc_data: true
+
+helpers do
+  # @see https://github.com/vmg/redcarpet/pull/186#issuecomment-22783188
+  def table_of_contents(resource)
+    # Without the `gsub` part, we get redundant items like
+    #  "tags: <tags set in front-matter>"
+    content = File.read(resource.source_file).
+      gsub(/^(---\s*\n.*?\n?)^(---\s*$\n?)/m,'')
+    toc_renderer = Redcarpet::Render::HTML_TOC.new
+    # nesting_level is optional
+    markdown = Redcarpet::Markdown.new(toc_renderer, nesting_level: 2)
+    markdown.render(content)
+  end
+end
 
 page "/feeds.xml", layout: false
 page "/sitemap.xml", layout: false
