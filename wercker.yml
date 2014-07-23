@@ -3,8 +3,8 @@ build:
   steps:
     - bundle-install
     - script:
-        name: middleman-build
-        code: bundle exec middleman build --verbose
+        name: build
+        code: bundle exec rake build
     - script:
         name: rspec
         code: bundle exec rspec
@@ -19,5 +19,5 @@ deploy :
           git config --global user.email "$MIDDLEMAN_DEPLOY_EMAIL"
           git config --global user.name "$MIDDLEMAN_DEPLOY_NAME"
     - script:
-        name: middleman-deploy
-        code: bundle exec middleman deploy
+        name: deploy
+        code: bundle exec rake deploy

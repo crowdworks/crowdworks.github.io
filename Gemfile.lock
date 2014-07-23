@@ -1,9 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (4.1.1)
-      activesupport (= 4.1.1)
-      builder (~> 3.1)
     activesupport (4.1.1)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -11,9 +8,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    asset_sync (1.0.0)
-      activemodel
-      fog (>= 1.8.0)
     builder (3.2.2)
     capybara (2.4.1)
       mime-types (>= 1.16)
@@ -29,6 +23,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    colorize (0.7.3)
     compass (0.12.6)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -44,10 +39,11 @@ GEM
     excon (0.38.0)
     execjs (2.2.0)
     ffi (1.9.3)
-    fog (1.22.1)
+    fog (1.23.0)
       fog-brightbox
-      fog-core (~> 1.22)
+      fog-core (~> 1.23)
       fog-json
+      fog-softlayer
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
     fog-brightbox (0.1.1)
@@ -63,6 +59,9 @@ GEM
       net-ssh (>= 2.1.3)
     fog-json (1.0.0)
       multi_json (~> 1.0)
+    fog-softlayer (0.3.10)
+      fog-core
+      fog-json
     formatador (0.2.5)
     fssm (0.2.10)
     haml (4.0.5)
@@ -81,6 +80,7 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
+    map (6.5.4)
     middleman (3.3.3)
       coffee-script (~> 2.2.0)
       compass (>= 0.12.4)
@@ -116,14 +116,19 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (~> 3.2)
       rack-livereload (~> 0.3.15)
+    middleman-s3_sync (3.0.30)
+      colorize
+      fog (>= 1.10.1)
+      map
+      middleman-core (>= 3.0.0)
+      pmap
+      ruby-progressbar
+      unf
     middleman-sprockets (3.3.3)
       middleman-core (>= 3.2)
       sprockets (~> 2.2)
       sprockets-helpers (~> 1.1.0)
       sprockets-sass (~> 1.1.0)
-    middleman-sync (3.0.12)
-      asset_sync (~> 1.0.0)
-      middleman-core (>= 3.0.0)
     middleman-syntax (2.0.0)
       middleman-core (~> 3.2)
       rouge (~> 1.0)
@@ -150,12 +155,14 @@ GEM
     parallel (1.1.2)
     parallel_tests (0.16.6)
       parallel
+    pmap (1.0.1)
     ptools (1.2.4)
     rack (1.5.2)
     rack-livereload (0.3.15)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -177,6 +184,7 @@ GEM
     rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
+    ruby-progressbar (1.5.1)
     rubyzip (1.1.6)
     sass (3.2.19)
     sauce (3.4.9)
@@ -220,6 +228,9 @@ GEM
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     websocket (1.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -234,10 +245,11 @@ DEPENDENCIES
   middleman-blog (~> 3.5.3)
   middleman-deploy
   middleman-livereload (~> 3.3.4)
-  middleman-sync
+  middleman-s3_sync (~> 3.0.30)
   middleman-syntax
   nokogiri
   parallel_tests
+  rake
   redcarpet
   rspec (~> 3.0.0)
   sauce (~> 3.4.9)
