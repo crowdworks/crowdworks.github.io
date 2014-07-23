@@ -21,7 +21,7 @@ task :build do
   command = parts.select { |part| part.size > 0 }.join(' ')
   puts "Building the branch:\n  `#{current_branch}`"
   puts "Running the command:\n  `#{command}`"
-  system command
+  system(command) || exit(1)
 end
 
 desc "Build the blog to the target according to current branch"
@@ -36,5 +36,5 @@ task :deploy do
   command = parts.select { |part| part.size > 0 }.join(' ')
   puts "Deploying the branch:\n  `#{current_branch}`"
   puts "Running the command:\n  `#{command}`"
-  system command
+  system(command) || exit(1)
 end
