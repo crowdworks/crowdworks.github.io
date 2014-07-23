@@ -1,4 +1,8 @@
-current_branch = `git rev-parse --abbrev-ref HEAD`.chomp
+current_branch = ENV['WERCKER_GIT_BRANCH']
+
+if current_branch.nil? || current_branch.empty?
+  current_branch = `git symbolic-ref -q HEAD --short`.chomp
+end
 
 if current_branch == 'source'
   env = {}
@@ -17,12 +21,12 @@ task :build do
   command = parts.select { |part| part.size > 0 }.join(' ')
   puts "Building the branch:\n  `#{current_branch}`"
   puts "Running the command:\n  `#{command}`"
-  system command
+  system(command) || exit(1)
 end
 
 desc "Build the blog to the target according to current branch"
 task :deploy do
-  if current_branch == 'source'
+  if current_branch == 'source' || current_branch == 'HEAD'
     middleman_command = 'deploy'
   else
     middleman_command = 's3_sync'
@@ -32,5 +36,5 @@ task :deploy do
   command = parts.select { |part| part.size > 0 }.join(' ')
   puts "Deploying the branch:\n  `#{current_branch}`"
   puts "Running the command:\n  `#{command}`"
-  system command
+  system(command) || exit(1)
 end

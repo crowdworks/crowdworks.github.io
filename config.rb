@@ -160,10 +160,13 @@ end
 activate :dot
 
 activate :s3_sync do |s3_sync|
-  s3_sync.bucket = ENV['MIDDLEMAN_SYNC_BUCKET_NAME']
+  bucket_name = ENV['MIDDLEMAN_SYNC_BUCKET_NAME']
+  access_key_id = ENV['MIDDLEMAN_SYNC_ACCESS_KEY_ID']
+  secret_access_key = ENV['MIDDLEMAN_SYNC_SECRET_ACCESS_KEY']
+  s3_sync.bucket = bucket_name
   s3_sync.region = 'ap-northeast-1'
-  s3_sync.aws_access_key_id = ENV['MIDDLEMAN_SYNC_ACCESS_KEY_ID']
-  s3_sync.aws_secret_access_key = ENV['MIDDLEMAN_SYNC_SECRET_ACCSES_KEY']
+  s3_sync.aws_access_key_id = access_key_id
+  s3_sync.aws_secret_access_key = secret_access_key
   s3_sync.prefix = sync_prefix
   s3_sync.delete = false
 end
