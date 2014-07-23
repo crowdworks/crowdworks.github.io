@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
+gem "rake"
 gem "middleman", "~> 3.3.3"
 gem "middleman-blog", "~> 3.5.3"
 gem "middleman-livereload", "~> 3.3.4"
 gem "middleman-syntax"
 gem "middleman-deploy"
-gem "middleman-sync"
+gem "middleman-s3_sync", "~> 3.0.30"
 
 gem "builder", "~> 3.0"
 gem "nokogiri"

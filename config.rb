@@ -48,6 +48,11 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
+sync_prefix = ENV['MIDDLEMAN_SYNC_PREFIX'] != '' ? ENV['MIDDLEMAN_SYNC_PREFIX'] : nil
+http_prefix = ENV['MIDDLEMAN_HTTP_PREFIX'] != '' ? "/#{ENV['MIDDLEMAN_HTTP_PREFIX']}" : nil
+
+#sync_prefix = `git rev-parse --abbrev-ref HEAD`
+
 # Build-specific configuration
 configure :build do
   ignore 'images/*.psd'
@@ -76,9 +81,7 @@ configure :build do
   # Or use a different image path
   # set :http_path, "/Content/images/"
 
-  if ENV['MIDDLEMAN_SYNC_BUCKET_NAME'] != nil && ENV['MIDDLEMAN_SYNC_BUCKET_NAME'].size > 0
-    set :http_prefix, "/" + ENV['MIDDLEMAN_SYNC_BUCKET_NAME']
-  end
+  set :http_prefix, http_prefix if http_prefix != nil
 end
 
 activate :disqus do |d|
@@ -156,13 +159,11 @@ end
 
 activate :dot
 
-activate :sync do |sync|
-  sync.fog_provider = 'AWS' # Your storage provider
-  sync.fog_directory = ENV['MIDDLEMAN_SYNC_BUCKET_NAME'] # Your bucket name
-  sync.fog_region = 'ap-northeast-1' # The region your storage bucket is in (eg us-east-1, us-west-1, eu-west-1, ap-southeast-1 )
-  sync.aws_access_key_id = ENV['MIDDLEMAN_SYNC_ACCESS_KEY_ID'] # Your Amazon S3 access key
-  sync.aws_secret_access_key = ENV['MIDDLEMAN_SYNC_SECRET_ACCESS_KEY'] # Your Amazon S3 access secret
-  sync.existing_remote_files = 'keep' # What to do with your existing remote files? ( keep or delete )
-  # sync.gzip_compression = false # Automatically replace files with their equivalent gzip compressed version
-  # sync.after_build = false # Disable sync to run after Middleman build ( defaults to true )
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket = ENV['MIDDLEMAN_SYNC_BUCKET_NAME']
+  s3_sync.region = 'ap-northeast-1'
+  s3_sync.aws_access_key_id = ENV['MIDDLEMAN_SYNC_ACCESS_KEY_ID']
+  s3_sync.aws_secret_access_key = ENV['MIDDLEMAN_SYNC_SECRET_ACCSES_KEY']
+  s3_sync.prefix = sync_prefix
+  s3_sync.delete = false
 end
