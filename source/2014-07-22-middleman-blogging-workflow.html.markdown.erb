@@ -4,8 +4,6 @@ date: 2014-07-22 20:15 JST
 tags: middleman
 ---
 
-こんにちは！クラウドワークスの九岡です。
-
 クラウドワークスエンジニアブログは、
 GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成・運用されています。
 複数人で運用するにあたってドキュメントを書こうと思い、参考になるものをググってみたところ、
@@ -16,6 +14,8 @@ GitHubと静的サイトジェネレータ「Middleman」を使って複数人�
 内容としては、「書こう！」と思ってから、実際に記事が書かれて、公開されるまでをカバーしています。
 これからMiddleman + GitHubの構成でブログや静的サイトを運用されることを検討中の方、
 「すでに運用しているが、他所ではどうしているのか気になる」という方の参考になれば幸いです。
+
+**目次**
 
 <%= table_of_contents(current_page) %>
 
@@ -43,7 +43,7 @@ git clone git@github.com:crowdworks/crowdworks.github.io.git
 
 cloneしたレポジトリのデフォルトブランチはmasterではないということを覚えておいてください。
 
-###### コラム: デフォルトブランチをmasterにしない理由
+##### コラム: デフォルトブランチをmasterにしない理由
 
 「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
 GitHub Organization Pagesにおけるデプロイ方法は、
@@ -149,7 +149,7 @@ $EDITOR source/<yyyy-mm-dd>-article-title-in-english.html.markdown
 
 ### レビュー環境にデプロイする
 
-記事を書き終わったら、次はレビューに回しましょう。
+記事を書き終わったら、次はレビューに出せるように、レビュー環境にデプロイしましょう。
 ソースをコミットして、GitHubのレビュー用ブランチにpushします。
 
 ```bash
@@ -160,16 +160,14 @@ git commit -m 'Write about something cool'
 git push origin something-cool
 ```
 
-CIによりレビュー用ブランチの内容がレビュー環境にデプロイされ、以下のURLからアクセスできるようになります。
+CIによりレビュー用ブランチがビルドされます。
+ビルドが成功すると、CIサービスから手動でレビュー環境にデプロイすることができます。
+デプロイすると、以下のようなURLからアクセスできるようになります。
+`something-cool`部分はブランチ名に置き換わります。
 
 http://reviewing.engineer.crowdworks.jp/something-cool/
 
-これで、自分だけでなくレビュワーも記事を読めるようになります。
-
-クラウドワークスの場合、CIにはWerckerを使っています。
-WerckerによるMiddlemanサイトのCIについては、以下の記事を御覧ください。
-
-[TODO MiddlemanサイトのCIについて](#)
+これで、自分だけでなくレビュワーも記事を読めるようになりました。
 
 ### レビューに出す
 
@@ -197,10 +195,15 @@ hub pull-request -b source
 
 http://engineer.crowdworks.jp/
 
-### まとめ
+## まとめ
 
-* Middlemanでブログを生成する
+この記事では、クラウドワークスエンジニアブログのワークフローをご説明しました。
+
+* ブログはMiddlemanで生成する静的サイト
 * 記事は好きなエディタや言語で作成する
 * GitHubでレビューする
-* git pushするとレビュー環境に自動的にデプロイされる
+* git pushするとテストが自動実行
+* CIサービス上からレビュー環境へデプロイすることができる(手動)
 * プルリクエストをマージすると本番環境に自動的にデプロイされる
+
+MiddlemanやGitHubを使ってブログを運用する予定がある・している方々の参考になれば幸いです。
