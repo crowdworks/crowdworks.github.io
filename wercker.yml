@@ -5,11 +5,15 @@ build:
     - script:
         name: middleman-build
         code: bundle exec middleman build --verbose
+    - script:
+        name: rspec
+        code: bundle exec rspec
 deploy :
   steps :
     - add-ssh-key:
         keyname: SSH_KEY
-    - bundle-install
+    - bundle-install:
+        without: test
     - script:
         code: |
           git config --global user.email "$MIDDLEMAN_DEPLOY_EMAIL"
