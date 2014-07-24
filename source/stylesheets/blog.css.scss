@@ -22,11 +22,17 @@ $caution: #f28e0c;
 }
 
 .article-title {
-  font-size: 50px;
+  font-size: 30px;
   margin: 0 0 0 -4px;
   font-weight: bold;
   line-height: 1em;
   color: $primary;
+}
+
+@media all and (min-width: 768px) {
+  .article-title {
+    font-size: 50px;
+  }
 }
 
 .author {

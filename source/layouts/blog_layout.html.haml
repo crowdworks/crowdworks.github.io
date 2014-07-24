@@ -66,7 +66,7 @@
           %h1.article-title= current_article.data.title
     %section#body.article-body.container.content-section
       .row
-        .col-lg-8.col-lg-offset-2
+        .col-md-8.col-md-offset-2
           %div.author
             - if current_page.data.gravatar
               %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
@@ -105,7 +105,7 @@
                 })();
     %section.content-section.container
       .row
-        .col-lg-8.col-lg-offset-2
+        .col-md-8.col-md-offset-2
           - related_articles = blog.
           -   tags.
           -   select { |t| (current_page.data.tags || []).include? t }.
@@ -134,7 +134,7 @@
     %section#download.content-section.text-center
       .download-section
         .container
-          .col-lg-8.col-lg-offset-2.copyright
+          .col-md-8.col-md-offset-2.copyright
             <div>©2014 CrowdWorks, Inc., All Rights Reserved.</div>
     -# Javascripts
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"
