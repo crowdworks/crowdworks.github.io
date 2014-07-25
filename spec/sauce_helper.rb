@@ -11,5 +11,5 @@ Sauce.config do |c|
     ["OS X 10.8", "Safari", "6"],
     ["Linux", "Chrome", nil]
   ]
-  c[:'idle-timeout'] = 120
+  c[:idle_timeout] = 120
 end
