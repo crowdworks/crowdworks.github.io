@@ -1,5 +1,5 @@
 ---
-title: Middleman is Watching
+title: CrowdWorks Engineer Blog
 body_class: index
 pageable: true
 per_page: 10
@@ -11,42 +11,16 @@ per_page: 10
   - if prev_page
     %p= link_to 'Previous page', prev_page
 
-- page_articles.each_with_index do |article, i|
-  %section{class: 'article'}
-    .article__date= "#{article.date.strftime('%Y/%m/%d')}"
-    %h3.article__title
-      = link_to article.title, article
-    .article__author
-      - if article.data.gravatar
-        %img{class: 'article__author__gravatar gravatar', src: gravatar_for(article.data.gravatar)}
-      - if article.data
-        %p.article__author__name= article.data.author
-    .article__body= article.summary(100)
+- page_articles.each_with_index do |current_article, i|
+  %section.article-intro.container
+    .row
+      .col-md-8.col-md-offset-2.blog-article
+        %p.article-date= current_article.data.date
+        %h1.article-title= link_to current_article.data.title, current_article
+  %section.article-body.container.content-section
+    .row
+      .col-md-8.col-md-offset-2.blog-article= current_article.summary(100)
 
 - if paginate
   - if next_page
     %p= link_to 'Next page', next_page
-
-%h2.section-title
-  %i{ class: "fa fa-angle-double-down animated" }
-  カテゴリから記事を探す
-
-%ul.tags
-  - blog.tags.each do |tag, articles|
-    %li.tag
-      %a{href: tag_path(tag)}
-        %i{ class: "fa fa-tag" }
-        = tag
-
-%h2.section-title
-  %i{ class: "fa fa-angle-double-down animated" }
-  過去の記事を探す
-
-- blog.articles.group_by {|a| a.date.year }.each do |year, articles|
-  %h3.archives__year= "#{year}年"
-  %ul.archive
-    - articles.group_by {|a| a.date.month }.each do |month, articles|
-      /%h2.archive__month= "#{month}月"
-      - articles.each do |article|
-        %li.archive__article
-          %a{href: article.url}= article.title
