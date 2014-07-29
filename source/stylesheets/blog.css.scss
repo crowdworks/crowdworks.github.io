@@ -1,6 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300);
 @import 'lib/*';
 
+
+.article__cover {
+  background: url(/images/cover-500.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 20%;
+}
+
 .article-intro {
   margin-top: 50px;
   vertical-align: bottom;

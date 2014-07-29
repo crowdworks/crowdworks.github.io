@@ -99,7 +99,7 @@ a:focus {
 }
 
 .nav-logo {
-  width: 50%;
+  width: 10%;
   margin-left: -3px;
 }
 
@@ -534,6 +534,8 @@ h1.blog-title {
   font-weight: lighter;
   font-family: $third-font;
   width: 100%;
+  color: white;
+  opacity: 0.85;
 }
 
 @media all and (min-width: 10px) {
@@ -546,7 +548,7 @@ h1.blog-title {
 @media all and (min-width: 768px) {
   h1.blog-title {
     font-size: 72px;
-    letter-spacing: -4px;
+    letter-spacing: -5px;
   }
 }
 
