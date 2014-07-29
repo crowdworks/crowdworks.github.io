@@ -49,11 +49,7 @@
         js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    %div{style: "margin-top: 0px; border-top: 5px solid #44bbcc;"}
-    %section.article-intro.container{style: "margin-top: 0px"}
-      .row
-        .col-md-10.col-md-offset-1.blog-article
-          = image_tag 'crowdworks-logo.png', width: 64
+    = partial "nav"
     %section.article-intro.container{style: "font-family: Verdana, \"游ゴシック\", YuGothic, \"Hiragino Kaku Gothic ProN\", Meiryo, sans-serif; color: #aaa; text-align: center; font-weight: 100; font-size: 30px; padding: 10px 15px;"}
       .row
         .col-md-8.col-md-offset-2
