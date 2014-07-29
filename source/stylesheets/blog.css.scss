@@ -69,13 +69,13 @@ $caution: #f28e0c;
 
 .article-body h3 {
   font-weight: bold;
-  margin: 20px 0;
+  margin: 30px 0;
   // color: $caution;
 }
 
 .article-body h4 {
   font-weight: bold;
-  margin: 15px 0;
+  margin: 30px 0;
 }
 
 .article-body h5 {
@@ -92,6 +92,7 @@ $caution: #f28e0c;
 
 .article-body pre {
   border: 0px;
+  margin: 30px 0;
 }
 
 // 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
