@@ -18,20 +18,21 @@ $caution: #f28e0c;
 }
 
 .article-intro p {
-  line-height: 1.2em
+  line-height: 1.2em;
 }
 
 .article-title {
   font-size: 30px;
   margin: 0 0 0 -4px;
   font-weight: bold;
-  line-height: 1em;
+  line-height: 1.6;
   color: $primary;
 }
 
 @media all and (min-width: 768px) {
   .article-title {
     font-size: 50px;
+    line-height: 1.6;
   }
 }
 
@@ -62,9 +63,9 @@ $caution: #f28e0c;
 
 .article-body h2 {
   font-weight: bold;
-  color: $caution;
   margin: 30px 0 20px 0;
   font-size: 30px;
+  letter-spacing: -1px;
 }
 
 .article-body h3 {

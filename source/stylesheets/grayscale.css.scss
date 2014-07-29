@@ -117,7 +117,7 @@ a:focus {
     outline: none;
 }
 
-@media(min-width:768) {
+@media(min-width:768px) {
     .navbar {
         top: 0px;
         height: 150px;
@@ -143,13 +143,15 @@ a:focus {
     }
 
     p {
-        margin: 0 0 5px;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 1.6;
+        letter-spacing: 1px;
     }
 
-    .content-section {
-        padding-top: 250px;
+    li {
+      line-height: 1.6;
+      letter-spacing: 1px;
+      margin: 10px 0;
     }
 
     .download-section {
