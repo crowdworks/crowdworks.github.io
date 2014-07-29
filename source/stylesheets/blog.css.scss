@@ -4,7 +4,7 @@
 
 $primary: #28c3ab;
 // $dark: #000;
-$text: #555;
+$text: #000;
 $dark: #44bbcc;
 $light: #f7f7f7;
 $back: #f7f7f7;
@@ -62,7 +62,6 @@ $caution: #f28e0c;
 
 .article-body h2 {
   font-weight: bold;
-  color: $caution;
   margin: 30px 0 20px 0;
   font-size: 30px;
 }
@@ -70,7 +69,6 @@ $caution: #f28e0c;
 .article-body h3 {
   font-weight: bold;
   margin: 30px 0 20px 0;
-  // color: $caution;
 }
 
 .article-body h4 {
