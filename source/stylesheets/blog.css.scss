@@ -1,15 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300);
-
-//= require_tree ./lib
-
-$primary: #28c3ab;
-// $dark: #000;
-$text: #000;
-$dark: #44bbcc;
-$light: #f7f7f7;
-$back: #f7f7f7;
-// $caution: #d4633b;
-$caution: #f28e0c;
+@import 'lib/*';
 
 .article-intro {
   margin-top: 100px;
@@ -27,6 +17,7 @@ $caution: #f28e0c;
   font-weight: bold;
   line-height: 1em;
   color: $primary;
+  font-family: $secondary-font;
 }
 
 @media all and (min-width: 768px) {
@@ -50,7 +41,7 @@ $caution: #f28e0c;
 .article-date {
   font-size: 18px;
   margin-bottom: 10px;
-  font-family: 'Avenir Next W02 Light',Avenir-Light,'Avenir Light',SegoeUI-Light,'Segoe UI Light',Helvetica-Light,'Helvetica Light',Avenir,'Segoe UI',Helvetica,'Hiragino Kaku Gothic ProN','Hiragino Kaku Gothic Pro','游ゴシック','Yu Gothic','Meiryo',sans-serif;
+  font-family: $secondary-font;
   color: #aaa;
 }
 
@@ -60,42 +51,48 @@ $caution: #f28e0c;
   color: $text;
 }
 
-.article-body h2 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-  font-size: 30px;
-}
+.article-body {
+  h2, h3, h4, ht {
+    font-weight: bold;
+    font-family: $secondary-font;
+  }
 
-.article-body h3 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-}
+  h2 {
+    margin: 30px 0 20px 0;
+    font-size: 220%;
+  }
 
-.article-body h4 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-}
+  h3 {
+    margin: 30px 0 20px 0;
+    font-size: 190%;
+  }
 
-.article-body h5 {
-  font-weight: bold;
-  margin: 10px 0;
-}
+  h4 {
+    margin: 30px 0 20px 0;
+    font-size: 160%;
+  }
 
-.article-body code {
-  // font-family: 'Source Code Pro', sans-serif;
-  // font-weight: bold;
-  background: none;
-  color: inherit;
-}
+  h5 {
+    margin: 10px 0;
+    font-size: 130%;
+  }
 
-.article-body pre {
-  border: 0px;
-  margin: 30px 0;
-}
+  code {
+    // font-family: 'Source Code Pro', sans-serif;
+    // font-weight: bold;
+    background: none;
+    color: inherit;
+  }
 
-// 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
-.article-body img {
-  max-width: 100%;
+  pre {
+    border: 0px;
+    margin: 30px 0;
+  }
+
+  // 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
+  img {
+    max-width: 100%;
+  }
 }
 
 .highlight, .highlight > code, code.highlight {
