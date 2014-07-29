@@ -1,15 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300);
-
-//= require_tree ./lib
-
-$primary: #28c3ab;
-// $dark: #000;
-$text: #000;
-$dark: #44bbcc;
-$light: #f7f7f7;
-$back: #f7f7f7;
-// $caution: #d4633b;
-$caution: #f28e0c;
+@import 'lib/*';
 
 .article-intro {
   margin-top: 100px;
