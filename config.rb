@@ -84,10 +84,6 @@ configure :build do
   set :http_prefix, http_prefix if http_prefix != nil
 end
 
-activate :disqus do |d|
-  d.shortname = 'engineer-crowdworks-jp'
-end
-
 activate :deploy do |deploy|
   deploy.method = :git
   deploy.remote = "origin"
