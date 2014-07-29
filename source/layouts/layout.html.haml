@@ -60,11 +60,7 @@
         .col-md-8.col-md-offset-2
           CrowdWorks Engineer Blog
     = yield
-    %section#download.content-section.text-center
-      .download-section
-        .container
-          .col-md-8.col-md-offset-2.copyright
-            <div>©2014 CrowdWorks, Inc., All Rights Reserved.</div>
+    = partial "copyright"
     -# Javascripts
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"
