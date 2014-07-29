@@ -49,8 +49,9 @@
         js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    = partial "nav"
-    = partial "title"
+    .article__cover
+      = partial "nav"
+      = partial "title"
     = yield
     = partial "copyright"
     -# Javascripts
