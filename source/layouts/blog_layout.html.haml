@@ -114,7 +114,6 @@
           -   reject { |a| a.title == current_page.title }
           - if related_articles.size > 0
             %h2.section-title
-              %i{ class: "fa fa-angle-double-down animated" }
               関連する記事
 
             %ul.archive
@@ -123,7 +122,6 @@
                   %a{href: article.url}= article.title
 
           %h2.section-title
-            %i{ class: "fa fa-angle-double-down animated" }
             最近の記事
 
           %ul.archive
