@@ -50,10 +50,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     = partial "nav"
-    %section.article-intro.container{style: "font-family: Verdana, \"游ゴシック\", YuGothic, \"Hiragino Kaku Gothic ProN\", Meiryo, sans-serif; color: #aaa; text-align: center; font-weight: 100; font-size: 30px; padding: 10px 15px;"}
-      .row
-        .col-md-8.col-md-offset-2
-          %h1.blog-title CrowdWorks Engineer Blog
+    = partial "title"
     = yield
     = partial "copyright"
     -# Javascripts
