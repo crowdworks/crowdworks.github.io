@@ -60,42 +60,45 @@ $caution: #f28e0c;
   color: $text;
 }
 
-.article-body h2 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-  font-size: 30px;
-}
+.article-body {
+  h2 {
+    font-weight: bold;
+    margin: 30px 0 20px 0;
+    font-size: 220%;
+  }
 
-.article-body h3 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-}
+  h3 {
+    font-size: 190%;
+  }
 
-.article-body h4 {
-  font-weight: bold;
-  margin: 30px 0 20px 0;
-}
+  h4 {
+    font-weight: bold;
+    margin: 30px 0 20px 0;
+    font-size: 160%;
+  }
 
-.article-body h5 {
-  font-weight: bold;
-  margin: 10px 0;
-}
+  h5 {
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 130%;
+  }
 
-.article-body code {
-  // font-family: 'Source Code Pro', sans-serif;
-  // font-weight: bold;
-  background: none;
-  color: inherit;
-}
+  code {
+    // font-family: 'Source Code Pro', sans-serif;
+    // font-weight: bold;
+    background: none;
+    color: inherit;
+  }
 
-.article-body pre {
-  border: 0px;
-  margin: 30px 0;
-}
+  pre {
+    border: 0px;
+    margin: 30px 0;
+  }
 
-// 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
-.article-body img {
-  max-width: 100%;
+  // 画面サイズの小さな端末で画像がスクリーンサイズをはみ出ないようにする
+  img {
+    max-width: 100%;
+  }
 }
 
 .highlight, .highlight > code, code.highlight {

@@ -23,6 +23,7 @@ body {
     font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
     color: $text;
     background-color: $back;
+    font-size: 13px;
 }
 
 html {
@@ -49,7 +50,6 @@ h6 {
 p {
     margin: 20px 0;
     line-height: 1.5;
-    font-size: $default_font_size;
 }
 
 a {
@@ -142,8 +142,11 @@ a:focus {
         border-bottom: 1px solid rgba(30,30,30,0.3);
     }
 
+    body {
+      font-size: 16px;
+    }
+
     p {
-        font-size: 16px;
         line-height: 1.6;
         letter-spacing: 1px;
     }
