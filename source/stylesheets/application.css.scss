@@ -432,7 +432,7 @@ body {
 }
 
 .copyright {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $third-font;
 }
 
 .article {
@@ -453,7 +453,7 @@ body {
 .article__date {
   font-size: 15px;
   margin: 0;
-  font-family: "Avenir Next W02 Light", Avenir-Light, "Avenir Light", SegoeUI-Light, "Segoe UI Light", Helvetica-Light, "Helvetica Light", Avenir, "Segoe UI", Helvetica, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic", "Meiryo", sans-serif;
+  font-family: $third-font;
   color: $green;
 }
 
@@ -525,32 +525,32 @@ body {
 
 h2.header-recent-articles {
   font-size: 50px;
-  font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-family: $secondary-font;
 }
 
 @media all and (min-width: 10px) {
   h1.blog-title {
-    font-size: 40px;
-    font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    font-weight: 700;
+    font-size: 20px;
+    font-family: $third-font;
+    font-weight: lighter;
     width: 100%;
-    text-shadow: 0px 0px 10px #555555;
   }
 }
 
 @media all and (min-width: 768px) {
   h1.blog-title {
-    font-size: 80px;
-    font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    font-weight: 700;
+    font-size: 40px;
+    font-family: $third-font;
+    font-weight: lighter;
     width: 100%;
-    text-shadow: 0px 0px 10px #555555;
   }
 }
 
 h2.section-title {
   color: $caution;
   margin: 30px 0;
+  font-family: $secondary-font;
+  font-weight: bold;
 }
 
 .tags {
