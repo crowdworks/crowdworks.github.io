@@ -32,9 +32,9 @@ helpers do
     #  "tags: <tags set in front-matter>"
     content = File.read(resource.source_file).
       gsub(/^(---\s*\n.*?\n?)^(---\s*$\n?)/m,'')
-    toc_renderer = Redcarpet::Render::HTML_TOC.new
+    toc_renderer = Redcarpet::Render::HTML_TOC.new(nesting_level: 3)
     # nesting_level is optional
-    markdown = Redcarpet::Markdown.new(toc_renderer, nesting_level: 2)
+    markdown = Redcarpet::Markdown.new(toc_renderer)
     markdown.render(content)
   end
 end
