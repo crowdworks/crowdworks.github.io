@@ -60,10 +60,8 @@
     %section#body.article-body.container.content-section
       .row
         .col-md-8.col-md-offset-2
-          %div.author
-            - if current_page.data.gravatar
-              %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
           = yield
+          = partial 'author'
           = partial "sns_shares"
     %section.content-section.container
       .row
