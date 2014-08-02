@@ -1,0 +1,9 @@
+- if current_page.data.author
+  %div.author{style: 'text-align: right;'}
+    Written by
+    - if current_page.data.gravatar
+      %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}
+    - if current_page.data.twitter_id
+      = link_to current_page.data.author, "https://twitter.com/#{current_page.data.twitter_id}"
+    - else
+      = current_page.data.author
