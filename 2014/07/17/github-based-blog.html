@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>エンジニアブログをMiddlemanでつくることにした3つの理由 - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='article__cover'>
+<div style='margin-top: 0px; border-top: 5px solid #44bbcc;'></div>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article'>
+<img class="nav-logo" src="/images/crowdworks-logo.png" />
+</div>
+</div>
+</section>
+
+<section class='article-intro container' style='text-align: center; padding: 10px 15px;'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h1 class='blog-title'>Engineer Blog</h1>
+</div>
+</div>
+</section>
+
+</div>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<p class='article-date'>2014/07/17</p>
+<h1 class='article-title'>エンジニアブログをMiddlemanでつくることにした3つの理由</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>みなさん、技術ブログの運用って面倒じゃないですか？ぼくは面倒です！
+ネタを貯めて、記事を書いて、公開する。その一連の流れは会社的にも・個人的にも意味があり、
+それプロセス自体も楽しいものです。
+しかし、ブログエンジンやブログサービスを使っていると「もうちょっとなんとかならないか？」と思うことがあります。
+例えば、以下のようなことです。</p>
+
+<ul>
+<li>拡張できない・しづらい</li>
+<li>使い慣れた言語とエディタが使えない・使いづらい</li>
+<li>共同作業しづらい(Git &amp; GitHubが使えない等)</li>
+</ul>
+
+<p>もちろん、ブログエンジンやブログサービスには管理が簡単、すぐ使えるなどのメリットもありますが、
+それにこだわらない場合はもっといい方法があるはずです。</p>
+
+<p>弊社ではMiddlemanを使って軽く・モダンにブログを運用してこれらの問題を回避しています。
+この記事では、Middlemanを使うことにした理由をご説明させていただきます。</p>
+
+<p>技術ブログの運用に悩まされている皆さん、これから技術ブログをつくろうとされている皆さん、
+ぜひこの記事を参考にして、Middlemanを使ってみてください！</p>
+
+<p></p>
+
+<p><strong>目次</strong></p>
+
+<ul>
+<li>
+<a href="#middlemanとは？">Middlemanとは？</a>
+</li>
+<li>
+<a href="#採用の理由">採用の理由</a>
+<ul>
+<li>
+<a href="#rubyで書かれている">Rubyで書かれている</a>
+</li>
+<li>
+<a href="#使い慣れた言語とエディタで書ける">使い慣れた言語とエディタで書ける</a>
+</li>
+<li>
+<a href="#git-&-githubが使える">Git &amp; GitHubが使える</a>
+</li>
+</ul>
+
+<p></li>
+<li>
+<a href="#まとめ">まとめ</a>
+</li>
+</ul></p>
+
+<h2 id="middlemanとは？">Middlemanとは？</h2>
+
+<p>Rubyで書かれた、拡張性が高い静的サイト生成ツールです。
+利用者がページのソースを好きな言語で書き、Middelmanがそれをビルド・デプロイします。
+ビルドやデプロイの部分はプラグインで拡張することができます。</p>
+
+<p>プラグインが対応しているものも含めると、以下のような言語に対応しています。</p>
+
+<ul>
+<li>Haml</li>
+<li>ERB</li>
+<li>SCSS/SASS</li>
+<li>CofeeScript</li>
+</ul>
+
+<p>また、以下のような方法・サービスでデプロイできます。</p>
+
+<ul>
+<li>rsync</li>
+<li>ftp</li>
+<li>sftp</li>
+<li>GitHub Pages</li>
+<li>Amazon S3</li>
+<li>Rackspace Cloud Files</li>
+<li>Google Storage</li>
+</ul>
+
+<h2 id="採用の理由">採用の理由</h2>
+
+<p>クラウドワークスのエンジニアブログをMiddlemanで開発・運用することにした理由は、
+特に以下の3つです。</p>
+
+<ul>
+<li>Rubyで書かれている</li>
+<li>使い慣れた言語とエディタで記事をかける</li>
+<li>Git &amp; GitHubが使える</li>
+</ul>
+
+<h3 id="rubyで書かれている">Rubyで書かれている</h3>
+
+<p>MiddlemanはRubyで書かれています。
+そのため、私たちにとっては拡張しやすい、ということが採用の一つの理由です。</p>
+
+<h4 id="拡張しやすい">拡張しやすい</h4>
+
+<p>弊社はほとんどの開発でRubyを使っています。
+Middlemanの標準機能で対応できないことが仮にあったとしても、いざとなれば使い慣れたRubyでプラグインを
+開発するなどして対処できるので、安心感があります。</p>
+
+<h3 id="使い慣れた言語とエディタで書ける">使い慣れた言語とエディタで書ける</h3>
+
+<p>ブログエンジンやブログサービスを使うとき、個人的に一番気になるのがここです。
+Middlemanを使う場合、好きなエディタで記事をかけることが、採用の一つの理由です。</p>
+
+<h4 id="脳のコンテキストスイッチが最小化される">脳のコンテキストスイッチが最小化される</h4>
+
+<p>私たちの場合、技術ブログの記事は業務の合間に書きます。その場合、記事はサクッと書いたほうが断然いいです。</p>
+
+<p>書くのに手間取ると、業務が差し込んできて、書けないまま数日が立ち、そうしているうちに記憶も色あせて、
+余計に書きづらくなり、結局書かないまま数ヶ月すぎる・・・ということが起こりえます。経験ありませんか？僕はあります！
+そうでなくても、時期的にホットな内容なら早く書いて、早く公開したいところです。</p>
+
+<p>記事をサクッと書く一つの方法は、脳のコンテキストスイッチを最小限にすることです。
+開発中に、普段開発に使っている言語やエディタですぐに記事を書いて公開できれば、それに越したことはないですよね？</p>
+
+<p>ところが、ブログエンジンなどを使う場合、CoffeeScriptやSASSが単純には使えません。
+手元でビルドして、スタイルの設定ページへコピペ・・・みたいなことをすれば可能ですが、面倒です。</p>
+
+<p>また、使い慣れたエディタが使えない、使えたとしても、非公式なブラウザ拡張が必要だったり、「自分のエディタは対応してない！」といったことがあります。
+エディタで書いてから、ソースをコピペする？
+それでもいいのですが、コピペ後に記事を修正したくなったら、またエディタにコピペして戻す、といったことになって２度手間感がありますね。</p>
+
+<p>Middlemanなら、使う言語やエディタは各個人の自由です。私もこの記事はMarkdown + ERB、エディタはAtomで書いています。</p>
+
+<h3 id="git-&amp;-githubが使える">Git &amp; GitHubが使える</h3>
+
+<p>Middlemanを使う場合、ソースはGitなどで管理できます。
+Gitで管理すればGitHubが使えます。</p>
+
+<p>ブログエンジンなどでも、記事の執筆やシンプルな共同編集・レビューは問題無く行えます。
+Git &amp; GitHubが使えることによるメリットは以下のとおりです。</p>
+
+<ul>
+<li>GitHub上で公開前の記事をレビューできる</li>
+<li>記事が不慮の事故で消えない</li>
+<li>CIと相性がいい</li>
+</ul>
+
+<h4 id="githubでレビューできる">GitHubでレビューできる</h4>
+
+<p>クラウドワークスではGitHubを使って、公開前の記事をプルリクエストでレビューするプロセスにしています。
+すると、GitHubのプルリクエスト上に公開前の記事に対するレビューコメントをつけて、レビューが完了したらマージ、ということができるようになり、レビュープロセスが可視化されます。
+レビュー完了時のチャットへの通知なども、普段の開発でGitHubを使って行っているのと同じように実現できます。</p>
+
+<h4 id="記事が不慮の事故で消えない">記事が不慮の事故で消えない</h4>
+
+<p>また、Gitで気軽にコミットできるので、うっかりブラウザバックして書きかけの記事が消えたり、エディタで予め書いておいてコピペする必要がありません。</p>
+
+<h4 id="ciと相性がいい">CIと相性がいい</h4>
+
+<p>そして、CIと相性がよく、普段の開発で行っているようにブログもCIすることができます。
+例えば、クラウドワークスのエンジニアブログの場合、</p>
+
+<ul>
+<li>記事を執筆してコミットしgit pushしたとき、Werckerでビルドが走る。ビルドが通るとテスト環境に自動的にデプロイされる</li>
+<li>GitHub上で公開前記事のプルリクエストをマージすると、Werckerでビルドが走る。ビルドが通ると本番環境に自動的にデプロイされる</li>
+</ul>
+
+<p>というようにCIを回しています。
+特にHamlやSASSソースにシンタックスエラーがある場合にビルドが落ちてくれるので、
+明らかに壊れたページを公開してしまうといったことを防ぐことができています。
+その上、公開も自動化できるので、私たちは記事の執筆とレビューに集中することができます。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>クラウドワークスでは以下の3つの理由から、エンジニアブログをMiddlemanでつくることにしました。</p>
+
+<ul>
+<li>Rubyで書かれている</li>
+<li>使い慣れた言語とエディタで記事をかける</li>
+<li>Git &amp; GitHubが使える</li>
+</ul>
+
+<p>普段の開発でRubyを使っている、エディタや言語にこだわりがある、
+GitやGitHubで執筆からテスト・公開までのフローを円滑にしたい・・・
+そんな皆さんに、Middlemanをおすすめします！
+ぜひ、この記事をきっかけにMiddlemanでブログをつくってみてください。</p>
+
+<div class='author' style='text-align: right;'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/8e045bf747ca7a90b1d955dc30217271?s=32'>
+<a href="https://twitter.com/mumoshu">Yusuke Kuoka</a>
+</div>
+
+<ul class='article__body__share-buttons'>
+<li class='article__body__share-buttons__share-button'>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+関連する記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2014/07/22/middleman-blogging-workflow.html'>MiddlemanとGitHubによるブロギング・ワークフロー</a>
+</li>
+</ul>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2014/07/22/middleman-blogging-workflow.html'>MiddlemanとGitHubによるブロギング・ワークフロー</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/07/18/s3-access-control-with-bucket-policy.html'>Amazon S3でIPアドレスによるアクセス制限をかける</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/07/17/github-based-blog.html'>エンジニアブログをMiddlemanでつくることにした3つの理由</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script>
+  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+</body>
+</html>

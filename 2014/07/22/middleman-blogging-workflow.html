@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>MiddlemanとGitHubによるブロギング・ワークフロー - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='article__cover'>
+<div style='margin-top: 0px; border-top: 5px solid #44bbcc;'></div>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article'>
+<img class="nav-logo" src="/images/crowdworks-logo.png" />
+</div>
+</div>
+</section>
+
+<section class='article-intro container' style='text-align: center; padding: 10px 15px;'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h1 class='blog-title'>Engineer Blog</h1>
+</div>
+</div>
+</section>
+
+</div>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<p class='article-date'>2014/07/22</p>
+<h1 class='article-title'>MiddlemanとGitHubによるブロギング・ワークフロー</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>クラウドワークスエンジニアブログは、
+GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成・運用されています。
+複数人で運用するにあたってドキュメントを書こうと思い、参考になるものをググってみたところ、
+意外と事例がありませんでした。
+「ないなら作る！」ということで、弊社で運用している「MiddlemanとGitHubによるブロギング・ワークフロー」
+をまとめます。</p>
+
+<p>内容としては、「書こう！」と思ってから、実際に記事が書かれて、公開されるまでをカバーしています。
+これからMiddleman + GitHubの構成でブログや静的サイトを運用されることを検討中の方、
+「すでに運用しているが、他所ではどうしているのか気になる」という方の参考になれば幸いです。</p>
+
+<p><strong>目次</strong></p>
+
+<ul>
+<li>
+<a href="#前提">前提</a>
+</li>
+<li>
+<a href="#ワークフロー">ワークフロー</a>
+<ul>
+<li>
+<a href="#middlemanプロジェクトの準備">Middlemanプロジェクトの準備</a>
+</li>
+<li>
+<a href="#執筆">執筆</a>
+</li>
+<li>
+<a href="#レビュー環境にデプロイする">レビュー環境にデプロイする</a>
+</li>
+<li>
+<a href="#レビューに出す">レビューに出す</a>
+</li>
+<li>
+<a href="#レビューする">レビューする</a>
+</li>
+<li>
+<a href="#公開">公開</a>
+</li>
+</ul>
+
+<p></li>
+<li>
+<a href="#まとめ">まとめ</a>
+</li>
+</ul></p>
+
+<h2 id="前提">前提</h2>
+
+<ul>
+<li>ブログはMiddlemanとmiddleman-blogによる静的サイトとしてつくる</li>
+<li>MiddlemanプロジェクトはGitでバージョン管理する</li>
+<li>執筆は好きな言語とエディタを使って行う</li>
+<li>編集に関するワークフローはGitHubで回す</li>
+<li>ブログはGitHub Organization Pagesへデプロイする</li>
+</ul>
+
+<h2 id="ワークフロー">ワークフロー</h2>
+
+<h3 id="middlemanプロジェクトの準備">Middlemanプロジェクトの準備</h3>
+
+<h4 id="ソースの同期">ソースの同期</h4>
+
+<h5 id="初回">初回</h5>
+
+<p>初めてブログを執筆する場合は、まずMiddlemanプロジェクトのソースコードをcloneしましょう。</p>
+<pre><code class="highlight shell">git clone git@github.com:crowdworks/crowdworks.github.io.git
+</code></pre>
+
+<p>cloneしたレポジトリのデフォルトブランチはmasterではないということを覚えておいてください。</p>
+
+<h5 id="コラム:-デフォルトブランチをmasterにしない理由">コラム: デフォルトブランチをmasterにしない理由</h5>
+
+<p>「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
+GitHub Organization Pagesにおけるデプロイ方法は、</p>
+
+<ul>
+<li>Organizationにある</li>
+<li>「<code>organization</code>.github.io」という名前のGitレポジトリの</li>
+<li>masterブランチ</li>
+</ul>
+
+<p>にデプロイしたい内容をgit pushする、というものです。
+masterブランチにgit pushされた内容が http://organization.github.io/ に公開されます。</p>
+
+<p>ということは、Middlemanプロジェクトのソースをmasterブランチにおいてしまうと、ブログではなく元のソースがGitHub Pagesで
+公開されてしまいますね。
+それでは困るので、masterブランチ以外でソースを管理します。
+ソース管理するのがmasterではないということを明確にする意味もあり、
+デフォルトブランチはmaster以外でソース管理を行うブランチにしておきます。</p>
+
+<p>crowdworks.github.ioレポジトリの場合、sourceブランチでソースを管理し、ソースからビルドしたブログを
+masterブランチへデプロイしています。</p>
+
+<h5 id="2回め以降">2回め以降</h5>
+
+<p>すでにMiddlemanプロジェクトのソースコードをcloneしてある場合は、
+新しい記事を書き始める前にそれを更新しましょう。</p>
+<pre><code class="highlight shell">git pull origin <span class="nb">source</span>
+</code></pre>
+
+<h4 id="カレントディレクトリ">カレントディレクトリ</h4>
+
+<p>以降で実行するコマンドは、特に説明がない限りclone先をカレントディレクトリとします。
+今のうちにclone先に移動しておきましょう。</p>
+<pre><code class="highlight plaintext">cd crowdworks.github.io.git
+</code></pre>
+
+<h4 id="依存gemのインストール">依存gemのインストール</h4>
+
+<p>Middlemanプロジェクトは通常のRubyプロジェクトでもあります。
+今回はじめてソースを同期した場合や、2回め以降でGemfileが更新された場合には、
+Gemfileに書かれたgemをインストールする必要があります。
+インストールするためには、<code>bundle install</code>コマンドを実行しましょう。</p>
+<pre><code class="highlight shell">bundle install --binstubs
+</code></pre>
+
+<h5 id="コラム:-middlemanプロジェクト-≒-rubyプロジェクト">コラム: Middlemanプロジェクト ≒ Rubyプロジェクト</h5>
+
+<p>通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
+そして、実行前にはbundle installする必要がありますね。</p>
+
+<p>同様に、Middlemanプロジェクトのテストやビルド・デプロイに必要な
+Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
+したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。</p>
+
+<h5 id="コラム:-binstubs">コラム: binstubs</h5>
+
+<p><code>bundle install</code>コマンドに<code>--binstubs</code>オプションをつけることで、bin/以下に
+middlemanコマンドをBundler環境下で実行するためのラッパースクリプト(binstub)が生成されます。
+middlemanのbinstubはbin/middlemanです。</p>
+
+<p>binstubがない場合、Bundler環境下でmiddlemanを実行する場合は以下のコマンドを実行する必要があります。</p>
+<pre><code class="highlight shell">bundle <span class="nb">exec </span>middleman
+</code></pre>
+
+<p>しかし、binstubがある場合、以下のコマンドでOKです。</p>
+<pre><code class="highlight shell">bin/middleman
+</code></pre>
+
+<p>少しだけ短くなりますね！</p>
+
+<h3 id="執筆">執筆</h3>
+
+<p>何はともあれ、まず記事を書きましょう。
+Middlemanプロジェクトでは各記事のソースはMarkdown、Haml、ERB等お好きなマークアップ言語・テンプレート言語で書くことができます。
+middleman-blogの場合、デフォルトではMarkdownで書きます。</p>
+
+<p>さらに、記事を新規作成するときに、手動でソースファイルを作成する必要はありません。
+以下のコマンドでソースのひな形を作成できます。</p>
+<pre><code class="highlight shell">bin/middleman article article-title-in-english
+</code></pre>
+
+<p>生成されたソースはsourceディレクトリ以下に作成され、以下のように日時と記事IDをつなげた名前になっています。</p>
+<pre><code class="highlight shell"><span class="nb">source</span>/&lt;yyyy-mm-dd&gt;-article-title-in-english.html.markdown
+</code></pre>
+
+<p>このファイルを編集して、記事を仕上げていきましょう。</p>
+<pre><code class="highlight shell"><span class="nv">$EDITOR</span> <span class="nb">source</span>/&lt;yyyy-mm-dd&gt;-article-title-in-english.html.markdown
+</code></pre>
+
+<h3 id="レビュー環境にデプロイする">レビュー環境にデプロイする</h3>
+
+<p>記事を書き終わったら、次はレビューに出せるように、レビュー環境にデプロイしましょう。
+ソースをコミットして、GitHubのレビュー用ブランチにpushします。</p>
+<pre><code class="highlight shell">git commit -m <span class="s1">'Write about something cool'</span>
+</code></pre>
+<pre><code class="highlight shell">git push origin something-cool
+</code></pre>
+
+<p>CIによりレビュー用ブランチがビルドされます。
+ビルドが成功すると、CIサービスから手動でレビュー環境にデプロイすることができます。
+デプロイすると、以下のようなURLからアクセスできるようになります。
+<code>something-cool</code>部分はブランチ名に置き換わります。</p>
+
+<p>http://reviewing.engineer.crowdworks.jp/something-cool/</p>
+
+<p>これで、自分だけでなくレビュワーも記事を読めるようになりました。</p>
+
+<h3 id="レビューに出す">レビューに出す</h3>
+
+<p>すでに記事がレビュー環境で読める状態になっているので、
+他のエンジニアにレビューしてもらうために、デフォルトブランチに対してGitHubのプルリクエストを作成します。
+プルリクエストの作成は、例えばhubコマンドで以下のように行えます。</p>
+<pre><code class="highlight shell">hub pull-request -b <span class="nb">source</span>
+</code></pre>
+
+<p>レビュイーは、レビュワーにプルリクエストのURLを通知します。
+レビュワーは、レビュー環境とソースを眺めつつ、コメントをつけてください。
+公開してOKなら、&quot;LGTM&quot;コメントをつけてください。</p>
+
+<h3 id="レビューする">レビューする</h3>
+
+<p>プルリクエストに&quot;LGTM&quot;コメントが2つ以上ついたら公開可能です。
+公開可能なら、レビュイーまたは執筆者がプルリクエストをマージしてください。</p>
+
+<h3 id="公開">公開</h3>
+
+<p>プルリクエストをマージすると、CIによって記事が自動的に公開されます。
+公開された記事は本番環境で閲覧することができます。</p>
+
+<p>http://engineer.crowdworks.jp/</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>この記事では、クラウドワークスエンジニアブログのワークフローをご説明しました。</p>
+
+<ul>
+<li>ブログはMiddlemanで生成する静的サイト</li>
+<li>記事は好きなエディタや言語で作成する</li>
+<li>GitHubでレビューする</li>
+<li>git pushするとテストが自動実行</li>
+<li>CIサービス上からレビュー環境へデプロイすることができる(手動)</li>
+<li>プルリクエストをマージすると本番環境に自動的にデプロイされる</li>
+</ul>
+
+<p>MiddlemanやGitHubを使ってブログを運用する予定がある・している方々の参考になれば幸いです。</p>
+
+<div class='author' style='text-align: right;'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/8e045bf747ca7a90b1d955dc30217271?s=32'>
+<a href="https://twitter.com/mumoshu">Yusuke Kuoka</a>
+</div>
+
+<ul class='article__body__share-buttons'>
+<li class='article__body__share-buttons__share-button'>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+関連する記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2014/07/17/github-based-blog.html'>エンジニアブログをMiddlemanでつくることにした3つの理由</a>
+</li>
+</ul>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2014/07/22/middleman-blogging-workflow.html'>MiddlemanとGitHubによるブロギング・ワークフロー</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/07/18/s3-access-control-with-bucket-policy.html'>Amazon S3でIPアドレスによるアクセス制限をかける</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/07/17/github-based-blog.html'>エンジニアブログをMiddlemanでつくることにした3つの理由</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script>
+  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+</body>
+</html>

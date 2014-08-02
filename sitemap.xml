@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://crowdworks.github.io//</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/18/s3-access-control-with-bucket-policy.html</loc>
+  </url>
+  <lastmod>2014-07-18 23:14 JST</lastmod>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/17/github-based-blog.html</loc>
+  </url>
+  <lastmod>2014-07-17 18:20 JST</lastmod>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/22/middleman-blogging-workflow.html</loc>
+  </url>
+  <lastmod>2014-07-22 20:15 JST</lastmod>
+  <url>
+    <loc>http://crowdworks.github.io//tags/aws.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//tags/s3.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//tags/middleman.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//tags/github.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/22.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/18.html</loc>
+  </url>
+  <url>
+    <loc>http://crowdworks.github.io//2014/07/17.html</loc>
+  </url>
+</urlset>
