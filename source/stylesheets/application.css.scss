@@ -536,6 +536,10 @@ h1.blog-title {
   width: 100%;
   color: white;
   opacity: 0.85;
+
+  .blog-title__link {
+    color: inherit;
+  }
 }
 
 @media all and (min-width: 10px) {
