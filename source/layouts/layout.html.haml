@@ -8,7 +8,7 @@
 %html{lang: 'en', class: 'no-js'}
   /<![endif]
   %head
-    %title #{data.page.title || ""} - CrowdWorks Engineer Blog
+    %title CrowdWorks Engineer Blog
     %meta(http-equiv="content-type" content="text/html" charset="utf-8")
     %meta(http-equiv="x-ua-compatible" content="ie=edge,chrome=1")
     %meta(name="description" content="")
@@ -67,9 +67,4 @@
     = yield_content :scripts
 
     - if build?
-      -# Google Analytics
-      :javascript
-        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
+      = google_analytics_universal_tag

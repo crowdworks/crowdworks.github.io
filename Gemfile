@@ -7,6 +7,7 @@ gem "middleman-livereload", "~> 3.3.4"
 gem "middleman-syntax"
 gem "middleman-deploy"
 gem "middleman-s3_sync", "~> 3.0.30"
+gem 'middleman-google-analytics', '~> 1.0.2'
 
 gem "builder", "~> 3.0"
 gem "nokogiri"
