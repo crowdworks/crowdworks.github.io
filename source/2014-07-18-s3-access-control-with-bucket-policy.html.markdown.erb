@@ -11,7 +11,7 @@ Amazon S3のBucketにHTTPでアクセスできるのは常識かもしれませ�
 それにアクセス制限をかけられる、ということはご存知でしたか？
 
 Bucketには「Static Website Hosting」の機能のオンオフにかかわらず、HTTPでアクセスできます。
-しかし、初期状態では[リクエストに認証情報を含めておかないと](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)アクセスできません。403 FORBIDDENです。
+しかし、初期状態ではリクエストに認証情報を含めておかないとアクセスできません。403 FORBIDDENです。
 ブラウザからアクセスしてWebサイトとして利用したい場合に、いちいちリクエストの認証情報を計算・付与するのは面倒です。
 用途によっては、もっと緩いアクセス制限をかけたいところです。
 
