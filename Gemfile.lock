@@ -119,6 +119,8 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (~> 3.2)
       rack-livereload (~> 0.3.15)
+    middleman-ogp (1.0.4)
+      middleman-core (~> 3.2)
     middleman-s3_sync (3.0.30)
       colorize
       fog (>= 1.10.1)
@@ -249,6 +251,7 @@ DEPENDENCIES
   middleman-deploy
   middleman-google-analytics (~> 1.0.2)
   middleman-livereload (~> 3.3.4)
+  middleman-ogp (~> 1.0.4)
   middleman-s3_sync (~> 3.0.30)
   middleman-syntax
   nokogiri

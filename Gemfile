@@ -8,6 +8,7 @@ gem "middleman-syntax"
 gem "middleman-deploy"
 gem "middleman-s3_sync", "~> 3.0.30"
 gem 'middleman-google-analytics', '~> 1.0.2'
+gem 'middleman-ogp', '~> 1.0.4'
 
 gem "builder", "~> 3.0"
 gem "nokogiri"

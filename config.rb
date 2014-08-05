@@ -173,3 +173,11 @@ activate :google_analytics do |ga|
   ga.development = false
   ga.minify = true
 end
+
+activate :ogp do |ogp|
+  ogp.namespaces = {
+    og: data.ogp.og
+  }
+  ogp.base_url = 'http://engineer.crowdworks.jp/'
+  ogp.blog = true
+end

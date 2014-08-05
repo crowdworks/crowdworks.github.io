@@ -1,0 +1,7 @@
+image:
+  '': http://engineer.crowdworks.jp/images/crowdworks-logo.png
+  type: image/png
+  width: 500
+  height: 500
+locale:
+  '': ja_jp
