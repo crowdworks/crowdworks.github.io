@@ -73,7 +73,7 @@
           -   select { |t| (current_page.data.tags || []).include? t }.
           -   map { |tag, articles| articles }.
           -   flatten.
-          -   reject { |a| a.title == current_page.title }
+          -   reject { |a| a.title == current_page.title || !a.data.published }
           - if related_articles.size > 0
             %h2.section-title
               関連する記事
@@ -83,14 +83,17 @@
                 %li.archive__article
                   %a{href: article.url}= article.title
 
-          %h2.section-title
-            最近の記事
+          - recent_articles = blog.articles.
+          - sort_by {|a| - a.date.to_i }.
+          - reject { |a| !a.data.published }
+          - if recent_articles.size > 0
+            %h2.section-title
+              最近の記事
 
-          %ul.archive
-            - recent_articles = blog.articles.sort_by {|a| - a.date.to_i }
-            - recent_articles.each do |article|
-              %li.archive__article
-                %a{href: article.url}= article.title
+            %ul.archive
+              - recent_articles.each do |article|
+                %li.archive__article
+                  %a{href: article.url}= article.title
     = partial "copyright"
     -# Javascripts
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"
