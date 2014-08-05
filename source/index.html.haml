@@ -1,0 +1,27 @@
+---
+title: CrowdWorks Engineer Blog
+body_class: index
+pageable: true
+per_page: 10
+---
+
+- if paginate && num_pages > 1
+  %p
+    = "Page #{page_number} of #{num_pages}"
+  - if prev_page
+    %p= link_to 'Previous page', prev_page
+
+- page_articles.each_with_index do |current_article, i|
+  = link_to current_article do
+    %section.article-intro.container
+      .row
+        .col-md-8.col-md-offset-2.blog-article
+          %p.article-date= current_article.date.strftime('%Y/%m/%d')
+          %h1.article-title= current_article.data.title
+    %section.article-body.container.content-section
+      .row
+        .col-md-8.col-md-offset-2.blog-article= current_article.summary(100)
+
+- if paginate
+  - if next_page
+    %p= link_to 'Next page', next_page

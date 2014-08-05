@@ -1,0 +1,31 @@
+require_relative 'sauce_helper'
+
+RSpec.configure do |config|
+  if config.files_to_run.one?
+    config.default_formatter = 'doc'
+  end
+
+  config.profile_examples = 10
+
+  config.order = :random
+
+  Kernel.srand config.seed
+
+  config.expect_with :rspec do |expectations|
+    expectations.syntax = :expect
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :expect
+    mocks.verify_partial_doubles = true
+  end
+
+  config.include Capybara::DSL
+end
+
+module Sauce
+  class Connect
+    remove_const :TIMEOUT if defined? TIMEOUT
+    TIMEOUT = 60
+  end
+end

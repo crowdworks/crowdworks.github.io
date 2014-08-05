@@ -1,0 +1,23 @@
+box: mumoshu/ubuntu12.04-ruby2.1.2-bundler1.6.4@0.0.1
+build:
+  steps:
+    - bundle-install
+    - script:
+        name: build
+        code: bundle exec rake build
+    - script:
+        name: rspec
+        code: bundle exec rspec
+deploy :
+  steps :
+    - add-ssh-key:
+        keyname: SSH_KEY
+    - bundle-install:
+        without: test
+    - script:
+        code: |
+          git config --global user.email "$MIDDLEMAN_DEPLOY_EMAIL"
+          git config --global user.name "$MIDDLEMAN_DEPLOY_NAME"
+    - script:
+        name: deploy
+        code: bundle exec rake deploy
