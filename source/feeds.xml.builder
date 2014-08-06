@@ -22,6 +22,13 @@ xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
       end
       # xml.summary article.summary, "type" => "html"
       xml.content article.body, "type" => "html"
+      xml.summary article.summary(100), "type" => "html"
+
+      logo_href =
+        %i| atom logo href |.inject(article.data) { |d, k| d[k] if d.respond_to?(:[]) } ||
+          'http://engineer.crowdworks.jp/images/crowdworks-logo.png'
+
+      xml.logo "href" => logo_href
     end
   end
 end
