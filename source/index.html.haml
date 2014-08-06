@@ -28,7 +28,9 @@ ogp:
           %h1.article-title= current_article.data.title
     %section.article-body.container.content-section
       .row
-        .col-md-8.col-md-offset-2.blog-article= current_article.summary(100)
+        .col-md-8.col-md-offset-2.blog-article
+          = current_article.summary(100)
+          .read-more 続きを読む
 
 - if paginate
   - if next_page

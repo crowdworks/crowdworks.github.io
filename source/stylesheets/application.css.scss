@@ -620,6 +620,11 @@ h2.section-title {
   margin: 0;
 }
 
+.read-more {
+  text-decoration: underline;
+  color: $primary;
+}
+
 .article__body__share-buttons {
   list-style: none;
   margin-left: -40px;
