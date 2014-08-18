@@ -22,14 +22,14 @@ atom:
 ---
 
 <%= image_tag 'aws.png', class: 'article__body__image_left_30' %>
-Amazon S3のBucketに、アクセス元IPアドレスによるアクセスコントロールをかけられる、ってご存知でしたか？
+Amazon S3のバケット(Bucket)に、アクセス元IPアドレスによるアクセスコントロールをかけられる、ってご存知でしたか？
 
-Bucketに入れるオブジェクトの機密性によっては、
+バケットに入れるオブジェクトの機密性によっては、
 「認証情報をつける」以外の方法でアクセスコントロールができると、応用が広がります。
 例えば、機密でもなんでもないファイルや静的サイトを、ロケーション的に同じオフィスにいる人にゆるく共有したい、
 くらいの用途であれば、アクセス元IPアドレスが使えることがあります。
 
-この記事では、AWSやS3のリクエスト認証の概要と、それを踏まえた「アクセス元IPアドレスによるBucketへのアクセスコントロール」の方法をご紹介します。
+この記事では、AWSやS3のリクエスト認証の概要と、それを踏まえた「アクセス元IPアドレスによるバケットへのアクセスコントロール」の方法をご紹介します。
 
 なお、情報セキュリティに関わることなので、利用箇所には注意してください！！
 
@@ -39,7 +39,7 @@ READMORE
 
 ## S3リソースへのアクセス方法
 
-Amazon S3で作成したBucketやオブジェクトにはHTTPでアクセスできます。
+Amazon S3で作成したバケットやオブジェクトにはHTTPでアクセスできます。
 
 例えば、
 
@@ -47,7 +47,7 @@ Amazon S3で作成したBucketやオブジェクトにはHTTPでアクセスで�
 2. S3が払い出すオブジェクトのURLを共有して、ファイル共有に使う
 3. Static Website Hostingを有効化して、独自ドメインを割り当てて静的サイトとして公開、Webブラウザからアクセスする
 
-いずれのケースでも、BucketやオブジェクトにアクセスするときはHTTPを話します。
+いずれのケースでも、バケットやオブジェクトにアクセスするときはHTTPを話します。
 
 ## AWSのリクエスト認証
 
@@ -58,7 +58,7 @@ S3を含むAWSリソースにアクセスするときは、基本的に、HTTP�
 認証情報の内容は、2014年8月現在は[「Authenticating Requests (AWS Signature Version 4)」](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)の通りです。
 具体的には、コンテンツとシークレットアクセスキーなどを元にした署名を含むAuthorizationヘッダをHTTPリクエストに含めたりします。
 
-試しに、Bucketを作成して、適当なファイルを設置して、curlやブラウザで該当するS3オブジェクトのURLにアクセスしてみると、403 FORBIDDENになりますね。
+試しに、バケットを作成して、適当なファイルを設置して、curlやブラウザで該当するS3オブジェクトのURLにアクセスしてみると、403 FORBIDDENになりますね。
 
 AWS SDK、S3に対応したファイル転送ソフト、ブラウザ拡張などは、アクセスキーID・シークレットキー等を元に認証情報を計算してくれています。
 「認証情報」を計算できないブラウザ等から普通にアクセスすると、拒否されます。
@@ -88,10 +88,10 @@ IPアドレスによるアクセス制限は、AWS Consoleから簡単にかけ�
 
 ## BEFORE: アクセス拒否されることのテスト
 
-まず、Bucketに変更を加える前に、まずこの記事でご紹介するIPアドレスによるアクセスコントロールを行っていない状態ではどうなるのか、確認しておきましょう。
+まず、バケットに変更を加える前に、まずこの記事でご紹介するIPアドレスによるアクセスコントロールを行っていない状態ではどうなるのか、確認しておきましょう。
 変更後に、また同じ手順でアクセスができることを確認します。
 
-Amazon S3のBucketに保存されたオブジェクトには、以下のようなURLでアクセスできます。
+Amazon S3のバケットに保存されたオブジェクトには、以下のようなURLでアクセスできます。
 
 ```
 $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name>
@@ -107,20 +107,20 @@ $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name> -w "\
 Status: 403
 ```
 
-前述のとおり、Amazon S3でBucketを作成すると、初期状態ではルートアカウントやBucketを作成したIAMユーザにフルアクセスの権限がついているはずです。
+前述のとおり、Amazon S3でバケットを作成すると、初期状態ではルートアカウントやバケットを作成したIAMユーザにフルアクセスの権限がついているはずです。
 したがって、このように403 FORBIDDENとなるのが正しい挙動です。
 
 セキュアでいいですね。
 しかし、用途によってはもっと緩いアクセス制限にしたい、その一つの方法としてアクセス元IPアドレスを使う、というのがこの記事の趣旨です。
 
-## Bucket Policyの設定
+## バケットポリシーの設定
 
-アクセス元IPアドレスによるアクセスコントロールを行うためには、Bucket Policyを変更します。
+アクセス元IPアドレスによるアクセスコントロールを行うためには、バケットポリシー(Bucket Policy)を変更します。
 
-Bucket Policyは、S3リソースに誰がアクセスできるかというルールを、
+バケットポリシーは、S3リソースに誰がアクセスできるかというルールを、
 Access Policy LanguageというJSONベースの言語で記述したものです。
 
-Bucket Policyの詳細については S3のドキュメント ["Using Bucket Policies and User Policies"](http://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) を参照してください。
+バケットポリシーの詳細については S3のドキュメント ["Using Bucket Policies and User Policies"](http://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) を参照してください。
 
 AWSコンソールで該当のBucketのPropertiesを開きます。
 「Add bucket policy」をクリックします。
@@ -132,11 +132,11 @@ JSON中の`<UNIQUE_ID>`と`<IP/CIDR>`はそれぞれユニークなIDと`IPア�
 
 <script src="https://gist.github.com/mumoshu/15a5a15a7d3c44ec8530.js"></script>
 
-このBucket Policyに登場する要素はそれぞれ以下の意味があります。
+このバケットポリシーに登場する要素はそれぞれ以下の意味があります。
 
 | 要素名(JSONPathで) | 説明 |
 | ----------------- | --- |
-| `/Statement/` | Bucket Policyの構成要素です。最低限、誰が(Principal)、どのAWSリソース(Resource)に対して、何をしようとしたとき(Action)、それを許可/拒否するか(Effect)という情報を含みます。 |
+| `/Statement/` | バケットポリシーの構成要素です。最低限、誰が(Principal)、どのAWSリソース(Resource)に対して、何をしようとしたとき(Action)、それを許可/拒否するか(Effect)という情報を含みます。 |
 | `/Statement/Condition/` | Statementが適用される条件です。Condition中では様々な条件分岐を書くことができます。例えば、S3の場合、「オブジェクトキー |
 | `/Statement/Condition/IpAddress/aws:SourceIp` | アクセス許可（ホワイトリスト） |
 | `/Statement/Condition/NotIpAddress/aws:SourceIp` | アクセス拒否（ブラックリスト） |
@@ -158,15 +158,15 @@ Access Policy Languageの詳細については、 S3のドキュメント["Acces
 $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name>`
 ```
 
-## 保守的なBucket Policy
+## 保守的なバケットポリシー
 
-なお、ご紹介したBucket Policyは念のため保守的に、
+なお、ご紹介したバケットポリシーは念のため保守的に、
 「デフォルトが拒否・許可にかかわらず、指定したIPアドレス/CDIRブロック内ならアクセス許可、それ以外なら拒否」となるようにしています。
 
 わざわざ保守的にしている理由は、皆さんの環境でデフォルト許可・拒否のどちらになっていたとしても、
 アクセス元IPアドレスでアクセスコントロールが効くようにするためです。
 
-実は、今回変更するBucket Policy以外にも、IAMポリシーやBucketのPermissionsの組み合わせ次第で、
+実は、今回変更するバケットポリシー以外にも、IAMポリシーやバケットのPermissionsの組み合わせ次第で、
 かなり柔軟にS3へのアクセスコントロールを行うができます。
 
 「デフォルトで拒否」になっていれば、
@@ -178,7 +178,7 @@ $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name>`
 例えば、以下のようにBucketに対してEveryoneユーザへのOpen/Download権限がついていると、
 認証不要でだれでもHTTP GETでアクセスできてしまいます。つまり、「デフォルト許可」の状態です。
 言われてみれば当たり前の話だとは思いますが、この状態でホワイトリストの設定をしても、認証不要でだれでもアクセスできることに変わりはありません。
-保守的なBucket Policyにしておけば、この状態でもアクセス元IPアドレスによるアクセスコントロールが有効になります。
+保守的なバケットポリシーにしておけば、この状態でもアクセス元IPアドレスによるアクセスコントロールが有効になります。
 個人的には、全公開にする予定がないなら、EveryoneへのPermissionは削除してしまいます。
 
 <%= image_tag 's3-remove-everyones-permission.png' %>
@@ -188,7 +188,7 @@ $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name>`
 
 ## 応用例: アクセス元IPで閲覧許可、ユーザ名で更新許可
 
-このBucket Policyの応用は色々考えられますが、例えば
+このバケットポリシーの応用は色々考えられますが、例えば
 
 * 特定のIAMユーザが更新可能
 * あるアクセス元IPアドレスからは閲覧可能
@@ -197,7 +197,7 @@ $ curl https://s3-ap-northeast-1.amazonaws.com/<bucket-name>/<object-name>`
 といった設定ができます。
 
 実際、このブログのテスト環境では、Middlemanでビルドした静的サイトをS3 Bucketへデプロイしています。
-そのために、以下の様なBucket Policyを設定しています。
+そのために、以下の様なバケットポリシーを設定しています。
 
 * WerckerからS3へのデプロイを許可 (Wercker用のIAMユーザを作成して、そのユーザからS3へのファイルアップロード許可)
 * 社内からは認証情報なしで閲覧許可
