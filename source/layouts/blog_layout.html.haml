@@ -72,10 +72,10 @@
         .col-md-8.col-md-offset-2
           - related_articles = blog.
           -   tags.
-          -   select { |t| (current_page.data.tags || []).include? t }.
+          -   select { |tag, articles| (current_page.data.tags || []).include? tag }.
           -   map { |tag, articles| articles }.
           -   flatten.
-          -   reject { |a| a.title == current_page.title || !a.data.published }
+          -   reject { |a| a.title == current_page.title || a.data.published != false }
           - if related_articles.size > 0
             %h2.section-title
               関連する記事
