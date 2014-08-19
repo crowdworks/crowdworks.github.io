@@ -75,7 +75,7 @@
           -   select { |tag, articles| (current_page.data.tags || []).include? tag }.
           -   map { |tag, articles| articles }.
           -   flatten.
-          -   reject { |a| a.title == current_page.title || a.data.published != false }
+          -   reject { |a| a.title == current_page.title || a.data.published == false }
           - if related_articles.size > 0
             %h2.section-title
               関連する記事
@@ -87,7 +87,7 @@
 
           - recent_articles = blog.articles.
           - sort_by {|a| - a.date.to_i }.
-          - reject { |a| !a.data.published }
+          - reject { |a| a.data.published == false }
           - if recent_articles.size > 0
             %h2.section-title
               最近の記事
