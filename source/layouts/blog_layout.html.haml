@@ -53,49 +53,52 @@
         js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    .article__cover
-      = partial "nav"
-      = partial "title"
-    %section.article-intro.container
-      .row
-        .col-md-8.col-md-offset-2.blog-article
-          %p.article-date= current_article.date.strftime('%Y/%m/%d')
-          %h1.article-title= current_article.data.title
-    %section#body.article-body.container.content-section
-      .row
-        .col-md-8.col-md-offset-2
-          = yield
-          = partial 'author'
-          = partial "sns_shares"
-    %section.content-section.container
-      .row
-        .col-md-8.col-md-offset-2
-          - related_articles = blog.
-          -   tags.
-          -   select { |t| (current_page.data.tags || []).include? t }.
-          -   map { |tag, articles| articles }.
-          -   flatten.
-          -   reject { |a| a.title == current_page.title || !a.data.published }
-          - if related_articles.size > 0
-            %h2.section-title
-              関連する記事
-
-            %ul.archive
-              - related_articles.each do |article|
-                %li.archive__article
-                  %a{href: article.url}= article.title
-
-          - recent_articles = blog.articles.
-          - sort_by {|a| - a.date.to_i }.
-          - reject { |a| !a.data.published }
-          - if recent_articles.size > 0
-            %h2.section-title
-              最近の記事
-
-            %ul.archive
-              - recent_articles.each do |article|
-                %li.archive__article
-                  %a{href: article.url}= article.title
+    = partial "header"
+    .article-cover
+    .article
+      %section.article-intro.container
+        .row
+          .col-md-8.col-md-offset-2.blog-article
+            .article-info.clearfix
+              %p.article-date= current_article.date.strftime('%Y/%m/%d')
+              = partial "sns_shares_article"
+            %h1.article-title= current_article.data.title
+      %section#body.article-body.container.content-section
+        .row
+          .col-md-8.col-md-offset-2
+            = yield
+            .article-info-bottom.clearfix
+              = partial 'author'
+              = partial "sns_shares_article"
+      %section.content-section.container
+        .row
+          .col-md-8.col-md-offset-2
+            - related_articles = blog.
+            -   tags.
+            -   select { |t| (current_page.data.tags || []).include? t }.
+            -   map { |tag, articles| articles }.
+            -   flatten.
+            -   reject { |a| a.title == current_page.title || !a.data.published }
+            - if related_articles.size > 0
+              %h2.section-title
+                関連する記事
+  
+              %ul.archive
+                - related_articles.each do |article|
+                  %li.archive__article
+                    %a{href: article.url}= article.title
+  
+            - recent_articles = blog.articles.
+            - sort_by {|a| - a.date.to_i }.
+            - reject { |a| !a.data.published }
+            - if recent_articles.size > 0
+              %h2.section-title
+                最近の記事
+  
+              %ul.archive
+                - recent_articles.each do |article|
+                  %li.archive__article
+                    %a{href: article.url}= article.title
     = partial "copyright"
     -# Javascripts
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"
@@ -103,6 +106,7 @@
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"
     = javascript_include_tag 'application'
+    = javascript_include_tag 'main.js'
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"
     = javascript_include_tag "//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js"
     = javascript_include_tag "//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js"

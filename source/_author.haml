@@ -1,5 +1,5 @@
 - if current_page.data.author
-  %div.author{style: 'text-align: right;'}
+  %div.author
     Written by
     - if current_page.data.gravatar
       %img{class: 'author-gravatar gravatar', src: gravatar_for(current_page.data.gravatar)}

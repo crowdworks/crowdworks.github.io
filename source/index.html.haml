@@ -8,11 +8,6 @@ ogp:
     description: Ruby・AWSエンジニア 必読！日本最大級のクラウドソーシング「クラウドワークス」の裏側をお届けするエンジニアブログ
 ---
 
-%section.article-intro.container
-  .row
-    .col-md-8.col-md-offset-2.blog-article
-      = partial "sns_shares"
-
 - if paginate && num_pages > 1
   %p
     = "Page #{page_number} of #{num_pages}"
@@ -24,7 +19,8 @@ ogp:
     %section.article-intro.container
       .row
         .col-md-8.col-md-offset-2.blog-article
-          %p.article-date= current_article.date.strftime('%Y/%m/%d')
+          .article-info.clearfix
+            %p.article-date= current_article.date.strftime('%Y/%m/%d')
           %h1.article-title= current_article.data.title
     %section.article-body.container.content-section
       .row
