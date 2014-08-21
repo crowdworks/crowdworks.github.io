@@ -471,64 +471,9 @@ a:focus {
   font-family: $third-font;
 }
 
-.article {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  text-align: left;
-  margin: 50px -20px;
-  border-left: 3px solid rgba(255, 255, 255, 0);
-  padding: 17px 17px;
-  cursor: pointer;
-  background-color: white;
-}
-
 .summarized-article__author {
   margin: 5px 0px;
   color: $primary;
-}
-
-.article__date {
-  font-size: 15px;
-  margin: 0;
-  font-family: $third-font;
-  color: $green;
-}
-
-.article__title {
-  font-size: 200%;
-  font-weight: 700;
-  margin: 0;
-  color: $text;
-}
-
-.article__title a {
-  color: inherit;
-}
-
-.article__body {
-  font-size: 15px;
-  margin-top: 0.4em;
-  color: $gray;
-}
-
-.article-body ul {
-  margin-left: -5px;
-}
-
-.article-body li {
-  position: relative;
-}
-
-.article__body__image_left_50 {
-  width: 50%;
-  float: left;
-  margin-right: 20px;
-}
-
-.article__body__image_left_30 {
-  width: 30%;
-  float: left;
-  margin-right: 20px;
-  margin-bottom: 20px;
 }
 
 .archives__year {
@@ -551,13 +496,6 @@ a:focus {
 
 .archive__article a {
   color: inherit;
-}
-
-// .content-section
-//   padding: 0px 15px
-
-.content-section__body {
-  padding-top: 90px;
 }
 
 h2.header-recent-articles {
