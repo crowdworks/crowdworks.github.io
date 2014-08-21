@@ -23,7 +23,7 @@ set :haml, { ugly: true }
 
 set :markdown_engine, :redcarpet
 
-set :markdown, :fenced_code_blocks => true, :smartypants => true, with_toc_data: true
+set :markdown, :fenced_code_blocks => true, :smartypants => true, with_toc_data: true, footnotes: true, tables: true
 
 helpers do
   # @see https://github.com/vmg/redcarpet/pull/186#issuecomment-22783188
