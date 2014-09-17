@@ -1,3 +1,0 @@
-[submodule "source/images/emoji"]
-	path = source/images/emoji
-	url = git://github.com/leereilly/emoji.git
