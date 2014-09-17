@@ -60,28 +60,28 @@ git clone git@github.com:crowdworks/crowdworks.github.io.git
 
 cloneしたレポジトリのデフォルトブランチはmasterではないということを覚えておいてください。
 
-##### コラム: デフォルトブランチをmasterにしない理由
-
-「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
-GitHub Organization Pagesにおけるデプロイ方法は、
-
-* Organizationにある
-* 「`organization`.github.io」という名前のGitレポジトリの
-* masterブランチ
-
-にデプロイしたい内容をgit pushする、というものです。
-masterブランチにgit pushされた内容が http://organization.github.io/ に公開されます。
-
-参考: [User, Organization, and Project Pages · GitHub Help](https://help.github.com/articles/user-organization-and-project-pages#user--organization-pages)
-
-ということは、Middlemanプロジェクトのソースをmasterブランチにおいてしまうと、ブログではなく元のソースがGitHub Pagesで
-公開されてしまいますね。
-それでは困るので、masterブランチ以外でソースを管理します。
-ソース管理するのがmasterではないということを明確にする意味もあり、
-GitHub上でのデフォルトブランチはmasterではなく、ソース管理を行うブランチにしておきます。
-
-例えば、crowdworks.github.ioレポジトリの場合、sourceブランチでソースを管理し、ソースからビルドしたブログのデプロイ先はmasterブランチです。
-また、デフォルトブランチはsourceです。
+> ##### コラム: デフォルトブランチをmasterにしない理由
+>
+> 「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
+> GitHub Organization Pagesにおけるデプロイ方法は、
+>
+> * Organizationにある
+> * 「`organization`.github.io」という名前のGitレポジトリの
+> * masterブランチ
+>
+> にデプロイしたい内容をgit pushする、というものです。
+> masterブランチにgit pushされた内容が http://organization.github.io/ に公開されます。
+>
+> 参考: [User, Organization, and Project Pages · GitHub Help](https://help.github.com/articles/user-organization-and-project-pages#user--organization-pages)
+>
+> ということは、Middlemanプロジェクトのソースをmasterブランチにおいてしまうと、ブログではなく元のソースがGitHub Pagesで
+> 公開されてしまいますね。
+> それでは困るので、masterブランチ以外でソースを管理します。
+> ソース管理するのがmasterではないということを明確にする意味もあり、
+> GitHub上でのデフォルトブランチはmasterではなく、ソース管理を行うブランチにしておきます。
+>
+> 例えば、crowdworks.github.ioレポジトリの場合、sourceブランチでソースを管理し、ソースからビルドしたブログのデプロイ先はmasterブランチです。
+> また、デフォルトブランチはsourceです。
 
 ##### 2回め以降
 
@@ -112,34 +112,36 @@ Gemfileに書かれたgemをインストールする必要があります。
 bundle install --binstubs
 ```
 
-##### コラム: Middlemanプロジェクト ≒ Rubyプロジェクト
+> ##### コラム: Middlemanプロジェクト ≒ Rubyプロジェクト
+>
+> 通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
+> そして、実行前にはbundle installする必要がありますね。
+>
+> 同様に、Middlemanプロジェクトのテストやビルド、デプロイに必要な
+> Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
+> したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。
 
-通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
-そして、実行前にはbundle installする必要がありますね。
+　
 
-同様に、Middlemanプロジェクトのテストやビルド、デプロイに必要な
-Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
-したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。
-
-##### コラム: binstubs
-
-`bundle install`コマンドに`--binstubs`オプションをつけることで、bin/以下に
-middlemanコマンドをBundler環境下で実行するためのラッパースクリプト(binstub)が生成されます。
-middlemanのbinstubはbin/middlemanです。
-
-binstubがない場合、Bundler環境下でmiddlemanを実行する場合は以下のコマンドを実行する必要があります。
-
-```bash
-bundle exec middleman
-```
-
-しかし、binstubがある場合、以下のコマンドでOKです。
-
-```bash
-bin/middleman
-```
-
-少しだけ短くなりますね :tada:
+> ##### コラム: binstubs
+>
+> `bundle install`コマンドに`--binstubs`オプションをつけることで、bin/以下に
+> middlemanコマンドをBundler環境下で実行するためのラッパースクリプト(binstub)が生成されます。
+> middlemanのbinstubはbin/middlemanです。
+>
+> binstubがない場合、Bundler環境下でmiddlemanを実行する場合は以下のコマンドを実行する必要があります。
+>
+> ```bash
+> bundle exec middleman
+> ```
+>
+> しかし、binstubがある場合、以下のコマンドでOKです。
+>
+> ```bash
+> bin/middleman
+> ```
+>
+> 少しだけ短くなりますね :tada:
 
 ### 執筆
 
