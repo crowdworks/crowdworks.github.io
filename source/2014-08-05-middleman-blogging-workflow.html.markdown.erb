@@ -21,7 +21,7 @@ atom:
 ---
 
 クラウドワークスエンジニアブログは、
-GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成・運用されています。
+GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成、運用されています。
 複数人で運用するにあたってドキュメントを書こうと思い、参考になるものをググってみたところ、
 意外と事例がありませんでした。
 「ないなら作る！」ということで、弊社で運用している「MiddlemanとGitHubによるブロギング・ワークフロー」
@@ -38,8 +38,8 @@ GitHubと静的サイトジェネレータ「Middleman」を使って複数人�
 ## 前提
 
 このブログはMiddlemanで作られています。
-ブログのソースはRubyやMarkdown・Haml・SCSS・JavaScriptなどで書かれたMiddlemanプロジェクトです。
-執筆者がソースを書いて、Middlemanにビルドさせると、HTML・CSS・JavaScriptによる静的サイトが生成されます。
+ブログのソースはRubyやMarkdown、Haml、SCSS、JavaScriptなどで書かれたMiddlemanプロジェクトです。
+執筆者がソースを書いてMiddlemanにビルドさせると、HTML、CSS、JavaScriptによる静的サイトが生成されます。
 こうして生成された静的サイトをGitHub Pagesにデプロイしています。
 
 このブログの生い立ちや仕組みの詳細は、「<%= link_to 'エンジニアブログをMiddlemanでつくる3つの理由 - CrowdWorks Engineer Blog', '/2014/08/05/why-we-use-middleman-blog.html' %>」の記事を見てみてください！
@@ -117,7 +117,7 @@ bundle install --binstubs
 通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
 そして、実行前にはbundle installする必要がありますね。
 
-同様に、Middlemanプロジェクトのテストやビルド・デプロイに必要な
+同様に、Middlemanプロジェクトのテストやビルド、デプロイに必要な
 Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
 したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。
 
@@ -150,7 +150,7 @@ bin/middleman
 git checkout -b something-cool
 ```
 
-Middlemanプロジェクトでは各記事のソースはMarkdown、Haml、ERB等お好きなマークアップ言語・テンプレート言語で書くことができます。
+Middlemanプロジェクトでは各記事のソースはMarkdown、Haml、ERB等お好きなマークアップ言語、テンプレート言語で書くことができます。
 middleman-blogの場合、デフォルトではMarkdownで書きます。
 
 さらに、記事を新規作成するときに、手動でソースファイルを作成する必要はありません。
@@ -239,11 +239,11 @@ hub pull-request -b source
 この記事では、クラウドワークスエンジニアブログでの記事の書き方をご説明しました。
 
 * ブログはMiddlemanで生成された静的サイト
-* MiddlemanプロジェクトはRuby・Markdown・Haml・SCSSで書かれている
+* MiddlemanプロジェクトはRuby、Markdown、Haml、SCSSで書かれている
 * 記事は好きなエディタや言語で作成する
 * GitHubへpushすると自動的にビルドされる
 * GitHubのプルリクエスト上でレビューする
-* CIサービスWerckerから、レビュー環境へ手動・自動でデプロイする
+* CIサービスWerckerから、レビュー環境へ手動、自動でデプロイする
 * プルリクエストをマージすると本番環境に自動的にデプロイされる
 
-MiddlemanやGitHubを使ってブログを運用する予定がある・している方々の参考になれば幸いです！
+MiddlemanやGitHubを使ってブログを運用する予定がある、している方々の参考になれば幸いです！
