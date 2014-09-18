@@ -1,0 +1,383 @@
+---
+title: RubyKaigi 2014 1日目 参加レポート by @mumoshu
+date: 2014-09-16 15:03 JST
+tags:
+  - ruby
+  - rubykaigi
+gravatar: ykuoka@gmail.com
+author: Yusuke Kuoka
+twitter_id: mumoshu
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+      type: image/png
+      width: 250
+      height: 250
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+    type: image/png
+---
+
+9/18(木)に開催された [RubyKaigi 2014](http://rubykaigi.org/2014) 1日目の参加レポートです。
+弊社クラウドワークスも、[多くの有名企業に並んでスポンサーをさせていただいている](http://rubykaigi.org/2014/sponsors)ので、全力で宣伝させていただきます！
+
+聴講しながら勢いてまとめているので読みづらい点もあると思いますが、全力で更新していきます！！
+
+![RubyKaigi 2014 Official Sponsor](rubykaigi/2014/badge-for-official-sponsor@2x.png "クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!")
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## 9:30~ 入場
+
+![入り口にスポンサーのロゴが貼られていました](http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10684117_547926005309429_67661353_n.jpg)
+
+## 10:15~ オープニング
+
+角谷さんによるオープニングセッション。挨拶や、Rubyが世界中で使われていて、日本はその誕生の地であること、スポンサーの紹介と謝辞など。面白いのはWifiスポンサーで、SIDを自由に付けられる。今回はDeNAさんが「dena_use_ruby」というSIDで宣伝されてましたw
+
+RubyKaigiはセミインターナショナルカンファレンス。通訳あり。通訳ありのカンファレンスって運営が大変なのに、やりきるRubyKaigiすごい。
+
+## 10:30~ CRuby Committers Who's Who in 2014
+
+次は近永さんにバトンタッチ。
+日本やRubyKaigiにはCRubyコミッタが多く集まるので、今回はその人達に質問できるセッションがあります。セッションは所定のはっしゅた　
+
+CRubyにはbotも含めると84ものアカウントがある。個人的な印象としては多い。人間だけでも50人。それぞれ紹介する時間がないので、特に面白そうな人を紹介。今年のRubyKaigiでスピーカーになっているコミッタは、15人。うち三人はキーノートスピーカー。それぞれ発表順で紹介。
+
+### Tomoyuki Chikanaga, @nagachika さん at Groovenauts, Inc.
+
+* Rubyの2.1 branch maintainer
+* ruby-trunk-chanegs日々のRubyへの変更を日本語ブログに書く、という活動
+* RubyPrize 2013受賞
+
+### Koichi Sasada @ko1 さん at Heroku, Inc.
+
+Ruby VMの開発がお仕事。Speed Freak, 昨年はRGenGC開発、今年はIncremental GC開発。Incremental GCはもうtrunkに入っているので、次のRubyバージョンでは使えるようになるはず。それぞれsweepを細切れ、mark&sweepを細切れにする。
+
+ko1さん、ご結婚おめでとうございます！ちなみに、お相手の鳥居さんもスピーカー。スーパーカップルですね。
+
+### Narihiro Nakamura, @nariさん
+
+Mr. GC, Lazy Sweep/Bitmap Marking, ko1さんに対抗して、今年はSymbol GC開発。次のRailsバージョンはSymbol GCが欲しいがために、Ruby 2.2以降のみをサポートするらしい。つまり、Ruby 2.1がオワコンになるので、メンテがんばりましょう！
+
+### matz
+
+Yukihiro "Matz" Matsumoto
+
+The Creator of Ruby
+
+現在は言語デザイナ(Language Designer)、NaCLのフェロー、Rakutenフェロー、名誉市民、など一枚のスライドに書ききれないくらいの
+技術顧問とか行ってあ行った、親長さんもしならい
+
+matzのコミット。
+
+![]()
+
+去年のRubyKaigi以降、matzのコミットはこれだけだったw
+このようにRuby自体の開発はしないものの、Rubyの新機能に関わるジャッジ(新機能を入れるべきかどうか)はmatz。
+
+### Kazuhiro NISHIYAMA, @kazuさん
+
+* 'fiz typo' ratio 97 / 143 = 68%。Mr, fox typo
+
+### Hiroshi SHIBATA, @hsbtさん at GMO Pepabo, Inc.
+
+Administrator of *.ruby-lang.org (www, bugs, ML)
+
+* Test edge ruby (trunk) on raiils
+
+RailsがエッジなRubyで動くかどうか、率先して地雷を踏んでいる。みんな知らないうちに恩恵を受けているはずなので、あったらお礼を言ってあげてください！
+
+### Shota Fukumori, @sorah at Cookpad Inc.
+
+* test/unit maintainer -> dropped from stdlib
+* parallel test
+
+Cookpadで発生したRubyの問題などをRubyにフィードバックする。
+最年少コミッタ、Cookpadでは非常に頼りにされるアニキ。
+今回のセッション内容はデプロイの高速化、という骨太な内容。
+
+### Kouji takao, @kouji
+
+* Readline extension maintainer
+* MacRuby Commiter
+* Ruby Programming Shounendan
+  * http://smalruby.jp/
+  * ビジュアルプログラミング環境をバックエンドRubyで作ったもの。
+
+### Kazuki Tsujimoto, @ktsj at Nomura Research Institute, Ltd.
+
+* VM Bug Hunter, ややこしいバグの修正パッチを投げてくださる方
+* Pattern Maching (pattern-match)
+* Power Assert (test-unit-power_assert)
+
+今回のセッションでも、Power Assertについて聞けるらしい。
+
+### Aaron Patterson, @tenderlove at AT&T -> RedHat, Inc.
+
+* psynch/dl/fiddle maintainer
+* Rails Commiter
+* NokogiriというXMLパーサの開発者。かつてのリリースメールTakoyaki Kamenという小話がついていて、楽しみにされていたらしい.w
+
+最近RedHatに転職されたそうですが、RedHatはJRubyコミッタを擁しているので、今後の活動にも注目。
+
+### Keiju Ishitsuka, @keiju
+
+* Rubyという名前を提案した方、Ruby's godfather
+* irb author & maintainer
+* 最近はirbのバグ修正などでご活躍
+
+### Masatoshi SEKI, @seki
+
+* dRuby/rinda/erb author & maintainer
+* 今回紹介している15人の中で、唯一RubyKaigi以降一回もコミットがない。これらプロダクトがいかに枯れているかわかる！
+* 今回のセッションは分散処理について
+
+### @zzak
+
+* Documentation maintainer
+* rubygems, rake, rdoc contributor
+* Conference freak
+   * England, Singapore, Maxico, Scotland, Taiwan, Japan, Phillippines, India, Australia, South Africa Belgium, ...去年のRubyKaigi以降20カ国のカンファレンスに参加し、17カ国はスピーカーとして登壇。すごい。
+* 今回のセッション内容は「Rubyのエコシステムに対してどうやって貢献していくか」
+
+### Kouhei Sutou, @kou at ClearCode, Inc.
+
+* rexml/rss/xmlrpc maintainer, XMLにかかわるところ
+* テストがちゃんとかかれていたり、リファクタリングと変更のコミットがちゃんと分かれていたり、今どきのきれいなコミットをされる方で、毎日コミットを読む側としては大変ありがたいそうです
+* Groonga
+
+### Aaron at GitHub, Inc.
+
+* 最終日のKeynoteスピーカー
+* RUbyのコアに精通している
+* Memory Optimizations
+* Inspection/Profiler/Debugger
+* Hash#[] optimization
+* ObjectSpace.dump_all
+* ko1さんとコミット領域が似ていて、ko1さんの愉快な最適化仲間の一人。
+* 今回のセッション内容はたぶん「実行中Rubyプログラムの状態を見る方法」
+
+Rubyの開発にはたくさんの方が関わっている、ということが伝わると嬉しい、とのこと。
+
+## 11:00~ スポンサーアピール
+
+Cookpad株式会社技術部長のたかいさん。
+
+Cookpadは国内最大のレシピサイト。178万レシピが投稿されているサービス。Cookpadは3つのチャレンジをしている。
+
+1. 食のプラットフォームとしてレシピ以外のサービスを開発すること
+  * プロのレシピ、料理動画、おでかけ情報共有
+2. Mobile First
+  * アプリはiOS 10.1M, Android 9.9M ダウンロード
+  * ＞突然のモバイルファースト＜
+3. 海外展開
+  * インドネシアのサービスを買収して、CTOが駐在している。
+  * 生ハムがバナナのように売られている写真。
+
+* RubyKaigi 2010~2014まですべてスポンサーをしている（拍手）
+* Rubyのコアデベロッパ三人とRubinius開発者も一人。技術ブログもあり。Rubyの良き市民を目指している。
+* 今日、garageというライブラリがオープンソース化。
+
+Cookpadさんエンジニア採用中！
+
+## 11:00~ キーノート: Build-up Ruby interepreter - What is easy and what is difficult? by @ko1
+
+「2014年というのは私にとってとても重要な年でした」
+
+「明後日、結婚記念日」
+
+「Rubyを通じて知り合ったので、このような場でご挨拶させていただいて光栄です」
+
+### Ruby 10th Anniversary
+
+* 10年でここまで来たか、という思いと、10年でまだここまでなのか、という思い
+* 何が簡単で、何が難しかったかという話
+* Ruby developmentのEasy partとDifficult part
+* これからRubyがどこに進んでいくのか、どんな課題があるのか
+* A programmer, CRuby developer since 2007
+* Member of Heroku Matz team
+* Fulltime CRuby developer with Matz and Nobu since 2012
+* One of the directors of Ruby Association since 2013
+* Herokuまでは大学の先生(!)
+* Ruby Associationでは500,000yen/projectで3project公募しているので気軽に応募してほしい
+* Herokuは今年のBentoスポンサー、Herokuの本も出ました
+
+Understanding Computationの日本語版を手に「この本の監訳をしました」
+
+![この本の監訳をしました]()
+
+### Who am I
+
+* YARV: Yet Another RUbyVM (1.9-)
+
+私にはRubyはこんなふうに見えています。Ruby Intepreterの部分をつくっています
+
+![]()
+
+* 2004/01/01に暇だったから始めたものが10年続いて、やってよかった。
+
+* Fiber (1.9-)
+  * 他の言語ではコルーチンやセミコルーチンと呼ばれるもの。
+  * Fast Context Switchを実現
+* New method cache (2.0-)
+  * Flonum (on 64bit CPU) (2.0-)
+  * Embedded "double" into VALUE like FIxnum: About 2 times faster
+* RGenGC: GEnerational GC for Ruby (2.1-)
+  * Introduce RGenGC by inventing "WB-unprotected" objects technique and reduce marking time dramaticaly
+  * Incremental GC by same technique (for Ruby 2.2)
+    * See Rubyist Magazine vol. 0048 or attend RubyCOnf2014
+  * About 15x speed-up!
+* Performance
+  * Ruby to C compiler
+  * Ruby to C# compiler
+  * などなどの開発も研究プロジェクトでされていた
+* http://www.atdot.net/~ko1/activities/ にすべてのアクテビティを書いてある。書いておくと、履歴書つくるときに役に立つ。（いつ転職するかはわからないけど・・）
+
+![12月に予定がないので誰か読んでくれないかな」()
+
+### 本題: Ruby developmentの何が難しくて何が易しいのか
+
+* ミッションは「クオリティを高めること」
+* ちゃんと動くこと(RUn Ruby program correctly, No bugs!!)
+* 速く動いて文句言う人はいないので、なるべく速く動かす
+* 省メモリ・省エネルギー
+* 拡張性
+   * Ruby intepreter自体がどれくらい手を入れやすいか。バグ修正やワクワクする新しい機能を実装しやすくするために。
+* トレードオフ
+  * Performance <-> Reliability
+  * Performance <-> Low resource
+  * Performance <-> Compatibility
+  * Performance <-> Extensibility (速度のためにコードをぐちゃらせると、手を入れづらくなる)
+* トレードオフを知り、
+* Rubyはlanguage powerと読みやすさ・下記やすさのトレードオフを乗り越えて生産性を向上させてきた
+
+#### Serial execution Pperformance, Paralle execution performance, GC performanceの話
+
+* VMをシンプルにつくるだけならそんなに難しくない。それを人間が管理可能な形で置いておくとか、最適化をちゃんとやるのが難しい。Cコードとの相互運用性も難しい。
+* Add bytecode incrementally
+    * Increase support ruby features
+    * For YARV, ruby has an answer set! (test case)
+* Loop fetch and execute instructionsするだけの、
+   * "Implementing block data structure is hell"
+
+![ブロックの実装にあたってはこういうことをちゃんと考えないといけない]()
+
+* VM記述言語をつくって、それでVMを記述することで保守しやすくした
+
+* Aggressive optimizations
+   * Method/block inlining
+   * Constant folding
+   * Partial redundancy elimination (PRE)
+   * Lambda lifting
+   * ... (many well-known traditional optimizations)
+* Key technique is DE-OPTIMIZATION
+   * 90年代のJavaやSmalltakは既にやっていたが、これが難しい
+   * 最適化されたコードを、必要なタイミングでまた元に戻す
+* Inteoperatility with C codes
+   * C code is low-levle, faster than Ruby's code
+   * Howevefr, C code doesn''t have internal details which aggressive optimization requires
+   * Most of Java class libraries are written in Java program -> Rubiniuys Way
+
+#### Parallel executionどうするか
+
+* EASY: 並列スレッドを提供する
+   * 博士論文を一部はRuby上で並列スレッドをどう作るか
+* HARD: 単純に並列スレッドを提供すると、スレッドプログラミングが大変なので、Rubyを書くことが辛くなる、プログラマハッピーでなくなる。
+   * プログラミングモデルの改善やデバッガの提供が必要
+   * あらゆるところで動機が必要
+* "Why Threads Are A Bad Idea (for most purposes)"
+   * Quoted from John Ousterhout, 1995
+
+VisualBasicはだれでもできるだろう、C・C++はもっとwizardより、スレッドプログラミングはwizard中のwizardでないとできない
+
+![]()
+
+* 問題は「すべての状態を共有しているので、一つでも同期を間違えるとバグる」
+* よくあるバグ: Data race, Atomicity violation, Order violation
+* Non-deterministic nature
+   * Bugs are not reproducible
+   * デバッグがすごくつらくなる
+* こういう経験をRubyでしてしまうと、RubyがFun/Happyでなくなってしまう。だからRubyに並列スレッドをそのままは入れたくない
+* 対策
+   * Educate  programmers: しかし人類がスレッドプログラミングをできるようになるのかという問題がある
+   * 他のツールを提供する
+
+工夫すればセーフコードが書ける、セーフコードしか書けない、という2種類ある。
+いまは書きやすくて安全なものをみんなが探している状態。
+
+![他の言語でのアプローチ]()
+
+最高性能を出すためにはスレッドプログラミングは確かにはやい。ちゃんとやれば動く。でも人間はミスをするので、デバッグが大変になる。
+free() vs GCの話と同じで、わかってる人はfreeすれば速いが、人間はミスをする。RubyはGCの改良で高速になった。
+
+* IDEA
+   * プロセス間通信を良くする
+   * MVM: Multiple virtual machines
+     * 小さなRubyVMを複数動かす
+   * "owner threads" for each object
+     * それはそれで、グローバルなアクセスをどうするかが難しい
+
+すごく面白いテーマなので、誰か一緒に考えてくれるとうれしい。
+
+* Non-deterministic behavior kills programmers
+* Many research on thread debugging tools
+   * detecting inter-thread conflicts
+   * Change OS scheduler to make programs deterministic
+* GC Performace
+   * 世代別GCのアルゴリズムを書くのは簡単。100行くらいでかける。でも、でもそれをちゃんとバグ無く書くのが難しい。
+   * Write barrier technique is required for many GC algorithms, but it is difficult to insert WBs correctly because of compatibility issue
+  * Non-deterministic behavior: GC bugs appear in unexpected place.
+  * Solution: Debugging feature
+    * GC.stress: invoke GC many times forcibly
+    * CHeck assertions
+       * List up all assertions
+  * detect write barrier miss
+    * "Old objects should not point new objects"
+    * バグでwriter barrierの入れ忘れによりこういう状態になる可能性があるのでassert
+  * ベンチマークの実行自体は簡単だが、何をはかるか、継続的にどうやるかが難しい。
+  * ベンチマークのため、早いマシンがねむってたら、貸してください!
+  * 何をはかるか
+    * microbenchmark
+    * discourseというRailsアプリのベンチマークスイートを使っているが、これしかないのでRubyがこれに最適化されてしまうw 他の使いやすいテストスイートを提供してくれると嬉しい。
+  * Ruby 2.1以降「メモリ消費量が増えた」という話を聞くが、それはピークなのか平均なのかメディアンなのか
+  * Rubyコミッタになるのは簡単。
+  * でも、Ruby開発者になるのは難しい。
+     * Ruby開発者とはモチベーションを保って継続的にRubyを開発する人。
+     * Ruby開発者を増やすこと。
+  * 学習用のリソース
+     * ko1さんは「Rubyソースコード完全解説」という本を読んでRuby開発者になれた。
+     * Ruby Under a Microscope。現在日本語へも翻訳中。
+
+![メッセージ]()
+
+## 12:00~ ランチブレーク
+
+午前の部は終わりです！Have a nice bento！
+
+ランチ画像など
+
+## 13:30~ Controller Testing: You’re Doing It Wrong @ Hall B
+
+## 14:00~ Continuous Delivery at GitHub @ Hall B
+
+## 14:30~ What is your app's problem? @ Hall B
+
+## 15:30~ Non-Linear Pattern Matching against Unfree Data Types in Ruby (Egison Pattern Matching in Ruby) @ Hall A
+
+## 16:00~ Hypermedia: the Missing Element to Building Adaptable Web APIs in Rails @ Hall B
+
+## 16:30~  JRuby 9000 Project Update @ Hall A
+
+## この記事で利用している素材について
+
+この記事でも利用しているRubyKaigiのロゴ・バッジ・バナー画像は、RubyKaigiの公式サイトで配布されています。
+
+[RubyKaigi 2014 | Goodies](http://rubykaigi.org/2014/goodies)
+
+様々なサイズが揃っていて嬉しいですね！
+記事を書く際にライセンス的に利用して問題ない画像を探すのに時間をかけなくて済むのは大変ありがたいです。
