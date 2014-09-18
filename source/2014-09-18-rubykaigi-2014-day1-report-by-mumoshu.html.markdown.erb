@@ -160,11 +160,11 @@ Cookpadで発生したRubyの問題などをRubyにフィードバックする�
 ### Aaron at GitHub, Inc.
 
 * 最終日のKeynoteスピーカー
-* RUbyのコアに精通している
+* Rubyのコアに精通している
 * Memory Optimizations
 * Inspection/Profiler/Debugger
-* Hash#[] optimization
-* ObjectSpace.dump_all
+* `Hash#[]` optimization
+* `ObjectSpace.dump_all`
 * ko1さんとコミット領域が似ていて、ko1さんの愉快な最適化仲間の一人。
 * 今回のセッション内容はたぶん「実行中Rubyプログラムの状態を見る方法」
 
@@ -219,15 +219,15 @@ Cookpadさんエンジニア採用中！
 
 Understanding Computationの日本語版を手に「この本の監訳をしました」
 
-![この本の監訳をしました]()
+![この本の監訳をしました](http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10693312_624421431011237_980164497_n.jpg)
 
 ### Who am I
 
-* YARV: Yet Another RUbyVM (1.9-)
+* YARV: Yet Another RubyVM (1.9-)
 
 私にはRubyはこんなふうに見えています。Ruby Intepreterの部分をつくっています
 
-![]()
+![](http://photos-a.ak.instagram.com/hphotos-ak-xap1/927465_1469981506611592_628093403_n.jpg)
 
 * 2004/01/01に暇だったから始めたものが10年続いて、やってよかった。
 
@@ -373,13 +373,322 @@ free() vs GCの話と同じで、わかってる人はfreeすれば速いが、�
 
 ## 13:30~ Controller Testing: You’re Doing It Wrong @ Hall B
 
-## 14:00~ Continuous Delivery at GitHub @ Hall B
+By Jonathan Mukai-Heidt, @johnnymukai at Groundwork
+
+TDD・Testingなどの慣習がRubyにはある。その目的は:
+
+* Catching regression
+* Developing code in isolation
+
+よくあるコントローラテストのアンチパターンを紹介してから、どう解決するかを紹介。
+
+* Controller Testing Hall of Shame
+  * Stub all the things
+     * 意味のないテストになってしまう
+  * Everything is integration
+     * すべてがCucumberのfeatureになっているとか
+  * render_views
+     * 聞き取れなかった・・・
+  * No tests at all
+
+* Controllers often have a big action and small details
+* Authentication, Loeading 
+* Small converns are actually very important
+* I was also confused
+* Rails controllers + responders are awesomely declarative
+* What do we really mean when we say declarative
+* Imperative/Declarative
+* Imperative
+   * When deleting a user, if the current iuser is an admin user, then allow the deletion; if the current user is not an admin, do not allow ...
+* Imperative
+   * When a request fora resource comes in , if the rquesit is for JSON ....
+* Declarative
+this conroller restusn a resource erepstened as jONS or HTML
+Look at how declarative Rails controlelrs can be
+
+### before_filter
+
+```
+before_filer :authenticate_user!, except: :show
+before_filter ::load_some_model, ...
+```
+
+### Authorization
+
+```
+authorize_actions_for SomeResource
+load_and_authorize_resource :foo
+```
+
+### Rails4 + Responedrs
+
+#### respond_to
+
+```
+respond_to :html, :json
+```
+
+```
+def new
+  respond_with @foo
+end
+```
+
+### Little to no logic in controllers
+
+* Skinny controllerを目指す。
+* "It's not what 90% of the controllers I come across look like."
+* What do we really care about in controllers?
+  * Authentication
+  * Authorization
+  * Presence of resource
+    * What resource are we working with
+  * Response
+    * HMTML, jSON, PDF
+* Tests should help us write better code
+* Shared examples cover the small details
+* Big actions can be simple
+
+```
+it { should assign(:some_resource) }
+it { should change(Pizza, :count).by(+1) }
+```
+
+Authentication
+
+各controllerのspecで個別にやるのではなく、shared_examplesを使う
+
+```
+shared_examples_for "an action that requires a login" do
+  # ...
+  before { sign_out :user }
+    it should { ... }
+  end
+```
+
+以下のように使う。
+
+```
+before { sign_in(:user, current_user) }
+
+...
+it should_behave_like "an action that requires a login"
+```
+
+Response
+
+Authenticationをshared_examplesを使ってテストする方法と同様に、HTMLなどに応答するということをshould_behaves_like...で表現。
+
+Ever since I began Rails work people 
+
+What about
+
+ActiveModel is awesome. ActiveModelを使ってSkinny Controllerを実現。
+
+DBとやりとりしないModelはCheap。
+
+Password Resetの例
+
+* Client wanted to overhaul a legacy password reset workflow
+* Email間違った時にエラーにどうしたい
+* 既に退会していたらどうしたい
+* >突然のFat Controller<
+
+"Think nouns, not verbs"
+
+Footwork
+
+* No gem!
+* This will vary from project to project
+* Figure out how your project will handle these situations
+
+Habbits
+
+Controller Checklist
+
+* Rewards
+   * Easier to test
+   * Drives good design
+   * Uniform controllers == Less dev time
+   
+## 14:00~ Continuous Delivery at GitHub
+
+By @rsanheim
+
+* どうやって一日に50回ダウンタイムなしでデプロイするか
+* https://github.com/blog/1110-rob-sanheim-is-a-githubber
+* What is Continuous Delivery?
+* Key Point is: "Software ready to be deployed at any time"
+* Ship more frequently
+* Why should we care?
+* All the things are changing quickly
+* Besides... Shipping is fun
+* CI is way more fun
+* サイクルが長いと、使われないもの開発に時間をかけてしまうことになる可能性が高まる。サイクルが短い方が、Changingな世界では有効。
+
+ポイント
+
+* Automation
+* Tests
+* PRs
+* Feature Flags
+* Chat Ops
+
+### Automation
+
+プラクティス：同じことを2回やったら、自動化すべき
+
+### Tests
+
+* test/models
+* test/integration
+* test/controllers
+* test/lib
+* test/view_models
+* test/jobs
+* test/mailers
+
+### PRs
+
+フィードバックは早く受けられれば受けられるほどいい。
+例えば、6行しか変更がない状態でPRを開く。そしてディスカッションしながらPRを育てる。
+
+### Feature Flags
+
+```
+def live_update_enabed?
+  logged_in? && current_user.staff?
+end
+```
+
+全公開するときは、Feature Flagのメソッドで必ずtrueを返すようにする。
+
+### Chat Ops
+
+Hubotでつくりこむ。
+
+### Rails 3アップグレードの話
+
+* Long lived branches are a smell
+* timeboxを区切ってリリースしてみる。必要ないものだとわかったらkillする。
+* rails3-reduxブランチをつくって長々と育てるのではなく、早めにmasterにマージ。
+* RAILS_VERSION環境変数によってrails 2、3どちらでもbootstrapできるようした。
+* Gemfile内でも`if rails3?`でロードするgemを切り替え。
+
+### リリース後
+
+* github/dat-scienceでPDCAをまわす
+* リリース後はtwitterでユーザの声に耳を傾ける
+* "Collect Feedback …and act on it" 正しいフィードバックを受けて、それに対応することが重要。
+
+### 締めのメッセージ
+
+"Getting started today"
+
+"More flexible, more adaptable, more money, more fun"
 
 ## 14:30~ What is your app's problem? @ Hall B
 
+By Keiko Odeira, @keiko713 at Heroku, Inc.
+
+* サポートチームのメンバー紹介
+  * matz、ko1、nobu、HerokuのRuby、Japanに強いメンバー紹介
+* HerokuはZendeskを使っているが、"my app is down"で検索してみたら263 resultsもヒットした。今回はアプリが"down"した理由のトップを紹介
+* 先にネタばらしをしてしまうと、大抵の場合、アプリが何か間違ったことをしていることが原因
+
+### H12エラー
+
+= "request timeout error"
+
+* 原因は遅いリクエスト
+  * NeRelicやログをみる。コード、外部サービス、DBの問題がないか調べる。
+* 突発的なトラフィック
+  * "Sudden traffic spike can cause downtime"
+  * dynoを増やす。裏側のDBが増えたdynoに対応できるだけのキャパシティをもってることを確認しておく。
+
+### Memory quota exceed
+
+* アプリが制限以上のメモリを使うと超遅くなる
+* 短期的にはアプリを再起動する。
+* Ruby 2.1からメモリ消費が増えた。
+* メモリリークの可能性もあるので、ツールで見る。
+
+### いますぐ初めて欲しいこと
+
+#### Loggingしましょう
+
+* Herokuは1500行しかログを保存しないので、logging add-onsを使いましょう。
+
+#### モニタリングしましょう
+
+* まずNewRelicから始めることをお勧めします。
+
 ## 15:30~ Non-Linear Pattern Matching against Unfree Data Types in Ruby (Egison Pattern Matching in Ruby) @ Hall A
 
+バッテリー切れでメモできず(´・ω・｀)
+InfoWorldで"Top 10 programming languages on the rise"にも選出されたプログラミング言語[Egison](http://www.egison.org/)と、そのパターンマッチ部分をRubyに移植した[egison-ruby](https://github.com/egison/egison-ruby)の紹介。
+
+質問では、
+
+* 速度はどうなのか? → 大丈夫ではないか
+* 実際どれくらい読みやすいのか? → 知り合いのプログラマは3時間で読めるようになった
+
+というやりとりがされてました。
+
 ## 16:00~ Hypermedia: the Missing Element to Building Adaptable Web APIs in Rails @ Hall B
+
+### APIは変化に適用しなければならない
+
+* APIには2種類ある
+  * Public
+  * Private
+* 変化は避けられない。Web APIは変化に適応しなければならない
+* Changeには2種類ある
+  * バージョンのあり・なし
+  * 後方互換性のあり・なし
+  * クライアントを壊す・壊さない
+* 後方互換性のない変更はNG
+  * クライアントに変更を強要してしまう
+* 密結合
+  * 本当はAPIの変更がクライアントに自動的に反映されてほしい
+* API Callの考え方は危険。
+
+### APIをよくするため、密結合を避ける
+
+* Hypermediaの考え方を取り入れて、最初にリクエストしたURLが返したレスポンスに含まれるlinkをfollowするだけにする。
+* HTMLの例。HTMLではリンクとフォームでワークフローが表現されている。Hypermediaがワークフローを表している。例えば、各画面にはブラウザが次に何をできるかがメニューのようにすべて書かれている。
+* クローラの例。クローラはリンクをfollowしたり、フォームをsubmitしたりできる。クローラはHTMLドキュメントの意味を理解している。どうやっているのか?
+* Microdataの例。itemtype・itemprop属性でHTMLドキュメント内に構造化されたデータを埋め込むことができる。これにより、データを変えること無くドキュメントの構造を変えることができる。
+* schema.org。Bing, Google, Yahoo!, Yandexなどが進めているプロジェクト。
+* MicrodataのJSクライアントもあるが、たぶんJSON Web APIにしたいはず。どうすればいいか?
+* 一般的なJSON Web APIにはlinkとformの概念が足りない。
+* JSON + Link header, HAL, JSON+LDなどのJSONの拡張を使う?
+
+### Hypermicrodata gem
+
+* Hypermicrodata gemを使う。
+  * HypermicrodataはHTMLをサーバサイドでJSONに変換する。
+* Hypermicrodata gemを使ってRailsでAPIを実装する例
+  * Design resources: 普通に`rails g model Note text:text published_at:datetime`
+  * Draw a state diagram: クライアントの視点から状態遷移図を書く。
+  * 状態遷移図ではunsafe(安全でない)、non-idempotent(べき等でない)な遷移を区別する
+* rel属性がpublish、next、prevのようなlinkやbutton要素を場合によってドキュメントに含める。これにより、クライアントは次に何ができるかがわかる。
+* この手法の利点
+  * DRY: HTMLとJSONを同時に提供できる
+  * リンクとフォームがある
+  * Constraints
+* この方法を使わず、JSONを直接書きたいときでも、まだやれることはある
+  * link/formパターンを意識するため、状態遷移図を書く
+  * APIを疎結合にする。そのために、model.to_jsonの代わりにViewテンプレートやJbuilderやRABLを使う。
+  * "Webを支える技術"
+
+### まとめ
+
+* Web APIは特別なものではない
+* JSONにはデファクトスタンダードなフォーマットはない。
+* RESTの原理原則と制約を意識することで、少し良くできる
+* HypermediaはRESTの重要な要素の一つ
+* "Build a Better & Adaptable Web API!"
 
 ## 16:30~  JRuby 9000 Project Update @ Hall A
 
