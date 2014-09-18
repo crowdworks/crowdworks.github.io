@@ -692,6 +692,59 @@ InfoWorldで"Top 10 programming languages on the rise"にも選出されたプ�
 
 ## 16:30~  JRuby 9000 Project Update @ Hall A
 
+By Thomas E. Enebo (@tom_enebo)
+
+* JRuby 9000はJRuby 1.7系とは別で、CRuby 2.2と互換。
+* JRuby 9000
+  * Ruby 2.2
+  * New runtime (IR)
+  * Major IO and Encodings overhaul
+  * Code removal/deprecations
+
+### New Runtime Internal Representation (IR)
+
+* IR導入の理由
+  * AST to semantic representation
+  * Traditional Compiler Design
+  * Wanted Architectual longevity
+* 意味解析がCFGからIR Instructionsを生成、最適化はCFGをみる、Byte code生成(JVM、Dalkvik向けそれぞれなど)はこれらと別
+* それまでのJRubyでは密結合だった
+* 意味解析が例えば何をやるか
+   * superの簡単化。
+* set_trace_func
+  * On-demand instrumentation possible
+  * Trivial to JIT
+  * Very easy to understand in source
+* 最適化
+  * Dead Code Elimination
+  * Constant Propagation
+  * Method+Block Inlining
+  * Unboxing wrapped types
+  * それぞれプラガブルなコンパイラーパス（プラグインのようなもの?）で対応
+* IRとJVMのミスマッチ。IRよりJVMのほうが制約が強い。
+  * Javaの場合、tryブロックのローカル変数はfinallyブロック内から見えない。Rubyの場合、beginとrescueは同じスコープ。
+
+### IOまわりの改善について
+
+* JRubyの問題
+  * JRuby 1.7xはRuby 1.8.xと1.9.xの両対応。M17n対応の違い、それぞれのコードが混在してしまう。
+  * byte[] -> char[] -> byte[]というJDKのtranscodingが非効率的
+* 解決方法
+  * Port: MRI IOサブシステムをポートする
+    * MRIのIOと同じバッファリング戦略等
+  * 結果: JRuby 1.7.xと比べて高速なTranscoding・IOも高速化
+* 9000のTODO
+  * 起動高速化。現状は1.7.xと比べて最大30%起動が遅い。
+  * Parser高速化(10~20%)
+* MRIとの互換性
+  * Refinements
+  * freezeされた文字列
+  * coreにある85個くらいのメソッドがまだない
+* Java Heap != Ruby Heap
+  * Java Heap (hprof) -> Ruby Heap (JSON)に変換するalienistというgem
+  * そのビュワーalienist_viewer(Railsアプリ)
+    * Rubyのヒープの内容（オブジェクト）をWebアプリ上で見ることができる
+
 ## この記事で利用している素材について
 
 この記事でも利用しているRubyKaigiのロゴ・バッジ・バナー画像は、RubyKaigiの公式サイトで配布されています。
