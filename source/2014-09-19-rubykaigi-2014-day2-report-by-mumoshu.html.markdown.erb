@@ -555,8 +555,170 @@ old_lockfile.specs.each do |old_spec|
 
 ## 15:30- Write ruby code to change ruby code
 
+![](http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10665610_575134155946253_172027716_n.jpg)
+
+* ストーリー
+  * Project AでRSpecの新しいシンタックスを使おう! → OK
+  * Project BでRSpecの新しい.. → まあ、OK
+ * Project Cで.. → もう繰り返したくない！
+* "Developers hate changing code again and again"
+  * そこでAutomation
+* Metric Tools
+  * cane: fails your build if code quality threasholds are not met
+  * reek: examies classes modules and methods and any code problem
+* これらは何をすべきか教えてくれるだけ、その何かを自動的に行なってはくれない
+* RubyMineのようなIDE
+  * rename, extract methodsリファクタリングなどのような決まりきった処理は自動的に行える
+  * しかし、カスタマイズできない
+* じゃあテキストベースで変換するか?
+  * `sed -i " 's/FactoryGirl.create/create/g' spec/**/*.rb"
+* テキストベースだと難しいケースがある
+  * User.findの古い書き方(conditionあり)から、lambdaを使った新しい書き方への変換
+* AST
+* Tools
+  * ripper
+  * seattlerb/parsetree
+  * seattlerb/ruby_parser
+  * whitequark/parser
+* Example
+  * yujinakayama/transpec
+* Based on AST method: accurate, but hard to read
+* Solution: xinminlabs/synvert
+* Demo: http://xinminlabs.github.io/synvert/
+  * `synvert --run factory_girl/use_short_syntax` → `git diff spec/`
+  * Rails 2.3 -> Rails 3.0, 3.2 -> 4.0への自動変換(!)
+  * Rubyのキーワード引数スタイルへの書き換え(!)
+* Synvert DSL
+  * within_file, within_node, if_exist_node, append/insert/insert_after/replace_with
+* http://xinminlabs.github.io/synvert/dsl/
+* [synvert-tools](https://github.com/xinminlabs/synvert-tools)
+  * ソースコードをASTに変換したり、Synvert DSLをテストしたり、をWeb UI上で試すことができる
+  * DSLスニペットや対象ソースコードなどを変更すると、結果がリロードなしで即座に確認できる
+* [synvert-snippets](https://github.com/xinminlabs/synvert-snippets)
+* Want more?
+  * Fork and send pull request
+  * Open issues on GitHub
+  * Hire us to refactor your project
+
 ## 16:00- ServerEngine: a framework for multiprocess servers in Ruby
 
+![](http://photos-g.ak.instagram.com/hphotos-ak-xpa1/925964_525897497544478_1474657486_n.jpg)
+
+* アーキテクチャ
+  * Supervisor
+  * Server
+  * Worker
+    * worker_typeで簡単に切り替え
+      * Embedded (main thread, default)
+      * Thread (for jruby)
+      * Process (fork, doesnt work on windows)
+  * TDではjrubyを使ってないので誰かテストして欲しい(!)
+* Dynamic reconfigurationの仕組みが用意されている。
+  * Workerにreloadメソッドを用意しておく
+* Log rotation
+  * Ruby標準のLoggerはマルチプロセスで動かすとバグる
+  * ServerEngineのロガーはその問題を解決&traceレベルに追加対応
+  * Ruby 2.1以降はruby-core入り
+* Signal handling
+  * Queue based signal handling
+    * CRubyのSignalハンドリングはメインスレッドで行われる
+    * マルチスレッド環境ではデッドロックする
+    * そこでSignalThreadでキューベースでシグナルを処理
+    * Fluentdではシグナル毎にスレッドを起動していていけてないのでこうした
+* Live Restarrt
+  * サーバ再起動時間を最小化する
+  * Fluentdでout_forward使ってると、再起動時に切れてクライアント側で例外処理する必要がある。
+    * 接続を保ったまま再起動して欲しい
+    * 工夫しないと完全には実装できないが、その基盤をServerEngineが用意している
+  * SIGINT時にサーバを多重に起動して、送り先を切り替える。
+    * supervisorを使ってる時しかできない
+* sigdump gem
+  * JavaVMにはSIGQUITを送るとメモリやスレッドの状態をdumpする機能がある
+    * TDでもHadoopが止まったりしたときに活躍する
+  * Rubyでデーモンとか書いてるとたまにそういうことがある
+    * Ruby版のsigdumpが欲しくなった
+  * ServerEngineにはビルトイン。SIGINT送るとdumpされる。
+  * 定期的にkill -INT pidしてやればスレッドの状態なんどをモニタできる
+* Usecase: Sneakers
+  * jondot.github.com/sneakers
+  * ServerEngine + RabbitMQ
+* Usecase: Fluentd v1
+  * CRubyでヘヴィーなデータ加工をするとそこがボトルネックになる
+  * Zero downtime restart
+
 ## 16:30- Kids, Ruby, Fun!: Introduction of the Smalruby and the Ruby Programming Shounendan
+
+![](http://photos-h.ak.instagram.com/hphotos-ak-xaf1/10683813_1520926471486639_1554393760_n.jpg)
+
+* Sponsored by NaCl
+* NaCl
+  * is SIer
+  * 60人中30人はRubyで開発
+  * Matsumotoさんはじめ6名のCRubyコミッタを擁する
+  * 島根県
+* Ruby プログラミング少年団
+  * 青少年のための任意団体
+  * 毎月第3日曜日に親子向けのプログラミング教育を実施
+  * 将来は各地にチームがあって、地区大会・県大会・全国大会があるような少年団をつくりたい
+* プログラミング教育の現状
+  * 国内外で盛り上がっている
+  * もっとも活発なのはアメリカ
+    * 幼稚園から高校まで20,000 teachersが授業に取り入れている
+    * オバマ大統領が必修化を目指している
+  * 5歳からアルゴリズムの初歩とプログラミング、デバッグのカリキュラム。Googleの人も参画。
+  * エストニア、シンガポールなどでも導入の動き
+  * 日本
+    * 中学校の技術家庭科で2012年度から必須。「計測と制御」、黒い線にそってロボットの車を動かす、という内容。
+    * 松江市立の5500人の学生にRubyを教えることｋに
+      * 子供を立派なRubystに育てたかったら松江への移住を検討してください
+    * 生徒一人一台のコンピュータ配布
+  * 日本の民間企業の活動もある
+    * PEG(GoogleとNPO法人Cambusの共同プロジェクト)
+      * 日本全国でワークショップ開催
+      * 教育事業者向けに5000台のRasberryPi配布
+    * TENTO
+* 多くのワークショップではMIT Media LabのScratchがよく使われる
+  * 全世界で200万人が利用している
+* プログラミング教育が盛り上がっているが、それをRubyでもやりたい
+* 発表者は中学生に6年間Rubyを教えたが・・
+  * 英語・キーボードが難しくて、プログラミングが楽しくなる前にやめてしまう
+* そこでSmalruby開発
+* ビジュアルプログラミング環境
+  * ブロックをグラフィカルな画面上に配置すると、Rubyコードが自動生成される
+  * Rubyコードで書いたものは、ブロックにも反映される
+* 実装
+  * SmalrubyのエディタはRailsアプリ
+  * 命令ブロックの組み合わせでコードを生成するところはBlocklyというライブラリで実現
+    * Google Closureライブラリを使っている
+    * JSレベルでブロックの定義・Rubyコード生成を行われる
+* やりたいことが決まっている子供がいる
+  * 素数を求めたい、とか言う
+  * 早いタイミングでブロックでは足りなくなって、コードを書きたくなる
+  * これまで6回のイベントを開催したが、「こんな簡単なことはやりたくないので次からきません」みたいな人もいた
+  * そこでSmalrubyではコード生成。コードも書けるようにした。
+* Rubyコードからブロックの生成は、Railsアプリ側で正規表現ベースで行っている
+  * Ripperなどを使わない理由は、子どもたちが書いたシンタックス的に正しくないおしいコードもうまく変換するため
+  * 「Rubyコードからブロック生成、ほんとにいるの？」と言われたがSmalrubyではそこを重要視している
+* Programmingとは、Creativity とLogical thinking
+* 命令ブロックでプログラミングの基礎を学んだあとは、早い時期にコードを書いて欲しい
+* Smalrubyは基本的に一人で開発している。興味がある人はプルリクエストを送って欲しい
+* ワークショップ開催したい人は、教科書などCreative Commonsで用意しているので声をかけて欲しい
+* 「私たちは自分の生活で使っているツールを自分で直せる」ということが重要。OSSに関わっている人なら共感してもらえるのでは。
+* 子どもたちに最高の道具を授けたいと思い、こういう活動を行っている。
+* Q&A
+  * ハードウェア制御をSmalrubyでやれるようにすることはあるか?
+    * Arudino対応。例えばブロックの中に「アクチュエータ」というのがあって、Arudinoで作られた車を制御する、ということができる
+  * なぜそんな遅いのか?
+    * RubyをWindowsで動かしてるせい。
+      * でも、教育で使うときはこだわってWindowsを使っていきたい。
+      * 教育現場で使われているのはWindowsだから。
+      * WindowsのRubyをよりよくしていきたいと思っている
+      * こだわり: Rubyそのものをインストールさせる
+        * もっとプログラミングしたい、Railsやりたい、というときに、既にRubyがインストールされている状況をつくりたい
+  * 日本語以外の言語をサポートする予定はありますか?
+    * RubyConfでSmalrubyを紹介することになったので、それまでに多言語対応したい
+    * Blocklyはもともと国際化対応されていた
+  * 実行ボタンおした時の結果はどこで動いているのか?
+    * dxruby + rubyでネイティブで動いている。ブラウザで動いているように見えるが、実はネイティブ。
 
 ## 17:30- LT
