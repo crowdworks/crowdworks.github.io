@@ -421,6 +421,66 @@ old_lockfile.specs.each do |old_spec|
 
 ## 14:00- Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3 ®
 
+![](http://photos-a.ak.instagram.com/hphotos-ak-xpa1/10543048_702526429826096_1828283942_n.jpg)
+
+* 自己紹介
+  * ハンドルネームの「ちはやふる」は落語の演目が由来(!)
+  * 日本の製造業のヒエラルキー。上から士農工商、メカ、エレキ、ソフト。私は一番下。
+  * 機械のボタンの色変えろとかはないが、ソフトはいつでも変えろ、と言われる！最後のしわ寄せが来るのがソフト。
+* LEGO Mindstorms
+  * ToyというよりはEducational Tool
+  * 米国ではSTEM educationとも呼ばれる
+    * Science
+    * Technology
+    * Engienering
+    * Mathematics
+    * のような分野の教材として使おう、ということ
+* RasberryPiの数倍の価格
+  * 個人で買うと辛いが、RubyKaigiで発表ネタになれば元が取れる
+* Mindstorm
+  * 1st gen = RCX
+    * 1998
+    * H8 16MHz
+  * 2nd gen = NXT
+    * 2006
+    * ARM7 48MHz
+  * 3rd gen = EV4
+    * 2013
+    * ARM9 300MHz
+   * RCXも現役で使われている
+* EV3の開発環境: ビジュアルプログラミング。対象年齢10歳以上
+* Remote control対応。PCから遠隔操作することもできる。
+  * PCでRubyからMindstormをリモートコントロールするLTをみたことがある
+  * 今回はリモコンではなく組み込み。Standalone、EV3上でRubyで動かす。
+* ファームウェアアーキテクチャ。Linuxなので起動にも終了にも数秒かかる。
+  * Linux
+  * VM
+  * System Program, User Program, Direct Command
+* 拡張ファームウェア
+  * ev3dev
+    * full Debian 7 (wheezy)
+    * customized for the LEGO MINDSTORM EV3 controller
+    * Bootable from microSD (標準のファームウェアを壊さない)
+    * GitHubで公開されている
+  * 2代目からは設計図もソースコードも公開されている
+  * 3代目からはソースコードがGitHubで公開されている
+  * 言語
+    * C/C++
+    * Python
+    * JavaScript
+    * Lua
+    * Go
+    * 全部動きます
+* What's mruby?
+  * "the lightweight implementation of Ruby language complying to (part of) the ISO standard. Its syntax is Ruby 1.9 compatible."
+    * can be embedded and linked to your app
+* Can we use mruby in embedded systems?
+  * 組み込み業界的にはGC大丈夫なの、仕事で使えるの?という反応
+* RubyKaigiで回路図を出してみたかった(会場笑)
+* RCX向け光センサ: 蓄電池内蔵で、充電・センシングをソフトで切り替える仕組み。RCXだとマイコンがbusyなので、mrubyだとGCなどのタイミングで切り替えが間に合わないため、光センサ使用不可
+* 最近の光センサ: 光センサにマイコンが内蔵されていてそちらで充電・センシング切り替えをやってくれるので、Mindstorm側のマイコンがbusyでも関係ない。mruby使える。
+* デモ - RubyJinja
+
 ## 14:30- Scalable deployments - How we deploy Rails app to 100+ hosts in a minute
 
 ## 15:30- Write ruby code to change ruby code
