@@ -1,0 +1,432 @@
+---
+title: RubyKaigi 2014 2日目 参加レポート by @mumoshu
+date: 2014-09-19 9:30 JST
+tags:
+  - ruby
+  - rubykaigi
+gravatar: ykuoka@gmail.com
+author: Yusuke Kuoka
+twitter_id: mumoshu
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+      type: image/png
+      width: 250
+      height: 250
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+    type: image/png
+---
+
+9/19(金)に開催された [RubyKaigi 2014](http://rubykaigi.org/2014) 2日目の参加レポートです。
+弊社クラウドワークスも、[多くの有名企業に並んでスポンサーをさせていただいている](http://rubykaigi.org/2014/sponsors)ので、全力で宣伝させていただきます！
+
+聴講しながら勢いてまとめているので読みづらい点もあると思いますが、全力で更新していきます！！
+
+![RubyKaigi 2014 Official Sponsor](rubykaigi/2014/badge-for-official-sponsor@2x.png "クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!")
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## 各種情報
+
+### スケジュール
+
+RubyKaigiの公式サイトにスケジュールが掲載されています。
+
+[RubyKaigi 2014 | Schedule](http://rubykaigi.org/2014/schedule)
+
+### Ustream
+
+当日参加できない方向けには、USTが用意されていました。素晴らしいですね!
+
+* [Hall A](http://www.ustream.tv/channel/rubykaigi1)
+* [Hall B](http://www.ustream.tv/channel/rubykaigi2)
+
+## 9:30- Pixivさんのスポンサーアピール
+
+![](http://photos-g.ak.instagram.com/hphotos-ak-xfa1/10684298_568313199963878_467251139_n.jpg)
+
+## 9:40- キーノート by matz
+
+![](http://photos-e.ak.instagram.com/hphotos-ak-xpa1/1516276_717455721668964_1173995058_n.jpg)
+
+* 未来の話をします
+* Heroku本は機能のうちに売り切れたが、今日追加があるかどうか?
+* Herokuで2.2.0 Preview 1が早速使えるようになりました
+* RubyConf 2001
+  * 11月に開催された。9.11の後だった。フロリダあたりでは炭疽菌が話題になっていたが、家族に止められつ参加。
+  * このとき既にRuby 2の話をしていた。
+  * Ruby 2の話は結局「Virtual Machine」をつくるよ、という話。
+  * VMが実現するまでバージョン1.9、2007年までかかった
+  * VMは簡単なものを書くのは1週間くらいだった。でもmatzは挫折。その頃、いろいろなVMを書く試みがあったが、笹田先生がYARVを提案。Yet Anotherだけあってまたきたよ、という感じだったが、最終的にはこれがRubyに取り込まれることになった。
+* RubyConf 2002
+  * このときもRuby 2の話をしていた
+  * このとき言っていたRuby 2には
+    * M17N (1.9 -> 2007)
+    * Native thread (1.9 -> 2007)
+    * Generational GC (2.1 -> 2013)
+* RubyConf 2003
+  * Local variable scope (互換性を決定的に破壊することになるので断念)
+  * Multiple assignment (1.9 -> 2007)
+  * Method visibility
+  * Keyword argument (2.0 2013)
+  * Method combination (2.0)
+  * SElector namespace (2.0, Refinemenetとして)
+  * Optional static type (結局入る気配なし)
+* RubyConf 2004
+  * 唯一欠席した。末の娘が生まれたので、さすがにそのとき渡米すると一生なにか言われそうだったからw
+  * 笹田先生、YARV発表
+* RubyConf 2005
+  * Stabby lambda (->)
+    * ものすごい評判が悪くて、こんなの絶対ダメだ、と言われた
+    * いざ入れてみたら、結構いいじゃん、と言われた
+    * 他の人の印象は参考にならない例
+  * Real multi-value
+  * Traits
+* RubyConf 2006
+  * Bikeshed argument encourage
+    * 自転車小屋の矛盾はみんな乗ってくる
+    * 原子力発電所をどこに置くか、という話は誰も乗ってこない
+* RubyConf 2007
+  * 1.9 introduced
+  * 1.9がきたのでそのsj崩壊
+* RubyConf 2008
+  * Philosophy explained
+  * RUbyの背景にある哲学を紹介
+* RubyConf 2009
+  * DSLの力
+* RubyKaigi 2009
+  * Complex literal (2.1, 2013)
+  * Rational literal (2.1)
+  * True divisonn (1/2 => 1/2) 結局入らず
+  * Bitmap marking (2.0, 2013)
+  * Symbol GC (2.2, 2014)
+* RubyConf 2010
+  * Mix (traits)
+  * Module#prepend
+  * Refinement
+  * Rite (のちのmruby)
+* RubyConf 2011-2014
+  * No new ideas
+* 過去のRubyConf, RubyKaigiでは「こんなアイデアを将来のRubyに入れたいよね」という話をしてきた。
+* 結果、入ったものもあれば、入らなかったものもアッた。7/22は入らなかった。False rate = 32%。
+* 注目しなければならないのは2011-2014
+  * Ruby 2が出てから先の話をしてない
+  * Ruby 2の改善に注力していたから
+* "OSS Community is like a shark" 私たちは泳ぎ続けないと死んでしまう
+* 「そろそろ燃料を投下するべきではないか！」
+* そこでRuby 3.0
+* "May happen in next 10 year" Ruby 3.0、次の10年に実現するかもしれないこと。
+* Concurrency
+* JIT (LLVM?) "パフォーマンスが良いことに対して文句を言う人はいない" インラインアセンブラかどうかわからないが、何か
+* Static typing
+* Static typing?
+* "All new kids in the street"
+* 20世紀に生まれた言語の多くは、スクリプト言語のようなものは変数に型のないような言語が多かった。Perl, Python, Ruby
+* 最近登場してきた言語Scala, TypeScript, Dirt, Goのようあんものはスクリプト言語っぽい使われ方をするようなものでも肩が付いている
+* Feature #9999 by Davido
+
+```
+def connect(r -> Stream, c -> Client) -> Fiber
+ ...
+end
+```
+
+* 長年のライバルPythonの方にはPEP:3107がある
+* Functional Annotation
+
+```
+def connect(r: Stream, c: Client) -> Fiber:
+ ...
+```
+
+* Pythonの場合、実はFunctional Annotationを書いても解決しない
+* Static typingとはひとことも書いてない。実はこれはドキュメント(!)
+* mypy: optional static type checker
+* Functional Annotationを使ってtype checkしよう、という新興の処理系
+* このようにRubyに近いような言語でもStatic type checkingをしよう、という動きがある
+* 目的はこの3つだろう
+  * Performance
+  * Compile-time check
+  * Documentation
+* Performance
+  * "No one complains for faster Ruby"
+  * 速くなるならそれはそれで嬉しいが、パフォーマンスのために必須なのか?
+  * JavaScript V8, LuaJITなどを見ていると、必ずしも必要ないのでは?
+  * これらは言語的には動的型付けなのに、大変高速である
+  * 技術次第。動的型付けでも不可能ではない?
+  * だから、パフォーマンスのためにtypeが必要、というのは思い込みっぽい
+* Compile-time check
+  * これは嬉しい事が多い
+  * Static analysis
+  * 多くのバグは型の矛盾を含むので、それによってバグが見つけられる事が多い
+  * Refactoring漏れの検出もできる
+  * 型があってるからテストしなくてもいいか、というとそんなことはない
+  * Test coverageが少なくていい、ってことにはならない
+  * "But less flexible" duck typingは型宣言と相性が悪い
+* Documentation
+  * Rubyのドキュメントを書いているときに、変数名で何を渡したらいいか判断するが、型がわからない
+  * 文字列なのか数値なのか、ドキュメントにぼんやり書いてあることもあれば、書いてないことも
+  * "Much better than comments"
+  * 矛盾しているとコンパイラが指摘してくれるので、信頼性のあるドキュメントになる
+  * "No investigation into detail"
+    * 「こういう処理をしているから文字列を渡せばいいよね」というinvestigationが不要になり、型宣言をみるだけでよくなる
+* "Why not static typing?": static typingがいまRubyにない理由
+  * なくてもちゃんと動いたから今ない、というのも理由w
+  * "Duck typing" by Dave Thomas
+  * 通常Nominal typingなので、Stringと同じ振る舞いをするものをStringとして渡すことができない
+  * static typingを入れると、我々の作り上げてきたduck typingの美しい世界
+  * いままで書かれた型のないRubyコードとの互換性なので、型はoptionalにせざるをえない
+  * 型のない世界から型のある世界に渡すと、型はなくなる。復元できない。プログラムを実行する過程で、どんどん型が落ちていくことになる
+  * 例えばTypeScriptはJavaScriptに決定的に型をつける仕組み。dynamic typingも例外的にできるがほおｔんど決定的に型をつける。JavaScriptには型を後付してやることができる。めんどくさいけど。こういう世界では型はうれしい。
+  * 「Pがつく言語みたいに、バージョン5と6は違う言語、みたいなことになりたくない」
+* DRY: Don't Repeat Yourself
+  * Static typingで書こうとすると、重複を感じる。DRYに書きたい。
+  * プログラムの本質はどんなことをコンピュータにさせたいか伝えることにある
+  * Code & Declaration
+  * 型は「どんなデータを必要とするか」ということを表す
+  * コードを書いた時点で意図がある、その上でまたDeclarationを書かなければならないのが繰り返し感がある
+  * Soft-typing
+    * No declaration needed
+    * コードから「こういう型を要求しているに違いない」という、型推論のようなことをする
+    * Based on duck typing
+    * Type inference
+
+```
+a=1 # type of a is Integer
+```
+
+```
+def foo(a)
+  print a.to_int
+end
+
+foo(1) # OK: 1 has to_int
+foo("foo") # NG: "a" does not have to_int
+```
+
+* Type is represented by:
+  * Set of methods: 型はメソッドの集合として表される
+    * name
+    * return value
+    * number and type of arguments
+  * Class
+* これはBest-effort type checker
+  * お行儀の良いプログラムを書いているといい線いくのではないか
+* Rubyはお行儀の悪いプログラムも書ける
+* そこでTarget subset of the language
+  * 対象となるプログラムのクラスがせまい。機能的制限。
+  * 例えば
+    * require
+    * define_method
+    * method_missing
+    * などには制限がかかると思う
+  * 型宣言がないのでそのままDocumentationとしての働きができない
+    * Generates doc / IDE info
+  * このネタは日経Linux 2014年9月号/10月号に掲載予定
+* Subset
+  * Rubyは長い歴史の間に「過去に入れちゃったけど捨てられない」というものがある
+  * 「このサブセットのなかでプログラミングをするといいことがあります、外れるといいことはないけど互換性がえられます」
+  * Rubyは互換性を大切にする
+  * "Two languages in One" あるサブセットの中ではsoft-typing
+* Soft-typed language
+  * Dynamic typed language
+* Fallback to super-set
+  * Strongly encouraging the former
+* 将来起きるかもしれないし、起きないかもしれない
+* Ruby 2が一般化して色々な事ができるようになったいま、そろそろ新しいことを始めようじゃないか
+* 未来に備えよう、コミュニティとして死なないように、ワクワクすることを考え続けよう
+* Happy Hacking
+
+(衣装提供: VASILYさん)
+
+* Q: Rubyに型をつける研究が過去にあったが、はやらなかった理由は?
+  * A: Rubyに単純に型を付けるのは不可能なので、RubyにSubsetの概念を導入するのが重要。そこがなかった。
+  * A: そもそも難しい。型一致じゃなくて構造一致のような型システムを後付で導入するのは難しい。それも理由ではないか。
+* Q: if分のthen-elseで違うメソッド読んでると、外側からどちらが呼ばれるからわからない。じゃあSubsetからif文を外すのかというと外せない。どうするのか?
+  * A: orになるのでは
+* Q: メタプログラミングはプログラムの最初の方で行われるので、その後に解析すればいいのではないあｋ
+  * A: そのアイデアはなかったので検討してみます
+
+## Extreme Makeover: Rubygems Edition
+
+![](http://photos-c.ak.instagram.com/hphotos-ak-xaf1/10706958_298408827029082_138113761_n.jpg)
+
+* まずBundlerにDDoSがあった
+  * 昨年はどうして起こったか、どう対処したかの話をした
+* 次はSecurity breahがあった
+  * gemをアップロードすると任意のコードを実行されてしまう?
+  * 結果的にrubygems.orgをEC2でrebuildした
+* その後、Travis network issuesがあった
+  * DNSサーバを変えるなどして対処
+* 次はSSL failures
+  * またrubygems.orgをRebuildした
+* Budler Source CVE
+* How it works today with a fast connection, at least
+* Gemspecsの置き方を変えた
+  * Original gemspecs
+  * /Marshal.4.8.gz (Marshaled gemspecs)
+  * /specs.4.8.gz (List of gemspecs)
+* Bundler API
+  * Plan
+    * Simple plaintext indexes
+    * clients cache the indexes
+      * 例えばgem install railするとplaintextで書かれたindexをダウンロードする必要があるが、次回以降はキャッシュ
+   * put a CDN on it
+     * 現状gem pushするとus-west?のサーバに保存され、クライアントはそこからダウンロードすることになる。遠い。
+   * easy local mirrors
+     * オフィスごとにrubygems.orgのミラーをつくって、そこからgem install?
+   * The New Index
+     * /versions
+       * rack 1.0.0,1.0.1,1.0.2
+       * sinatra 0.9.6,1.0.,1.1
+       * rack 2.0.0
+       * gem毎に行が分かれているので、entire fileをダウンロードする必要がない/
+     * /deps/sinatra
+       * 0.9.6 rack:>= 0.9.1
+       * 1.0 rack:>= 1.0
+       * 1.1.4 rack:~> 1.1,tilt:< 2.0...
+* 現状
+  * new indexを設計した
+  * bundler api経由でnew indexが取れるようになった
+* TODO
+  * rubygems.orgからnew indexをとれるように
+  * fastly-hosted index file
+* gem install bundler
+* `export_BUNDLE_JOBS=4`
+  * parallel gem installs
+* rubygems.org mirror
+  * https://tokyo-m.rubygems.org
+* New resolver
+  * better erors
+  * faster installs
+  * many bugfixes
+* You can help!
+  * github.com/bundler/bundler
+    * CONTRIBUTING.md
+
+## Archeology of Ruby: Removed Features (Ruby 考古学 機能編)
+
+![](http://photos-f.ak.instagram.com/hphotos-ak-xfa1/10691885_654613707986989_1724238965_n.jpg)
+
+* 過去にあったのに消された機能
+  * Safe Level
+    * $SAFE=4 is obsolete since 2.1.0
+    * 不完全なSandbox
+    * Feature #8468 Remove $SAFE
+      * GitHub Tokyo drinkupでmatzが合意
+    * $SAFE < 4はバグ発見のためのフェールセーフ機能として残った
+    * 代わりに1.9.1からあるuntrustというメソッドが追加されたが活用されず2.1.0deprecated
+  * '.'が$LOAD_PATHからひっそりと削除された
+    * かわりにrequire_relativeを使う
+  * Ruby 1.9の多言語化対応の影響で$KCODEの代わりにEncoding
+    * $KODEは既にnilを返しつつwarningになった
+  * Regexp options: /n /e /s /uは互換性のために残っていて、そのうちなくなるかも
+  * グローバル変数$= (ignore case)
+    * 大文字小文字の無視フラグ
+    * 1.8.7でdeprecate、1.9.3で削除
+  * $deferr (1.6.7から1.8.0)
+    * 子プロセスに影響しないエラー出力リダイレクト
+    * 現在は$stderrへの代入は子プロセスに影響しない
+    * STDERR.reopenなどで子プロセスに影響する
+  * if cond:
+    * 1.8までは
+
+```
+if true:
+  p true
+end
+```
+
+という隠し機能があった
+
+  * File.exists?
+   * Ruby本体のメソッドは三単現のsを付けないルールがあるが、ついてた
+   * 一度警告がでなくなったことがあったが、また出るようになった。
+   * recommented: File.exist?
+   * deprecated: File.exists?
+* 開発版のみに入っていたけど削除された機能
+  * Symbol < String in 2006 (1.9.0-dev)
+    * 問題が多かったため継承関係なくした
+    * 「caseとかでたくさんのバグを産んでしまう」 by matz日記
+  * `__send__` cannot call private methodsになったことがあったが問題が多かった
+    * 一時あった__send, __send!は削除
+    * public_sendが1.9.1が最終的に導入
+  * real multi-value(to_splat)
+    * `a, b, = mvalue`
+  * Symbol.find in 2.0.0-dev
+    * Symbolが既に存在するかを調べるメソッドが追加されたが、2.2.0でGCされるようになったので削除
+    * 必要だと思ったら再度redmineでリクエストしてください、とのこと
+  * statfs in 2.0.0-dev
+    * 「色々込み入っているので最低限はtestに、それ以上はgemに」 by matz
+* まとめ
+  * いくつかの機能は開発版だけで消えてしまった
+  * 理由を考えることで今後の新機能提案に活かしてください
+* Q: 次に消えそうな機能はなんですか
+  * A: 全然考えてなかったw
+* Q: 消えて欲しい機能は?
+  * A: 正規表現のオプションは整理してもいいんじゃないのかなと思います
+
+## Make "bundle update" more fun to review
+
+![](http://photos-e.ak.instagram.com/hphotos-ak-xfp1/10299649_882751865070172_1313374247_n.jpg)
+
+* Solution
+  * GitHubのCompare View URLを活用したい
+    * https://github.com/markevans/dragonfly/compare/v1.0.0...v1.0.7
+    * バージョンタグやコミットID間で差分を見ることができる
+* Motivation
+  * 昨年"Continuous gem dependency ~"の発表をした
+    * "bundle update"はよく忘れられる
+    * 定期的に人力でやるのは面倒
+    * 自動化!
+  * quipper/schemaというprivateなgemにビジネスロジックをまとめている?
+  * qlink, qcreateなどのサービスはschemaが更新されたらbundle updateする必要がある
+  * それを手動でやる必要はない
+* Implementation
+  * 方法
+    * Receive webook
+    * Compare Gemfile.lock(s)
+    * Build URL
+    * Post comment
+* Compare Gemfile.lock(s)
+
+```
+file = octokit.contents(
+  repo_full_name, { ref: 'master' }
+).find { | content| ... }
+
+# LockfileParserでGemfile.lockをparse
+```
+
+```
+old_lockfile.specs.each do |old_spec|
+  new_lockfile_specs.each do |new_spec|
+    if old_spec.name == new_spec.name
+      if old_spec.version != new_spec.version
+        # ...
+```
+
+* 結果
+  * schemaにプルリクエストを投げると、他のプロジェクトへschemaのバージョン更新のPRが自動的に飛ぶ
+* 問題
+  * rails関連のgemはgemspecに書かれているホームページがGitHubになっていないなどの問題でうまく処理でいない
+  * git push --forceするとWebHookに通常とは異なるリクエストが飛ぶが、その対応はできてない
+* 教訓
+  * 継続的改善が重要
+
+## 14:00- Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3 ®
+
+## 14:30- Scalable deployments - How we deploy Rails app to 100+ hosts in a minute
+
+## 15:30- Write ruby code to change ruby code
+
+## 16:00- ServerEngine: a framework for multiprocess servers in Ruby
+
+## 16:30- Kids, Ruby, Fun!: Introduction of the Smalruby and the Ruby Programming Shounendan
+
+## 17:30- LT
