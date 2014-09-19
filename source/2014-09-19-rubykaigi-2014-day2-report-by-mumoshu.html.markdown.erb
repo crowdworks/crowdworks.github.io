@@ -555,7 +555,96 @@ old_lockfile.specs.each do |old_spec|
 
 ## 15:30- Write ruby code to change ruby code
 
+![](http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10665610_575134155946253_172027716_n.jpg)
+
+* ストーリー
+  * Project AでRSpecの新しいシンタックスを使おう! → OK
+  * Project BでRSpecの新しい.. → まあ、OK
+ * Project Cで.. → もう繰り返したくない！
+* "Developers hate changing code again and again"
+  * そこでAutomation
+* Metric Tools
+  * cane: fails your build if code quality threasholds are not met
+  * reek: examies classes modules and methods and any code problem
+* これらは何をすべきか教えてくれるだけ、その何かを自動的に行なってはくれない
+* RubyMineのようなIDE
+  * rename, extract methodsリファクタリングなどのような決まりきった処理は自動的に行える
+  * しかし、カスタマイズできない
+* じゃあテキストベースで変換するか?
+  * `sed -i " 's/FactoryGirl.create/create/g' spec/**/*.rb"
+* テキストベースだと難しいケースがある
+  * User.findの古い書き方(conditionあり)から、lambdaを使った新しい書き方への変換
+* AST
+* Tools
+  * ripper
+  * seattlerb/parsetree
+  * seattlerb/ruby_parser
+  * whitequark/parser
+* Example
+  * yujinakayama/transpec
+* Based on AST method: accurate, but hard to read
+* Solution: xinminlabs/synvert
+* Demo: http://xinminlabs.github.io/synvert/
+  * `synvert --run factory_girl/use_short_syntax` → `git diff spec/`
+  * Rails 2.3 -> Rails 3.0, 3.2 -> 4.0への自動変換(!)
+  * Rubyのキーワード引数スタイルへの書き換え(!)
+* Synvert DSL
+  * within_file, within_node, if_exist_node, append/insert/insert_after/replace_with
+* http://xinminlabs.github.io/synvert/dsl/
+* [synvert-tools](https://github.com/xinminlabs/synvert-tools)
+  * ソースコードをASTに変換したり、Synvert DSLをテストしたり、をWeb UI上で試すことができる
+  * DSLスニペットや対象ソースコードなどを変更すると、結果がリロードなしで即座に確認できる
+* [synvert-snippets](https://github.com/xinminlabs/synvert-snippets)
+* Want more?
+  * Fork and send pull request
+  * Open issues on GitHub
+  * Hire us to refactor your project
+
 ## 16:00- ServerEngine: a framework for multiprocess servers in Ruby
+
+![](http://photos-g.ak.instagram.com/hphotos-ak-xpa1/925964_525897497544478_1474657486_n.jpg)
+
+* アーキテクチャ
+  * Supervisor
+  * Server
+  * Worker
+    * worker_typeで簡単に切り替え
+      * Embedded (main thread, default)
+      * Thread (for jruby)
+      * Process (fork, doesnt work on windows)
+  * TDではjrubyを使ってないので誰かテストして欲しい(!)
+* Dynamic reconfigurationの仕組みが用意されている。
+  * Workerにreloadメソッドを用意しておく
+* Log rotation
+  * Ruby標準のLoggerはマルチプロセスで動かすとバグる
+  * ServerEngineのロガーはその問題を解決&traceレベルに追加対応
+  * Ruby 2.1以降はruby-core入り
+* Signal handling
+  * Queue based signal handling
+    * CRubyのSignalハンドリングはメインスレッドで行われる
+    * マルチスレッド環境ではデッドロックする
+    * そこでSignalThreadでキューベースでシグナルを処理
+    * Fluentdではシグナル毎にスレッドを起動していていけてないのでこうした
+* Live Restarrt
+  * サーバ再起動時間を最小化する
+  * Fluentdでout_forward使ってると、再起動時に切れてクライアント側で例外処理する必要がある。
+    * 接続を保ったまま再起動して欲しい
+    * 工夫しないと完全には実装できないが、その基盤をServerEngineが用意している
+  * SIGINT時にサーバを多重に起動して、送り先を切り替える。
+    * supervisorを使ってる時しかできない
+* sigdump gem
+  * JavaVMにはSIGQUITを送るとメモリやスレッドの状態をdumpする機能がある
+    * TDでもHadoopが止まったりしたときに活躍する
+  * Rubyでデーモンとか書いてるとたまにそういうことがある
+    * Ruby版のsigdumpが欲しくなった
+  * ServerEngineにはビルトイン。SIGINT送るとdumpされる。
+  * 定期的にkill -INT pidしてやればスレッドの状態なんどをモニタできる
+* Usecase: Sneakers
+  * jondot.github.com/sneakers
+  * ServerEngine + RabbitMQ
+* Usecase: Fluentd v1
+  * CRubyでヘヴィーなデータ加工をするとそこがボトルネックになる
+  * Zero downtime restart
 
 ## 16:30- Kids, Ruby, Fun!: Introduction of the Smalruby and the Ruby Programming Shounendan
 
