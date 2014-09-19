@@ -483,6 +483,76 @@ old_lockfile.specs.each do |old_spec|
 
 ## 14:30- Scalable deployments - How we deploy Rails app to 100+ hosts in a minute
 
+![](http://photos-d.ak.instagram.com/hphotos-ak-xaf1/10684198_1628842794009075_686401127_n.jpg)
+
+* ISUCONの宣伝(Iikanjini Speed-up CONtest)
+* 今日はなさないこと
+  * Rails
+  * Continuous Delivery
+  * App servers auto-scaling
+* Cookpadのデプロイ規模
+  * rails-statが桁あふれする規模のアプリ
+  * サーバ台数max 140台
+  * デプロイmax 10回/day
+* デプロイルール「CIビルドが通ったものを日中だけデプロイ可能。エラーが出たら戻してください。」
+* これまではデプロイサーバからCapistranoでssh+rsync
+* Deploy via Chat
+* デプロイにかかる時間の内訳
+  * CIに10分
+  * タグ打ち
+  * デプロイに通常 10分
+  * トータル15...20分
+* Capistrano 2向けのデプロイ: complicated super historical script
+* 2595行もあった
+* さすがにdead codeなんとかしたいという問題
+* SSH重いという問題
+* High CPU usage on deployment. たまにこける
+* 「たまにこける」というのが問題
+* 10分で終わるはずのデプロイが、20分くらいかかることもある。トータルで20分から30分。
+* 開発基盤チームは気持ちよく開発できるようにすることをゴールにしている。CIが遅かったらCIを高速化するし、テストの手順が複雑なら自動化するし、デプロイが遅かったら高速化する。
+* 今回はデプロイに手を加えることになった
+* Capistrano 3はどうか
+  * SSHのハンドリングがまし。でもSSHにはまだ依存している。
+* 新しいツールをつくった
+* sorah/mamiya
+  * Rubyで書かれている
+  * Serfをオーケストレーション用に使っている
+  * ファイル配布にS3利用
+  * Capistranoとディレクトリ構造に互換性があるので移行しやすい
+* Serf
+  * Gossip protocol
+    * うわさ話が広がるようにメッセージをfanoutしていく
+  * hashicorp/serf
+    * SSHでやるより速いだろう
+  * sorah/villein
+* mamiyaのアーキテクチャ
+  * Master node
+    * HTTP API
+    * serfへのメッセージ送信
+    * 他のnodeの監視
+  * Agent node
+  * Deploy Script
+    * how to build, preapre, release
+  * Package
+    * tarball of files to deploy
+  * Storage
+    * packageの置き場所
+    * 標準ではS3
+  * Step
+    * デプロイの各処理。それぞれ呼び出すことができる
+    * Fetch
+    * Prepare
+    * Switch
+* これでSSH依存は脱したが、まだできることがあるのでは
+* Stepはバラバラに実行できるので、bundle installや最新packageの配信はCI通った後に予め行っておく。
+* 結果的に数十秒でデプロイできるようになった
+* デモ
+* Future
+  * Better documentation (soon)
+  * Auto deploy when joining cluster
+  * Web UI
+  * Better error tracking, handling
+
 ## 15:30- Write ruby code to change ruby code
 
 ## 16:00- ServerEngine: a framework for multiprocess servers in Ruby
