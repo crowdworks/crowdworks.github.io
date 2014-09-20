@@ -722,3 +722,162 @@ old_lockfile.specs.each do |old_spec|
     * dxruby + rubyでネイティブで動いている。ブラウザで動いているように見えるが、実はネイティブ。
 
 ## 17:30- LT
+
+### Practical factory_girl
+
+* 7年くらいRubyやRailsを使った開発をしてきた
+* traitを使おう
+  * inheritance: userと並列にdeactivated_user、admin_userを作る
+  * 欠点はdeactivatedかつadminみたいな組み合わせが発生したときにどうするか?
+  * 適材適所とはいえ、なるべくtraitを使おう
+  * オブジェクトの状態とは継承関係で表現するものではないから
+* イベントデータはつくらないようにしよう
+  * プロダクションコードと同様、createメソッドでイベントデータをつくろう
+* BDD-style
+  * describeとcontextで構成されたスタイル
+    * describe中ではletやsubjectを作る
+    * context中でbefore
+  * Find notable state, name the state
+
+### Native Libs and Gems on Heroku with Hammer
+
+* ネイティブライブラリのgem化方法
+* = Native Gems (or Extensions)
+* [hammer](https://github.com/hone/hammer)を使う
+
+### ofruby - Ruby running on the iPhone
+
+* ファイルの編集実行まですべてiPhoneで行うことができるビジュアルプログラミング環境
+* 構成
+  * mruby for scritping
+  * openFrameworks for graphics
+  * Objective-C
+* モチベーション
+  * iPhoneは偉大
+  * そのおかげで家庭用PCの売上は下がった
+  * PCがないとプログラマの減少につながる。世界の危機。
+  * そこでiPhoneを使ってプログラマを育てることを考えた
+* デモ
+  * Balls
+  * Wave clock
+  * ブロック崩し
+* ここまですべてiPod touchで開発できる
+* ソースコードはすべて公開されている
+* インストールはAppStorからofrubyで検索
+
+### Keep Freedom on Ruby - A magical world, 'Diversity'
+
+* 万葉は今年で7歳。今年はじめてゴールドスポンサーになれました
+* "I love freedom" 性格的に自由が好き
+* Rubyは私たちに自由を与えてくれるので好き
+* Rubyは気持ちよく書ける
+* でもチームでコードを書いていると「一貫性」というプレッシャーが襲ってくる
+* privateにするかどうか、新しい設計、書き方を試したい
+* それがConsistency vs Freedom(多様性)
+* 「forのかわりにeachを使いましょう」それってほんとに必要?
+* 「Rubyが与えたものをプログラマが制限してはいけません、と思う」w
+* 「初心者のためにdescribe・contextだけ使いましょう」も地獄への入り口
+* 自由を手放すことには慎重になるべき
+* それを阻止するためにDiversity
+* 「やりたくない」という代わりに「それはRubyの多様性を壊す！」というのをおすすめします(会場笑)
+* 一貫性にこだわり過ぎると一部を変えたり新しいことを始めるときにつらい
+* ここでも多様性という言葉使える
+* 多様性はチャレンジを推奨してくれるので良い
+* とはいえ、みんなが知ってるメソッドはみんなが知っているように動くべき
+* I love Ruby
+
+### 10th anniversary of Rubyist Magazine
+
+* 「RubyKaigi 2014のスピーカー・発表できなかった人、るびまで記事を書いてください！」
+* 文字にして書いてもらえると後まで残る
+* るびまは2004年リリース。今日で10年
+* 0048号本日リリース
+* 目玉記事
+  * あの記事を振り返って
+  * Rubyst Magazine 10周年
+  * Incremental GCの導入記事(ちゃんと書いたので呼んでください by ko1さん)
+* 通常号48号、特別号5号
+* 総記事数643本
+* リリース間隔平均4ヶ月
+* 10年間ありがとうございました。今後共よろしくお願いします!
+
+### The world's fastest tour of real time web applications
+
+* 中止?
+
+### Let's try mruby's edge cases
+
+* いまこそmrubyニコントリビュートすべき
+* 64ビット整数使いたいんだよね
+```
+#define MRB_INT64
+```
+* "You can find problmes very easily"
+* 数日後、他のところでも見つかった
+* mrubyを良くするためには困難に立ち向かう必要はありません!
+* 難しいことも残っているが、簡単なことも残っている
+* Rails 勉強会91回主催した。引き継いで下さった人に感謝
+
+### Probabilistic model for inspirations and significance of programming
+
+* 数学者です
+* Rubyは全く関係ありません
+* アイデア、ひらめき、思いつきとは何なのか？その価値とは？を数学的な何かで考察する
+* アイデアはうまくいったりうまくいかなかったりします。利益もあったりなかったり。つまり確率的な存在
+* アイデアの価値とは期待値ではないか
+* 成功率 x 成功時の利益
+* しかし成功率は低いので、アイデアの価値は引くい
+* 期待値の加法性
+* 一個一個の価値は低くても、たくさんあればいいのではないか
+* 試行
+* プログラマにとってはプログラミングが試行
+* アイデアの価値を引き出すためにはコーディングという試行錯誤が必要。
+* 実力をつけてコードをたくさんかかなければならない
+* アイデアの加法性ってあやしくない？
+* 普通、2つのアイデアを2つ同時にためしたりしない
+* Xを試してうまくいあかなｋったらYを試す→条件付き確率
+* XとYに正の相関があれば条件付き確率の期待値は下がってしまう
+* XとYが似ている=相関がある
+* = 2つのアイデアが似ていると、XがだめなときにYがだめなこともわかってしまう
+* 相関が小さいアイデアを、確率的独立に近い多種多様なアイデアが必要
+* そのためにプログラミングが必要
+* つまりわれわれは修行しなければならない
+* アイデアの価値が、と言ってくる人にこういう話をして煙にまくといいと思います(会場爆笑)
+
+(このあたりでPCの電源が切れたのでiPhoneでメモ取り始めました・・ので、分量が落ちます)
+
+### R/W splitting in Rails
+
+* octopus: コードベース大きい
+* acs_as_readonlyable: フリーダムにモンキーパッチあてててメンテがつらい
+* そこでswitch_pointを作った
+* initializerなどで初期化してModelに組み込むだけで使える
+* 本来RW Splittingはコネクションのレイヤーでできるはず。実際それをやってみたのがswitch_point
+
+### Invitation for v1.0.0
+
+* バージョンはフィーリングできめられたりする
+* v1 is GA
+* v1まではいつでもAPIは変えられることを意味する
+  * v0ということは、プロダクションで使ってないということ。本当？
+  * 違うならv1に上げましょう
+* norikraは一年でv1
+  * public apiと機能はこわしません、という表明
+* バージョニングはコミュニケーションの一手段
+* ところでFluentdは？
+  * 0.10ですね(!)
+* みなさんv1をリリースしてください！
+
+### How the RSpec team and I built the smooth upgrade process for RSpec 3
+
+* RSpec 3は互換性がない変更があったので、アップグレード大変だろう。
+* そのためにRSpec 2.9.9とtranspecを作った
+* transpecはASTと実行時の情報を使う。誤変換を防ぐため。
+* おすすめのアップグレードパス
+  * まずRSpec 2.9.9にして、Transpec実行、その後に手修正
+* 同じアップグレード方法を他のフレームワークで使えないか？
+  * specは対象コードを全部実行することができるので、実行時情報全部取れた。アプリだとそうはいかない。
+  * コストをそんなにかけていいのか?
+    * RSpecはポピュラーなので、労力をかける価値があった
+    * 他のアプリだとそうはいかないかも
+
