@@ -1,66 +1,66 @@
 ---
-title: Turnipのステップ実行前後でスクショをとりたい時、どの辺のソースを読めばいいか
+title: Turnip のテストレポートを見やすくする技術
 date: 2014-09-11 14:36 JST
 tags:
 - turnip
 author: Atsushi Yasuda
 ---
 
-初めまして。最近 CrowdWorks にジョインしたエンジニアの安田です。
+Turnip のステップ実行毎にスクリーンショット (以下 SS) とレンダリングされた html を記録する Formatter を作った。
+本投稿では、簡単な使い方の紹介およびどのようにステップを記録しているかについて述べる。
 
-弊社では受け入れテストを Cucumber から Tunrip へ移行を進めています。
-Cucumber と比較するとかなりステップ定義が書きやすくなりました。
-しかし、テストレポートはかなり控えめなものとなってしまいました。
-特に、テスト失敗時のエラーメッセージがかなりわかりにくくなってしまっています。
-下記の例などでは、ボタンが無かったというのはうっすらわかりますが、いったいどんな画面だったのかがわかりません。
+## 背景
+
+Ruby on Rails での受け入れテストと言えば Cucumber が著名だが、ステップ定義にて正規表現を用いる点や RSpec との二本立てとなっている点などがネックとなっていた。
+この２点を解決すべく Turnip が生まれた。 Turnip の詳しい説明は [るびまの記事](http://magazine.rubyist.net/?0042-FromCucumberToTurnip) が詳しいので割愛する。
+
+しかし、テストレポートも RSpec のものに統合されたため、特にステップの失敗時のエラーメッセージがかなりわかりにくくなってしまった。
+
+下記に例を示す。
+この例では、とある画面にボタンが描画されていなかったため、ステップ実行に失敗したと予測されるが、結局どんな画面だったのかはわからない。
 
 ![turnip-error-message](how-to-work-turnip-1.png "nil なのはわかるが……")
 
-これを解決すべく、簡単ながら各ステップとスクリーンショットを記録できるよう、各ステップの開始・終了をキャプチャできる[パッチ](ここに gist への URI を貼りたい)を作成しました。
-しかし、紹介記事とするには簡単すぎますし、機能も自分たちで使う分の最小限なので面白くありません。
-世の中、「どうやって実現しているか」や「どういう機能があるか」について書かれた記事は多く見られますが、
-「何をどう考えて作ったか」をまとめた記事はあまり見られません。
-そこで、何をどう調査してパッチを作ったのか、レポート記事を作成してみようと思います。
+ステップ失敗時の SS だけであれば、
+[TurnipFormatter](https://github.com/gongo/turnip_formatter) および [Gnawrnip](https://github.com/gongo/gnawrnip) を用いれば記録することが可能だ。
+しかし、 TurnipFormatter, Gnawrnip では、キャプチャのタイミングがページ遷移毎となっている。
+javascript による制御が組み込まれた Web アプリケーションにおいては、もう少し細かなタイミングでのキャプチャが求められる。
 
-## 前提
+## CapturefulFormatter の機能
 
-Turnip の詳しい説明は [るびまの記事](http://magazine.rubyist.net/?0042-FromCucumberToTurnip) が詳しいのでそちらにゆずるとします。
-重要なのは、 [summary](https://github.com/jnicklas/turnip/blob/master/turnip.gemspec#L11) にも書かれている通り、 *Turnip は RSpec のエクステンション* だと言うことです。
-RSpec の一部である以上、ステップごとのスクリーンショット等は CustomFormatter で行うのがベターでしょう。
+TODO: ここに機能紹介
 
-しかし、現時点では Turnip ステップ実行前後に Formatter に通知が行きません。
-ですので、簡単にはテスト失敗時に上記にあげたような豊かなデバッグ情報を残せません。
+## CapturefulFormatter の実現方法
 
-[TurnipFormatter](https://github.com/gongo/turnip_formatter) および [Gnawrnip](https://github.com/gongo/gnawrnip) の組み合わせを用いることで近しいことが可能となりますが、
-この二つは画面遷移ごとにスクリーンショットが記録されます。
-ステップごとにスクリーンショットや出力された html 等を確認したいという要望には、惜しくもあいません。
+CapturefulFormatter は RSpec の CustomFormatter の一つとして実装した。
+Trunip は RSpec の [エクステンション](https://github.com/jnicklas/turnip/blob/master/turnip.gemspec#L11) なので、 Turnip の実行記録をとる CapturefulFormatter も RSpec の機構に則るべきだと考えたためだ。
 
-そこで、Turnip のステップ実行前後に Formatter へ通知が行われるように改造することにします。
-そのために、次の 2 点を調査することとします。
+実装するためには二つの課題がある。
 
-* RSpec はどのように Formatter にイベントを通知するのでしょうか？
-* また、 Turnip はどうやって feature ファイルを実行しているのでしょうか？
+まず、 RSpec が各 Formatter にどのように通知を行っているかを把握する必要がある。ステップ実行前後の通知を Formatter に通知する方法を学ぶ。
+次に、 Turnip がどのように feature を実行しているか、特に step の実行前後がどこにあるのかを把握する。通知のコードを実際に実装するためである。
 
-この 2 つがわかれば、改造も行えるはずです。
+### RSpec はどのように Formatter にイベントを通知するのか
 
-## RSpec はどのように Formatter にイベントを通知するのか
+`RSpec::Core::Formatters` の [RDoc](http://rubydoc.info/gems/rspec-core/RSpec/Core/Formatters) にはビルトインの各種 `Formatter` の説明と、 `CustomFormatter` の作り方について記載されている。
+これだけいろいろな通知を受け取れるということは、何か `Formatter` へを通知する共通処理があると予測できる。
+`RSpec::Core::Reporter` へ[リンク](http://rubydoc.info/gems/rspec-core/RSpec/Core/Reporter) が貼られており、このクラスが通知機構の実装そのものだとわかる。
+しかし、公開されているメソッドのうち、それっぽいメソッドは `report` だけであり、引き数もそれっぽくない。
+よって、ソースコードを読み解くこととする。
 
-いきなりソースコードを読み始めても良いのですが、まずは RDoc をあさりましょう。
-`RSpec::Core::Formatters` の [RDoc](http://rubydoc.info/gems/rspec-core/RSpec/Core/Formatters) にはビルトインの各種 `Formatter` の説明と、 `CustomFormatter` の作り方について記載されています。
-既存のすべての通知の一覧等も載っていて大変便利ですね。
-これだけいろいろな通知を受け取れるということは、何か `Formatter` へを通知する共通処理がありそうです。
+```ruby
+# https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L51
+def report(expected_example_count)
+  start(expected_example_count)
+  begin
+    yield self
+  ensure
+    finish
+  end
+end
+```
 
-`RSpec::Core::Formatters` の RDoc をよく読むと、 `RSpec::Core::Reporter` へ[リンク](http://rubydoc.info/gems/rspec-core/RSpec/Core/Reporter) が貼られています。
-Overview にも記されている通り、この `RSpec::Core::Reporter` が通知機構の実装そのものです。
-このクラスを使えば、自分たちの望む通知を送ることができそうです。
-しかし、公開されているメソッドのうち、それっぽいメソッドは `report` だけです。
-独自の通知送る場合にはこのメソッドを使えば良いのでしょうか？
-
-残念ながら、 `report ` はテストスイート全体の開始と終了の通知に用いられています。
-
-この辺で、ソースを読み始めましょう。
-`report` の実装を読むと、即座に `start` を呼び出しています。
-この `start` の実装はどのようになっているのでしょうか？
+`report` の実装を読むと、即座に `start` を呼び出している。
 
 ```ruby
 # https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L61
@@ -71,9 +71,20 @@ def start(expected_example_count, time = RSpec::Core::Time.now)
 end
 ```
 
-  ずいぶんと簡単かつ、 *とても通知をしていそう* なメソッドが見えます。
-  ソースを眺めれば、`finish` や、 `example_group_finished` なども `notify` を使って通知をしていることがわかります。
-  どうやらこんなメソッドを実装してやれば良さそうです。 `notify :step_startd, some_object` と呼び出せば、期待した動きになりそうです。
+`start` では上記の通り `notify` を呼び出すだけだ。
+
+```ruby
+# https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L135
+def notify(event, notification)
+  registered_listeners(event).each do |formatter|
+    formatter.__send__(event, notification)
+  end
+end
+```
+
+`notify` で具体的に通知を行っている。
+ソースを眺めれば、`finish` や、 `example_group_finished` なども `notify` を使って通知をしているのが見て取れる。
+これらに習い、 `step_started` を実装し、その内部で `noify :step_started` としてやることとした。
 
 ```ruby
 # こんな感じのメソッドを実装してやれば良さそうだ。
@@ -82,44 +93,16 @@ def step_started(step)
 end
 ```
 
-ところで `start` や `example_passed` そして `notify` は `@private` がつけられています。
-これらのメソッドを外から呼び出して大丈夫でしょうか？
-
-ソースを読み進め `RSpec::Core::Reporter.example_passed` の呼び出しを確認してみましょう。
-grep をすればわかりますが、呼び出し元は 1 箇所のみ。 `RSpec::Core::Example` 中で、直接 `reporter.example_passed` と呼び出しています。
-RSpec の中から呼び出す分には問題なさそうです。
-
-ここまで、ソースとドキュメントのみを追って、動きを予測してきました。
-この予測が正しいか、きちんと実験して確認してみましょう。
-下記の様な CustomFormatter を作って見ました。
-予測が正しいのであれば、コールスタック上に `RSpec::Core::Reporter.report` からの一連の流れが確認できるはずです。
-
-```ruby
-# 呼び出し順の検証用フォーマッタ
-require "rspec/core/formatters/base_text_formatter"
-
-class TestFormatter < RSpec::Core::Formatters::BaseTextFormatter
-  RSpec::Core::Formatters.register self, :example_passed
-
-  def example_passed(notification)
-    caller.each{|call| output.print call.to_s + "\n"}
-  end
-end
-```
-
-![turnip-error-message](how-to-work-turnip-2.png "example_passed から notify が呼ばれている")
-
-動きも確認したので、早速 `step_started` を `RSpec::Core::Reporter` に実装していきましょう。
-しかし、 RSpec のコードに手を入れるのはあまり行儀がよくありません。
-
-ruby はオープンクラスです。今回は RSpec の動きを自分たちの為に変えたいだけですのでモンキーパッチを当てることにしましょう。
+ところで RSpec のコードに手を入れるのはさすがに避けたい。
+そこで、今回はモンキーパッチを当てることとした。
 
 ```ruby
 # RSpec に当てるモンキーパッチ
-module MonkeyPatch
+module CapturefulFormatter
   module RSpec
     module Core
       module Reporter
+        # Formatter へ送る構造体。今回は ExampleNotification の実装を参考にした。
         StepNotification = Struct.new(:description, :keyword, :extra_args) do
           private_class_method :new
 
@@ -141,28 +124,33 @@ module MonkeyPatch
   end
 end
 
-RSpec::Core::Reporter.send(:prepend, MonkeyPatch::RSpec::Core::Reporter)
+RSpec::Core::Reporter.send(:prepend, CapturefulFormatter::RSpec::Core::Reporter)
 ```
 
-これで、 `RSpec::Core::Reporter.step_started` が呼び出せるようになり、CustomFormatter で拾えるようになりました。
+これで、 `RSpec::Core::Reporter.step_started` が呼び出せるようになり、CustomFormatter で拾えるようになった。
 
-## Turnip はどのように spec を実行するか？
+### Turnip がどのように step を実行するか
 
-さて、次は Turnip のステップ実行前後に `step_started` と `step_finished` の呼び出しを挟みます。
-どこに実装すれば良いか、ヒントになるのは *Turnip は RSpec のエクステンションということです* 。
-RSpec の拡張と言っているのですから、 RSpec を拡張している場所が必ずあるはずです。
+Turnip は RSpec の拡張であり、実行コマンドも
 
-ソースを探せばすぐに見つかりますが、 [rspec.rb](https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb) というそのものズバリなファイルがあります。
-このファイルでは `Turnip::RSpec::Loader` と `Turnip::RSpec::Execute` という 2 つのパッチが定義され、ファイル末尾で RSpec へパッチを当てています。
+```
+rspec spec/acceptance/attack_monster.feature
+```
 
-まずは `Turnip::RSpec::Loader` の方から見ていきましょう。
+のように `rspec` を用いる。
+
+よって、* RSpec を拡張している場所がソースコード中にある* と予測できる。
+ファイル名の通りであるが、それをしているのが [turnip/lib/turnip/rspec.rb](https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb) だ。
+このファイル中では `Turnip::RSpec::Loader` と `Turnip::RSpec::Execute` という二つのクラスが用意され、ファイル末尾で `Turnip::RSpec::Loader` を RSpec にパッチしている。
+
+それぞれの挙動を、まずは `Turnip::RSpec::Loader` の方から見ていく。
 
 ```ruby
 # https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb#L12
 module Turnip
   module RSpec
     module Loader
-      def load(*a, &b)
+      def load(*a, &b) # load メソッドを定義
         if a.first.end_with?('.feature') # ロードされたのが .feature ふぁいるなら
           require_if_exists 'turnip_helper'
           require_if_exists 'spec_helper'
@@ -187,10 +175,10 @@ end
 ::RSpec::Core::Configuration.send(:include, Turnip::RSpec::Loader)
 ```
 
-パッチのコードはそれだけ見るとわかりにくいですが、 `load` の挙動にパッチを当てています。
-これによって、 `RSpec::Core::Configuration` 中で `load` を呼び出すと、上のコードが呼ばれることとなります。
+このパッチは `load` を定義し、 `RSpec::Core::Configuration` にあてている。
+これによって、 `RSpec::Core::Configuration` 中で `load` を呼び出すと、上のコードが呼ばれることとなり、指定されたのが `.feature` なら Turnip が処理するとわかる。
 
-より具体的には、 `RSpec::Core::Configuration.load_spec_files` で `load` を呼び出すときの動作がかわることとなります。
+より具体的には、 `RSpec::Core::Configuration.load_spec_files` での挙動が、これにより変化する。
 
 ```ruby
 # https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/configuration.rb#L1057
@@ -206,9 +194,10 @@ module RSpec
 end
 ```
 
-このパッチのおかげで、 `rspec` コマンド実行時に .feature ファイルでは Turnip が実行されるようになるのですね！
+このパッチにより、 `rspec` コマンド実行時に `.feature` ファイルでは Turnip が実行されるようになる。
 
-次に、 `Turnip::RSpec.run` を見ていきましょう。
+さて、 `Turnip::RSpec::Loader.load` では `.feature` ファイルロード時に `Turnip::RSpec.run` を実行していた。
+`Turnip::RSpec.run` を見ていく。
 
 ```ruby
 # https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb#L63
@@ -253,16 +242,13 @@ module Turnip
 end
 ```
 
-少々込み入っていますが、 `Turnip::Builder` で Geherkin をパースして、 RSpec の desribe ブロックを作り上げています！
-これをみれば、Turnip で it が右の方に長くなる理由もよくわかりますね。
-
-さて、ステップの実行は `Turnip::RSpec::Execute.run_step` で行われているのがわかります。
-と、いうことは、この前後に `RSpec.configure.step_started` そして `RSpec.configure.step_finished` を呼びだしを加えれば、やりたいことは達成できます！
-
-`RSpec::Core::Reporter` の時と同じく、モンキーパッチを当ててやりましょう！
+少し複雑に見えるが、 `Turnip::Builder` で Gherkin をパースして、 RSpec の desribe ブロックを作り上げ、それを実行しているだけだとわかる。
+シナリオごとに describe ブロックを定義し、 `it(scenario.steps.map(&:description).join(' -> '))` により一つの it 句が一つのシナリオに対応するというのも見て取れる。
+そして、ステップの実行は `Turnip::RSpec::Execute.run_step` で行われているというのもわかる。
+`RSpec::Core::Reporter` の時と同様に、 `run_step` 前後に通知を行うモンキーパッチを作成することとする。
 
 ```ruby
-module MonkeyPatch
+module CapturefulFormatter
   module Turnip
     module RSpec
       module Execute
@@ -278,17 +264,17 @@ module MonkeyPatch
   end
 end
 
-::Turnip::RSpec::Execute.send(:prepend, MonkeyPatch::Turnip::RSpec::Execute)
+::Turnip::RSpec::Execute.send(:prepend, CapturefulFormatter::Turnip::RSpec::Execute)
 ```
 
-## 調査が終わり
+ここまでの二つのパッチを当てることで、自分の独自 Formatter で step 前後の動きを記録できる。
+CapturefulFormatter では、単純に `Capybara.current_session.save_screenshot` を行い、 SS を保存している。
 
-こうして自分の CustomFormatter で `step_started` と `step_finished` が受け取れるようになりました。
-あとは、それぞれのコード中で、例えば `Capybara.current_session.save_screenshot` などを好きなだけ呼び出せるようになります。
+## むすび
 
-実際に RSpec, Turnip に当てたモンキーパッチをご覧いただければわかりますが、かなり小さなコードだけでライブラリの動きに変化を与えることが可能です。
+ここまで記してきたように、本投稿ではステップごとの SS を記録する Fomatter の誕生理由と、その実現方法について述べてきた。
+実際の CapturefulFormatter は、ステップごとの情報を記録した後、テスト終了時に erb をもとにレポートを作成する機能などが実装されている。
+しかし、コアとなるステップ前後の hook 追加については、上記に示した二つのパッチのみで実現できる。
 
-ruby のライブラリは非常にオープンかつ、かなり多くは小さな作りのライブラリです。
-そして行うことの高機能さに比べ、単純な実装が多く見られます。
-
-せっかくのオープンソースな世界です。秋の夜長に、自分の使っている gem のソースを読んで、ちょっと思い通りに動作を変えてみるのはいかがでしょうか？
+よって、例えば上記パッチのみを `spec/support` 以下に実装し、読者自身の CustomFormatter を定義することも簡単だ。
+せっかくの受け入れテストであり、ステップごとにスクリーンショットを撮りたい。読者の中にそのような要望があれば、本投稿を役立てていただければ幸いだ。
