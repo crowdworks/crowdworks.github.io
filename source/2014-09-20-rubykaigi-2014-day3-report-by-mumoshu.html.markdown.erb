@@ -1,0 +1,400 @@
+---
+title: RubyKaigi 2014 3日目 参加レポート
+date: 2014-09-20 9:30 JST
+tags:
+  - ruby
+  - rubykaigi
+gravatar: ykuoka@gmail.com
+author: Yusuke Kuoka
+twitter_id: mumoshu
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+      type: image/png
+      width: 250
+      height: 250
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png
+    type: image/png
+---
+
+9/20(土)に開催された [RubyKaigi 2014](http://rubykaigi.org/2014) 3日目の参加レポートです。
+
+聴講しながら勢いてまとめているので読みづらい点もあると思いますが、今日も全力で更新していきます！！
+
+![RubyKaigi 2014 Official Sponsor](rubykaigi/2014/badge-for-official-sponsor@2x.png "クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!")
+
+READMORE
+
+* [RubyKaigi 1日目のレポート](http://engineer.crowdworks.jp/2014/09/18/rubykaigi-2014-day1-report-by-mumoshu.html)
+* [RubyKaigi 2日目のレポート](http://engineer.crowdworks.jp/2014/09/19/rubykaigi-2014-day2-report-by-mumoshu.html)
+
+<%= table_of_contents(current_page) %>
+
+## 各種情報
+
+### スケジュール
+
+RubyKaigiの公式サイトにスケジュールが掲載されています。
+
+[RubyKaigi 2014 | Schedule](http://rubykaigi.org/2014/schedule)
+
+### Ustream
+
+当日参加できない方向けには、USTが用意されていました。素晴らしいですね!
+
+* [Hall A](http://www.ustream.tv/channel/rubykaigi1)
+* [Hall B](http://www.ustream.tv/channel/rubykaigi2)
+
+## 9:30- Ohayō Rails (Hall A)
+
+登壇しました!
+Railsをヘビーに使っている企業によるRailsのベストプラクティスや、「うちではこう使っている」といったノウハウなどをパネルディスカッション形式でざっくばらんに紹介していくというセッションでした。
+Railsだと用途(SPAやAPIサーバにもRails使うの?)や方法(どんなツール、gemを使うの?)も多岐に渡るので、それをまとめて聞ける場として活用いただけていたら嬉しいです。
+
+## 11:00- Speeding up Rails 4.2 (Hall A)
+
+![](http://photos-b.ak.instagram.com/hphotos-ak-xfp1/10268740_700556530027001_1251933772_n.jpg)
+
+* Rails 4.2.0
+* Rackはらくじゃない
+  * MLにもRackはやめましょう、というメールきた
+  * アーロンは諦めたくなかった
+  * そこでthe_metalでRack2.0になるかもしれないものを検証中
+* 現状のRackではenvはグローバル変数
+  * Metalではかわりにcall(request, response)というAPIを提供
+  * requestはIOとレスポンスの情報
+  * node.jsのようなapi
+  * HTTP2拡張予定
+* AdequateRec. 2x faster
+* benchmark/ips
+  * iterations per second
+  * 高いほど速い
+* link_toはURLが長ければ長いほど遅くなる
+* ArrayのようなfetchがO(N)時間かかるものがある
+* GC.stat(:total_allocated_object) 2.2ではobjects
+* 4-0stableから19%
+* 4.1から14%オブジェクト生成減った
+* SafeBuffer#newに時間がかかっていた
+* html＿safe?メソッドを提供するもの
+* YMMV
+* allocation_gem
+* elimate objects
+* 「存在しないコード」これが最も速い。コードはできるだけ削除しましょう。
+* fewer types less code faster code
+* measure, measure, measure, measure
+* 4.2 will be fastest rails ever
+* 次のターゲットはview code、elimate garbages
+
+## 11:30- Practical meta-programming in Application (Hall A)
+
+![](http://photos-b.ak.instagram.com/hphotos-ak-prn/929233_305083956337721_1331875971_n.jpg)
+
+* EMS
+* idobata
+* メタプログラミングとお近づきになってもらうことがゴール
+* 関係するもの
+  * クラス
+  * モジュール
+  * オプジェ区と、状態、ivar
+  * メソッド
+  * 手順
+* attr_accessor、define_methodとinstance_variable_get
+* 普段使っているものもメタプログラミング関係
+* メタプログラミングとは言語要素を操作すること
+* メタプログラミングの欠点
+* メタプログラミングやりすぎるとコード量が減る
+* do less in メタプログラミング
+* define_readers
+* association_objectを返すだけ
+* owner.pk = target.fk
+* メタ要素をとりだして、そこだけシンプルに書く
+* 投稿監視の例
+* after_saveでHTTPで送る
+* HTTPで送る部分はModel化できる
+* タイトル、本文などの属性以外はさらに共通化できる
+* 監視タイプ、属性値エクストラクタprocを渡すしてつくるコールバッククラス。それをafter_saveで呼ぶ。
+* module CensorDSL
+* ```
+include Censorable
+censor_content(:text) do
+...end
+* Rubyの力を生かすために、メタな部分を切り出してそこだけメタプログラミング。
+* 他は普通にリファクタリングして問題を抽出していく
+
+## 13:30- Everything is Broken: A Story of Hope (Hall A)
+
+![](http://photos-g.ak.instagram.com/hphotos-ak-xaf1/10661026_930912470256406_1879500512_n.jpg)
+
+* leetはギャル語みたいなもの。@1337807 -> LEET BOT
+* Webの世界からみたセキュリティの話
+* 「Googleのトップページをブラウザで開くとどうなりますか？」いい面接の質問。いろいろな答えがあるから
+* DNS Lookup: Chrome -> OSのUtility = Resolverにきく
+* ResolverはDNSサーバにDNS Queryを送る
+* WiresharkでQuery内容を見てみましょう
+* AuthoritativeなDNSサーバにクエリが到達するまで
+* ここまで説明したのはDNS Cacheに入ってないケース
+* Evil Daveさんだったら、DNSレスポンスが正しいかわからない
+* DNS SECで解決できるがあまりつかわれてない
+* サーバがわかったのでTCPで接続
+* SYNを送る。SYNchronizeの意味
+* SYN ACKを返す = 「あなたが見えています」という意味
+* CLIENT HELLOにランダムバイトを入れる
+* SERVER HELLO
+  * CHose Cipher, Session ID, Random Byte
+* Asynmmetric Cipher
+  * Encrypt, Decrypt
+* SignatureはCAが作ったもの
+* CA = Certificate Authorities。
+* CAを信頼するから、Certificateに書いてあるサーバも信頼できる
+* PCにはCertificateが最初からたくさん入っている
+* そのCertificateはいまも有効かどうか
+  * Online Certificate Status Protocol
+* ChromeはOCSPを使って笹田さんに聞く
+* CAはあなたのプライバシーを侵害するかも
+* CAから返答がこなかったら、Certificateは正しい、と思われる
+* OCSPのタイムアウトは10秒。ブラウザはそれを待たない
+* ハッカーがこの10秒間に攻撃することができるかも
+* OCSP Staplingで対応
+  * クライアントとサーバの間でハッカーがStaplingを削除できるかもしれない
+* OCSP Must-Staple
+  * StapleがなかったらHard Fail
+  * いまのブラウザは使っていないがそろそろ使いはじめるのでは
+* CLIENT FINISHED
+* SERVER FINISHED
+* ここまでで共通鍵を持てた
+* 安全!
+* ・・だったのはHeartbleedまでの話
+* あとで秘密鍵を盗めばすべてのセッションの内容を見られてしまう
+* Perfect Forward Secrecy (PFS)を使えば回避できる
+  * セッション毎に別々のキーを使う
+  * あとで秘密鍵を盗んでも、そのセッションしか見られない
+* DH Exchange
+  * 傍受しても見ることはできない
+* TLS接続が確立できたので、Nginxが受け取ってUnix socketへ、socketにUnicornがむらがって、最終的にcute puppyが返ります
+* おわり
+
+## Fluentd Hacking Guide (Fluentd ソースコード完全解説)
+
+![](http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10632216_691568960924388_342344591_n.jpg)
+
+* Flentdとは何かや使い方は説明しません
+* Fluentdを使ったことがある、Fluentdプラグインを作ったことがある、Fluentdの内部に興味がある人がターゲット
+* v0.10 branchのコードを使う
+* トピック
+  1. Fluentdの起動シーケンス。プラグインの読み込み方
+  2. InputプラグインがOutputプラグインへどうやってデータを渡すか
+  3. BufferedOutputプラグインの仕組み
+* 早速コードを読んでいきます。ここからvimです。
+* Fluent::Supervisorのstart
+* run_configure
+* Fluent::Config.parseで設定ファイルをパース
+* Fluentd::Engine.configure
+* EngineはFluentdの本体
+* Engineでプラグインのロード
+* try_load_pluginでプラグインのロードを試みる。最終的にrequire
+* (input|output).configure(e)
+* Fluent::Inputを継承してInputプラグインを定義する
+  * initialize
+  * configure
+  * start
+  * shutdownを実装する決まり
+* configureでは設定がおかしかったら`raise ConfigError`するなど
+* `Match.new(pattern, output)`
+* TailInputプラグイン
+  * TailWatcherを別Threadでループさせる
+* startメソッドでは何もしてないことが多い
+* Supervisor#run_configure
+  * reqire
+  * new
+  * configure(config
+* Engine:run_engine
+  * start
+  * shutdown if signal received
+* listen
+  * `Coolio::TCPServer.new(...)`
+  * on_messageでメッセージが渡ってきて、最終的にemit_stream(message)
+* Outputプラグインで遅い処理をするとブロックしてしまう
+  * そのままだあとin_forwardが新しいデータを受け付けられなくなってしまう
+  * そこでBufferedOutput
+* BufferedOutput
+  * lib/fluent/output.rb
+  * Fluentdはひとつのファイルに複数クラス書いてあるので読みづらい
+* シーケンス
+  * Input --emit(tag, es) --> BufferedOutput
+  * BufferedOutput --emit(tag, data)--> BasicBuffer
+  * BasicBufferはキューに入れるだけ
+* HTTP的な処理はどこでやるのか？OutputThreadクラスで別スレッドでループを回している
+  * 定期的にtry_flush
+  * BasicOutputの@num_threadsでスレッド数増やせる
+* 隠しパラメータ
+  * キューにまだデータが入っている時だけのtry間隔 @queued_chunk_flush_interval
+    * DeNAさんではここだけ0.1とか
+  * キューにもうデータがないときのtry間隔 @try_flush_interval
+* 常にBUfferedOutput使えば?
+  * 必ずしもそうではない
+  * 例えばfluentd-elasticsearch
+  * キューのサイズが大きくなりつづける
+  * キューが大きくなるとパフォーマンス劣化する
+  * キューが大きくなり過ぎないようにチューニング
+  * buffer_chunk_limit(一つのチャンクサイズを大きくして一気にデータを吐き出せるようにする)
+  * 隠しqueued_chunk_flush_intervalなど
+  * でも、Elasticsearch側がさばける以上はさばけないので、まずElasticsearch側でスループットを増やす。第一。
+* Fluentdの貢献に役立ててください!
+
+## The role of ruby in the single page app. (Hall B)
+
+![](http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10693290_713223678756668_1641007942_n.jpg)
+
+* SPAには色々な選択しがある
+  * framework
+  * library
+* Content first development
+* 色々なチャレンジがある
+* Ruby + JSの共存の一つの方法を紹介
+  * これは新しいパターン
+  * 原則としてはアプリを柔軟にする
+  * 最終的には自分にあったものを選びましょう
+* ZendeksはSPA
+* トピック
+  * Server Management
+  * Application Flexibility
+  * Data Provisioning
+  * Deployment
+* CapistranoはSPAでどう使うか
+  * SPAに必要な依存性はmanifest.jsonで管理
+  * DeployVerifier.verifyでインターネット経由でCDNにデプロイしたファイルがアクセスできるかチェック
+  * チェック通ったらmanifest.jsonを/path/to/appにアップロードして切り替え
+* SPAをロードしてから動的にloginすると、応答性悪い
+  * 普通にログインページにリダイレクトさせたほうがいい
+* AJAX化するとリクエスト数が爆発的に増えてアプリが遅い問題
+  * SPAからAPIを複数回よぶ、RailsからこれまでどおりAR、RailsからAPIを呼ぶ、色々方法あるけどどれでも解決しない
+  * 一つの方法は・・
+    * アカウントとユーザ情報など変化しないものをRails側でできるだけキャッシュ
+    * そしてレイアウトにJSONを埋め込む。scriptタグで
+    * 例えばaccount情報のためのscriptタグ部分をfragment cacheでユーザID毎にキャッシュ
+    * AJAXするより、fragmentキャッシュしたscriptタグをRailsでrenderして、JSから普通に読む
+
+## Scaling is hard, let's go server shopping! Or, How we scaled Travis CI, and helped Open Source at the same time. (Hall A)
+
+![](http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10706988_310230649164436_84764746_n.jpg)
+
+* Travis体操
+* Weillington
+  * 400,000 people
+* Tokyo = 3 new zealand
+* What is Travis CI
+  * like Jenkins
+  * 137,194 OSS REPOS in the past 12 months
+  * 27,000 builds per day
+  * 79,930 jobs per day
+  * 2.96 jobs per build
+  * testing different combinations
+  * gem開発時のconfidence
+  * 68+ dedicated servers
+  * 1,100+VMS
+  * Growth Took Time
+  * 4 life stages
+* travis-ci/travis-ci   
+  * worker
+  * core: business logic
+  * hub: messaging
+  * api
+* sponsors for servers
+* more servers
+* create a team
+* 6ヶ月後会社をやめた
+* Why isn't this our job!
+* We were commited!
+* Love Campaignをした
+  * クラウドファンディング
+* We are crowd funded company
+* $134,000 -> サーバ、人
+* すぐ有料プランを始める必要があった
+* get billing to work
+* there was never a shortage of work
+* 4 people
+* oct 2012の話
+* 現在
+  * profitable companyになった
+  * 9,000 support emails
+* そのために行った3つのこと
+  * features
+  * bug reports
+  * optimizations
+* Optimizations
+  * optimizationはfeatureでもbugでもないのでほっておかれる。必要になるまでは
+  * optimizationにいくら時間がかかるかわかｒなあい
+  * time == money
+  * possible opportunity cost
+  * sometimes spending more money costs less
+* docker使えるのでsupport@travis-ci.comまで連絡ください
+* Ruby 2.1.3, 2.2.0-Preview 1
+* Travisで今日から使える!
+* One last thing
+  * Travis CI Enterprise
+    * Docker
+* TravisのDocker内ではDockerもsudoも使えない。priviledge mode offのため
+
+## tending the ruby ecosystem (Hall B)
+
+(序盤聞き逃しました><)
+
+* acts_as_paranoidの例
+  * メンテされてないうえに誰かのgit branchに依存していた
+* 解決方法を提案
+* railsアプリにはsilent dependenciesがある
+  * railsが様々なgemに依存している
+* いくつかのライブラリは切りだされたけどまだまだ
+  * rails/protected_attributes
+  * rails/activerecord-deprecated_...
+* プロジェクトの状態を知る方法
+  * Check recent commits
+  * How long since last commit?
+* How to find owners
+  * contributos graph on GitHub
+  * eメールでhelpの申し出
+    * やさしい挨拶から始める
+    * 短期的な目的・長期的な目的
+    * この2つがあれば、あなたが信頼できる人であるとわかってもらえる
+    * 自分が適任であることを述べて最後にthanks
+* Last resort
+  * メールに反応がなかったとき
+  * gemの名前をかえよう
+  * ライセンスはそのままにしよう
+* Contact RubyGems Support
+  * 経緯を説明してgemの移管を頼むことができる(!)
+* Plan for the worst
+  * Specify version matrix of Ruby with RVM
+  * Run a different Gemfile for Undler
+  * See if you are compatible
+* Integration testing
+  * Use your app for integration test
+  * hopefully you are covered
+  * もしくはテストカバレッジがいい他のライブラリを使う
+* Get approval
+  * Beta releases: 早めにフィードバックをもらう
+  * Fix major regressions
+  * ユーザにアップグレードしてテストしてもらう
+* Issues REmain
+  * These issues are extinct
+  * Ship software with zero-bugs
+* 安全なリリースをしよう
+* 最後に
+  * gemはpowerful, integral
+  * saving gems is rewarding
+  * many gems still need out help
+  * lts support Ruby
+* 私の猫です @gingypurrs
+* Q. モチベーションは?
+  * A. 依存したくない＆gemが好きだから
+
+ここで所用のため一足先にRubyKaigi離脱しました><
+おつかれさまでした!
+ここでレポートしきれなかった残りの2セッションについては、他の参加者の方のレポートで読めるといいなぁ…。
+
+## 他のRubyKaigi 3日目レポート
+
+* [RubyKaigi 2014 3日目まとめ #rubykaigi - Qiita](http://qiita.com/tbpgr/items/bb1f2090b1167592262f)
