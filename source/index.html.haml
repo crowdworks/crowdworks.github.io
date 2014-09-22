@@ -15,17 +15,18 @@ ogp:
     %p= link_to 'Previous page', prev_page
 
 - page_articles.each_with_index do |current_article, i|
-  = link_to current_article do
-    %section.article-intro.container
-      .row
-        .col-md-8.col-md-offset-2.blog-article
-          .article-info.clearfix
-            %p.article-date= current_article.date.strftime('%Y/%m/%d')
+  %section.article-intro.container
+    .row
+      .col-md-8.col-md-offset-2.blog-article
+        .article-info.clearfix
+          %p.article-date= current_article.date.strftime('%Y/%m/%d')
+        = link_to current_article, style: 'display: block;'  do
           %h1.article-title= current_article.data.title
-    %section.article-body.container.content-section
-      .row
-        .col-md-8.col-md-offset-2.blog-article
-          = current_article.summary(100)
+  %section.article-body.container.content-section
+    .row
+      .col-md-8.col-md-offset-2.blog-article
+        = current_article.summary(100)
+        = link_to current_article do
           .read-more 続きを読む
 
 - if paginate
