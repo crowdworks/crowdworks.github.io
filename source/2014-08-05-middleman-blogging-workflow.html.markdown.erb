@@ -1,15 +1,28 @@
 ---
-title: MiddlemanとGitHubによるブロギング・ワークフロー
+title: MiddlemanとGitHubによるブログの書き方 〜クラウドワークスエンジニアブログの場合〜
 date: 2014-08-05 16:00 JST
-tags: middleman
+tags:
+  - middleman
+  - github
 gravatar: ykuoka@gmail.com
 author: Yusuke Kuoka
 twitter_id: mumoshu
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/middleman.png
+      type: image/png
+      width: 400
+      height: 400
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/middleman.png
+    type: image/png
 published: false
 ---
 
 クラウドワークスエンジニアブログは、
-GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成・運用されています。
+GitHubと静的サイトジェネレータ「Middleman」を使って複数人で作成、運用されています。
 複数人で運用するにあたってドキュメントを書こうと思い、参考になるものをググってみたところ、
 意外と事例がありませんでした。
 「ないなら作る！」ということで、弊社で運用している「MiddlemanとGitHubによるブロギング・ワークフロー」
@@ -25,11 +38,12 @@ GitHubと静的サイトジェネレータ「Middleman」を使って複数人�
 
 ## 前提
 
-* ブログはMiddlemanとmiddleman-blogによる静的サイトとしてつくる
-* MiddlemanプロジェクトはGitでバージョン管理する
-* 執筆は好きな言語とエディタを使って行う
-* 編集に関するワークフローはGitHubで回す
-* ブログはGitHub Organization Pagesへデプロイする
+このブログはMiddlemanで作られています。
+ブログのソースはRubyやMarkdown、Haml、SCSS、JavaScriptなどで書かれたMiddlemanプロジェクトです。
+執筆者がソースを書いてMiddlemanにビルドさせると、HTML、CSS、JavaScriptによる静的サイトが生成されます。
+こうして生成された静的サイトをGitHub Pagesにデプロイしています。
+
+このブログの生い立ちや仕組みの詳細は、「<%= link_to 'エンジニアブログをMiddlemanでつくる3つの理由 - CrowdWorks Engineer Blog', '/2014/08/05/why-we-use-middleman-blog.html' %>」の記事を見てみてください！
 
 ## ワークフロー
 
@@ -47,26 +61,28 @@ git clone git@github.com:crowdworks/crowdworks.github.io.git
 
 cloneしたレポジトリのデフォルトブランチはmasterではないということを覚えておいてください。
 
-##### コラム: デフォルトブランチをmasterにしない理由
-
-「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
-GitHub Organization Pagesにおけるデプロイ方法は、
-
-* Organizationにある
-* 「`organization`.github.io」という名前のGitレポジトリの
-* masterブランチ
-
-にデプロイしたい内容をgit pushする、というものです。
-masterブランチにgit pushされた内容が http://organization.github.io/ に公開されます。
-
-ということは、Middlemanプロジェクトのソースをmasterブランチにおいてしまうと、ブログではなく元のソースがGitHub Pagesで
-公開されてしまいますね。
-それでは困るので、masterブランチ以外でソースを管理します。
-ソース管理するのがmasterではないということを明確にする意味もあり、
-デフォルトブランチはmaster以外でソース管理を行うブランチにしておきます。
-
-crowdworks.github.ioレポジトリの場合、sourceブランチでソースを管理し、ソースからビルドしたブログを
-masterブランチへデプロイしています。
+> ##### コラム: デフォルトブランチをmasterにしない理由
+>
+> 「前提」のとおり、MiddlemanでビルドしたブログはGitHub Organization Pagesへデプロイします。
+> GitHub Organization Pagesにおけるデプロイ方法は、
+>
+> * Organizationにある
+> * 「`organization`.github.io」という名前のGitレポジトリの
+> * masterブランチ
+>
+> にデプロイしたい内容をgit pushする、というものです。
+> masterブランチにgit pushされた内容が http://organization.github.io/ に公開されます。
+>
+> 参考: [User, Organization, and Project Pages · GitHub Help](https://help.github.com/articles/user-organization-and-project-pages#user--organization-pages)
+>
+> ということは、Middlemanプロジェクトのソースをmasterブランチにおいてしまうと、ブログではなく元のソースがGitHub Pagesで
+> 公開されてしまいますね。
+> それでは困るので、masterブランチ以外でソースを管理します。
+> ソース管理するのがmasterではないということを明確にする意味もあり、
+> GitHub上でのデフォルトブランチはmasterではなく、ソース管理を行うブランチにしておきます。
+>
+> 例えば、crowdworks.github.ioレポジトリの場合、sourceブランチでソースを管理し、ソースからビルドしたブログのデプロイ先はmasterブランチです。
+> また、デフォルトブランチはsourceです。
 
 ##### 2回め以降
 
@@ -97,34 +113,36 @@ Gemfileに書かれたgemをインストールする必要があります。
 bundle install --binstubs
 ```
 
-##### コラム: Middlemanプロジェクト ≒ Rubyプロジェクト
+> ##### コラム: Middlemanプロジェクト ≒ Rubyプロジェクト
+>
+> 通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
+> そして、実行前にはbundle installする必要がありますね。
+>
+> 同様に、Middlemanプロジェクトのテストやビルド、デプロイに必要な
+> Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
+> したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。
 
-通常のRubyプロジェクトの場合、依存するgemがGemfile（や、gemの場合はgemspecにも）書かれています。
-そして、実行前にはbundle installする必要がありますね。
+　
 
-同様に、Middlemanプロジェクトのテストやビルド・デプロイに必要な
-Middleman本体やMiddleman拡張もgemであり、Gemfileに書かれています。
-したがって、Middlemanや拡張をまとめてインストールするためにbundle installが使えます。
-
-##### コラム: binstubs
-
-`bundle install`コマンドに`--binstubs`オプションをつけることで、bin/以下に
-middlemanコマンドをBundler環境下で実行するためのラッパースクリプト(binstub)が生成されます。
-middlemanのbinstubはbin/middlemanです。
-
-binstubがない場合、Bundler環境下でmiddlemanを実行する場合は以下のコマンドを実行する必要があります。
-
-```bash
-bundle exec middleman
-```
-
-しかし、binstubがある場合、以下のコマンドでOKです。
-
-```bash
-bin/middleman
-```
-
-少しだけ短くなりますね！
+> ##### コラム: binstubs
+>
+> `bundle install`コマンドに`--binstubs`オプションをつけることで、bin/以下に
+> middlemanコマンドをBundler環境下で実行するためのラッパースクリプト(binstub)が生成されます。
+> middlemanのbinstubはbin/middlemanです。
+>
+> binstubがない場合、Bundler環境下でmiddlemanを実行する場合は以下のコマンドを実行する必要があります。
+>
+> ```bash
+> bundle exec middleman
+> ```
+>
+> しかし、binstubがある場合、以下のコマンドでOKです。
+>
+> ```bash
+> bin/middleman
+> ```
+>
+> 少しだけ短くなりますね :tada:
 
 ### 執筆
 
@@ -135,7 +153,7 @@ bin/middleman
 git checkout -b something-cool
 ```
 
-Middlemanプロジェクトでは各記事のソースはMarkdown、Haml、ERB等お好きなマークアップ言語・テンプレート言語で書くことができます。
+Middlemanプロジェクトでは各記事のソースはMarkdown、Haml、ERB等お好きなマークアップ言語、テンプレート言語で書くことができます。
 middleman-blogの場合、デフォルトではMarkdownで書きます。
 
 さらに、記事を新規作成するときに、手動でソースファイルを作成する必要はありません。
@@ -159,8 +177,7 @@ $EDITOR source/<yyyy-mm-dd>-article-title-in-english.html.markdown
 
 ### レビュー環境にデプロイする
 
-記事を書き終わったら、次はレビューに出せるように、レビュー環境にデプロイしましょう。
-ソースをコミットして、GitHubのレビュー用ブランチにpushします。
+記事を書き終わったら、コミットしてGitHub上のレビュー用ブランチにpushします。
 
 ```bash
 git commit -m 'Write about something cool'
@@ -170,50 +187,66 @@ git commit -m 'Write about something cool'
 git push origin something-cool
 ```
 
-CIによりレビュー用ブランチがビルドされます。
-ビルドが成功すると、CIサービスから手動でレビュー環境にデプロイすることができます。
+GitHub上にpushすると、CIによりMiddlemanプロジェクトがビルドされます。静的サイトがエラーで生成できない、などの致命的なミスがあれば、ここでビルドエラーになります。
+ビルドが成功すると、CIサービスからレビュー環境へデプロイをすることができます。
 デプロイすると、以下のようなURLからアクセスできるようになります。
-`something-cool`部分はブランチ名に置き換わります。
 
-http://reviewing.engineer.crowdworks.jp/something-cool/
+[http://reviewing.engineer.crowdworks.jp/something-cool/](http://reviewing.engineer.crowdworks.jp/something-cool/)
 
-これで、自分だけでなくレビュワーも記事を読めるようになりました。
+`something-cool`部分は執筆中のブランチ名に置き換えてください。
+
+デプロイは基本的にCIサービス上でワンクリックすることで行います。
+
+なお、ブランチ名が以下のように各エンジニアのIDの場合、自動的にデプロイされます。執筆ブランチをfeature branchと考えると、全くいい命名ではありませんが、試してみてください。
+
+* koichiro
+* yasuda
+* nomura
+* kimi
+* tanaka
+* kuoka
+
+本当は特定のパターン(例えば、write-about-\*、fix-\*)にマッチしたブランチだけ自動的にデプロイしたいのですが、Werckerさんの対応待ちです。
 
 ### レビューに出す
 
 すでに記事がレビュー環境で読める状態になっているので、
-他のエンジニアにレビューしてもらうために、デフォルトブランチに対してGitHubのプルリクエストを作成します。
+他のエンジニアにレビューしてもらいましょう。
+レビューの場を用意するため、sourceブランチに対してプルリクエストを作成します。
+レビューはプルリクエスト上のコメントのやりとりで行いましょう。
+
 プルリクエストの作成は、例えばhubコマンドで以下のように行えます。
 
 ```bash
 hub pull-request -b source
 ```
 
-レビュイーは、レビュワーにプルリクエストのURLを通知します。
+プルリクエストを作成すると、Slackのエンジニア向けチャンネルに通知が行きます。
 レビュワーは、レビュー環境とソースを眺めつつ、コメントをつけてください。
-公開してOKなら、"LGTM"コメントをつけてください。
+公開してOKなら、[LGTM](http://www.lgtm.in/)をつけてください。
 
-### レビューする
+特にレビューして欲しいエンジニアに対しては、プルリクエストの説明文中でmentionを飛ばしておきましょう。
 
-プルリクエストに"LGTM"コメントが2つ以上ついたら公開可能です。
+### プルリクエストをマージして公開
+
+プルリクエストに[LGTM](http://www.lgtm.in/)が2つ以上ついたら公開可能です。
 公開可能なら、レビュイーまたは執筆者がプルリクエストをマージしてください。
-
-### 公開
 
 プルリクエストをマージすると、CIによって記事が自動的に公開されます。
 公開された記事は本番環境で閲覧することができます。
 
-http://engineer.crowdworks.jp/
+[http://engineer.crowdworks.jp/](http://engineer.crowdworks.jp/)
 
 ## まとめ
 
-この記事では、クラウドワークスエンジニアブログのワークフローをご説明しました。
+この記事では、クラウドワークスエンジニアブログでの記事の書き方をご説明しました。
 
-* ブログはMiddlemanで生成する静的サイト
+* ブログはMiddlemanで生成された静的サイト
+* MiddlemanプロジェクトはRuby、Markdown、Haml、SCSSで書かれている
 * 記事は好きなエディタや言語で作成する
-* GitHubでレビューする
-* git pushするとテストが自動実行
-* CIサービス上からレビュー環境へデプロイすることができる(手動)
+* GitHubへpushすると自動的にビルドされる
+* GitHubのプルリクエスト上でレビューする
+* CIサービスWerckerから、レビュー環境へ手動、自動でデプロイする
 * プルリクエストをマージすると本番環境に自動的にデプロイされる
 
-MiddlemanやGitHubを使ってブログを運用する予定がある・している方々の参考になれば幸いです。
+MiddlemanやGitHubを使ってブログを運用する予定がある、している方々の参考になれば幸いです！

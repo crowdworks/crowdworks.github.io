@@ -1,3 +1,20 @@
+require 'rack/lint'
+
+module ::Rack
+  class Lint
+    def call(env = nil)
+      @app.call(env)
+    end
+  end
+end
+
+def present(str)
+  str != nil && str != ''
+end
+
+sync_prefix = present(ENV['MIDDLEMAN_SYNC_PREFIX']) ? ENV['MIDDLEMAN_SYNC_PREFIX'] : nil
+http_prefix = present(ENV['MIDDLEMAN_HTTP_PREFIX']) ? "/#{ENV['MIDDLEMAN_HTTP_PREFIX']}" : nil
+
 Time.zone = "Tokyo"
 
 activate :livereload
@@ -18,6 +35,11 @@ helpers do
 end
 
 activate :syntax
+
+activate :emoji,
+        dir: ( http_prefix ? "#{http_prefix}" : '') + '/images/emoji',
+        width: 20,
+        height: 20
 
 set :haml, { ugly: true }
 
@@ -47,9 +69,6 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
-
-sync_prefix = ENV['MIDDLEMAN_SYNC_PREFIX'] != '' ? ENV['MIDDLEMAN_SYNC_PREFIX'] : nil
-http_prefix = ENV['MIDDLEMAN_HTTP_PREFIX'] != '' ? "/#{ENV['MIDDLEMAN_HTTP_PREFIX']}" : nil
 
 #sync_prefix = `git rev-parse --abbrev-ref HEAD`
 
