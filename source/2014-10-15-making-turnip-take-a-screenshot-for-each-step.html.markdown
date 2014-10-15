@@ -1,6 +1,6 @@
 ---
-title: Turnip のテストレポートを見やすくする技術
-date: 2014-09-11 14:36 JST
+title: Turnip のテストレポートを見やすくしてみた
+date: 2014-10-15 18:00 JST
 tags:
 - turnip
 author: Atsushi Yasuda
