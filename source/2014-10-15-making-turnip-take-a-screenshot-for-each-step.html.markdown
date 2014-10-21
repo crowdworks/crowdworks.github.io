@@ -3,21 +3,32 @@ title: Turnip のテストレポートを見やすくしてみた
 date: 2014-10-15 18:00 JST
 tags:
 - turnip
+- testing
 author: Atsushi Yasuda
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/how-to-work-turnip-og.png
+      type: image/png
+      width: 300
+      height: 176
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/how-to-work-turnip-og.png
+    type: image/png
 ---
 
 Turnipのステップ実行毎にスクリーンショット(以下SS)とレンダリングされたhtmlを記録するFormatter、[CapturefulFormatter](http://github.com/ayasuda/CapturefulFormatter)を作りました。
-本投稿では、簡単な使い方の紹介と、どのようにステップを記録しているかについて記していきます。
+本記事では、簡単な使い方の紹介と、どのようにステップを記録しているかについて記していきます。
 
 ## 背景
 
-Ruby on Railsでの受け入れテストと言えばCucumberが著名ですが、ステップ定義にて正規表現を用いる点や、RSpecとの二本立てとなっている点などがネックとなっていました。
+Ruby on Railsでの受け入れテストと言えばCucumberが著名ですが、ステップ定義にて正規表現を用いる点や、RSpecとの二本立てとなっている点などが課題となっていました。
 この２点を解決すべく生まれたのがTurnipです。Turnipの詳しい説明は [るびま42号のTurnip解説記事](http://magazine.rubyist.net/?0042-FromCucumberToTurnip) が詳しいので割愛します。
 
-しかし、テストレポートもRSpecのものに統合されたため、特にステップの失敗時のエラーメッセージがかなりわかりにくくなってしまいました。
+しかし、Turnip では、テストレポートもRSpecのものを使うため、特にステップの失敗時のエラーメッセージがかなりわかりにくくなってしまいました。
 
-下記に例を示します。
-この例では、とある画面にボタンが描画されていなかったため、ステップ実行に失敗したと予測されます。ですが、結局どんな画面だったのかはわかりません。
+下記に例を示します。とある画面にボタンが描画されていなかったため、ステップ実行に失敗したと予測されるテスト結果です。ですが、結局どんな画面だったのかはわかりません。
 
 ![turnip-error-message](how-to-work-turnip-1.png "nil なのはわかるが……")
 
@@ -29,8 +40,8 @@ javascriptによる制御が組み込まれたWebアプリケーションでは�
 
 ## CapturefulFormatter の機能
 
-CapturefulFormatterは、Turnipのステップごとに、ステップ名とスクリーンショット、描画された html を記録するFormatterです。
-現時点では最低限の機能しかありませんが、将来的にはExcelとかにステップ毎の結果を出力していけたらと考えています。
+CapturefulFormatterは、Turnipのステップごとに、ステップ名とスクリーンショット、描画されたhtmlの3つを記録するシンプルなFormatterです。
+各ステップのスクリーンショットと描画されたhtmlが保存されるため、いざバグが発生したときなど、調査がよりスムーズに行えるようになるでしょう。
 
 このFormatter使うことで、こんな感じのテストレポートが生成できます。
 
@@ -39,8 +50,8 @@ CapturefulFormatterは、Turnipのステップごとに、ステップ名とス�
 非常にわかりやすいレポートが生成されるので、エンジニアだけでなく、他部門のメンバーにもテスト結果がスムーズに共有できます。
 また、新しく参加するメンバーのためのマニュアルとしても活用できるかと思います。
 
-現時点ではレポートのテンプレート等を切り替えられませんが、近々にテンプレートなどのカスタマイズ等、提供する予定です。
-実装して欲しい機能の要望などがあれば、Githubにて提案いただければ幸いです。
+レポートのテンプレート等のカスタマイズもサポートしていますので、ユーザ独自のきれいなレポートを作成することも可能です。
+その他、実装して欲しい機能の要望などがあれば、Githubにて提案いただければ幸いです。
 
 ## CapturefulFormatter の実現方法
 
@@ -57,7 +68,7 @@ Turnipの実行記録をとるCapturefulFormatterもRSpecの機構に則るべ�
 
 `RSpec::Core::Formatters` の [RDoc](http://rubydoc.info/gems/rspec-core/RSpec/Core/Formatters) にはビルトインの各種 `Formatter` の説明と、 `CustomFormatter` の作り方について記載されています。
 これだけいろいろな通知を受け取れるということは、何か `Formatter` へを通知する共通処理があると予測できるでしょう。
-個のページを良く読むと、 `RSpec::Core::Reporter` へ[リンク](http://rubydoc.info/gems/rspec-core/RSpec/Core/Reporter) が貼られているのがわかります。
+このページを良く読むと、 `RSpec::Core::Reporter` へ[リンク](http://rubydoc.info/gems/rspec-core/RSpec/Core/Reporter) が貼られているのがわかります。
 このクラスが通知機構の実装そのものです。
 しかし、公開されているメソッドのうち、それっぽいメソッドは `report` だけであり、引き数もそれっぽくありません。
 確認するために、ソースコードを見てみましょう。
@@ -286,15 +297,15 @@ end
 ::Turnip::RSpec::Execute.send(:prepend, CapturefulFormatter::Turnip::RSpec::Execute)
 ```
 
-ここまでの2つのパッチを当てることで、自分の独自Formatterでstep前後の動きを記録できるようになりました!!
+ここまでの2つのパッチを当てることで、独自Formatterでstep前後の動きを記録できるようになりました!!
 
 CapturefulFormatterでは、単純に `Capybara.current_session.save_screenshot` を行い、SSを保存しています。
 
 ## むすび
 
-ここまで記してきたように、本投稿ではステップごとの SS を記録するFomatterの誕生理由と、その実現方法について述べてきました。
+ここまで記してきたように、本記事ではステップごとの SS を記録するFomatterの誕生理由と、その実現方法について述べてきました。
 実際のCapturefulFormatterでは、ステップごとの情報を記録した後、テスト終了時にerbをもとにレポートを作成する機能なども実装されています。
 しかし、コアとなるステップ前後のhook追加については、上記に示した二つのパッチのみで実現できるのが、おわかりいただけたでしょうか。
 
 本記事の方法を使えば、例えば上記パッチのみを `spec/support` 以下に実装することで、読者自身のCustomFormatterを定義することも簡単です。
-せっかく、わかりやすい受け入れテストの記述ができますし、スクリーンショットも簡単に撮ることができるので、読者の中にそのような要望があれば、本投稿を役立てていただければ幸いです。
+せっかく、わかりやすい受け入れテストの記述ができますし、スクリーンショットも簡単に撮ることができるので、読者の中にそのような要望があれば、本記事を役立てていただければ幸いです。
