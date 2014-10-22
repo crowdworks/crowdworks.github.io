@@ -24,7 +24,7 @@ Turnipのステップ実行毎にスクリーンショット(以下SS)とレン�
 ## 背景
 
 Ruby on Railsでの受け入れテストと言えばCucumberが著名ですが、ステップ定義にて正規表現を用いる点や、RSpecとの二本立てとなっている点などが課題となっていました。
-この２点を解決すべく生まれたのがTurnipです。Turnipの詳しい説明は [るびま42号のTurnip解説記事](http://magazine.rubyist.net/?0042-FromCucumberToTurnip) が詳しいので割愛します。
+この２点を解決すべく生まれたのがTurnipです。Turnipの詳しい説明は[るびま42号のTurnip解説記事](http://magazine.rubyist.net/?0042-FromCucumberToTurnip)が詳しいので割愛します。
 
 しかし、Turnip では、テストレポートもRSpecのものを使うため、特にステップの失敗時のエラーメッセージがかなりわかりにくくなってしまいました。
 
