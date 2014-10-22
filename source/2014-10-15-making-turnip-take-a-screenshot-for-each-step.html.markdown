@@ -56,7 +56,7 @@ CapturefulFormatterは、Turnipのステップごとに、ステップ名とス�
 ## CapturefulFormatter の実現方法
 
 CapturefulFormatterはRSpecのCustomFormatterの一つとして実装しました。
-これは、TrunipはRSpecの [エクステンション](https://github.com/jnicklas/turnip/blob/master/turnip.gemspec#L11) なので、
+これは、TurnipはRSpecの [エクステンション](https://github.com/jnicklas/turnip/blob/master/turnip.gemspec#L11) なので、
 Turnipの実行記録をとるCapturefulFormatterもRSpecの機構に則るべきだと考えたためです。
 
 実装するためには二つの課題がありました。
