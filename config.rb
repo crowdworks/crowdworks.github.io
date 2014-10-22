@@ -17,7 +17,7 @@ http_prefix = present(ENV['MIDDLEMAN_HTTP_PREFIX']) ? "/#{ENV['MIDDLEMAN_HTTP_PR
 
 Time.zone = "Tokyo"
 
-activate :livereload
+activate :livereload, host: 'localhost'
 
 activate :blog do |blog|
   blog.tag_template = "tag.html"
