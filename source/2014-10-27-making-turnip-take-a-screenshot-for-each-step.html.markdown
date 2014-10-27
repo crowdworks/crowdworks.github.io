@@ -1,6 +1,6 @@
 ---
 title: Turnip のテストレポートを見やすくしてみた
-date: 2014-10-15 18:00 JST
+date: 2014-10-27 12:00 JST
 tags:
 - turnip
 - testing
