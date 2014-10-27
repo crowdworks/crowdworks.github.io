@@ -7,9 +7,10 @@ end
 if current_branch == 'source'
   env = {}
 else
+  prefix = current_branch.gsub(/[^a-zA-Z0-9\-]/, '-')
   env = {
-    'MIDDLEMAN_SYNC_PREFIX' => current_branch,
-    'MIDDLEMAN_HTTP_PREFIX' => current_branch
+    'MIDDLEMAN_SYNC_PREFIX' => prefix,
+    'MIDDLEMAN_HTTP_PREFIX' => prefix
   }
 end
 
