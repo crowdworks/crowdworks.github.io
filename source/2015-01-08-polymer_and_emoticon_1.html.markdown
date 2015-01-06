@@ -140,8 +140,26 @@ Polymer on Rails
 まず、Bowerを直接使用するのは、RailsのAssetPipelineを考慮すると、あまりオススメはできません。
 
 polymer-railsは
+インストールが簡単
+asset pipeline に対応
+自作コンポーネントが作りやすい
+外部コンポーネントの読み込みは gem 化待ち
+
+emceeは
+コレ自体のインストールは簡単だけど、 polymer のインストールが別途必要
+asset pipeline に対応
+自作コンポーネントは作れる
+外部コンポーネントは bower で管理
+その為に bower-rails もインストールしよう
 
 polymer-rails を使う
 bower を使う
 bower-rails を使う
 の３つの選択肢があり、著者は bower-rails を推奨する
+
+参考リンク
+http://stackoverflow.com/questions/26884022/google-polymer-with-rails-4
+http://rubygems.org/gems/polymer-rails
+http://rubygems.org/gems/emcee
+http://joshhuckabee.com/getting-started-polymer-ruby-rails
+https://coderwall.com/p/99oshq/how-to-integrate-webcomponents-and-other-assets-into-rails-4

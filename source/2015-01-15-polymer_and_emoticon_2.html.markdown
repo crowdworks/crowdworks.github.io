@@ -44,4 +44,11 @@ Polymerを使用すると、まるでDOM要素のような自作の要素を作�
 1. Polymer core をロードします
 2. 新しい要素名を `<polymer-element>` を使って宣言します。
 
+早速、 elements/sample.html を作ってみましょう
 
+サンプルソース
+
+<polymer-element> の name 属性で名前を設定
+スクリプトを使うか否か。
+<template>の説明
+<script>の説明
