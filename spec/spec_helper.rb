@@ -22,10 +22,3 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
 end
-
-module Sauce
-  class Connect
-    remove_const :TIMEOUT if defined? TIMEOUT
-    TIMEOUT = 60
-  end
-end

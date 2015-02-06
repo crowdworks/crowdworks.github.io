@@ -13,3 +13,7 @@ Sauce.config do |c|
   ]
   c[:idle_timeout] = 120
 end
+
+# @see http://qiita.com/oh_rusty_nail/items/c04ed0deba902443a9cd
+require 'sauce/connect'
+Sauce::Connect::TIMEOUT = 270
