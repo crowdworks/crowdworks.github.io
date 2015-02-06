@@ -17,8 +17,8 @@ gem "redcarpet"
 
 group :test do
   gem 'rspec', '~> 3.0.0'
-  gem 'sauce', '~> 3.4.9'
-  gem 'sauce-connect', '~> 3.4.1'
+  gem 'sauce', '~> 3.5.0'
+  gem 'sauce-connect', '~> 3.5.0'
   gem 'capybara', '~> 2.4.1'
   gem 'parallel_tests'
 end
