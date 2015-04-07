@@ -6,12 +6,16 @@
 
 # Ignore bundler config
 /.bundle
+/vendor/bundle/
 
 # Ignore the build directory
 /build
 
 # Ignore Sass' cache
 /.sass-cache
+
+# Ignore Ruby version config for rbenv and rvm
+.ruby-version
 
 *~
 
