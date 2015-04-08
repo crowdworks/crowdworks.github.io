@@ -12,6 +12,7 @@ ogp:
       type: image/jpeg
       width: 1200
       height: 630
+    description: クラウドワークスでは従来のインターンシップに加え、エンジニア向けの短期インターンシップを開催します。
 atom:
   image:
     url: http://engineer.crowdworks.jp/images/2015/04/engineer-intern/cover.jpg
