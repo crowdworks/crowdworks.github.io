@@ -9,6 +9,11 @@ build:
     - script:
         name: rspec
         code: bundle exec rspec
+  after-steps:
+    - sherzberg/slack-notify:
+        subdomain: $SLACK_SUBDOMAIN
+        token: $SLACK_TOKEN
+        channel: "$SLACK_CHANNEL"
 deploy :
   steps :
     - add-ssh-key:
@@ -22,3 +27,8 @@ deploy :
     - script:
         name: deploy
         code: bundle exec rake deploy
+  after-steps:
+    - sherzberg/slack-notify:
+        subdomain: $SLACK_SUBDOMAIN
+        token: $SLACK_TOKEN
+        channel: "$SLACK_CHANNEL"
