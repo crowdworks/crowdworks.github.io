@@ -1,0 +1,131 @@
+---
+title: 社内LT大会を開催しました！
+date: 2015-05-12 10:00 JST
+tags: lt
+gravatar: tatsuya.itakura@crowdworks.co.jp
+author: Tatsuya Itakura
+twitter_id: itkrt2y
+ogp:
+  og:
+    image:
+      '': https://c1.staticflickr.com/9/8798/17024999056_a3c76eb40a_h.jpg
+      type: image/png
+      width: 400
+      height: 400
+---
+
+はじめまして！
+
+今年1月にクラウドワークスにジョインした、日本酒エンジニアとして絶賛売り込み中の板倉（[@itkrt2y](https://twitter.com/itkrt2y)）と申します。よろしくお願いします:punch::smile:
+
+さて、クラウドワークスはおかげさまで現在急成長しておりまして、エンジニア数も半年経たずして5倍以上に増えております。
+人数が増えて勢いが増しているのは喜ばしいことですが、反面、個々人のバックグラウンドや大切にしていることなどが見えにくくなり始めていました。
+
+そこで、この度エンジニア・デザイナー陣の交流の場を作るためにクラウドワークス全エンジニア・デザイナーによるLT大会を開催しました！
+
+## そもそもLTって？
+
+LTとはライトニングトーク（Lightning Talks）の略で、5分程度の短い時間の発表のことを言います。
+あえて時間を短く限定することで、発表者・聴衆ともに低いハードルで発表をする、または聞くことができるスタイルとして、技術カンファレンスなどで広く行われています。
+
+## 発表テーマ
+
+### エンジニアとしての私
+
+皆さんの好きな技術、やってきたこと、大事にしていること、いつも心がけていることを発表してもらいました。
+
+## 発表順決めは我らがRubyで！
+
+発表順は公平を期すためランダムにしました。
+また、ランダム抽出するスクリプト作成は[沢田さん](https://twitter.com/cesare)が一瞬でやってくださいました。
+
+```ruby
+members = %w(foo bar hoge).shuffle.each  # => #<Enumerator: ...>
+members.next # => bar
+members.next # => hoge
+members.next # => foo
+members.next # => StopIteration: iteration reached an end
+```
+
+## 発表風景
+
+我らがエンジニア、デザイナー陣:punch:
+![参加者](https://c1.staticflickr.com/9/8798/17024999056_ea6765f86e.jpg)
+
+今回の幹事の安西さん。2月入社ながらも既にクラウドワークスの中核を担っています:+1:
+![安西さん](https://c1.staticflickr.com/9/8783/17050173951_a1c72980ca.jpg)
+
+タイムキーパーをやってくれたインターンの笠井さん。後ろには:beers:
+![笠井さん](https://c2.staticflickr.com/8/7637/16428559394_8b17e5b50f.jpg)
+
+カメラマン兼CTOの大場さん:v:
+![CTO](https://c2.staticflickr.com/8/7674/17050171531_45278c9afe.jpg)
+
+今回のためになんとわざわざ鳥取から来てくださった坂口さん:laughing:
+![坂口さん](https://c1.staticflickr.com/9/8772/17024991456_d33dcc0838.jpg)
+
+蒼樹うめ酒をもってきてくれた福島さん:yum:
+![福島さん](https://c1.staticflickr.com/9/8758/16428551734_fc8befdf42.jpg)
+
+ジョインしてすぐの割と無茶振りだったにもかかわらず、素晴らしい発表をしてくれたインターンの玉木さんと屋富祖さん:clap:
+
+![玉木さん](https://c1.staticflickr.com/9/8701/16843579687_ccc8c56d45.jpg)
+![屋富祖さん](https://c1.staticflickr.com/9/8761/16864770359_24aa1c69c2.jpg)
+
+などなど、盛り沢山な発表となりました。
+
+## 僕が選ぶよかった発表3選！！
+
+- I <3 bugs!!
+
+- ふくしまさん＠がんばらない
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/pqwlMuqwFOiNe5" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>
+
+- 中学二年生の世界観
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/2QQCe1jZ9CelZU" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>
+
+
+## 意見・質問はSlackで
+
+感想・質問などの反応があるとモチベーション上がるので、Slackに専用のチャンネルを作ってそこでやりとりしました。Twitterみたいなノリで意見交換できて面白かった！
+
+![](engineer_lt/slack.png)
+
+## 酒
+
+写真撮りそびれましたが、持ち寄りの:sake:がとてもよかった。
+次のLT大会ではもっと色んな:sake:を揃えたい！
+
+## この会を続けていくためにKPTを実施
+
+KPTを実施して、次への課題を洗い出しました。
+僕が個人的に良いな、と思ったものを抜粋します。
+
+- Keep（次回もやりたいこと）
+    - みんな発表したこと
+    - Slackへの書き込み奨励による盛り上がり感
+    - 個々のエンジニアの大切していることを垣間見れたこと
+    - 十分な食事で食事難民が出なかった
+    - 酒がうまい
+- Problem（課題）
+    - 発表の間に微妙な間がある
+    - 食べ物・飲み物をとりに行きづらいので真ん中に食事テーブル配置する
+    - Slackへの書き込みもよいのですが、どうしても書くことに気をとられて発表者へ視線が向かないことがある
+    - 月曜に飲みすぎると次の日メンタル死ぬ（僕のみ）
+- Try（挑戦したいこと）
+    - 継続的に運用できる仕組みを考える
+    - LTしたことないメンバーもいたので、LTスライド作成のコツみたいなレクチャーが事前にあってもよかったかも？
+    - 別プロジェクターでのSlack実況投影次回こそは！
+
+## 次回は6/5！
+
+次も頑張ろ( ˘ω˘)
+
+## 最後に
+
+クラウドワークスでは現在エンジニアを全力採用しております！
+プログラミングが好きでクラウドソーシングに可能性を感じているディスプレイ前のあなた！
+
+**[ぜひ一緒に働きましょう！](https://crowdworks.co.jp/recruit/engineer/)**
