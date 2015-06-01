@@ -5,7 +5,6 @@ tags:
 author: SAWADA Tadashi
 twitter_id: cesare
 gravatar: cesare@mayverse.jp
-published: false
 ogp:
   og:
     image:
@@ -18,6 +17,7 @@ atom:
   image:
     url: http://engineer.crowdworks.jp/images/2015/06/sezemi-events/suto-san.png
     type: image/jpeg
+published: true
 ---
 
 こんにちは！2015年1月からクラウドワークスでプログラマーとして活動している[沢田](https://github.com/cesare)と申します。
