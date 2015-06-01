@@ -1,6 +1,6 @@
 ---
 title: 【お知らせ】SEゼミ主催イベントに協賛します
-date: 2015-05-28 09:00 JST
+date: 2015-06-01 09:00 JST
 tags:
 author: SAWADA Tadashi
 twitter_id: cesare
