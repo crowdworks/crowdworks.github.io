@@ -12,7 +12,7 @@ ogp:
       type: image/jpeg
       width: 1024
       height: 683
-    description: クラウドワークスでは従来のUX改善インターンシップに加え、エンジニア向けの短期インターンシップを開催します。
+    description: SEゼミさん主催の技術イベントに協賛することになりましたので、ご紹介します。
 atom:
   image:
     url: http://engineer.crowdworks.jp/images/2015/06/sezemi-events/suto-san.png
