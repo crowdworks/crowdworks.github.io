@@ -6,6 +6,18 @@ author: SAWADA Tadashi
 twitter_id: cesare
 gravatar: cesare@mayverse.jp
 published: false
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/2015/06/sezemi-events/suto-san.jpg
+      type: image/jpeg
+      width: 1024
+      height: 683
+    description: クラウドワークスでは従来のUX改善インターンシップに加え、エンジニア向けの短期インターンシップを開催します。
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/2015/06/sezemi-events/suto-san.png
+    type: image/jpeg
 ---
 
 こんにちは！2015年1月からクラウドワークスでプログラマーとして活動している[沢田](https://github.com/cesare)と申します。
@@ -20,6 +32,8 @@ published: false
 イベントの詳細や参加申し込みについては、上記のリンク先をご確認ください。
 
 READMORE
+
+![講師の須藤さん](2015/06/sezemi-events/suto-san.jpg)
 
 これらの一連のイベントはオープンソース・ソフトウェアにコードを貢献するまでの作業や手順をひと通り体験してもらうのがゴールになっています。  
 そのための下準備として、[リーダブルコード勉強会](http://www.seplus.jp/sezemi/)で読みやすいコードの書き方を、[GitHub勉強会](http://www.seplus.jp/sezemi/github)で Git や GitHub の使い方を、[OSS Hack 4 Beginners](http://www.seplus.jp/sezemi/4beginners)でオープンソースへ貢献する作法を学んで、ラストの[OSS Hack Weekend](http://www.seplus.jp/sezemi/ohw)で実際にオープンソースのソフトウェアに Pull Request を出すという流れになります。
