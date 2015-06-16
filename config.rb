@@ -36,10 +36,7 @@ end
 
 activate :syntax
 
-activate :emoji,
-        dir: ( http_prefix ? "#{http_prefix}" : '') + '/images/emoji',
-        width: 20,
-        height: 20
+activate :gemoji, size: 20, style: 'vertical-align: middle'
 
 set :haml, { ugly: true }
 
