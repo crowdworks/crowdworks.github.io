@@ -8,6 +8,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
+    ansi (1.5.0)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -25,7 +26,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    colorize (0.7.3)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -44,32 +44,27 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
     eventmachine (1.0.7)
-    excon (0.38.0)
+    excon (0.45.4)
     execjs (2.5.2)
     ffi (1.9.8)
-    fog (1.23.0)
-      fog-brightbox
-      fog-core (~> 1.23)
-      fog-json
-      fog-softlayer
-      ipaddress (~> 0.5)
-      nokogiri (~> 1.5, >= 1.5.11)
-    fog-brightbox (0.1.1)
-      fog-core (~> 1.22)
-      fog-json
-      inflecto
-    fog-core (1.23.0)
+    fog-aws (0.7.6)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-core (1.32.1)
       builder
-      excon (~> 0.38)
+      excon (~> 0.45)
       formatador (~> 0.2)
       mime-types
       net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
-    fog-json (1.0.0)
-      multi_json (~> 1.0)
-    fog-softlayer (0.3.10)
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-xml (0.1.2)
       fog-core
-      fog-json
+      nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
     gemoji (2.1.0)
     haml (4.0.6)
@@ -81,7 +76,6 @@ GEM
       uber (~> 0.0.4)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.2)
     kramdown (1.7.0)
@@ -89,7 +83,7 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    map (6.5.4)
+    map (6.5.5)
     middleman (3.3.12)
       coffee-script (~> 2.2)
       compass (>= 1.0.0, < 2.0.0)
@@ -133,9 +127,9 @@ GEM
       rack-livereload (~> 0.3.15)
     middleman-ogp (1.0.4)
       middleman-core (~> 3.2)
-    middleman-s3_sync (3.0.30)
-      colorize
-      fog (>= 1.10.1)
+    middleman-s3_sync (3.0.47)
+      ansi (~> 1.5.0)
+      fog-aws (>= 0.1.1)
       map
       middleman-core (>= 3.0.0)
       pmap
@@ -173,7 +167,7 @@ GEM
     parallel (1.3.3)
     parallel_tests (1.0.6)
       parallel
-    pmap (1.0.1)
+    pmap (1.0.2)
     ptools (1.2.4)
     rack (1.6.1)
     rack-livereload (0.3.15)
@@ -201,7 +195,7 @@ GEM
     rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
-    ruby-progressbar (1.5.1)
+    ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     sass (3.4.14)
     sauce (3.5.4)
@@ -249,7 +243,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     websocket (1.2.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -267,7 +261,7 @@ DEPENDENCIES
   middleman-google-analytics (~> 1.0.2)
   middleman-livereload (~> 3.3.4)
   middleman-ogp (~> 1.0.4)
-  middleman-s3_sync (~> 3.0.30)
+  middleman-s3_sync (~> 3.0.40)
   middleman-syntax
   nokogiri
   parallel_tests
@@ -278,4 +272,4 @@ DEPENDENCIES
   sauce-connect (~> 3.5.0)
 
 BUNDLED WITH
-   1.10.3
+   1.10.5
