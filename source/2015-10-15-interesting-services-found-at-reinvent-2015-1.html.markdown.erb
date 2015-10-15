@@ -1,0 +1,77 @@
+---
+title: AWS re:Invent 2015で見つけた注目サービスまとめ（前編） #reinvent
+date: 2015-10-15 09:00 JST
+tags:
+  - aws
+  - reinvent
+author: Yusuke Kuoka
+twitter_id: mumoshu
+gravatar: ykuoka@gmail.com
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+      type: image/jpeg
+      width: 1080
+      height: 1080
+    description: クラウドワークスのエンジニアが単身AWS re:Invent 2015に参戦してきました。あまり情報がない、re:Inventに協賛している企業のサービスのうち、個人的に注目したいものをピックアップしてまとめます。
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+    type: image/jpeg
+published: true
+---
+
+[最近、タスク形式の手数料を無料化したクラウドワークス](http://thebridge.jp/2015/10/crowdworks-reveals-open-platform-strategy)のエンジニア 九岡です :smile: [先日、re:Invent 2015に参加してきましたが](2015-10-14-reinvent-2015.html)、そこでいくつか個人的に注目のサービスを見つけたので、共有します。
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## Vivid Cortex
+
+[Vivid Cortext](https://www.vividcortex.com/)は、
+
+* MySQL
+* PostgreSQL
+* Redis
+* MongoDB
+
+などのデータベースのモニタリングサービスです。
+データベースのモニタリングサービス、と銘打っているだけあって、DBサーバ等のリソース監視、[メトリクスがしきい値を超えた場合のアラート](https://docs.vividcortex.com/how-to-use-vividcortex/incidents/#incident-groupings)などの基本的な機能の他、[クエリの分析機能](https://docs.vividcortex.com/how-to-use-vividcortex/top-queries/)が充実しているようです。クラウドワークスではAPMとしてNewRelicを使っていて、そこではWebアプリケーションのアクション毎に関連するクエリを分析することはできますが、クエリ毎の分析はできないので（データベースモニタリングのためのサービスではないので当然ですが）、使い分けができそうです。
+
+また、クラウドワークスではAmazon RDS上のMySQLを使うことが多いですが、[Vivid CortexのIntroduction](https://docs.vividcortex.com/)を読む限り、対象ホストにエージェントをインストールする必要があるタイプなので、RDSでは使えないなぁ…と思っていたのですが、昨年末にRDSに対応したようです。
+
+[VividCortex Now Supports Amazon RDS For MySQL - VividCortex](https://www.vividcortex.com/blog/2014/11/12/vividcortex-now-supports-amazon-rds-for-mysql/)
+
+## Cloud.IQ
+
+[Cloud.IQ](http://www.cloud-iq.com/)はcart recovery and convertion expertsのためのサービスです。
+cartというのはshopping cartのことで、cart recoveryというのは、ECサイトのショッピングカートに商品が残ったままユーザが離脱してしまうことを防ぐことを意味しているようです。
+具体的にはサイト上のオーバーレイとE-mailによって、ECサイトの売上を10%向上させる…という触れ込みです。
+
+Webマーケティングに詳しい方ならご存知かもしれないのですが、個人的にとても目新しく映ったサービスです。
+Optimizelyみたいに、一般的なWebサイトのコンバージョンを改善するためのツールの存在は知っていたのですが、ECサイトの特化したマーケティング・セールス用のWebサービスは初めて見ました。[shopifyなどの著名なECサイト作成サービスや、MailChimpのようなマーケティングメールサービスなどとも連携できる](http://www.cloud-iq.com/partners)ようです。
+
+* Site Analytics（ユーザの離脱によってどれだけコストがかかっているかを分析する）
+* On-site Remarketing（ユーザのカーソル操作などまで見て表示される動的オーバーレイによってユーザの離脱を防ぐ）
+* Off-site Remarketing（マーケティングメールによって離脱したユーザに復帰していただく）
+* Optimization（WebサイトやマーケティングメールのA/Bテスト）
+
+のような様々な子サービスによって構成されています。
+クラウドワークスそのもののサービス開発では部分的にしか使い道はなさそうですが・・・ECサイトを運営する場合にワンストップ型のソリューションを提供してくれるという意味ではよさそうです。
+
+## ScaleArc
+
+[ScaleArc](http://scalearc.com/)は、SQL ServerやOracle、MySQLなどのデータベース向けの可用性、Zero-Downtime、Automatic Fail-Overを実現するサービスで、RDSにも対応しています。
+
+* [データベースの負荷が上昇したときに、クエリを一時的にためておくSurge Queue](http://scalearc.com/how-it-works/availability-features/surge-queue)
+* [レプリカラグに応じて読み取りクエリをセカンダリデータベースにルーティングしたり](http://scalearc.com/how-it-works/availability-features/read-write-split)
+* [レスポンスタイムが短いデータベースへクエリをルーティング](http://scalearc.com/how-it-works/availability-features/dynamic-load-balancing)
+* [キーのパターンや範囲によるシャーディング](http://scalearc.com/how-it-works/performance/query-routing-and-sharding)
+
+などをアプリケーションから透過的に実現してくれるプロキシになっているようです。
+
+[Marketplaceで見る限り費用感は年間5,000ドルくらい](https://aws.amazon.com/marketplace/seller-profile?id=3075b280-1379-46a8-bac3-60f50720294e)なようなので、マルチマスタ構成のMySQLクラスタ(というかPercona XtraDBクラスタ)やMariaDB Galera Cluster、そしてそれらに負荷分散（結果的に可用性も向上）するためのHAProxyクラスタを自前で組んだりメンテするくらいなら、RDSとScaleArcを使う…という選択肢はあるのでしょうか？そもそもこれらのマルチマスタ構成と比較できるものなのかも不明なので、識者のご意見を伺いたいですね！
+
+中編に続きます。
