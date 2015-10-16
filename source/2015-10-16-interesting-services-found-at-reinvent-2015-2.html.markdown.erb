@@ -1,0 +1,60 @@
+---
+title: AWS re:Invent 2015で見つけた注目サービスまとめ（中編） #reinvent
+date: 2015-10-16 09:00 JST
+tags:
+  - aws
+  - reinvent
+author: Yusuke Kuoka
+twitter_id: mumoshu
+gravatar: ykuoka@gmail.com
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+      type: image/jpeg
+      width: 1080
+      height: 1080
+    description: クラウドワークスのエンジニアが単身AWS re:Invent 2015に参戦してきました。あまり情報がない、re:Inventに協賛している企業のサービスのうち、個人的に注目したいものをピックアップしてまとめます（中編）。
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+    type: image/jpeg
+published: true
+---
+
+今更ですが最近bash芸にはまりつつあるエンジニアの九岡です。bashで連想配列を使ったオブジェクト指向プログラミングをやろう！と思ったら、Macのbashは連想配列に未対応のバージョン3系…。個人的にbashに期待しているポータビリティが損なわれてしまうので諦めました。:sweat: それでは、[昨日に引き続き、re:Invent 2015に参加した際に見つけた注目サービス](2015-10-15-interesting-services-found-at-reinvent-1.html)の続編をお届けします！
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## AppNeta
+
+[AppNeta](http://www.appneta.com/)はWebアプリケーション向けのフルスタックのモニタリングサービスです。
+
+* Webアプリケーション向けのパフォーマンスモニタリングサービスTraceView
+* 合成監視（Synthetic Monitoring）サービスAppView
+* ネットワークのトラフィック分析サービスFlowView
+* ネットワークのエラーモニタリングサービスPathView
+
+などの機能を提供しています。
+
+恐らく最も使われそうなTraceViewは、Webアプリ向けのいわゆるAPMです。アプリケーションサーバ視点のレスポンスタイムの内訳（アプリケーションサーバ、フレームワーク、データベースアクセス）や、エンドユーザ視点でのレスポンスタイムの内訳（ネットワーク、サーバ、DOM処理、ページレンダリングにかかった時間）などを、リクエストからドリルダウンすることで、パフォーマンスチューニングの参考になる情報を得ることができます。
+
+AppViewはWebサイトのパフォーマンスをユーザ目線で監視することができます。具体的には、Seleniumのテストシナリオ（ワークフローと呼ばれているようです）のようなものを作成、それを様々なリージョンから定期実行して、各ページにおいてどの国からアクセスしたとき何にどれくらいの時間がかかったのか、を分析することができます。サービスが海外展開したとき、リージョンをまたがるようなパフォーマンス上の問題を発見するような場合にも使えそうです。
+
+クラウドワークスではAPMとしてNewRelicを使っているのですが、AppNetaはNewRelicが提供しているような機能を一通り提供しているようです。TraceViewはNewRelic APM、AppViewはNewRelic Syntheticsに対応していると思われます。FlowViewとPathViewのようなネットワークのモニタリングも必要、ということになったらAppNetaに移行するのもありかもしれません。
+
+## Ruxit
+
+[Ruxit](https://ruxit.com/)はNewRelicやAppNeta同様、Webアプリケーション向けのパフォーマンスモニタリングサービスです。基本的な機能はAPM、合成監視で特筆すべきものはなさそうなのですが、障害発生時に原因を提案してくれる機能が面白いです。また、NewRelicやAppNetaとは違って1ホスト/1時間単位の課金なので、オートスケーリングを多用するような環境だとコスト削減効果がありそうです。
+
+## Batchly
+
+[Batchly](http://www.batchly.net/)は、画像処理や動画変換などをはじめとするバッチ処理を行うためのAWSリソースを効率的にプロビジョニングしてくれるサービスです。バッチ処理向け、という切り口が個人的には目新しいです。
+
+AWSアカウントを接続して、リージョン、VPC、VPCサブネットとSLA(最大所要時間やコスト)、処理内容を指定すると、最もコスト対効果の高いインスタンスタイプを選んでスポットインスタンスを作成、監視、エラーハンドリングを行ない、SLAを担保しつつインフラ費用を抑える…ということをやってくれるようです。
+
+スポットインスタンスを使ってバッチ処理の仕組みを組むということ自体は難しくないと思いますが、[ケーススタディ](http://www.batchly.net/files/Batchly-OCR-Processing-Case-Study.pdf)を読む限りでは費用対効果が最大になるようなアルゴリズムを持っているところが強みなようです。
+
+後編に続きます。
