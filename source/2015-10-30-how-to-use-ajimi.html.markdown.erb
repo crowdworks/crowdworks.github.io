@@ -1,0 +1,395 @@
+---
+title: サーバ設定diffツールAjimi入門 #ajimi
+date: 2015-10-30 09:00 JST
+tags:
+  - ajimi
+author: Masayuki Morita
+twitter_id: minamijoyo
+gravatar: minamijoyo@gmail.com
+published: true
+---
+
+こんにちは。缶コーヒーを愛してやまないクラウドワークスのエンジニア森田です。
+
+Infrastructure as Code と叫ばれて久しいですが、現実はそんなに単純な話ばかりじゃないですよね(´・ω・`)
+
+新規に立てるサーバで設定内容が自明であればよいんですけれども、
+既に本番運用されており、温かみのある職人の手仕事によって維持管理されているサーバってありますよね？
+
+管理者が一人ならまだしも、複数人で設定変更したりしてると、どのような設定が入っているのかがブラックボックスで、
+それを後からコードに置き換えるには困難が伴います。
+
+この「既存のサーバ」と「コードで生成したサーバ」のファイルシステム全体の差分を効率的に調査する目的で、
+任意の2つのサーバ設定を比較するAjimiという便利ツールを作ったのでご紹介します。
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## はじめに
+
+サーバ構築をコードに置き換えていく作業は、
+[Chef](https://www.chef.io/)や[Ansible](http://www.ansible.com/)などのプロビジョニングツールを使って、
+必要なソフトウェアのインストールと設定ファイルの配置などの作業を1つずつコードにしていきます。
+クラウドワークスではサーバのプロビジョニングツールにChefを利用しています。
+
+書いたコードで正しくセットアップできるかは、
+[test-kitchen](http://kitchen.ci/)や[serverspec](http://serverspec.org/)などを利用することで、
+テスト作業を自動化できます。
+
+で、何の設定を入れればこの作業は完成なのでしょうか？既存サーバからコードへの置き換えの場合、往々にしてこのALLが分からないのが最大の問題です。
+その答えを得るためには既に運用されている既存サーバと設定を比較する必要があります。
+サーバ設定の比較と言っても、何の設定が入っているかわからないので、ファイルシステム全体を調査する必要があります。
+
+容易に想像がつくと思いますが、単純にファイルシステム全量の数十万ファイルをdiffでぶつけると、差分量が多すぎて目視でチェックするのは現実的ではありません。
+ログや一時ファイルなどで無視してよい差分もあるし、ホスト名などで差分になることが自明な設定もあるからです。
+
+## 要件整理
+ちょっとこの辺で要件を整理してみます。
+ぼくのかんがええたさいきょうのサーバ設定diffツールの要件は以下のとおりです。
+
+* 背景
+  * 既存のサーバをChefのcookbookのコードに置き換えたい
+  * 既存のサーバは職人の手作業で丹精込めて作られた秘伝のタレなので、取りこぼしがないか効率的に差分チェックしたい
+* やりたいこと
+  * 指定した2つのサーバ間の設定の差分をいいかんじに比較する
+* いいかんじとは？
+  * ファイルシステム全体の差分を調査対象とする
+  * 指定のディレクトリ配下や指定のファイルの差分を無視できる
+  * 指定のファイルの既知の差分を無視できる
+      * ホスト名などノード固有の情報が差分になることが分かっているものがある
+  * 無視対象リスト自体をgitでバージョン管理したいので、無視対象リストは外部ファイルで管理できる
+  * 単純な無視と、差分として認知したけど未解決のpendingを区別して管理できる
+  * 全量の差分をいきなり出すと目視で確認しきれないので、ディレクトリの階層レベル、ファイル名レベル、ファイル内容レベルのdiffを使い分けられるようにする
+  * あとでCIと統合しやすいようにCLIツール
+      * ツールのインストール環境はMac or Linuxを想定(さしあたりMacで動けばよい)
+      * チェック対象サーバはLinuxを想定(さしあたりAmazon Linuxで動けばよい)
+  * クリーン
+      * ツールはローカルにインストールし、対象サーバにSSH鍵認証してsudoができれば使える
+      * 対象サーバではリードオンリーで中間ファイルなどのゴミを生成しない
+      * オンメモリでローカルにもファイルをダウンロードしない
+  * 低負荷
+      * 稼働中のサーバでも動かしたいので極力低負荷にしたい
+      * md5sumでチェックサムを取ると重くなるので、差分の検知はfindでファイルのパス/オーナー/パーミッション/サイズの差分が検知できれば、ほとんどのケースでは問題ない
+
+## 作ったもの
+欲しいものがなければ作ればいいじゃないというわけで、Ajimiというツールを作りました。
+
+[crowdworks/ajimi](https://github.com/crowdworks/ajimi)
+
+それでは、さっそくAjimiを使ってChefがcookした鯖の味見をしてみましょう。
+
+※単に言ってみたかっただけなので、特にChefでプロビジョニングしたかどうかに限らず使えます。
+
+また、この記事は、本稿執筆時点のajimi v0.2.0を対象にしています。
+最新の情報は上記のGitHubのREADMEを参照して下さい。
+
+## インストール
+
+Ajimiはgemとして公開してあるので、手元のPCで以下のコマンドでインストールできます。
+
+```bash
+$ gem install ajimi
+```
+
+## 初期設定
+
+操作はすべて手元のPCで実行します。
+以降の説明でコマンドを実行する箇所は、比較対象のサーバではなく、手元のPCで実行して下さい。
+
+インストールしたら、まず設定ファイルの雛形を `ajimi-init` コマンドで作ります。
+
+```bash
+$ ajimi-init
+```
+
+カレントディレクトリに `Ajimifile` という設定ファイルができるので、適当なエディタで開いて下さい。
+デフォルトで設定のサンプルが記載されています。
+
+`Ajimifile` は、とりあえず最低限 `source` と `target` の接続設定ができていれば、
+その他の無視リストなどは、後から徐々に育てていく感じになるので、
+はじめの一歩として `Ajimifile` を以下のように設定してみました。
+
+設定値の各意味は後述しますが、`source` と `target` のところに適当なサーバ名と `ssh_options` のところに接続先IP(またはFQDN)、ユーザ名、SSH鍵のパスを指定して下さい。
+
+```ruby
+source "app1.example.com", {
+  ssh_options: {
+    host: "XXX.XXX.XXX.XXX",
+    user: "morita",
+    key: "~/.ssh/id_rsa"
+  },
+  enable_nice: true
+}
+
+target "app2.example.com", {
+  ssh_options: {
+    host: "YYY.YYY.YYY.YYY",
+    user: "morita",
+    key: "~/.ssh/id_rsa"
+  },
+  enable_nice: true
+}
+
+check_root_path "/"
+
+pruned_paths [
+  "/dev",
+  "/proc",
+]
+
+ignored_paths [
+  *@config[:pruned_paths],
+]
+
+ignored_contents ({
+})
+
+pending_paths [
+]
+
+pending_contents ({
+})
+```
+
+接続設定ができたら、とりあえずSSHが繋がるか接続テストをしてみましょう。
+デバッグ用に`ajimi exec` という任意のコマンドを実行するサブコマンドがあるので、試しに以下のコマンドを実行してみましょう。
+
+```
+$ ajimi exec source hostname
+Execute command at source_host: XXX.XXX.XXX.XXX
+app1.example.com
+
+$ ajimi exec target hostname
+Execute command at target_host: YYY.YYY.YYY.YYY
+app2.example.com
+```
+
+それぞれのサーバで `hostname` コマンドの出力結果が表示されれば接続設定は問題ありません。
+接続エラーが出る場合は、ユーザや鍵の情報が正しいかを確認して下さい。
+
+接続が問題なければ、本題の差分チェックに進みます。
+
+## 味見する
+
+差分調査の全体的な流れを先に説明して、細かな設定ファイルの書き方などは後述します。
+
+`ajimi` コマンドに `-d` オプションを付けて、まずはチェックするディレクトリの階層を3階層めまでに深さを制限して実行してみます。
+これは適切な無視設定がされていない状態で、いきなり全量チェックすると大量の差分が出てしまうためです。
+
+```bash
+$ ajimi -d 3 > ajimi.log
+```
+
+実行結果は以下のように出力されます。出力量が多いため、適当に省略しています。
+
+```
+Start ajimi check with options: { (オプションの指定のdump略) }
+Finding...: XXX.XXX.XXX.XXX
+Finding...: YYY.YYY.YYY.YYY
+Checking diff entries...
+Checking ignored_paths and pending_paths...
+Diffs empty?: false
+
+###### diff entries report ######
+--- XXX.XXX.XXX.XXX
++++ YYY.YYY.YYY.YYY
+
+- 12 /bin/cpio, -rwxr-xr-x, root, root, 129832
++ 16 /bin/cpio, -rwxr-xr-x, root, root, 129912
+- 17 /bin/dbus-daemon, -rwxr-xr-x, root, root, 403480
++ 21 /bin/dbus-daemon, -rwxr-xr-x, root, root, 403416
+- 29 /bin/egrep, -rwxr-xr-x, root, root, 102456
++ 33 /bin/egrep, -rwxr-xr-x, root, root, 103240
+- 33 /bin/fgrep, -rwxr-xr-x, root, root, 66168
++ 37 /bin/fgrep, -rwxr-xr-x, root, root, 69176
+(略)
+- 330 /etc/hosts, -rw-r--r--, root, root, 463
++ 396 /etc/hosts, -rw-r--r--, root, root, 537
+- 340 /etc/httpd/ports.conf, -rw-r--r--, root, root, 129
++ 406 /etc/httpd/ports.conf, -rw-r--r--, root, root, 148
+(略)
+- 1794 /tmp/nginx/0, drwx------, nginx, nginx, 4096
+- 1795 /tmp/nginx/1, drwx------, nginx, nginx, 4096
+- 1796 /tmp/nginx/2, drwx------, nginx, nginx, 4096
+- 1798 /tmp/nginx/4, drwx------, nginx, nginx, 4096
+(略)
+
+###### diff contents report ######
+check_contents was skipped (enable_check_contents = false)
+
+###### diff summary report ######
+source: 4560 files
+target: 3961 files
+ignored_by_path: 12 files
+pending_by_path: 0 files
+ignored_by_content: 0 files
+pending_by_content: 0 files
+diff: 1059 files
+```
+
+`diff entries report` セクションのところにファイルパスの差分が並んでるので、
+たとえば `/tmp` など無視して良さそうなディレクトリを見つけて `Ajimifile` の `pruned_paths` の設定に追加していきます。
+設定ファイルのフォーマットは後述しますが、無視してよいディレクトリのリストとして並べていきます。
+出力量を見ながら徐々にチェックする階層を増やして、調査範囲を広げていきます。
+
+```bash
+$ ajimi -d 4 > ajimi.log
+```
+
+`Ajimifile` の設定で、パスの差分の無視の仕方には `pruned_paths` の他に  `ignored_paths` と `pending_paths` があり、それぞれ若干意味が異なります。
+
+* `pruned_paths` : 調査対象から除外するもの
+* `ignored_paths` : 差分として検知したが、既知の差分として恒久的に無視してよいもの
+* `pending_paths` : 差分として検知したが、なんらか修正が必要ですぐに対応できず、一時的にdiff出力結果を抑止したいもの
+
+`-d` オプション指定なしですべての階層をチェックできるようになったら、
+`-c` オプションを付けて、ファイルの中身の差分もチェックします。
+ファイルの中身の比較は、差分のファイル数が大量にあると膨大な出力になるので、
+可能な限りファイルのパスレベルで無駄なものを除外してから有効にして下さい。
+
+```bash
+$ ajimi -c > ajimi.log
+```
+
+ファイルの中身の差分は `diff contents report` セクションに出力されます。
+左の数字はファイル内の行番号です。
+
+```
+(略)
+###### diff contents report ######
+--- XXX.XXX.XXX.XXX: /etc/postfix/main.cf
++++ YYY.YYY.YYY.YYY: /etc/postfix/main.cf
+
+- 5 myhostname = app1.example.com
++ 5 myhostname = app2.example.com
+
+(略)
+
+```
+
+既知の無視して問題ない差分であれば、 `ignored_contents` や `pending_contents` などにファイル名と無視してよい差分パターンを正規表現で指定することで、
+差分として表示されなくなります。`ignored_contents` と `pending_contents` の使い分けは、パスと同様に恒久的な無視と一時的な無視の違いです。
+
+最後に `pending_paths` や `pending_contents` に指定した問題を解決すれば、
+「既存のサーバ」と「コードで生成したサーバ」の間に想定外の差分がなく、
+コードで置き換えられたと言える状態になります。
+
+## 設定詳細
+`Ajimifile` の各設定項目の意味を順に説明していきます。
+
+```ruby
+source "source.example.com", {
+  ssh_options: {
+    host: "192.168.0.1",
+    user: "ec2-user",
+    key: "~/.ssh/id_rsa"
+  },
+  enable_nice: true
+}
+```
+
+比較元のサーバの接続情報を指定します。
+`host` に接続先のFQDNまたはIPアドレス、`user` と `key` にSSH接続で使用するユーザ名と鍵ファイルを指定します。
+指定するユーザは、対象サーバでsudoができるユーザを指定して下さい。
+
+`enable_nice` というオプションは対象サーバで `find` コマンドを実行する際に、 `nice` と `ionice` コマンドと組み合わせて、可能な限り低負荷で実行するためのオプションです。
+このオプションはデフォルト `false` で無効です。
+比較対象のサーバが本番運用中の場合は、多少時間がかかっても極力負荷をかけずに実行したい一方で、
+リリース前のサーバであれば、全力で実行して構わないという使い分けを想定しています。
+
+```ruby
+target "target.example.com", {
+  ssh_options: {
+    user: "ec2-user",
+    key: "~/.ssh/id_rsa"
+  },
+  enable_nice: false
+}
+```
+
+比較先のサーバの接続情報を指定します。
+指定できるオプションは `source` の場合と同じです。
+このように `host` を省略した場合は、targetの第1引数（この場合は `target.example.com` )を接続先の `host` として使用します。
+`source` と `target` の機能的な違いはなく、diff出力結果表示の `-` と `+` の方向が変わるだけです。
+
+```ruby
+check_root_path "/"
+```
+
+チェック対象のルートパスを指定します。基本的に `/` でよいですが、
+`/home` などを指定すると `/home` 配下のみをチェックするので、デバッグ目的などで一時的に対象を絞りたいときに使います。
+
+```ruby
+pruned_paths [
+  "/dev",
+  "/proc",
+]
+```
+
+チェック対象から除外するパスを指定します。パスは前方一致なので、指定のディレクトリ配下をまとめて無視するのに使います。
+後述する `ignored_paths` はチェックした結果に差分が出ても無視しますが、
+ `pruned_paths` は（内部的にfindコマンドの時点で)チェック対象から除外するので、
+ 無視してよい自明なパスは `pruned_paths` で指定することでチェック処理が高速になります。
+
+```ruby
+ignored_paths [
+  *@config[:pruned_paths],
+  %r|^/lost\+found/?.*|,
+  %r|^/media/?.*|,
+  %r|^/mnt/?.*|,
+  %r|^/run/?.*|,
+  %r|^/sys/?.*|,
+  %r|^/tmp/?.*|
+]
+```
+
+既知の差分として無視するパスを文字列または正規表現で指定します。
+正規表現のエスケープ方法などはRubyの文法に従います。というか `Ajimifile` は内部的にRubyのコードとして評価されます。
+なので、コメントを書きたい場合は`#` で行末まで無視できるので、無視した理由などをコメントとして書くこともできます。
+
+`*@config[:pruned_paths]` の部分は `pruned_paths` をここに展開するという意味ですが、
+`find -path /hoge -prune` すると `/hoge` 配下は無視されますが、
+ `/hoge` 自体は出力に含まれてしまうという内部実装的な都合でこうなっているので、あまり深く気にしないで下さい。
+
+```ruby
+ignored_contents ({
+  "/root/.ssh/authorized_keys" => /Please login as the user \\"ec2-user\\" rather than the user \\"root\\"/
+})
+```
+
+既知のファイルの中身の差分を無視します。
+ファイルのパスと無視する正規表現をハッシュ形式で指定します。
+ファイルに差分があることは分かっているが、ファイルごと無視せずに、ファイル内のこの文字列の差分だけ無視したいというような使い方を想定しています。
+
+```ruby
+pending_paths [
+  "/etc/sudoers"
+]
+```
+
+`ignored_paths` と機能的には同じですが、恒久的に無視してよい差分が `ignored_paths` で、
+差分は認知したが、なんらか修正が必要ですぐに対応できず、一時的にdiff出力結果を抑止して視界から消したい場合に
+`pending_paths` を使うという意味的な使い分けを想定しています。
+
+```ruby
+pending_contents ({
+  "/etc/hosts" => /127\.0\.0\.1/
+})
+```
+
+`ignored_contents` と機能的に同様ですが、一時的に無視したい場合に `pending_contents` を使います。
+
+## おわりに
+
+「既存のサーバ」と「コードで生成したサーバ」のファイルシステム全体の差分を効率的に調査する目的で、
+任意の2つのサーバ設定を比較するAjimiというツールを作りました。
+
+適切な無視設定を管理することで、人間が目視でチェックできる差分量をコントロールし、
+効率的に2つのサーバの比較が可能となりました。
+
+Ajimiはとりあえず作ったものの、今のところ必要最小限の機能しか実装していないので、
+こんな機能も欲しいとかあれば、 [GitHub](https://github.com/crowdworks/ajimi) にプルリいただけると助かります。
+
+とりあえずただの感想でも [@minamijoyo](https://twitter.com/minamijoyo) までフィードバックいただけるとうれしいです。
+
