@@ -1,0 +1,71 @@
+---
+title: re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて
+date: 2015-10-29 09:00 JST
+tags:
+  - aws
+  - reinvent
+  - flocker
+  - docker
+  - ecs
+author: Yusuke Kuoka
+twitter_id: mumoshu
+gravatar: ykuoka@gmail.com
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+      type: image/jpeg
+      width: 1080
+      height: 1080
+    description: クラウドワークスのエンジニアが単身AWS re:Invent 2015に参戦したときに見つけたFlockerというOSSについて調べてみました。
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+    type: image/jpeg
+published: true
+---
+
+Dockerを本番環境で使う機会を今か今かと待ちわびているエンジニアの九岡です。今回は、先日参加したAWS re:Invent 2015で知った、Dockerボリュームを透過的にEBSでポータブルにするFlockerというOSSについて調べてみました。
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## TL;DR;
+
+* Dockerのデータボリュームをホスト間で移動させる/ステートフルなDockerコンテナを別ホストへ移動させたりするのに便利
+* AWS ECSには未対応(´・ω・｀)
+
+## Docker Volumeの永続化について
+
+Dockerのデータボリュームは通常、Dockerホストが削除されると消えてしまいます。ステートフルなDockerコンテナをホスト間で移動させたり、ボリュームのバックアップをとったりリストアしたりするためには、Dockerの外でスクリプトなどの作り込みが必要になります。EC2上でやるなら、EBSボリュームのプールから必要なものをマウントして、それをデータボリュームとしてDockerに使わせるようなスクリプトを書くとか。でも、面倒ですよね。
+
+Docker 1.8からVolume Pluginが追加されて、上記のようなことをスクリプトではなく、Dockerのプラグインレベルで行えるようになりました。データボリュームの移動やバックアップ・リストアをしたいという目的に照らし合わせると、スクリプトでやるかプラグインでやるかは単に実装の違いですが、プラグインの方は必要とする機能をDocker利用者から透過的に提供できる、などのメリットはありそうです。
+
+## Flocker
+
+DockerのデータボリュームをポータブルにするためのOSSです。Flocker AgentとFlocker Control Serviceで構成されています。
+
+Flocker AgentはDockerホストで動くデーモンでもあり、[Docker Volume Pluginでもあります](https://clusterhq.com/2015/08/04/docker-volume-plugins/)。
+Flocker Control Serviceは、Dockerホストとは別のmaster的なノード(Swarmを使う場合はSwarm masterに同居させる構成がFlockerのドキュメントで紹介されています)で動くデーモンで、Flockerクラスタ内部向けのAPIや、Flockerを外部からコントロールするためのWeb API、Flockerクラスタの設定を保存するためのストレージ、などの機能を提供します。
+
+[Flocker Cluster Architecture](https://docs.clusterhq.com/en/1.0.0/concepts/architecture.html#flocker-cluster-architecture)
+
+## 制限
+
+現状は素のDockerやCompose、Swarmなどに対応していますが、Amazon ECSには対応していません(re:Inventで話したCloudHQブースの方は「組み合わせられる」と言っていた気がするけど…)。
+ECSではDockerのVolume Driverを指定することができないので、必然的にFlocker Docker Pluginも使えないからです。
+
+re:InventでComposeに対応した[ecs-cli](https://github.com/aws/amazon-ecs-cli)が発表されました。FlockerはComposeに対応しているので、ecs-cliからならFlockerを使えるのでは?と思うかもしれませんが、無理です。[ecs-cliはdocker-compose.ymlをECSのTask Definitionに変換してECSに渡すことでComposeに対応をしています](https://github.com/aws/amazon-ecs-cli/blob/93edc41a6ff39ba396f6000707c846821cc3d1f0/ecs-cli/modules/compose/ecs/utils/convert_task_definition.go#L57)が、結局ECSがDocker Volume Pluginに対応していないためです。
+
+## 似ているOSS
+
+"A Docker volume plugin, managing persistent container volumes."を標榜している[Convoy](https://github.com/rancher/convoy)というOSSがあります。
+Device Mapper、NFS、EBSをバックエンドに選べるDockerのVolume DriverとCLIの組み合わせとして提供されています。CLIを使うと、Convoyで管理しているボリュームをNFSやS3などにバックアップしたり、復元したりすることができます。
+
+ただし、Flockerとは違ってComposeやSwarm等への対応はしていません。Flockerと同じ理由で、ECSにも対応していません。
+
+## まとめ
+
+Dockerのデータボリュームについて、またそれをポータブルにするFlockerというOSSについて調査してみました。
+ECSに対応したら試してみたいですね！
