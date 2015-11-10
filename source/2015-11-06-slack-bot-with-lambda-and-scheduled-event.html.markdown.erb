@@ -1,0 +1,83 @@
+---
+title: re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました
+date: 2015-11-06 20:00 JST
+tags:
+  - aws
+  - reinvent
+  - lambda
+  - slack
+  - bot
+author: Yusuke Kuoka
+twitter_id: mumoshu
+gravatar: ykuoka@gmail.com
+ogp:
+  og:
+    image:
+      '': http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+      type: image/jpeg
+      width: 1080
+      height: 1080
+    description: クラウドワークスのエンジニアが単身AWS re:Invent 2015に参戦したときに受けた刺激がソフトウェアとQiita記事に昇華しました。
+atom:
+  image:
+    url: http://engineer.crowdworks.jp/images/2015/10/reinvent-2015/reinvent.jpg
+    type: image/jpeg
+published: true
+---
+
+先日、ありがたいことに会社から参加費をいただいて、[AWS re:Invent 2015に参加しました](/2015/10/14/reinvent-2015.html)。大いに刺激を受けて、その一部が気づいたらソフトウェアとQiita記事に昇華していたので、この場を借りてご紹介させていただきます :bow:
+
+紹介させていただくのは「サーバレスなSlackボットをAWS Lambdaでつくることができるライブラリ」です。
+
+READMORE
+
+<%= table_of_contents(current_page) %>
+
+## 背景
+
+クラウドワークスではチャットツールとして全社的にSlackを利用しています。
+
+スタッフ間の情報共有はもちろん、
+
+* GitHub
+* GitLab
+* Wercker
+* Semaphore
+* Datadog
+* NewRelic
+
+等、様々なWebサービスからの通知を集約する場所として、またボットやAPI、各種サービス連携を活用して、
+
+* Slackからアプリのテスト環境・本番環境へのリリース
+* 日程調整
+* Asana、Redmine等のチケットの内容共有
+* akiray03さん開発の[投票機能](http://qiita.com/akiray03/items/e649212d7749413365bd)
+
+などで便利に使っています。
+
+ボットはhubotベースで開発しています。しかし、
+
+* 諸事情によりEC2インスタンス上で24時間365日稼働させているため、負荷の割にサーバ費用がかさんでしまったり、
+* 新しいエンジニアが開発に参加したいとき開発環境を準備するのが面倒(で、結果的に一部のエンジニアがボット担当、のようになってしまったり)
+
+などの問題が発生していました。
+方法はいくつかあると思いますが、例えばAWS Lambdaベースで動くボットがあれば解決しそう…ということで、Lambdaの新機能を使って実現してみました。
+
+## ソフトウェア
+
+AWS Lambdaで動くボットを実装するためのOSSまたはnpmモジュールとして公開しています。
+
+[ソースコードはGitHubで](https://github.com/mumoshu/lambda_bot)、[npmモジュールはnpmjs.comで](https://www.npmjs.com/package/lambda_bot)でそれぞれ公開しているので、興味のある方はぜひご覧ください。
+
+## Qiita記事
+
+クラウドワークスのエンジニアは[Qiitaも利用しています。](http://qiita.com/organizations/crowdworks)
+技術的な記事は好みでQiitaに書くことも多いです。
+今回の記事もQiitaで書いたので、詳しくはそちらをご覧ください！
+
+[Node.js - AWS LambdaでサーバレスなSlackボットをつくったよー(Scheduled Event対応・npmモジュールあり) - Qiita](http://qiita.com/mumoshu/items/8752047a0d0265dada47)
+
+## まとめ
+
+re:Invent 2015で発表された新機能を使った、サーバレスなSlackボットをつくるためのライブラリを開発し、その紹介記事を書きました。
+できるだけサーバ保守などの手間をかけず、安価にSlackボットを運用したい方は、ぜひご活用ください！
