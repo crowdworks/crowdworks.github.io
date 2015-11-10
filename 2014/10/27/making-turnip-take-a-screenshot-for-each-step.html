@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>Turnip のテストレポートを見やすくしてみた - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/how-to-work-turnip-og.png' property='og:image'>
+<meta content='image/png' property='og:image:type'>
+<meta content='300' property='og:image:width'>
+<meta content='176' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='article' property='og:type'>
+<meta content='Turnip のテストレポートを見やすくしてみた' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2014/10/27/making-turnip-take-a-screenshot-for-each-step.html' property='og:url'>
+<meta content='2014-10-27T03:00:00Z' property='article:published_time'>
+<meta content='turnip' property='article:tag'>
+<meta content='testing' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2014/10/27</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>Turnip のテストレポートを見やすくしてみた</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>Turnipのステップ実行毎にスクリーンショット(以下SS)とレンダリングされたhtmlを記録するFormatter、<a href="http://github.com/ayasuda/CapturefulFormatter">CapturefulFormatter</a>を作りました。
+本記事では、簡単な使い方の紹介と、どのようにステップを記録しているかについて記していきます。</p>
+
+<h2 id="背景">背景</h2>
+
+<p>Ruby on Railsでの受け入れテストと言えばCucumberが著名ですが、ステップ定義にて正規表現を用いる点や、RSpecとの二本立てとなっている点などが課題となっていました。
+この２点を解決すべく生まれたのがTurnipです。Turnipの詳しい説明は<a href="http://magazine.rubyist.net/?0042-FromCucumberToTurnip">るびま42号のTurnip解説記事</a>が詳しいので割愛します。</p>
+
+<p>しかし、Turnip では、テストレポートもRSpecのものを使うため、特にステップの失敗時のエラーメッセージがかなりわかりにくくなってしまいました。</p>
+
+<p>下記に例を示します。とある画面にボタンが描画されていなかったため、ステップ実行に失敗したと予測されるテスト結果です。ですが、結局どんな画面だったのかはわかりません。</p>
+
+<p><img title="nil なのはわかるが……" alt="turnip-error-message" src="/images/how-to-work-turnip-1.png" /></p>
+
+<p>ステップ失敗時のSSを撮るために生まれたのが
+<a href="https://github.com/gongo/turnip_formatter">TurnipFormatter</a> および <a href="https://github.com/gongo/gnawrnip">Gnawrnip</a> です。
+大変便利なgemですが、TurnipFormatterとGnawrnipの組み合わせは、キャプチャのタイミングがページ遷移毎となっており、細かなタイミングでのキャプチャが得られません。
+javascriptによる制御が組み込まれたWebアプリケーションでは、もう少し細かなタイミングでのキャプチャが欲しくなりますし、
+受け入れテストのレポートにするならば、ステップごとのキャプチャが欲しくなります。</p>
+
+<h2 id="capturefulformatter-の機能">CapturefulFormatter の機能</h2>
+
+<p>CapturefulFormatterは、Turnipのステップごとに、ステップ名とスクリーンショット、描画されたhtmlの3つを記録するシンプルなFormatterです。
+各ステップのスクリーンショットと描画されたhtmlが保存されるため、いざバグが発生したときなど、調査がよりスムーズに行えるようになるでしょう。</p>
+
+<p>このFormatter使うことで、こんな感じのテストレポートが生成できます。</p>
+
+<p><img title="生成されたレポート" alt="captureful_report" src="/images/how-to-work-turnip-3.png" /></p>
+
+<p>非常にわかりやすいレポートが生成されるので、エンジニアだけでなく、他部門のメンバーにもテスト結果がスムーズに共有できます。
+また、新しく参加するメンバーのためのマニュアルとしても活用できるかと思います。</p>
+
+<p>レポートのテンプレート等のカスタマイズもサポートしていますので、ユーザ独自のきれいなレポートを作成することも可能です。
+その他、実装して欲しい機能の要望などがあれば、Githubにて提案いただければ幸いです。</p>
+
+<h2 id="capturefulformatter-の実現方法">CapturefulFormatter の実現方法</h2>
+
+<p>CapturefulFormatterはRSpecのCustomFormatterの一つとして実装しました。
+これは、TurnipはRSpecの <a href="https://github.com/jnicklas/turnip/blob/master/turnip.gemspec#L11">エクステンション</a> なので、
+Turnipの実行記録をとるCapturefulFormatterもRSpecの機構に則るべきだと考えたためです。</p>
+
+<p>実装するためには二つの課題がありました。</p>
+
+<p>まず、RSpecが各Formatterにどのように通知を行っているかを把握する必要があります。ステップ実行前後の通知をFormatterに通知する方法を調べましょう。
+次に、Turnipがどのようにfeatureを実行しているか、特にstepの実行前後がどこにあるのかを把握しましょう。そうすることで、先ほど調べたFormatterへの通知を実際に実装できるようになります。</p>
+
+<h3 id="rspec-はどのように-formatter-にイベントを通知するのか">RSpec はどのように Formatter にイベントを通知するのか</h3>
+
+<p><code>RSpec::Core::Formatters</code> の <a href="http://rubydoc.info/gems/rspec-core/RSpec/Core/Formatters">RDoc</a> にはビルトインの各種 <code>Formatter</code> の説明と、 <code>CustomFormatter</code> の作り方について記載されています。
+これだけいろいろな通知を受け取れるということは、何か <code>Formatter</code> へを通知する共通処理があると予測できるでしょう。
+このページを良く読むと、 <code>RSpec::Core::Reporter</code> へ<a href="http://rubydoc.info/gems/rspec-core/RSpec/Core/Reporter">リンク</a> が貼られているのがわかります。
+このクラスが通知機構の実装そのものです。
+しかし、公開されているメソッドのうち、それっぽいメソッドは <code>report</code> だけであり、引き数もそれっぽくありません。
+確認するために、ソースコードを見てみましょう。</p>
+
+<p><code>report</code> の実装を読むと、即座に <code>start</code> を呼び出しているのがわかります。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L51</span>
+<span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">expected_example_count</span><span class="p">)</span>
+  <span class="n">start</span><span class="p">(</span><span class="n">expected_example_count</span><span class="p">)</span>
+  <span class="k">begin</span>
+    <span class="k">yield</span> <span class="nb">self</span>
+  <span class="k">ensure</span>
+    <span class="n">finish</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code>start</code> では <code>notify</code> を呼び出すだけです。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L61</span>
+<span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="n">expected_example_count</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="no">RSpec</span><span class="o">::</span><span class="no">Core</span><span class="o">::</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+  <span class="vi">@start</span> <span class="o">=</span> <span class="n">time</span>
+  <span class="vi">@load_time</span> <span class="o">=</span> <span class="p">(</span><span class="vi">@start</span> <span class="o">-</span> <span class="vi">@configuration</span><span class="p">.</span><span class="nf">start_time</span><span class="p">).</span><span class="nf">to_f</span>
+  <span class="n">notify</span> <span class="ss">:start</span><span class="p">,</span> <span class="no">Notifications</span><span class="o">::</span><span class="no">StartNotification</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">expected_example_count</span><span class="p">,</span> <span class="vi">@load_time</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><code>notify</code> で具体的に通知を行っているのがわかります。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/reporter.rb#L135</span>
+<span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">notification</span><span class="p">)</span>
+  <span class="n">registered_listeners</span><span class="p">(</span><span class="n">event</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">formatter</span><span class="o">|</span>
+    <span class="n">formatter</span><span class="p">.</span><span class="nf">__send__</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">notification</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>周辺のソースを眺めれば、<code>finish</code> や、 <code>example_group_finished</code> なども <code>notify</code> を使って通知をしているのが見て取れます。
+今回は、これらに習い、 <code>step_started</code> を実装し、その内部で <code>noify :step_started</code> としてやることとしました。</p>
+<pre><code class="highlight ruby"><span class="c1"># こんな感じのメソッドを実装してやれば良さそうだ。</span>
+<span class="k">def</span> <span class="nf">step_started</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+  <span class="n">notify</span> <span class="ss">:step_started</span><span class="p">,</span> <span class="no">Notifications</span><span class="o">::</span><span class="no">StepNotificaton</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>ところで、このコードをRSpecのコード中に直接書くのは、あまりスマートではありません。
+そこで、今回はモンキーパッチを当てることとし、下記の様なコードが実装されています。</p>
+<pre><code class="highlight ruby"><span class="c1"># RSpec に当てるモンキーパッチ</span>
+<span class="k">module</span> <span class="nn">CapturefulFormatter</span>
+  <span class="k">module</span> <span class="nn">RSpec</span>
+    <span class="k">module</span> <span class="nn">Core</span>
+      <span class="k">module</span> <span class="nn">Reporter</span>
+        <span class="c1"># Formatter へ送る構造体。今回は ExampleNotification の実装を参考にした。</span>
+        <span class="no">StepNotification</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:description</span><span class="p">,</span> <span class="ss">:keyword</span><span class="p">,</span> <span class="ss">:extra_args</span><span class="p">)</span> <span class="k">do</span>
+          <span class="nb">private_class_method</span> <span class="ss">:new</span>
+
+          <span class="c1"># @api</span>
+          <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">from_step_object</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="kp">new</span> <span class="n">data</span><span class="p">.</span><span class="nf">description</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="nf">keyword</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="nf">extra_args</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+
+        <span class="k">def</span> <span class="nf">step_started</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+          <span class="n">notify</span> <span class="ss">:step_started</span><span class="p">,</span> <span class="no">StepNotification</span><span class="p">.</span><span class="nf">from_step_object</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="k">end</span>
+
+        <span class="k">def</span> <span class="nf">step_finished</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+          <span class="n">notify</span> <span class="ss">:step_finished</span><span class="p">,</span> <span class="no">StepNotification</span><span class="p">.</span><span class="nf">from_step_object</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">RSpec</span><span class="o">::</span><span class="no">Core</span><span class="o">::</span><span class="no">Reporter</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:prepend</span><span class="p">,</span> <span class="no">CapturefulFormatter</span><span class="o">::</span><span class="no">RSpec</span><span class="o">::</span><span class="no">Core</span><span class="o">::</span><span class="no">Reporter</span><span class="p">)</span>
+</code></pre>
+
+<p>これで、 <code>RSpec::Core::Reporter.step_started</code> が呼び出せるようになり、CustomFormatterで拾えるようになりました!!</p>
+
+<h3 id="turnip-がどのように-step-を実行するか">Turnip がどのように step を実行するか</h3>
+
+<p>TurnipはRSpecの拡張であり、実行コマンドも</p>
+<pre><code class="highlight plaintext">rspec spec/acceptance/attack_monster.feature
+</code></pre>
+
+<p>のように <code>rspec</code> を用います。</p>
+
+<p>と、いうことは、* RSpec を拡張している場所がソースコード中にある* はずです。
+ファイルの一覧を眺めれば、それっぽいファイルがすぐにみつかるでしょう。 <a href="https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb">turnip/lib/turnip/rspec.rb</a> です。
+このファイル中では <code>Turnip::RSpec::Loader</code> と <code>Turnip::RSpec::Execute</code> という二つのクラスが用意され、ファイル末尾で <code>Turnip::RSpec::Loader</code> を RSpec にパッチしています。
+パッチを当てやすいのは、<code>Ruby</code>の特長ですね!!</p>
+
+<p>それぞれの挙動を、まずは <code>Turnip::RSpec::Loader</code> の方から見ていきましょう。</p>
+
+<p>この <code>Turnip::RSpec::Loader</code> は <code>load</code> を定義し、 <code>RSpec::Core::Configuration</code> にあてています。
+このパッチによって、 <code>RSpec::Core::Configuration</code> 中で <code>load</code> を呼び出すと、上のコードが呼ばれることとなり、指定されたのが <code>.feature</code> なら Turnip が処理することになります。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb#L12</span>
+<span class="k">module</span> <span class="nn">Turnip</span>
+  <span class="k">module</span> <span class="nn">RSpec</span>
+    <span class="k">module</span> <span class="nn">Loader</span>
+
+      <span class="c1"># ここで load メソッドをオーバーライド</span>
+      <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">end_with?</span><span class="p">(</span><span class="s1">'.feature'</span><span class="p">)</span> <span class="c1"># ロードされたのが .feature ファイルなら...</span>
+          <span class="n">require_if_exists</span> <span class="s1">'turnip_helper'</span>
+          <span class="n">require_if_exists</span> <span class="s1">'spec_helper'</span>
+
+          <span class="no">Turnip</span><span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="nf">first</span><span class="p">)</span> <span class="c1"># turnip が起動！！</span>
+        <span class="k">else</span>
+          <span class="k">super</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="kp">private</span>
+
+      <span class="k">def</span> <span class="nf">require_if_exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="nb">require</span> <span class="n">filename</span>
+      <span class="k">rescue</span> <span class="no">LoadError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+        <span class="k">raise</span> <span class="k">unless</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="o">::</span><span class="no">RSpec</span><span class="o">::</span><span class="no">Core</span><span class="o">::</span><span class="no">Configuration</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="no">Turnip</span><span class="o">::</span><span class="no">RSpec</span><span class="o">::</span><span class="no">Loader</span><span class="p">)</span>
+</code></pre>
+
+<p>より具体的には、 <code>RSpec::Core::Configuration.load_spec_files</code> での挙動が、このパッチのおかげで変化します。
+これで、 <code>rspec</code> コマンド実行時に <code>.feature</code> ファイルが読み込まれた場合、Turnipが実行されるようになります。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/rspec/rspec-core/blob/v3.0.4/lib/rspec/core/configuration.rb#L1057</span>
+<span class="k">module</span> <span class="nn">RSpec</span>
+  <span class="k">module</span> <span class="nn">Core</span>
+    <span class="k">class</span> <span class="nc">Configuration</span>
+      <span class="k">def</span> <span class="nf">load_spec_files</span>
+        <span class="n">files_to_run</span><span class="p">.</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">load</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">}</span> <span class="c1"># パッチを当てることで、この load が Turnip::RSpec::Loader.load になる。</span>
+        <span class="vi">@spec_files_loaded</span> <span class="o">=</span> <span class="kp">true</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>さて、 <code>Turnip::RSpec::Loader.load</code> では <code>.feature</code> ファイルロード時に <code>Turnip::RSpec.run</code> を実行していたのを覚えているでしょうか。
+次は、いよいよ <code>Turnip::RSpec.run</code> を見ていきましょう。</p>
+
+<p>少し複雑に見えるが、 <code>Turnip::Builder</code> で Gherkin をパースして、RSpecの <code>desribe</code> ブロックを作り上げ、それを実行しているだけのコードです。</p>
+
+<p>シナリオごとに <code>describe</code> ブロックを定義しており、 <code>it(scenario.steps.map(&amp;:description).join(&#39; -&gt; &#39;))</code> により1つのシナリオからを1つのit句を作っています。
+そして、各ステップの実行は <code>Turnip::RSpec::Execute.run_step</code> で行われています。</p>
+<pre><code class="highlight ruby"><span class="c1"># https://github.com/jnicklas/turnip/blob/v1.2.2/lib/turnip/rspec.rb#L63</span>
+<span class="k">module</span> <span class="nn">Turnip</span>
+  <span class="k">module</span> <span class="nn">RSpec</span>
+    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+      <span class="k">def</span> <span class="nf">fetch_current_example</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">if</span> <span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">respond_to?</span><span class="p">(</span><span class="ss">:current_example</span><span class="p">)</span>
+          <span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">current_example</span>
+        <span class="k">else</span>
+          <span class="n">context</span><span class="p">.</span><span class="nf">example</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">feature_file</span><span class="p">)</span>
+        <span class="no">Turnip</span><span class="o">::</span><span class="no">Builder</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="n">feature_file</span><span class="p">).</span><span class="nf">features</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">feature</span><span class="o">|</span> <span class="c1"># Turnip::Builder で Gherkin をパースします。</span>
+          <span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="n">feature</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="n">feature</span><span class="p">.</span><span class="nf">metadata_hash</span> <span class="k">do</span> <span class="c1"># feature ごとに RSpec の describe を定義し...</span>
+            <span class="n">before</span> <span class="k">do</span> <span class="c1"># before の定義もします！</span>
+              <span class="n">example</span> <span class="o">=</span> <span class="no">Turnip</span><span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">fetch_current_example</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+              <span class="n">example</span><span class="p">.</span><span class="nf">metadata</span><span class="o">[</span><span class="ss">:file_path</span><span class="o">]</span> <span class="o">=</span> <span class="n">feature_file</span>
+
+              <span class="n">feature</span><span class="p">.</span><span class="nf">backgrounds</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:steps</span><span class="p">).</span><span class="nf">flatten</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">step</span><span class="o">|</span> <span class="c1"># before で "前提" の各ステップが呼ばれるようにしてますね。</span>
+                <span class="n">run_step</span><span class="p">(</span><span class="n">feature_file</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+              <span class="k">end</span>
+            <span class="k">end</span>
+            <span class="n">feature</span><span class="p">.</span><span class="nf">scenarios</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
+              <span class="nb">instance_eval</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="p">,</span> <span class="n">feature_file</span><span class="p">,</span> <span class="n">scenario</span><span class="p">.</span><span class="nf">line</span> <span class="c1"># シナリオごとに describe を作っています！ そして、1 つの it を定義しています！</span><span class="sh">
+                describe scenario.name, scenario.metadata_hash do
+                  it(scenario.steps.map(&amp;:description).join(' -&gt; ')) do # it は 1 つで
+                    scenario.steps.each do |step| # 中では step をぐるぐるまわしていますね。
+                      run_step(feature_file, step) # ここがステップ実行の本体です
+                    end
+                  end
+                end
+</span><span class="no">              EOS</span>
+            <span class="k">end</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>さて、ステップ実行の本体が <code>run_step</code> だとわかりましたので、早速、 <code>RSpec::Core::Reporter</code> の時と同様に、 <code>run_step</code> 前後に通知を行うモンキーパッチを作成しましょう。</p>
+<pre><code class="highlight ruby"><span class="k">module</span> <span class="nn">CapturefulFormatter</span>
+  <span class="k">module</span> <span class="nn">Turnip</span>
+    <span class="k">module</span> <span class="nn">RSpec</span>
+      <span class="k">module</span> <span class="nn">Execute</span>
+        <span class="c1"># 各ステップを実行する。前後に RSpec::Core::Reporter に向けて、実行内容を通知する</span>
+        <span class="k">def</span> <span class="nf">run_step</span><span class="p">(</span><span class="n">feature_file</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+          <span class="n">reporter</span> <span class="o">=</span> <span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">configuration</span><span class="p">.</span><span class="nf">reporter</span>
+          <span class="n">reporter</span><span class="p">.</span><span class="nf">step_started</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+          <span class="k">super</span><span class="p">(</span><span class="n">feature_file</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+          <span class="n">reporter</span><span class="p">.</span><span class="nf">step_finished</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="o">::</span><span class="no">Turnip</span><span class="o">::</span><span class="no">RSpec</span><span class="o">::</span><span class="no">Execute</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:prepend</span><span class="p">,</span> <span class="no">CapturefulFormatter</span><span class="o">::</span><span class="no">Turnip</span><span class="o">::</span><span class="no">RSpec</span><span class="o">::</span><span class="no">Execute</span><span class="p">)</span>
+</code></pre>
+
+<p>ここまでの2つのパッチを当てることで、独自Formatterでstep前後の動きを記録できるようになりました!!</p>
+
+<p>CapturefulFormatterでは、単純に <code>Capybara.current_session.save_screenshot</code> を行い、SSを保存しています。</p>
+
+<h2 id="むすび">むすび</h2>
+
+<p>ここまで記してきたように、本記事ではステップごとの SS を記録するFomatterの誕生理由と、その実現方法について述べてきました。
+実際のCapturefulFormatterでは、ステップごとの情報を記録した後、テスト終了時にerbをもとにレポートを作成する機能なども実装されています。
+しかし、コアとなるステップ前後のhook追加については、上記に示した二つのパッチのみで実現できるのが、おわかりいただけたでしょうか。</p>
+
+<p>本記事の方法を使えば、例えば上記パッチのみを <code>spec/support</code> 以下に実装することで、読者自身のCustomFormatterを定義することも簡単です。
+せっかく、わかりやすい受け入れテストの記述ができますし、スクリーンショットも簡単に撮ることができるので、読者の中にそのような要望があれば、本記事を役立てていただければ幸いです。</p>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+Atsushi Yasuda
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+関連する記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+</ul>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>

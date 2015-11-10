@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>RubyKaigi 2014 3日目 参加レポート - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png' property='og:image'>
+<meta content='image/png' property='og:image:type'>
+<meta content='250' property='og:image:width'>
+<meta content='250' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='article' property='og:type'>
+<meta content='RubyKaigi 2014 3日目 参加レポート' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2014/09/20/rubykaigi-2014-day3-report-by-mumoshu.html' property='og:url'>
+<meta content='2014-09-20T00:30:00Z' property='article:published_time'>
+<meta content='ruby' property='article:tag'>
+<meta content='rubykaigi' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2014/09/20</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>RubyKaigi 2014 3日目 参加レポート</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>9/20(土)に開催された <a href="http://rubykaigi.org/2014">RubyKaigi 2014</a> 3日目の参加レポートです。</p>
+
+<p>聴講しながら勢いてまとめているので読みづらい点もあると思いますが、今日も全力で更新していきます！！</p>
+
+<p><img title="クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!" alt="RubyKaigi 2014 Official Sponsor" src="/images/rubykaigi/2014/badge-for-official-sponsor@2x.png" /></p>
+
+<p></p>
+
+<ul>
+<li><a href="http://engineer.crowdworks.jp/2014/09/18/rubykaigi-2014-day1-report-by-mumoshu.html">RubyKaigi 1日目のレポート</a></li>
+<li><a href="http://engineer.crowdworks.jp/2014/09/19/rubykaigi-2014-day2-report-by-mumoshu.html">RubyKaigi 2日目のレポート</a></li>
+</ul>
+
+<ul>
+<li>
+<a href="#各種情報">各種情報</a>
+<ul>
+<li>
+<a href="#スケジュール">スケジュール</a>
+</li>
+<li>
+<a href="#ustream">Ustream</a>
+</li>
+</ul>
+
+<p></li>
+<li>
+<a href="#9:30--ohayō-rails-(hall-a)">9:30- Ohayō Rails (Hall A)</a>
+</li>
+<li>
+<a href="#11:00--speeding-up-rails-4.2-(hall-a)">11:00- Speeding up Rails 4.2 (Hall A)</a>
+</li>
+<li>
+<a href="#11:30--practical-meta-programming-in-application-(hall-a)">11:30- Practical meta-programming in Application (Hall A)</a>
+</li>
+<li>
+<a href="#13:30--everything-is-broken:-a-story-of-hope-(hall-a)">13:30- Everything is Broken: A Story of Hope (Hall A)</a>
+</li>
+<li>
+<a href="#fluentd-hacking-guide-(fluentd-ソースコード完全解説)">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a>
+</li>
+<li>
+<a href="#the-role-of-ruby-in-the-single-page-app.-(hall-b)">The role of ruby in the single page app. (Hall B)</a>
+</li>
+<li>
+<a href="#scaling-is-hard,-let's-go-server-shopping!-or,-how-we-scaled-travis-ci,-and-helped-open-source-at-the-same-time.-(hall-a)">Scaling is hard, let&rsquo;s go server shopping! Or, How we scaled Travis CI, and helped Open Source at the same time. (Hall A)</a>
+</li>
+<li>
+<a href="#tending-the-ruby-ecosystem-(hall-b)">tending the ruby ecosystem (Hall B)</a>
+</li>
+<li>
+<a href="#他のrubykaigi-3日目レポート">他のRubyKaigi 3日目レポート</a>
+</li>
+</ul></p>
+
+<h2 id="各種情報">各種情報</h2>
+
+<h3 id="スケジュール">スケジュール</h3>
+
+<p>RubyKaigiの公式サイトにスケジュールが掲載されています。</p>
+
+<p><a href="http://rubykaigi.org/2014/schedule">RubyKaigi 2014 | Schedule</a></p>
+
+<h3 id="ustream">Ustream</h3>
+
+<p>当日参加できない方向けには、USTが用意されていました。素晴らしいですね!</p>
+
+<ul>
+<li><a href="http://www.ustream.tv/channel/rubykaigi1">Hall A</a></li>
+<li><a href="http://www.ustream.tv/channel/rubykaigi2">Hall B</a></li>
+</ul>
+
+<h2 id="9:30--ohayō-rails-(hall-a)">9:30- Ohayō Rails (Hall A)</h2>
+
+<p>登壇しました!
+Railsをヘビーに使っている企業によるRailsのベストプラクティスや、「うちではこう使っている」といったノウハウなどをパネルディスカッション形式でざっくばらんに紹介していくというセッションでした。
+Railsだと用途(SPAやAPIサーバにもRails使うの?)や方法(どんなツール、gemを使うの?)も多岐に渡るので、それをまとめて聞ける場として活用いただけていたら嬉しいです。</p>
+
+<h2 id="11:00--speeding-up-rails-4.2-(hall-a)">11:00- Speeding up Rails 4.2 (Hall A)</h2>
+
+<p><img src="http://photos-b.ak.instagram.com/hphotos-ak-xfp1/10268740_700556530027001_1251933772_n.jpg" /></p>
+
+<ul>
+<li>Rails 4.2.0</li>
+<li>Rackはらくじゃない
+
+<ul>
+<li>MLにもRackはやめましょう、というメールきた</li>
+<li>アーロンは諦めたくなかった</li>
+<li>そこでthe_metalでRack2.0になるかもしれないものを検証中</li>
+</ul></li>
+<li>現状のRackではenvはグローバル変数
+
+<ul>
+<li>Metalではかわりにcall(request, response)というAPIを提供</li>
+<li>requestはIOとレスポンスの情報</li>
+<li>node.jsのようなapi</li>
+<li>HTTP2拡張予定</li>
+</ul></li>
+<li>AdequateRec. 2x faster</li>
+<li>benchmark/ips
+
+<ul>
+<li>iterations per second</li>
+<li>高いほど速い</li>
+</ul></li>
+<li>link_toはURLが長ければ長いほど遅くなる</li>
+<li>ArrayのようなfetchがO(N)時間かかるものがある</li>
+<li>GC.stat(:total<em>allocated</em>object) 2.2ではobjects</li>
+<li>4-0stableから19%</li>
+<li>4.1から14%オブジェクト生成減った</li>
+<li>SafeBuffer#newに時間がかかっていた</li>
+<li>html＿safe?メソッドを提供するもの</li>
+<li>YMMV</li>
+<li>allocation_gem</li>
+<li>elimate objects</li>
+<li>「存在しないコード」これが最も速い。コードはできるだけ削除しましょう。</li>
+<li>fewer types less code faster code</li>
+<li>measure, measure, measure, measure</li>
+<li>4.2 will be fastest rails ever</li>
+<li>次のターゲットはview code、elimate garbages</li>
+</ul>
+
+<h2 id="11:30--practical-meta-programming-in-application-(hall-a)">11:30- Practical meta-programming in Application (Hall A)</h2>
+
+<p><img src="http://photos-b.ak.instagram.com/hphotos-ak-prn/929233_305083956337721_1331875971_n.jpg" /></p>
+
+<ul>
+<li>EMS</li>
+<li>idobata</li>
+<li>メタプログラミングとお近づきになってもらうことがゴール</li>
+<li>関係するもの
+
+<ul>
+<li>クラス</li>
+<li>モジュール</li>
+<li>オプジェ区と、状態、ivar</li>
+<li>メソッド</li>
+<li>手順</li>
+</ul></li>
+<li>attr<em>accessor、define</em>methodとinstance<em>variable</em>get</li>
+<li>普段使っているものもメタプログラミング関係</li>
+<li>メタプログラミングとは言語要素を操作すること</li>
+<li>メタプログラミングの欠点</li>
+<li>メタプログラミングやりすぎるとコード量が減る</li>
+<li>do less in メタプログラミング</li>
+<li>define_readers</li>
+<li>association_objectを返すだけ</li>
+<li>owner.pk = target.fk</li>
+<li>メタ要素をとりだして、そこだけシンプルに書く</li>
+<li>投稿監視の例</li>
+<li>after_saveでHTTPで送る</li>
+<li>HTTPで送る部分はModel化できる</li>
+<li>タイトル、本文などの属性以外はさらに共通化できる</li>
+<li>監視タイプ、属性値エクストラクタprocを渡すしてつくるコールバッククラス。それをafter_saveで呼ぶ。</li>
+<li>module CensorDSL</li>
+<li>&ldquo;`
+include Censorable
+censor_content(:text) do
+&hellip;end</li>
+<li>Rubyの力を生かすために、メタな部分を切り出してそこだけメタプログラミング。</li>
+<li>他は普通にリファクタリングして問題を抽出していく</li>
+</ul>
+
+<h2 id="13:30--everything-is-broken:-a-story-of-hope-(hall-a)">13:30- Everything is Broken: A Story of Hope (Hall A)</h2>
+
+<p><img src="http://photos-g.ak.instagram.com/hphotos-ak-xaf1/10661026_930912470256406_1879500512_n.jpg" /></p>
+
+<ul>
+<li>leetはギャル語みたいなもの。@1337807 -&gt; LEET BOT</li>
+<li>Webの世界からみたセキュリティの話</li>
+<li>「Googleのトップページをブラウザで開くとどうなりますか？」いい面接の質問。いろいろな答えがあるから</li>
+<li>DNS Lookup: Chrome -&gt; OSのUtility = Resolverにきく</li>
+<li>ResolverはDNSサーバにDNS Queryを送る</li>
+<li>WiresharkでQuery内容を見てみましょう</li>
+<li>AuthoritativeなDNSサーバにクエリが到達するまで</li>
+<li>ここまで説明したのはDNS Cacheに入ってないケース</li>
+<li>Evil Daveさんだったら、DNSレスポンスが正しいかわからない</li>
+<li>DNS SECで解決できるがあまりつかわれてない</li>
+<li>サーバがわかったのでTCPで接続</li>
+<li>SYNを送る。SYNchronizeの意味</li>
+<li>SYN ACKを返す = 「あなたが見えています」という意味</li>
+<li>CLIENT HELLOにランダムバイトを入れる</li>
+<li>SERVER HELLO
+
+<ul>
+<li>CHose Cipher, Session ID, Random Byte</li>
+</ul></li>
+<li>Asynmmetric Cipher
+
+<ul>
+<li>Encrypt, Decrypt</li>
+</ul></li>
+<li>SignatureはCAが作ったもの</li>
+<li>CA = Certificate Authorities。</li>
+<li>CAを信頼するから、Certificateに書いてあるサーバも信頼できる</li>
+<li>PCにはCertificateが最初からたくさん入っている</li>
+<li>そのCertificateはいまも有効かどうか
+
+<ul>
+<li>Online Certificate Status Protocol</li>
+</ul></li>
+<li>ChromeはOCSPを使って笹田さんに聞く</li>
+<li>CAはあなたのプライバシーを侵害するかも</li>
+<li>CAから返答がこなかったら、Certificateは正しい、と思われる</li>
+<li>OCSPのタイムアウトは10秒。ブラウザはそれを待たない</li>
+<li>ハッカーがこの10秒間に攻撃することができるかも</li>
+<li>OCSP Staplingで対応
+
+<ul>
+<li>クライアントとサーバの間でハッカーがStaplingを削除できるかもしれない</li>
+</ul></li>
+<li>OCSP Must-Staple
+
+<ul>
+<li>StapleがなかったらHard Fail</li>
+<li>いまのブラウザは使っていないがそろそろ使いはじめるのでは</li>
+</ul></li>
+<li>CLIENT FINISHED</li>
+<li>SERVER FINISHED</li>
+<li>ここまでで共通鍵を持てた</li>
+<li>安全!</li>
+<li>・・だったのはHeartbleedまでの話</li>
+<li>あとで秘密鍵を盗めばすべてのセッションの内容を見られてしまう</li>
+<li>Perfect Forward Secrecy (PFS)を使えば回避できる
+
+<ul>
+<li>セッション毎に別々のキーを使う</li>
+<li>あとで秘密鍵を盗んでも、そのセッションしか見られない</li>
+</ul></li>
+<li>DH Exchange
+
+<ul>
+<li>傍受しても見ることはできない</li>
+</ul></li>
+<li>TLS接続が確立できたので、Nginxが受け取ってUnix socketへ、socketにUnicornがむらがって、最終的にcute puppyが返ります</li>
+<li>おわり</li>
+</ul>
+
+<h2 id="fluentd-hacking-guide-(fluentd-ソースコード完全解説)">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</h2>
+
+<p><img src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10632216_691568960924388_342344591_n.jpg" /></p>
+
+<ul>
+<li>Flentdとは何かや使い方は説明しません</li>
+<li>Fluentdを使ったことがある、Fluentdプラグインを作ったことがある、Fluentdの内部に興味がある人がターゲット</li>
+<li>v0.10 branchのコードを使う</li>
+<li>トピック
+
+<ol>
+<li>Fluentdの起動シーケンス。プラグインの読み込み方</li>
+<li>InputプラグインがOutputプラグインへどうやってデータを渡すか</li>
+<li>BufferedOutputプラグインの仕組み</li>
+</ol></li>
+<li>早速コードを読んでいきます。ここからvimです。</li>
+<li>Fluent::Supervisorのstart</li>
+<li>run_configure</li>
+<li>Fluent::Config.parseで設定ファイルをパース</li>
+<li>Fluentd::Engine.configure</li>
+<li>EngineはFluentdの本体</li>
+<li>Engineでプラグインのロード</li>
+<li>try<em>load</em>pluginでプラグインのロードを試みる。最終的にrequire</li>
+<li>(input|output).configure(e)</li>
+<li>Fluent::Inputを継承してInputプラグインを定義する
+
+<ul>
+<li>initialize</li>
+<li>configure</li>
+<li>start</li>
+<li>shutdownを実装する決まり</li>
+</ul></li>
+<li>configureでは設定がおかしかったら<code>raise ConfigError</code>するなど</li>
+<li><code>Match.new(pattern, output)</code></li>
+<li>TailInputプラグイン
+
+<ul>
+<li>TailWatcherを別Threadでループさせる</li>
+</ul></li>
+<li>startメソッドでは何もしてないことが多い</li>
+<li>Supervisor#run_configure
+
+<ul>
+<li>reqire</li>
+<li>new</li>
+<li>configure(config</li>
+</ul></li>
+<li>Engine:run_engine
+
+<ul>
+<li>start</li>
+<li>shutdown if signal received</li>
+</ul></li>
+<li>listen
+
+<ul>
+<li><code>Coolio::TCPServer.new(...)</code></li>
+<li>on<em>messageでメッセージが渡ってきて、最終的にemit</em>stream(message)</li>
+</ul></li>
+<li>Outputプラグインで遅い処理をするとブロックしてしまう
+
+<ul>
+<li>そのままだあとin_forwardが新しいデータを受け付けられなくなってしまう</li>
+<li>そこでBufferedOutput</li>
+</ul></li>
+<li>BufferedOutput
+
+<ul>
+<li>lib/fluent/output.rb</li>
+<li>Fluentdはひとつのファイルに複数クラス書いてあるので読みづらい</li>
+</ul></li>
+<li>シーケンス
+
+<ul>
+<li>Input &ndash;emit(tag, es) &ndash;&gt; BufferedOutput</li>
+<li>BufferedOutput &ndash;emit(tag, data)&ndash;&gt; BasicBuffer</li>
+<li>BasicBufferはキューに入れるだけ</li>
+</ul></li>
+<li>HTTP的な処理はどこでやるのか？OutputThreadクラスで別スレッドでループを回している
+
+<ul>
+<li>定期的にtry_flush</li>
+<li>BasicOutputの@num_threadsでスレッド数増やせる</li>
+</ul></li>
+<li>隠しパラメータ
+
+<ul>
+<li>キューにまだデータが入っている時だけのtry間隔 @queued<em>chunk</em>flush_interval</li>
+<li>DeNAさんではここだけ0.1とか</li>
+<li>キューにもうデータがないときのtry間隔 @try<em>flush</em>interval</li>
+</ul></li>
+<li>常にBUfferedOutput使えば?
+
+<ul>
+<li>必ずしもそうではない</li>
+<li>例えばfluentd-elasticsearch</li>
+<li>キューのサイズが大きくなりつづける</li>
+<li>キューが大きくなるとパフォーマンス劣化する</li>
+<li>キューが大きくなり過ぎないようにチューニング</li>
+<li>buffer<em>chunk</em>limit(一つのチャンクサイズを大きくして一気にデータを吐き出せるようにする)</li>
+<li>隠しqueued<em>chunk</em>flush_intervalなど</li>
+<li>でも、Elasticsearch側がさばける以上はさばけないので、まずElasticsearch側でスループットを増やす。第一。</li>
+</ul></li>
+<li>Fluentdの貢献に役立ててください!</li>
+</ul>
+
+<h2 id="the-role-of-ruby-in-the-single-page-app.-(hall-b)">The role of ruby in the single page app. (Hall B)</h2>
+
+<p><img src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10693290_713223678756668_1641007942_n.jpg" /></p>
+
+<ul>
+<li>SPAには色々な選択しがある
+
+<ul>
+<li>framework</li>
+<li>library</li>
+</ul></li>
+<li>Content first development</li>
+<li>色々なチャレンジがある</li>
+<li>Ruby + JSの共存の一つの方法を紹介
+
+<ul>
+<li>これは新しいパターン</li>
+<li>原則としてはアプリを柔軟にする</li>
+<li>最終的には自分にあったものを選びましょう</li>
+</ul></li>
+<li>ZendeksはSPA</li>
+<li>トピック
+
+<ul>
+<li>Server Management</li>
+<li>Application Flexibility</li>
+<li>Data Provisioning</li>
+<li>Deployment</li>
+</ul></li>
+<li>CapistranoはSPAでどう使うか
+
+<ul>
+<li>SPAに必要な依存性はmanifest.jsonで管理</li>
+<li>DeployVerifier.verifyでインターネット経由でCDNにデプロイしたファイルがアクセスできるかチェック</li>
+<li>チェック通ったらmanifest.jsonを/path/to/appにアップロードして切り替え</li>
+</ul></li>
+<li>SPAをロードしてから動的にloginすると、応答性悪い
+
+<ul>
+<li>普通にログインページにリダイレクトさせたほうがいい</li>
+</ul></li>
+<li>AJAX化するとリクエスト数が爆発的に増えてアプリが遅い問題
+
+<ul>
+<li>SPAからAPIを複数回よぶ、RailsからこれまでどおりAR、RailsからAPIを呼ぶ、色々方法あるけどどれでも解決しない</li>
+<li>一つの方法は・・</li>
+<li>アカウントとユーザ情報など変化しないものをRails側でできるだけキャッシュ</li>
+<li>そしてレイアウトにJSONを埋め込む。scriptタグで</li>
+<li>例えばaccount情報のためのscriptタグ部分をfragment cacheでユーザID毎にキャッシュ</li>
+<li>AJAXするより、fragmentキャッシュしたscriptタグをRailsでrenderして、JSから普通に読む</li>
+</ul></li>
+</ul>
+
+<h2 id="scaling-is-hard,-let&#39;s-go-server-shopping!-or,-how-we-scaled-travis-ci,-and-helped-open-source-at-the-same-time.-(hall-a)">Scaling is hard, let&rsquo;s go server shopping! Or, How we scaled Travis CI, and helped Open Source at the same time. (Hall A)</h2>
+
+<p><img src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10706988_310230649164436_84764746_n.jpg" /></p>
+
+<ul>
+<li>Travis体操</li>
+<li>Weillington
+
+<ul>
+<li>400,000 people</li>
+</ul></li>
+<li>Tokyo = 3 new zealand</li>
+<li>What is Travis CI
+
+<ul>
+<li>like Jenkins</li>
+<li>137,194 OSS REPOS in the past 12 months</li>
+<li>27,000 builds per day</li>
+<li>79,930 jobs per day</li>
+<li>2.96 jobs per build</li>
+<li>testing different combinations</li>
+<li>gem開発時のconfidence</li>
+<li>68+ dedicated servers</li>
+<li>1,100+VMS</li>
+<li>Growth Took Time</li>
+<li>4 life stages</li>
+</ul></li>
+<li>travis-ci/travis-ci<br>
+
+<ul>
+<li>worker</li>
+<li>core: business logic</li>
+<li>hub: messaging</li>
+<li>api</li>
+</ul></li>
+<li>sponsors for servers</li>
+<li>more servers</li>
+<li>create a team</li>
+<li>6ヶ月後会社をやめた</li>
+<li>Why isn&rsquo;t this our job!</li>
+<li>We were commited!</li>
+<li>Love Campaignをした
+
+<ul>
+<li>クラウドファンディング</li>
+</ul></li>
+<li>We are crowd funded company</li>
+<li>$134,000 -&gt; サーバ、人</li>
+<li>すぐ有料プランを始める必要があった</li>
+<li>get billing to work</li>
+<li>there was never a shortage of work</li>
+<li>4 people</li>
+<li>oct 2012の話</li>
+<li>現在
+
+<ul>
+<li>profitable companyになった</li>
+<li>9,000 support emails</li>
+</ul></li>
+<li>そのために行った3つのこと
+
+<ul>
+<li>features</li>
+<li>bug reports</li>
+<li>optimizations</li>
+</ul></li>
+<li>Optimizations
+
+<ul>
+<li>optimizationはfeatureでもbugでもないのでほっておかれる。必要になるまでは</li>
+<li>optimizationにいくら時間がかかるかわかｒなあい</li>
+<li>time == money</li>
+<li>possible opportunity cost</li>
+<li>sometimes spending more money costs less</li>
+</ul></li>
+<li>docker使えるのでsupport@travis-ci.comまで連絡ください</li>
+<li>Ruby 2.1.3, 2.2.0-Preview 1</li>
+<li>Travisで今日から使える!</li>
+<li>One last thing
+
+<ul>
+<li>Travis CI Enterprise</li>
+<li>Docker</li>
+</ul></li>
+<li>TravisのDocker内ではDockerもsudoも使えない。priviledge mode offのため</li>
+</ul>
+
+<h2 id="tending-the-ruby-ecosystem-(hall-b)">tending the ruby ecosystem (Hall B)</h2>
+
+<p>(序盤聞き逃しました&gt;&lt;)</p>
+
+<ul>
+<li>acts<em>as</em>paranoidの例
+
+<ul>
+<li>メンテされてないうえに誰かのgit branchに依存していた</li>
+</ul></li>
+<li>解決方法を提案</li>
+<li>railsアプリにはsilent dependenciesがある
+
+<ul>
+<li>railsが様々なgemに依存している</li>
+</ul></li>
+<li>いくつかのライブラリは切りだされたけどまだまだ
+
+<ul>
+<li>rails/protected_attributes</li>
+<li>rails/activerecord-deprecated_&hellip;</li>
+</ul></li>
+<li>プロジェクトの状態を知る方法
+
+<ul>
+<li>Check recent commits</li>
+<li>How long since last commit?</li>
+</ul></li>
+<li>How to find owners
+
+<ul>
+<li>contributos graph on GitHub</li>
+<li>eメールでhelpの申し出</li>
+<li>やさしい挨拶から始める</li>
+<li>短期的な目的・長期的な目的</li>
+<li>この2つがあれば、あなたが信頼できる人であるとわかってもらえる</li>
+<li>自分が適任であることを述べて最後にthanks</li>
+</ul></li>
+<li>Last resort
+
+<ul>
+<li>メールに反応がなかったとき</li>
+<li>gemの名前をかえよう</li>
+<li>ライセンスはそのままにしよう</li>
+</ul></li>
+<li>Contact RubyGems Support
+
+<ul>
+<li>経緯を説明してgemの移管を頼むことができる(!)</li>
+</ul></li>
+<li>Plan for the worst
+
+<ul>
+<li>Specify version matrix of Ruby with RVM</li>
+<li>Run a different Gemfile for Undler</li>
+<li>See if you are compatible</li>
+</ul></li>
+<li>Integration testing
+
+<ul>
+<li>Use your app for integration test</li>
+<li>hopefully you are covered</li>
+<li>もしくはテストカバレッジがいい他のライブラリを使う</li>
+</ul></li>
+<li>Get approval
+
+<ul>
+<li>Beta releases: 早めにフィードバックをもらう</li>
+<li>Fix major regressions</li>
+<li>ユーザにアップグレードしてテストしてもらう</li>
+</ul></li>
+<li>Issues REmain
+
+<ul>
+<li>These issues are extinct</li>
+<li>Ship software with zero-bugs</li>
+</ul></li>
+<li>安全なリリースをしよう</li>
+<li>最後に
+
+<ul>
+<li>gemはpowerful, integral</li>
+<li>saving gems is rewarding</li>
+<li>many gems still need out help</li>
+<li>lts support Ruby</li>
+</ul></li>
+<li>私の猫です @gingypurrs</li>
+<li>Q. モチベーションは?
+
+<ul>
+<li>A. 依存したくない＆gemが好きだから</li>
+</ul></li>
+</ul>
+
+<p>ここで所用のため一足先にRubyKaigi離脱しました&gt;&lt;
+おつかれさまでした!
+ここでレポートしきれなかった残りの2セッションについては、他の参加者の方のレポートで読めるといいなぁ…。</p>
+
+<h2 id="他のrubykaigi-3日目レポート">他のRubyKaigi 3日目レポート</h2>
+
+<ul>
+<li><a href="http://qiita.com/tbpgr/items/bb1f2090b1167592262f">RubyKaigi 2014 3日目まとめ #rubykaigi - Qiita</a></li>
+</ul>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/8e045bf747ca7a90b1d955dc30217271?s=32'>
+<a href="https://twitter.com/mumoshu">Yusuke Kuoka</a>
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>

@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>RubyKaigi 2014 2日目 参加レポート by @mumoshu - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png' property='og:image'>
+<meta content='image/png' property='og:image:type'>
+<meta content='250' property='og:image:width'>
+<meta content='250' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='article' property='og:type'>
+<meta content='RubyKaigi 2014 2日目 参加レポート by @mumoshu' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2014/09/19/rubykaigi-2014-day2-report-by-mumoshu.html' property='og:url'>
+<meta content='2014-09-19T00:30:00Z' property='article:published_time'>
+<meta content='ruby' property='article:tag'>
+<meta content='rubykaigi' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2014/09/19</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>RubyKaigi 2014 2日目 参加レポート by @mumoshu</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>9/19(金)に開催された <a href="http://rubykaigi.org/2014">RubyKaigi 2014</a> 2日目の参加レポートです。
+弊社クラウドワークスも、<a href="http://rubykaigi.org/2014/sponsors">多くの有名企業に並んでスポンサーをさせていただいている</a>ので、全力で宣伝させていただきます！</p>
+
+<p>聴講しながら勢いてまとめているので読みづらい点もあると思いますが、全力で更新していきます！！</p>
+
+<p><img title="クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!" alt="RubyKaigi 2014 Official Sponsor" src="/images/rubykaigi/2014/badge-for-official-sponsor@2x.png" /></p>
+
+<p></p>
+
+<ul>
+<li>
+<a href="#各種情報">各種情報</a>
+<ul>
+<li>
+<a href="#スケジュール">スケジュール</a>
+</li>
+<li>
+<a href="#ustream">Ustream</a>
+</li>
+</ul>
+
+<p></li>
+<li>
+<a href="#9:30--pixivさんのスポンサーアピール">9:30- Pixivさんのスポンサーアピール</a>
+</li>
+<li>
+<a href="#9:40--キーノート-by-matz">9:40- キーノート by matz</a>
+</li>
+<li>
+<a href="#extreme-makeover:-rubygems-edition">Extreme Makeover: Rubygems Edition</a>
+</li>
+<li>
+<a href="#archeology-of-ruby:-removed-features-(ruby-考古学-機能編)">Archeology of Ruby: Removed Features (Ruby 考古学 機能編)</a>
+</li>
+<li>
+<a href="#make-"bundle-update"-more-fun-to-review">Make &ldquo;bundle update&rdquo; more fun to review</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#lockfileparserでgemfile.lockをparse">LockfileParserでGemfile.lockをparse</a>
+<ul>
+<li>
+<a href="#14:00--open-the-door-of-embedded-systems-to-iot!-mruby-on-lego-mindstorms-ev3-®">14:00- Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3 ®</a>
+</li>
+<li>
+<a href="#14:30--scalable-deployments---how-we-deploy-rails-app-to-100+-hosts-in-a-minute">14:30- Scalable deployments - How we deploy Rails app to 100+ hosts in a minute</a>
+</li>
+<li>
+<a href="#15:30--write-ruby-code-to-change-ruby-code">15:30- Write ruby code to change ruby code</a>
+</li>
+<li>
+<a href="#16:00--serverengine:-a-framework-for-multiprocess-servers-in-ruby">16:00- ServerEngine: a framework for multiprocess servers in Ruby</a>
+</li>
+<li>
+<a href="#16:30--kids,-ruby,-fun!:-introduction-of-the-smalruby-and-the-ruby-programming-shounendan">16:30- Kids, Ruby, Fun!: Introduction of the Smalruby and the Ruby Programming Shounendan</a>
+</li>
+<li>
+<a href="#17:30--lt">17:30- LT</a>
+<ul>
+<li>
+<a href="#practical-factory_girl">Practical factory_girl</a>
+</li>
+<li>
+<a href="#native-libs-and-gems-on-heroku-with-hammer">Native Libs and Gems on Heroku with Hammer</a>
+</li>
+<li>
+<a href="#ofruby---ruby-running-on-the-iphone">ofruby - Ruby running on the iPhone</a>
+</li>
+<li>
+<a href="#keep-freedom-on-ruby---a-magical-world,-'diversity'">Keep Freedom on Ruby - A magical world, &lsquo;Diversity&rsquo;</a>
+</li>
+<li>
+<a href="#10th-anniversary-of-rubyist-magazine">10th anniversary of Rubyist Magazine</a>
+</li>
+<li>
+<a href="#the-world's-fastest-tour-of-real-time-web-applications">The world&rsquo;s fastest tour of real time web applications</a>
+</li>
+<li>
+<a href="#let's-try-mruby's-edge-cases">Let&rsquo;s try mruby&rsquo;s edge cases</a>
+</li>
+<li>
+<a href="#probabilistic-model-for-inspirations-and-significance-of-programming">Probabilistic model for inspirations and significance of programming</a>
+</li>
+<li>
+<a href="#r/w-splitting-in-rails">R/W splitting in Rails</a>
+</li>
+<li>
+<a href="#invitation-for-v1.0.0">Invitation for v1.0.0</a>
+</li>
+<li>
+<a href="#how-the-rspec-team-and-i-built-the-smooth-upgrade-process-for-rspec-3">How the RSpec team and I built the smooth upgrade process for RSpec 3</a>
+</li>
+</ul>
+</li>
+</ul></p>
+
+<h2 id="各種情報">各種情報</h2>
+
+<h3 id="スケジュール">スケジュール</h3>
+
+<p>RubyKaigiの公式サイトにスケジュールが掲載されています。</p>
+
+<p><a href="http://rubykaigi.org/2014/schedule">RubyKaigi 2014 | Schedule</a></p>
+
+<h3 id="ustream">Ustream</h3>
+
+<p>当日参加できない方向けには、USTが用意されていました。素晴らしいですね!</p>
+
+<ul>
+<li><a href="http://www.ustream.tv/channel/rubykaigi1">Hall A</a></li>
+<li><a href="http://www.ustream.tv/channel/rubykaigi2">Hall B</a></li>
+</ul>
+
+<h2 id="9:30--pixivさんのスポンサーアピール">9:30- Pixivさんのスポンサーアピール</h2>
+
+<p><img src="http://photos-g.ak.instagram.com/hphotos-ak-xfa1/10684298_568313199963878_467251139_n.jpg" /></p>
+
+<h2 id="9:40--キーノート-by-matz">9:40- キーノート by matz</h2>
+
+<p><img src="http://photos-e.ak.instagram.com/hphotos-ak-xpa1/1516276_717455721668964_1173995058_n.jpg" /></p>
+
+<ul>
+<li>未来の話をします</li>
+<li>Heroku本は機能のうちに売り切れたが、今日追加があるかどうか?</li>
+<li>Herokuで2.2.0 Preview 1が早速使えるようになりました</li>
+<li>RubyConf 2001
+
+<ul>
+<li>11月に開催された。9.11の後だった。フロリダあたりでは炭疽菌が話題になっていたが、家族に止められつ参加。</li>
+<li>このとき既にRuby 2の話をしていた。</li>
+<li>Ruby 2の話は結局「Virtual Machine」をつくるよ、という話。</li>
+<li>VMが実現するまでバージョン1.9、2007年までかかった</li>
+<li>VMは簡単なものを書くのは1週間くらいだった。でもmatzは挫折。その頃、いろいろなVMを書く試みがあったが、笹田先生がYARVを提案。Yet Anotherだけあってまたきたよ、という感じだったが、最終的にはこれがRubyに取り込まれることになった。</li>
+</ul></li>
+<li>RubyConf 2002
+
+<ul>
+<li>このときもRuby 2の話をしていた</li>
+<li>このとき言っていたRuby 2には</li>
+<li>M17N (1.9 -&gt; 2007)</li>
+<li>Native thread (1.9 -&gt; 2007)</li>
+<li>Generational GC (2.1 -&gt; 2013)</li>
+</ul></li>
+<li>RubyConf 2003
+
+<ul>
+<li>Local variable scope (互換性を決定的に破壊することになるので断念)</li>
+<li>Multiple assignment (1.9 -&gt; 2007)</li>
+<li>Method visibility</li>
+<li>Keyword argument (2.0 2013)</li>
+<li>Method combination (2.0)</li>
+<li>SElector namespace (2.0, Refinemenetとして)</li>
+<li>Optional static type (結局入る気配なし)</li>
+</ul></li>
+<li>RubyConf 2004
+
+<ul>
+<li>唯一欠席した。末の娘が生まれたので、さすがにそのとき渡米すると一生なにか言われそうだったからw</li>
+<li>笹田先生、YARV発表</li>
+</ul></li>
+<li>RubyConf 2005
+
+<ul>
+<li>Stabby lambda (-&gt;)</li>
+<li>ものすごい評判が悪くて、こんなの絶対ダメだ、と言われた</li>
+<li>いざ入れてみたら、結構いいじゃん、と言われた</li>
+<li>他の人の印象は参考にならない例</li>
+<li>Real multi-value</li>
+<li>Traits</li>
+</ul></li>
+<li>RubyConf 2006
+
+<ul>
+<li>Bikeshed argument encourage</li>
+<li>自転車小屋の矛盾はみんな乗ってくる</li>
+<li>原子力発電所をどこに置くか、という話は誰も乗ってこない</li>
+</ul></li>
+<li>RubyConf 2007
+
+<ul>
+<li>1.9 introduced</li>
+<li>1.9がきたのでそのsj崩壊</li>
+</ul></li>
+<li>RubyConf 2008
+
+<ul>
+<li>Philosophy explained</li>
+<li>RUbyの背景にある哲学を紹介</li>
+</ul></li>
+<li>RubyConf 2009
+
+<ul>
+<li>DSLの力</li>
+</ul></li>
+<li>RubyKaigi 2009
+
+<ul>
+<li>Complex literal (2.1, 2013)</li>
+<li>Rational literal (2.1)</li>
+<li>True divisonn (&frac12; =&gt; &frac12;) 結局入らず</li>
+<li>Bitmap marking (2.0, 2013)</li>
+<li>Symbol GC (2.2, 2014)</li>
+</ul></li>
+<li>RubyConf 2010
+
+<ul>
+<li>Mix (traits)</li>
+<li>Module#prepend</li>
+<li>Refinement</li>
+<li>Rite (のちのmruby)</li>
+</ul></li>
+<li>RubyConf 2011-2014
+
+<ul>
+<li>No new ideas</li>
+</ul></li>
+<li>過去のRubyConf, RubyKaigiでは「こんなアイデアを将来のRubyに入れたいよね」という話をしてきた。</li>
+<li>結果、入ったものもあれば、入らなかったものもアッた。7/22は入らなかった。False rate = 32%。</li>
+<li>注目しなければならないのは2011-2014
+
+<ul>
+<li>Ruby 2が出てから先の話をしてない</li>
+<li>Ruby 2の改善に注力していたから</li>
+</ul></li>
+<li>&ldquo;OSS Community is like a shark&rdquo; 私たちは泳ぎ続けないと死んでしまう</li>
+<li>「そろそろ燃料を投下するべきではないか！」</li>
+<li>そこでRuby 3.0</li>
+<li>&ldquo;May happen in next 10 year&rdquo; Ruby 3.0、次の10年に実現するかもしれないこと。</li>
+<li>Concurrency</li>
+<li>JIT (LLVM?) &ldquo;パフォーマンスが良いことに対して文句を言う人はいない&rdquo; インラインアセンブラかどうかわからないが、何か</li>
+<li>Static typing</li>
+<li>Static typing?</li>
+<li>&ldquo;All new kids in the street&rdquo;</li>
+<li>20世紀に生まれた言語の多くは、スクリプト言語のようなものは変数に型のないような言語が多かった。Perl, Python, Ruby</li>
+<li>最近登場してきた言語Scala, TypeScript, Dirt, Goのようあんものはスクリプト言語っぽい使われ方をするようなものでも肩が付いている</li>
+<li>Feature #9999 by Davido</li>
+</ul>
+<pre><code class="highlight plaintext">def connect(r -&gt; Stream, c -&gt; Client) -&gt; Fiber
+ ...
+end
+</code></pre>
+
+<ul>
+<li>長年のライバルPythonの方にはPEP:3107がある</li>
+<li>Functional Annotation</li>
+</ul>
+<pre><code class="highlight plaintext">def connect(r: Stream, c: Client) -&gt; Fiber:
+ ...
+</code></pre>
+
+<ul>
+<li>Pythonの場合、実はFunctional Annotationを書いても解決しない</li>
+<li>Static typingとはひとことも書いてない。実はこれはドキュメント(!)</li>
+<li>mypy: optional static type checker</li>
+<li>Functional Annotationを使ってtype checkしよう、という新興の処理系</li>
+<li>このようにRubyに近いような言語でもStatic type checkingをしよう、という動きがある</li>
+<li>目的はこの3つだろう
+
+<ul>
+<li>Performance</li>
+<li>Compile-time check</li>
+<li>Documentation</li>
+</ul></li>
+<li>Performance
+
+<ul>
+<li>&ldquo;No one complains for faster Ruby&rdquo;</li>
+<li>速くなるならそれはそれで嬉しいが、パフォーマンスのために必須なのか?</li>
+<li>JavaScript V8, LuaJITなどを見ていると、必ずしも必要ないのでは?</li>
+<li>これらは言語的には動的型付けなのに、大変高速である</li>
+<li>技術次第。動的型付けでも不可能ではない?</li>
+<li>だから、パフォーマンスのためにtypeが必要、というのは思い込みっぽい</li>
+</ul></li>
+<li>Compile-time check
+
+<ul>
+<li>これは嬉しい事が多い</li>
+<li>Static analysis</li>
+<li>多くのバグは型の矛盾を含むので、それによってバグが見つけられる事が多い</li>
+<li>Refactoring漏れの検出もできる</li>
+<li>型があってるからテストしなくてもいいか、というとそんなことはない</li>
+<li>Test coverageが少なくていい、ってことにはならない</li>
+<li>&ldquo;But less flexible&rdquo; duck typingは型宣言と相性が悪い</li>
+</ul></li>
+<li>Documentation
+
+<ul>
+<li>Rubyのドキュメントを書いているときに、変数名で何を渡したらいいか判断するが、型がわからない</li>
+<li>文字列なのか数値なのか、ドキュメントにぼんやり書いてあることもあれば、書いてないことも</li>
+<li>&ldquo;Much better than comments&rdquo;</li>
+<li>矛盾しているとコンパイラが指摘してくれるので、信頼性のあるドキュメントになる</li>
+<li>&ldquo;No investigation into detail&rdquo;</li>
+<li>「こういう処理をしているから文字列を渡せばいいよね」というinvestigationが不要になり、型宣言をみるだけでよくなる</li>
+</ul></li>
+<li>&ldquo;Why not static typing?&rdquo;: static typingがいまRubyにない理由
+
+<ul>
+<li>なくてもちゃんと動いたから今ない、というのも理由w</li>
+<li>&ldquo;Duck typing&rdquo; by Dave Thomas</li>
+<li>通常Nominal typingなので、Stringと同じ振る舞いをするものをStringとして渡すことができない</li>
+<li>static typingを入れると、我々の作り上げてきたduck typingの美しい世界</li>
+<li>いままで書かれた型のないRubyコードとの互換性なので、型はoptionalにせざるをえない</li>
+<li>型のない世界から型のある世界に渡すと、型はなくなる。復元できない。プログラムを実行する過程で、どんどん型が落ちていくことになる</li>
+<li>例えばTypeScriptはJavaScriptに決定的に型をつける仕組み。dynamic typingも例外的にできるがほおｔんど決定的に型をつける。JavaScriptには型を後付してやることができる。めんどくさいけど。こういう世界では型はうれしい。</li>
+<li>「Pがつく言語みたいに、バージョン5と6は違う言語、みたいなことになりたくない」</li>
+</ul></li>
+<li>DRY: Don&rsquo;t Repeat Yourself
+
+<ul>
+<li>Static typingで書こうとすると、重複を感じる。DRYに書きたい。</li>
+<li>プログラムの本質はどんなことをコンピュータにさせたいか伝えることにある</li>
+<li>Code &amp; Declaration</li>
+<li>型は「どんなデータを必要とするか」ということを表す</li>
+<li>コードを書いた時点で意図がある、その上でまたDeclarationを書かなければならないのが繰り返し感がある</li>
+<li>Soft-typing</li>
+<li>No declaration needed</li>
+<li>コードから「こういう型を要求しているに違いない」という、型推論のようなことをする</li>
+<li>Based on duck typing</li>
+<li>Type inference</li>
+</ul></li>
+</ul>
+<pre><code class="highlight plaintext">a=1 # type of a is Integer
+</code></pre>
+<pre><code class="highlight plaintext">def foo(a)
+  print a.to_int
+end
+
+foo(1) # OK: 1 has to_int
+foo("foo") # NG: "a" does not have to_int
+</code></pre>
+
+<ul>
+<li>Type is represented by:
+
+<ul>
+<li>Set of methods: 型はメソッドの集合として表される</li>
+<li>name</li>
+<li>return value</li>
+<li>number and type of arguments</li>
+<li>Class</li>
+</ul></li>
+<li>これはBest-effort type checker
+
+<ul>
+<li>お行儀の良いプログラムを書いているといい線いくのではないか</li>
+</ul></li>
+<li>Rubyはお行儀の悪いプログラムも書ける</li>
+<li>そこでTarget subset of the language
+
+<ul>
+<li>対象となるプログラムのクラスがせまい。機能的制限。</li>
+<li>例えば</li>
+<li>require</li>
+<li>define_method</li>
+<li>method_missing</li>
+<li>などには制限がかかると思う</li>
+<li>型宣言がないのでそのままDocumentationとしての働きができない</li>
+<li>Generates doc / IDE info</li>
+<li>このネタは日経Linux 2014年9月号/10月号に掲載予定</li>
+</ul></li>
+<li>Subset
+
+<ul>
+<li>Rubyは長い歴史の間に「過去に入れちゃったけど捨てられない」というものがある</li>
+<li>「このサブセットのなかでプログラミングをするといいことがあります、外れるといいことはないけど互換性がえられます」</li>
+<li>Rubyは互換性を大切にする</li>
+<li>&ldquo;Two languages in One&rdquo; あるサブセットの中ではsoft-typing</li>
+</ul></li>
+<li>Soft-typed language
+
+<ul>
+<li>Dynamic typed language</li>
+</ul></li>
+<li>Fallback to super-set
+
+<ul>
+<li>Strongly encouraging the former</li>
+</ul></li>
+<li>将来起きるかもしれないし、起きないかもしれない</li>
+<li>Ruby 2が一般化して色々な事ができるようになったいま、そろそろ新しいことを始めようじゃないか</li>
+<li>未来に備えよう、コミュニティとして死なないように、ワクワクすることを考え続けよう</li>
+<li>Happy Hacking</li>
+</ul>
+
+<p>(衣装提供: VASILYさん)</p>
+
+<ul>
+<li>Q: Rubyに型をつける研究が過去にあったが、はやらなかった理由は?
+
+<ul>
+<li>A: Rubyに単純に型を付けるのは不可能なので、RubyにSubsetの概念を導入するのが重要。そこがなかった。</li>
+<li>A: そもそも難しい。型一致じゃなくて構造一致のような型システムを後付で導入するのは難しい。それも理由ではないか。</li>
+</ul></li>
+<li>Q: if分のthen-elseで違うメソッド読んでると、外側からどちらが呼ばれるからわからない。じゃあSubsetからif文を外すのかというと外せない。どうするのか?
+
+<ul>
+<li>A: orになるのでは</li>
+</ul></li>
+<li>Q: メタプログラミングはプログラムの最初の方で行われるので、その後に解析すればいいのではないあｋ
+
+<ul>
+<li>A: そのアイデアはなかったので検討してみます</li>
+</ul></li>
+</ul>
+
+<h2 id="extreme-makeover:-rubygems-edition">Extreme Makeover: Rubygems Edition</h2>
+
+<p><img src="http://photos-c.ak.instagram.com/hphotos-ak-xaf1/10706958_298408827029082_138113761_n.jpg" /></p>
+
+<ul>
+<li>まずBundlerにDDoSがあった
+
+<ul>
+<li>昨年はどうして起こったか、どう対処したかの話をした</li>
+</ul></li>
+<li>次はSecurity breahがあった
+
+<ul>
+<li>gemをアップロードすると任意のコードを実行されてしまう?</li>
+<li>結果的にrubygems.orgをEC2でrebuildした</li>
+</ul></li>
+<li>その後、Travis network issuesがあった
+
+<ul>
+<li>DNSサーバを変えるなどして対処</li>
+</ul></li>
+<li>次はSSL failures
+
+<ul>
+<li>またrubygems.orgをRebuildした</li>
+</ul></li>
+<li>Budler Source CVE</li>
+<li>How it works today with a fast connection, at least</li>
+<li>Gemspecsの置き方を変えた
+
+<ul>
+<li>Original gemspecs</li>
+<li>/Marshal.4.8.gz (Marshaled gemspecs)</li>
+<li>/specs.4.8.gz (List of gemspecs)</li>
+</ul></li>
+<li>Bundler API
+
+<ul>
+<li>Plan</li>
+<li>Simple plaintext indexes</li>
+<li>clients cache the indexes
+
+<ul>
+<li>例えばgem install railするとplaintextで書かれたindexをダウンロードする必要があるが、次回以降はキャッシュ</li>
+</ul></li>
+<li>put a CDN on it
+
+<ul>
+<li>現状gem pushするとus-west?のサーバに保存され、クライアントはそこからダウンロードすることになる。遠い。</li>
+</ul></li>
+<li>easy local mirrors
+
+<ul>
+<li>オフィスごとにrubygems.orgのミラーをつくって、そこからgem install?</li>
+</ul></li>
+<li>The New Index
+
+<ul>
+<li>/versions</li>
+<li>rack 1.0.0,1.0.1,1.0.2</li>
+<li>sinatra 0.9.6,1.0.,1.1</li>
+<li>rack 2.0.0</li>
+<li>gem毎に行が分かれているので、entire fileをダウンロードする必要がない/</li>
+<li>/deps/sinatra</li>
+<li>0.9.6 rack:&gt;= 0.9.1</li>
+<li>1.0 rack:&gt;= 1.0</li>
+<li>1.1.4 rack:~&gt; 1.1,tilt:&lt; 2.0&hellip;</li>
+</ul></li>
+</ul></li>
+<li>現状
+
+<ul>
+<li>new indexを設計した</li>
+<li>bundler api経由でnew indexが取れるようになった</li>
+</ul></li>
+<li>TODO
+
+<ul>
+<li>rubygems.orgからnew indexをとれるように</li>
+<li>fastly-hosted index file</li>
+</ul></li>
+<li>gem install bundler</li>
+<li><code>export_BUNDLE_JOBS=4</code>
+
+<ul>
+<li>parallel gem installs</li>
+</ul></li>
+<li>rubygems.org mirror
+
+<ul>
+<li>https://tokyo-m.rubygems.org</li>
+</ul></li>
+<li>New resolver
+
+<ul>
+<li>better erors</li>
+<li>faster installs</li>
+<li>many bugfixes</li>
+</ul></li>
+<li>You can help!
+
+<ul>
+<li>github.com/bundler/bundler</li>
+<li>CONTRIBUTING.md</li>
+</ul></li>
+</ul>
+
+<h2 id="archeology-of-ruby:-removed-features-(ruby-考古学-機能編)">Archeology of Ruby: Removed Features (Ruby 考古学 機能編)</h2>
+
+<p><img src="http://photos-f.ak.instagram.com/hphotos-ak-xfa1/10691885_654613707986989_1724238965_n.jpg" /></p>
+
+<ul>
+<li>過去にあったのに消された機能
+
+<ul>
+<li>Safe Level</li>
+<li>$SAFE=4 is obsolete since 2.1.0</li>
+<li>不完全なSandbox</li>
+<li>Feature #8468 Remove $SAFE
+
+<ul>
+<li>GitHub Tokyo drinkupでmatzが合意</li>
+</ul></li>
+<li>$SAFE &lt; 4はバグ発見のためのフェールセーフ機能として残った</li>
+<li>代わりに1.9.1からあるuntrustというメソッドが追加されたが活用されず2.1.0deprecated</li>
+<li>&lsquo;.&#39;が$LOAD_PATHからひっそりと削除された</li>
+<li>かわりにrequire_relativeを使う</li>
+<li>Ruby 1.9の多言語化対応の影響で$KCODEの代わりにEncoding</li>
+<li>$KODEは既にnilを返しつつwarningになった</li>
+<li>Regexp options: /n /e /s /uは互換性のために残っていて、そのうちなくなるかも</li>
+<li>グローバル変数$= (ignore case)</li>
+<li>大文字小文字の無視フラグ</li>
+<li>1.8.7でdeprecate、1.9.3で削除</li>
+<li>$deferr (1.6.7から1.8.0)</li>
+<li>子プロセスに影響しないエラー出力リダイレクト</li>
+<li>現在は$stderrへの代入は子プロセスに影響しない</li>
+<li>STDERR.reopenなどで子プロセスに影響する</li>
+<li>if cond:</li>
+<li>1.8までは</li>
+</ul></li>
+</ul>
+<pre><code class="highlight plaintext">if true:
+  p true
+end
+</code></pre>
+
+<p>という隠し機能があった</p>
+
+<ul>
+<li>File.exists?
+
+<ul>
+<li>Ruby本体のメソッドは三単現のsを付けないルールがあるが、ついてた</li>
+<li>一度警告がでなくなったことがあったが、また出るようになった。</li>
+<li>recommented: File.exist?</li>
+<li>deprecated: File.exists?</li>
+<li>開発版のみに入っていたけど削除された機能</li>
+</ul></li>
+<li>Symbol &lt; String in 2006 (1.9.0-dev)
+
+<ul>
+<li>問題が多かったため継承関係なくした</li>
+<li>「caseとかでたくさんのバグを産んでしまう」 by matz日記</li>
+</ul></li>
+<li><code>__send__</code> cannot call private methodsになったことがあったが問題が多かった
+
+<ul>
+<li>一時あった_<em>send, _</em>send!は削除</li>
+<li>public_sendが1.9.1が最終的に導入</li>
+</ul></li>
+<li>real multi-value(to_splat)
+
+<ul>
+<li><code>a, b, = mvalue</code></li>
+</ul></li>
+<li>Symbol.find in 2.0.0-dev
+
+<ul>
+<li>Symbolが既に存在するかを調べるメソッドが追加されたが、2.2.0でGCされるようになったので削除</li>
+<li>必要だと思ったら再度redmineでリクエストしてください、とのこと</li>
+</ul></li>
+<li>statfs in 2.0.0-dev
+
+<ul>
+<li>「色々込み入っているので最低限はtestに、それ以上はgemに」 by matz</li>
+<li>まとめ</li>
+</ul></li>
+<li>いくつかの機能は開発版だけで消えてしまった</li>
+<li>理由を考えることで今後の新機能提案に活かしてください
+
+<ul>
+<li>Q: 次に消えそうな機能はなんですか</li>
+</ul></li>
+<li>A: 全然考えてなかったw
+
+<ul>
+<li>Q: 消えて欲しい機能は?</li>
+</ul></li>
+<li>A: 正規表現のオプションは整理してもいいんじゃないのかなと思います</li>
+</ul>
+
+<h2 id="make-&quot;bundle-update&quot;-more-fun-to-review">Make &ldquo;bundle update&rdquo; more fun to review</h2>
+
+<p><img src="http://photos-e.ak.instagram.com/hphotos-ak-xfp1/10299649_882751865070172_1313374247_n.jpg" /></p>
+
+<ul>
+<li>Solution
+
+<ul>
+<li>GitHubのCompare View URLを活用したい</li>
+<li>https://github.com/markevans/dragonfly/compare/v1.0.0&hellip;v1.0.7</li>
+<li>バージョンタグやコミットID間で差分を見ることができる</li>
+</ul></li>
+<li>Motivation
+
+<ul>
+<li>昨年&quot;Continuous gem dependency ~&ldquo;の発表をした</li>
+<li>&quot;bundle update&quot;はよく忘れられる</li>
+<li>定期的に人力でやるのは面倒</li>
+<li>自動化!</li>
+<li>quipper/schemaというprivateなgemにビジネスロジックをまとめている?</li>
+<li>qlink, qcreateなどのサービスはschemaが更新されたらbundle updateする必要がある</li>
+<li>それを手動でやる必要はない</li>
+</ul></li>
+<li>Implementation
+
+<ul>
+<li>方法</li>
+<li>Receive webook</li>
+<li>Compare Gemfile.lock(s)</li>
+<li>Build URL</li>
+<li>Post comment</li>
+</ul></li>
+<li>Compare Gemfile.lock(s)</li>
+</ul>
+<pre><code class="highlight plaintext">file = octokit.contents(
+  repo_full_name, { ref: 'master' }
+).find { | content| ... }
+
+# LockfileParserでGemfile.lockをparse
+</code></pre>
+<pre><code class="highlight plaintext">old_lockfile.specs.each do |old_spec|
+  new_lockfile_specs.each do |new_spec|
+    if old_spec.name == new_spec.name
+      if old_spec.version != new_spec.version
+        # ...
+</code></pre>
+
+<ul>
+<li>結果
+
+<ul>
+<li>schemaにプルリクエストを投げると、他のプロジェクトへschemaのバージョン更新のPRが自動的に飛ぶ</li>
+</ul></li>
+<li>問題
+
+<ul>
+<li>rails関連のgemはgemspecに書かれているホームページがGitHubになっていないなどの問題でうまく処理でいない</li>
+<li>git push &ndash;forceするとWebHookに通常とは異なるリクエストが飛ぶが、その対応はできてない</li>
+</ul></li>
+<li>教訓
+
+<ul>
+<li>継続的改善が重要</li>
+</ul></li>
+</ul>
+
+<h2 id="14:00--open-the-door-of-embedded-systems-to-iot!-mruby-on-lego-mindstorms-ev3-®">14:00- Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3 ®</h2>
+
+<p><img src="http://photos-a.ak.instagram.com/hphotos-ak-xpa1/10543048_702526429826096_1828283942_n.jpg" /></p>
+
+<ul>
+<li>自己紹介
+
+<ul>
+<li>ハンドルネームの「ちはやふる」は落語の演目が由来(!)</li>
+<li>日本の製造業のヒエラルキー。上から士農工商、メカ、エレキ、ソフト。私は一番下。</li>
+<li>機械のボタンの色変えろとかはないが、ソフトはいつでも変えろ、と言われる！最後のしわ寄せが来るのがソフト。</li>
+</ul></li>
+<li>LEGO Mindstorms
+
+<ul>
+<li>ToyというよりはEducational Tool</li>
+<li>米国ではSTEM educationとも呼ばれる</li>
+<li>Science</li>
+<li>Technology</li>
+<li>Engienering</li>
+<li>Mathematics</li>
+<li>のような分野の教材として使おう、ということ</li>
+</ul></li>
+<li>RasberryPiの数倍の価格
+
+<ul>
+<li>個人で買うと辛いが、RubyKaigiで発表ネタになれば元が取れる</li>
+</ul></li>
+<li>Mindstorm
+
+<ul>
+<li>1st gen = RCX</li>
+<li>1998</li>
+<li>H8 16MHz</li>
+<li>2nd gen = NXT</li>
+<li>2006</li>
+<li>ARM7 48MHz</li>
+<li>3rd gen = EV4</li>
+<li>2013</li>
+<li>ARM9 300MHz</li>
+<li>RCXも現役で使われている</li>
+</ul></li>
+<li>EV3の開発環境: ビジュアルプログラミング。対象年齢10歳以上</li>
+<li>Remote control対応。PCから遠隔操作することもできる。
+
+<ul>
+<li>PCでRubyからMindstormをリモートコントロールするLTをみたことがある</li>
+<li>今回はリモコンではなく組み込み。Standalone、EV3上でRubyで動かす。</li>
+</ul></li>
+<li>ファームウェアアーキテクチャ。Linuxなので起動にも終了にも数秒かかる。
+
+<ul>
+<li>Linux</li>
+<li>VM</li>
+<li>System Program, User Program, Direct Command</li>
+</ul></li>
+<li>拡張ファームウェア
+
+<ul>
+<li>ev3dev</li>
+<li>full Debian 7 (wheezy)</li>
+<li>customized for the LEGO MINDSTORM EV3 controller</li>
+<li>Bootable from microSD (標準のファームウェアを壊さない)</li>
+<li>GitHubで公開されている</li>
+<li>2代目からは設計図もソースコードも公開されている</li>
+<li>3代目からはソースコードがGitHubで公開されている</li>
+<li>言語</li>
+<li>C/C++</li>
+<li>Python</li>
+<li>JavaScript</li>
+<li>Lua</li>
+<li>Go</li>
+<li>全部動きます</li>
+</ul></li>
+<li>What&rsquo;s mruby?
+
+<ul>
+<li>&quot;the lightweight implementation of Ruby language complying to (part of) the ISO standard. Its syntax is Ruby 1.9 compatible.&rdquo;</li>
+<li>can be embedded and linked to your app</li>
+</ul></li>
+<li>Can we use mruby in embedded systems?
+
+<ul>
+<li>組み込み業界的にはGC大丈夫なの、仕事で使えるの?という反応</li>
+</ul></li>
+<li>RubyKaigiで回路図を出してみたかった(会場笑)</li>
+<li>RCX向け光センサ: 蓄電池内蔵で、充電・センシングをソフトで切り替える仕組み。RCXだとマイコンがbusyなので、mrubyだとGCなどのタイミングで切り替えが間に合わないため、光センサ使用不可</li>
+<li>最近の光センサ: 光センサにマイコンが内蔵されていてそちらで充電・センシング切り替えをやってくれるので、Mindstorm側のマイコンがbusyでも関係ない。mruby使える。</li>
+<li>デモ - RubyJinja</li>
+</ul>
+
+<h2 id="14:30--scalable-deployments---how-we-deploy-rails-app-to-100+-hosts-in-a-minute">14:30- Scalable deployments - How we deploy Rails app to 100+ hosts in a minute</h2>
+
+<p><img src="http://photos-d.ak.instagram.com/hphotos-ak-xaf1/10684198_1628842794009075_686401127_n.jpg" /></p>
+
+<ul>
+<li>ISUCONの宣伝(Iikanjini Speed-up CONtest)</li>
+<li>今日はなさないこと
+
+<ul>
+<li>Rails</li>
+<li>Continuous Delivery</li>
+<li>App servers auto-scaling</li>
+</ul></li>
+<li>Cookpadのデプロイ規模
+
+<ul>
+<li>rails-statが桁あふれする規模のアプリ</li>
+<li>サーバ台数max 140台</li>
+<li>デプロイmax 10回/day</li>
+</ul></li>
+<li>デプロイルール「CIビルドが通ったものを日中だけデプロイ可能。エラーが出たら戻してください。」</li>
+<li>これまではデプロイサーバからCapistranoでssh+rsync</li>
+<li>Deploy via Chat</li>
+<li>デプロイにかかる時間の内訳
+
+<ul>
+<li>CIに10分</li>
+<li>タグ打ち</li>
+<li>デプロイに通常 10分</li>
+<li>トータル15&hellip;20分</li>
+</ul></li>
+<li>Capistrano 2向けのデプロイ: complicated super historical script</li>
+<li>2595行もあった</li>
+<li>さすがにdead codeなんとかしたいという問題</li>
+<li>SSH重いという問題</li>
+<li>High CPU usage on deployment. たまにこける</li>
+<li>「たまにこける」というのが問題</li>
+<li>10分で終わるはずのデプロイが、20分くらいかかることもある。トータルで20分から30分。</li>
+<li>開発基盤チームは気持ちよく開発できるようにすることをゴールにしている。CIが遅かったらCIを高速化するし、テストの手順が複雑なら自動化するし、デプロイが遅かったら高速化する。</li>
+<li>今回はデプロイに手を加えることになった</li>
+<li>Capistrano 3はどうか
+
+<ul>
+<li>SSHのハンドリングがまし。でもSSHにはまだ依存している。</li>
+</ul></li>
+<li>新しいツールをつくった</li>
+<li>sorah/mamiya
+
+<ul>
+<li>Rubyで書かれている</li>
+<li>Serfをオーケストレーション用に使っている</li>
+<li>ファイル配布にS3利用</li>
+<li>Capistranoとディレクトリ構造に互換性があるので移行しやすい</li>
+</ul></li>
+<li>Serf
+
+<ul>
+<li>Gossip protocol</li>
+<li>うわさ話が広がるようにメッセージをfanoutしていく</li>
+<li>hashicorp/serf</li>
+<li>SSHでやるより速いだろう</li>
+<li>sorah/villein</li>
+</ul></li>
+<li>mamiyaのアーキテクチャ
+
+<ul>
+<li>Master node</li>
+<li>HTTP API</li>
+<li>serfへのメッセージ送信</li>
+<li>他のnodeの監視</li>
+<li>Agent node</li>
+<li>Deploy Script</li>
+<li>how to build, preapre, release</li>
+<li>Package</li>
+<li>tarball of files to deploy</li>
+<li>Storage</li>
+<li>packageの置き場所</li>
+<li>標準ではS3</li>
+<li>Step</li>
+<li>デプロイの各処理。それぞれ呼び出すことができる</li>
+<li>Fetch</li>
+<li>Prepare</li>
+<li>Switch</li>
+</ul></li>
+<li>これでSSH依存は脱したが、まだできることがあるのでは</li>
+<li>Stepはバラバラに実行できるので、bundle installや最新packageの配信はCI通った後に予め行っておく。</li>
+<li>結果的に数十秒でデプロイできるようになった</li>
+<li>デモ</li>
+<li>Future
+
+<ul>
+<li>Better documentation (soon)</li>
+<li>Auto deploy when joining cluster</li>
+<li>Web UI</li>
+<li>Better error tracking, handling</li>
+</ul></li>
+</ul>
+
+<h2 id="15:30--write-ruby-code-to-change-ruby-code">15:30- Write ruby code to change ruby code</h2>
+
+<p><img src="http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10665610_575134155946253_172027716_n.jpg" /></p>
+
+<ul>
+<li>ストーリー
+
+<ul>
+<li>Project AでRSpecの新しいシンタックスを使おう! → OK</li>
+<li>Project BでRSpecの新しい.. → まあ、OK</li>
+<li>Project Cで.. → もう繰り返したくない！</li>
+</ul></li>
+<li>&ldquo;Developers hate changing code again and again&rdquo;
+
+<ul>
+<li>そこでAutomation</li>
+</ul></li>
+<li>Metric Tools
+
+<ul>
+<li>cane: fails your build if code quality threasholds are not met</li>
+<li>reek: examies classes modules and methods and any code problem</li>
+</ul></li>
+<li>これらは何をすべきか教えてくれるだけ、その何かを自動的に行なってはくれない</li>
+<li>RubyMineのようなIDE
+
+<ul>
+<li>rename, extract methodsリファクタリングなどのような決まりきった処理は自動的に行える</li>
+<li>しかし、カスタマイズできない</li>
+</ul></li>
+<li>じゃあテキストベースで変換するか?
+
+<ul>
+<li>`sed -i &ldquo; &rsquo;s/FactoryGirl.create/create/g&rsquo; spec/*<em>/</em>.rb&rdquo;</li>
+</ul></li>
+<li>テキストベースだと難しいケースがある
+
+<ul>
+<li>User.findの古い書き方(conditionあり)から、lambdaを使った新しい書き方への変換</li>
+</ul></li>
+<li>AST</li>
+<li>Tools
+
+<ul>
+<li>ripper</li>
+<li>seattlerb/parsetree</li>
+<li>seattlerb/ruby_parser</li>
+<li>whitequark/parser</li>
+</ul></li>
+<li>Example
+
+<ul>
+<li>yujinakayama/transpec</li>
+</ul></li>
+<li>Based on AST method: accurate, but hard to read</li>
+<li>Solution: xinminlabs/synvert</li>
+<li>Demo: http://xinminlabs.github.io/synvert/
+
+<ul>
+<li><code>synvert --run factory_girl/use_short_syntax</code> → <code>git diff spec/</code></li>
+<li>Rails 2.3 -&gt; Rails 3.0, 3.2 -&gt; 4.0への自動変換(!)</li>
+<li>Rubyのキーワード引数スタイルへの書き換え(!)</li>
+</ul></li>
+<li>Synvert DSL
+
+<ul>
+<li>within<em>file, within</em>node, if<em>exist</em>node, append/insert/insert<em>after/replace</em>with</li>
+</ul></li>
+<li>http://xinminlabs.github.io/synvert/dsl/</li>
+<li><a href="https://github.com/xinminlabs/synvert-tools">synvert-tools</a>
+
+<ul>
+<li>ソースコードをASTに変換したり、Synvert DSLをテストしたり、をWeb UI上で試すことができる</li>
+<li>DSLスニペットや対象ソースコードなどを変更すると、結果がリロードなしで即座に確認できる</li>
+</ul></li>
+<li><a href="https://github.com/xinminlabs/synvert-snippets">synvert-snippets</a></li>
+<li>Want more?
+
+<ul>
+<li>Fork and send pull request</li>
+<li>Open issues on GitHub</li>
+<li>Hire us to refactor your project</li>
+</ul></li>
+</ul>
+
+<h2 id="16:00--serverengine:-a-framework-for-multiprocess-servers-in-ruby">16:00- ServerEngine: a framework for multiprocess servers in Ruby</h2>
+
+<p><img src="http://photos-g.ak.instagram.com/hphotos-ak-xpa1/925964_525897497544478_1474657486_n.jpg" /></p>
+
+<ul>
+<li>アーキテクチャ
+
+<ul>
+<li>Supervisor</li>
+<li>Server</li>
+<li>Worker</li>
+<li>worker_typeで簡単に切り替え
+
+<ul>
+<li>Embedded (main thread, default)</li>
+<li>Thread (for jruby)</li>
+<li>Process (fork, doesnt work on windows)</li>
+</ul></li>
+<li>TDではjrubyを使ってないので誰かテストして欲しい(!)</li>
+</ul></li>
+<li>Dynamic reconfigurationの仕組みが用意されている。
+
+<ul>
+<li>Workerにreloadメソッドを用意しておく</li>
+</ul></li>
+<li>Log rotation
+
+<ul>
+<li>Ruby標準のLoggerはマルチプロセスで動かすとバグる</li>
+<li>ServerEngineのロガーはその問題を解決&amp;traceレベルに追加対応</li>
+<li>Ruby 2.1以降はruby-core入り</li>
+</ul></li>
+<li>Signal handling
+
+<ul>
+<li>Queue based signal handling</li>
+<li>CRubyのSignalハンドリングはメインスレッドで行われる</li>
+<li>マルチスレッド環境ではデッドロックする</li>
+<li>そこでSignalThreadでキューベースでシグナルを処理</li>
+<li>Fluentdではシグナル毎にスレッドを起動していていけてないのでこうした</li>
+</ul></li>
+<li>Live Restarrt
+
+<ul>
+<li>サーバ再起動時間を最小化する</li>
+<li>Fluentdでout_forward使ってると、再起動時に切れてクライアント側で例外処理する必要がある。</li>
+<li>接続を保ったまま再起動して欲しい</li>
+<li>工夫しないと完全には実装できないが、その基盤をServerEngineが用意している</li>
+<li>SIGINT時にサーバを多重に起動して、送り先を切り替える。</li>
+<li>supervisorを使ってる時しかできない</li>
+</ul></li>
+<li>sigdump gem
+
+<ul>
+<li>JavaVMにはSIGQUITを送るとメモリやスレッドの状態をdumpする機能がある</li>
+<li>TDでもHadoopが止まったりしたときに活躍する</li>
+<li>Rubyでデーモンとか書いてるとたまにそういうことがある</li>
+<li>Ruby版のsigdumpが欲しくなった</li>
+<li>ServerEngineにはビルトイン。SIGINT送るとdumpされる。</li>
+<li>定期的にkill -INT pidしてやればスレッドの状態なんどをモニタできる</li>
+</ul></li>
+<li>Usecase: Sneakers
+
+<ul>
+<li>jondot.github.com/sneakers</li>
+<li>ServerEngine + RabbitMQ</li>
+</ul></li>
+<li>Usecase: Fluentd v1
+
+<ul>
+<li>CRubyでヘヴィーなデータ加工をするとそこがボトルネックになる</li>
+<li>Zero downtime restart</li>
+</ul></li>
+</ul>
+
+<h2 id="16:30--kids,-ruby,-fun!:-introduction-of-the-smalruby-and-the-ruby-programming-shounendan">16:30- Kids, Ruby, Fun!: Introduction of the Smalruby and the Ruby Programming Shounendan</h2>
+
+<p><img src="http://photos-h.ak.instagram.com/hphotos-ak-xaf1/10683813_1520926471486639_1554393760_n.jpg" /></p>
+
+<ul>
+<li>Sponsored by NaCl</li>
+<li>NaCl
+
+<ul>
+<li>is SIer</li>
+<li>60人中30人はRubyで開発</li>
+<li>Matsumotoさんはじめ6名のCRubyコミッタを擁する</li>
+<li>島根県</li>
+</ul></li>
+<li>Ruby プログラミング少年団
+
+<ul>
+<li>青少年のための任意団体</li>
+<li>毎月第3日曜日に親子向けのプログラミング教育を実施</li>
+<li>将来は各地にチームがあって、地区大会・県大会・全国大会があるような少年団をつくりたい</li>
+</ul></li>
+<li>プログラミング教育の現状
+
+<ul>
+<li>国内外で盛り上がっている</li>
+<li>もっとも活発なのはアメリカ</li>
+<li>幼稚園から高校まで20,000 teachersが授業に取り入れている</li>
+<li>オバマ大統領が必修化を目指している</li>
+<li>5歳からアルゴリズムの初歩とプログラミング、デバッグのカリキュラム。Googleの人も参画。</li>
+<li>エストニア、シンガポールなどでも導入の動き</li>
+<li>日本</li>
+<li>中学校の技術家庭科で2012年度から必須。「計測と制御」、黒い線にそってロボットの車を動かす、という内容。</li>
+<li>松江市立の5500人の学生にRubyを教えることｋに
+
+<ul>
+<li>子供を立派なRubystに育てたかったら松江への移住を検討してください</li>
+</ul></li>
+<li>生徒一人一台のコンピュータ配布</li>
+<li>日本の民間企業の活動もある</li>
+<li>PEG(GoogleとNPO法人Cambusの共同プロジェクト)
+
+<ul>
+<li>日本全国でワークショップ開催</li>
+<li>教育事業者向けに5000台のRasberryPi配布</li>
+</ul></li>
+<li>TENTO</li>
+</ul></li>
+<li>多くのワークショップではMIT Media LabのScratchがよく使われる
+
+<ul>
+<li>全世界で200万人が利用している</li>
+</ul></li>
+<li>プログラミング教育が盛り上がっているが、それをRubyでもやりたい</li>
+<li>発表者は中学生に6年間Rubyを教えたが・・
+
+<ul>
+<li>英語・キーボードが難しくて、プログラミングが楽しくなる前にやめてしまう</li>
+</ul></li>
+<li>そこでSmalruby開発</li>
+<li>ビジュアルプログラミング環境
+
+<ul>
+<li>ブロックをグラフィカルな画面上に配置すると、Rubyコードが自動生成される</li>
+<li>Rubyコードで書いたものは、ブロックにも反映される</li>
+</ul></li>
+<li>実装
+
+<ul>
+<li>SmalrubyのエディタはRailsアプリ</li>
+<li>命令ブロックの組み合わせでコードを生成するところはBlocklyというライブラリで実現</li>
+<li>Google Closureライブラリを使っている</li>
+<li>JSレベルでブロックの定義・Rubyコード生成を行われる</li>
+</ul></li>
+<li>やりたいことが決まっている子供がいる
+
+<ul>
+<li>素数を求めたい、とか言う</li>
+<li>早いタイミングでブロックでは足りなくなって、コードを書きたくなる</li>
+<li>これまで6回のイベントを開催したが、「こんな簡単なことはやりたくないので次からきません」みたいな人もいた</li>
+<li>そこでSmalrubyではコード生成。コードも書けるようにした。</li>
+</ul></li>
+<li>Rubyコードからブロックの生成は、Railsアプリ側で正規表現ベースで行っている
+
+<ul>
+<li>Ripperなどを使わない理由は、子どもたちが書いたシンタックス的に正しくないおしいコードもうまく変換するため</li>
+<li>「Rubyコードからブロック生成、ほんとにいるの？」と言われたがSmalrubyではそこを重要視している</li>
+</ul></li>
+<li>Programmingとは、Creativity とLogical thinking</li>
+<li>命令ブロックでプログラミングの基礎を学んだあとは、早い時期にコードを書いて欲しい</li>
+<li>Smalrubyは基本的に一人で開発している。興味がある人はプルリクエストを送って欲しい</li>
+<li>ワークショップ開催したい人は、教科書などCreative Commonsで用意しているので声をかけて欲しい</li>
+<li>「私たちは自分の生活で使っているツールを自分で直せる」ということが重要。OSSに関わっている人なら共感してもらえるのでは。</li>
+<li>子どもたちに最高の道具を授けたいと思い、こういう活動を行っている。</li>
+<li>Q&amp;A
+
+<ul>
+<li>ハードウェア制御をSmalrubyでやれるようにすることはあるか?</li>
+<li>Arudino対応。例えばブロックの中に「アクチュエータ」というのがあって、Arudinoで作られた車を制御する、ということができる</li>
+<li>なぜそんな遅いのか?</li>
+<li>RubyをWindowsで動かしてるせい。
+
+<ul>
+<li>でも、教育で使うときはこだわってWindowsを使っていきたい。</li>
+<li>教育現場で使われているのはWindowsだから。</li>
+<li>WindowsのRubyをよりよくしていきたいと思っている</li>
+<li>こだわり: Rubyそのものをインストールさせる</li>
+<li>もっとプログラミングしたい、Railsやりたい、というときに、既にRubyがインストールされている状況をつくりたい</li>
+</ul></li>
+<li>日本語以外の言語をサポートする予定はありますか?</li>
+<li>RubyConfでSmalrubyを紹介することになったので、それまでに多言語対応したい</li>
+<li>Blocklyはもともと国際化対応されていた</li>
+<li>実行ボタンおした時の結果はどこで動いているのか?</li>
+<li>dxruby + rubyでネイティブで動いている。ブラウザで動いているように見えるが、実はネイティブ。</li>
+</ul></li>
+</ul>
+
+<h2 id="17:30--lt">17:30- LT</h2>
+
+<h3 id="practical-factory_girl">Practical factory_girl</h3>
+
+<ul>
+<li>7年くらいRubyやRailsを使った開発をしてきた</li>
+<li>traitを使おう
+
+<ul>
+<li>inheritance: userと並列にdeactivated<em>user、admin</em>userを作る</li>
+<li>欠点はdeactivatedかつadminみたいな組み合わせが発生したときにどうするか?</li>
+<li>適材適所とはいえ、なるべくtraitを使おう</li>
+<li>オブジェクトの状態とは継承関係で表現するものではないから</li>
+</ul></li>
+<li>イベントデータはつくらないようにしよう
+
+<ul>
+<li>プロダクションコードと同様、createメソッドでイベントデータをつくろう</li>
+</ul></li>
+<li>BDD-style
+
+<ul>
+<li>describeとcontextで構成されたスタイル</li>
+<li>describe中ではletやsubjectを作る</li>
+<li>context中でbefore</li>
+<li>Find notable state, name the state</li>
+</ul></li>
+</ul>
+
+<h3 id="native-libs-and-gems-on-heroku-with-hammer">Native Libs and Gems on Heroku with Hammer</h3>
+
+<ul>
+<li>ネイティブライブラリのgem化方法</li>
+<li>= Native Gems (or Extensions)</li>
+<li><a href="https://github.com/hone/hammer">hammer</a>を使う</li>
+</ul>
+
+<h3 id="ofruby---ruby-running-on-the-iphone">ofruby - Ruby running on the iPhone</h3>
+
+<ul>
+<li>ファイルの編集実行まですべてiPhoneで行うことができるビジュアルプログラミング環境</li>
+<li>構成
+
+<ul>
+<li>mruby for scritping</li>
+<li>openFrameworks for graphics</li>
+<li>Objective-C</li>
+</ul></li>
+<li>モチベーション
+
+<ul>
+<li>iPhoneは偉大</li>
+<li>そのおかげで家庭用PCの売上は下がった</li>
+<li>PCがないとプログラマの減少につながる。世界の危機。</li>
+<li>そこでiPhoneを使ってプログラマを育てることを考えた</li>
+</ul></li>
+<li>デモ
+
+<ul>
+<li>Balls</li>
+<li>Wave clock</li>
+<li>ブロック崩し</li>
+</ul></li>
+<li>ここまですべてiPod touchで開発できる</li>
+<li>ソースコードはすべて公開されている</li>
+<li>インストールはAppStorからofrubyで検索</li>
+</ul>
+
+<h3 id="keep-freedom-on-ruby---a-magical-world,-&#39;diversity&#39;">Keep Freedom on Ruby - A magical world, &lsquo;Diversity&rsquo;</h3>
+
+<ul>
+<li>万葉は今年で7歳。今年はじめてゴールドスポンサーになれました</li>
+<li>&ldquo;I love freedom&rdquo; 性格的に自由が好き</li>
+<li>Rubyは私たちに自由を与えてくれるので好き</li>
+<li>Rubyは気持ちよく書ける</li>
+<li>でもチームでコードを書いていると「一貫性」というプレッシャーが襲ってくる</li>
+<li>privateにするかどうか、新しい設計、書き方を試したい</li>
+<li>それがConsistency vs Freedom(多様性)</li>
+<li>「forのかわりにeachを使いましょう」それってほんとに必要?</li>
+<li>「Rubyが与えたものをプログラマが制限してはいけません、と思う」w</li>
+<li>「初心者のためにdescribe・contextだけ使いましょう」も地獄への入り口</li>
+<li>自由を手放すことには慎重になるべき</li>
+<li>それを阻止するためにDiversity</li>
+<li>「やりたくない」という代わりに「それはRubyの多様性を壊す！」というのをおすすめします(会場笑)</li>
+<li>一貫性にこだわり過ぎると一部を変えたり新しいことを始めるときにつらい</li>
+<li>ここでも多様性という言葉使える</li>
+<li>多様性はチャレンジを推奨してくれるので良い</li>
+<li>とはいえ、みんなが知ってるメソッドはみんなが知っているように動くべき</li>
+<li>I love Ruby</li>
+</ul>
+
+<h3 id="10th-anniversary-of-rubyist-magazine">10th anniversary of Rubyist Magazine</h3>
+
+<ul>
+<li>「RubyKaigi 2014のスピーカー・発表できなかった人、るびまで記事を書いてください！」</li>
+<li>文字にして書いてもらえると後まで残る</li>
+<li>るびまは2004年リリース。今日で10年</li>
+<li>0048号本日リリース</li>
+<li>目玉記事
+
+<ul>
+<li>あの記事を振り返って</li>
+<li>Rubyst Magazine 10周年</li>
+<li>Incremental GCの導入記事(ちゃんと書いたので呼んでください by ko1さん)</li>
+</ul></li>
+<li>通常号48号、特別号5号</li>
+<li>総記事数643本</li>
+<li>リリース間隔平均4ヶ月</li>
+<li>10年間ありがとうございました。今後共よろしくお願いします!</li>
+</ul>
+
+<h3 id="the-world&#39;s-fastest-tour-of-real-time-web-applications">The world&rsquo;s fastest tour of real time web applications</h3>
+
+<ul>
+<li>中止?</li>
+</ul>
+
+<h3 id="let&#39;s-try-mruby&#39;s-edge-cases">Let&rsquo;s try mruby&rsquo;s edge cases</h3>
+
+<ul>
+<li>いまこそmrubyニコントリビュートすべき</li>
+<li>64ビット整数使いたいんだよね
+<code>
+#define MRB_INT64
+</code></li>
+<li>&ldquo;You can find problmes very easily&rdquo;</li>
+<li>数日後、他のところでも見つかった</li>
+<li>mrubyを良くするためには困難に立ち向かう必要はありません!</li>
+<li>難しいことも残っているが、簡単なことも残っている</li>
+<li>Rails 勉強会91回主催した。引き継いで下さった人に感謝</li>
+</ul>
+
+<h3 id="probabilistic-model-for-inspirations-and-significance-of-programming">Probabilistic model for inspirations and significance of programming</h3>
+
+<ul>
+<li>数学者です</li>
+<li>Rubyは全く関係ありません</li>
+<li>アイデア、ひらめき、思いつきとは何なのか？その価値とは？を数学的な何かで考察する</li>
+<li>アイデアはうまくいったりうまくいかなかったりします。利益もあったりなかったり。つまり確率的な存在</li>
+<li>アイデアの価値とは期待値ではないか</li>
+<li>成功率 x 成功時の利益</li>
+<li>しかし成功率は低いので、アイデアの価値は引くい</li>
+<li>期待値の加法性</li>
+<li>一個一個の価値は低くても、たくさんあればいいのではないか</li>
+<li>試行</li>
+<li>プログラマにとってはプログラミングが試行</li>
+<li>アイデアの価値を引き出すためにはコーディングという試行錯誤が必要。</li>
+<li>実力をつけてコードをたくさんかかなければならない</li>
+<li>アイデアの加法性ってあやしくない？</li>
+<li>普通、2つのアイデアを2つ同時にためしたりしない</li>
+<li>Xを試してうまくいあかなｋったらYを試す→条件付き確率</li>
+<li>XとYに正の相関があれば条件付き確率の期待値は下がってしまう</li>
+<li>XとYが似ている=相関がある</li>
+<li>= 2つのアイデアが似ていると、XがだめなときにYがだめなこともわかってしまう</li>
+<li>相関が小さいアイデアを、確率的独立に近い多種多様なアイデアが必要</li>
+<li>そのためにプログラミングが必要</li>
+<li>つまりわれわれは修行しなければならない</li>
+<li>アイデアの価値が、と言ってくる人にこういう話をして煙にまくといいと思います(会場爆笑)</li>
+</ul>
+
+<p>(このあたりでPCの電源が切れたのでiPhoneでメモ取り始めました・・ので、分量が落ちます)</p>
+
+<h3 id="r/w-splitting-in-rails">R/W splitting in Rails</h3>
+
+<ul>
+<li>octopus: コードベース大きい</li>
+<li>acs<em>as</em>readonlyable: フリーダムにモンキーパッチあてててメンテがつらい</li>
+<li>そこでswitch_pointを作った</li>
+<li>initializerなどで初期化してModelに組み込むだけで使える</li>
+<li>本来RW Splittingはコネクションのレイヤーでできるはず。実際それをやってみたのがswitch_point</li>
+</ul>
+
+<h3 id="invitation-for-v1.0.0">Invitation for v1.0.0</h3>
+
+<ul>
+<li>バージョンはフィーリングできめられたりする</li>
+<li>v1 is GA</li>
+<li>v1まではいつでもAPIは変えられることを意味する
+
+<ul>
+<li>v0ということは、プロダクションで使ってないということ。本当？</li>
+<li>違うならv1に上げましょう</li>
+</ul></li>
+<li>norikraは一年でv1
+
+<ul>
+<li>public apiと機能はこわしません、という表明</li>
+</ul></li>
+<li>バージョニングはコミュニケーションの一手段</li>
+<li>ところでFluentdは？
+
+<ul>
+<li>0.10ですね(!)</li>
+</ul></li>
+<li>みなさんv1をリリースしてください！</li>
+</ul>
+
+<h3 id="how-the-rspec-team-and-i-built-the-smooth-upgrade-process-for-rspec-3">How the RSpec team and I built the smooth upgrade process for RSpec 3</h3>
+
+<ul>
+<li>RSpec 3は互換性がない変更があったので、アップグレード大変だろう。</li>
+<li>そのためにRSpec 2.9.9とtranspecを作った</li>
+<li>transpecはASTと実行時の情報を使う。誤変換を防ぐため。</li>
+<li>おすすめのアップグレードパス
+
+<ul>
+<li>まずRSpec 2.9.9にして、Transpec実行、その後に手修正</li>
+</ul></li>
+<li>同じアップグレード方法を他のフレームワークで使えないか？
+
+<ul>
+<li>specは対象コードを全部実行することができるので、実行時情報全部取れた。アプリだとそうはいかない。</li>
+<li>コストをそんなにかけていいのか?</li>
+<li>RSpecはポピュラーなので、労力をかける価値があった</li>
+<li>他のアプリだとそうはいかないかも</li>
+</ul></li>
+</ul>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/8e045bf747ca7a90b1d955dc30217271?s=32'>
+<a href="https://twitter.com/mumoshu">Yusuke Kuoka</a>
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>サーバ設定diffツールAjimi入門 - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/logomark.png' property='og:image'>
+<meta content='image/png' property='og:image:type'>
+<meta content='1200' property='og:image:width'>
+<meta content='627' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='インフラをコード化するのに、既存のサーバに何の設定が入っているか分からない問題を解決するAjimiという便利ツールを作ったのでご紹介します。' property='og:description'>
+<meta content='article' property='og:type'>
+<meta content='サーバ設定diffツールAjimi入門' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2015/10/30/how-to-use-ajimi.html' property='og:url'>
+<meta content='2015-10-30T00:00:00Z' property='article:published_time'>
+<meta content='ajimi' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2015/10/30</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>サーバ設定diffツールAjimi入門</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>こんにちは。缶コーヒーを愛してやまないクラウドワークスのエンジニア森田です。</p>
+
+<p>Infrastructure as Code と叫ばれて久しいですが、現実はそんなに単純な話ばかりじゃないですよね(´・ω・`)</p>
+
+<p>新規に立てるサーバで設定内容が自明であればよいんですけれども、
+既に本番運用されており、温かみのある職人の手仕事によって維持管理されているサーバってありますよね？</p>
+
+<p>管理者が一人ならまだしも、複数人で設定変更したりしてると、どのような設定が入っているのかがブラックボックスで、
+それを後からコードに置き換えるには困難が伴います。</p>
+
+<p>この「既存のサーバ」と「コードで生成したサーバ」のファイルシステム全体の差分を効率的に調査する目的で、
+任意の2つのサーバ設定を比較するAjimiという便利ツールを作ったのでご紹介します。</p>
+
+<p></p>
+
+<ul>
+<li>
+<a href="#はじめに">はじめに</a>
+</li>
+<li>
+<a href="#要件整理">要件整理</a>
+</li>
+<li>
+<a href="#作ったもの">作ったもの</a>
+</li>
+<li>
+<a href="#インストール">インストール</a>
+</li>
+<li>
+<a href="#初期設定">初期設定</a>
+</li>
+<li>
+<a href="#味見する">味見する</a>
+</li>
+<li>
+<a href="#設定詳細">設定詳細</a>
+</li>
+<li>
+<a href="#おわりに">おわりに</a>
+</li>
+</ul>
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>サーバ構築をコードに置き換えていく作業は、
+<a href="https://www.chef.io/">Chef</a>や<a href="http://www.ansible.com/">Ansible</a>などのプロビジョニングツールを使って、
+必要なソフトウェアのインストールと設定ファイルの配置などの作業を1つずつコードにしていきます。
+クラウドワークスではサーバのプロビジョニングツールにChefを利用しています。</p>
+
+<p>書いたコードで正しくセットアップできるかは、
+<a href="http://kitchen.ci/">test-kitchen</a>や<a href="http://serverspec.org/">serverspec</a>などを利用することで、
+テスト作業を自動化できます。</p>
+
+<p>で、何の設定を入れればこの作業は完成なのでしょうか？既存サーバからコードへの置き換えの場合、往々にしてこのALLが分からないのが最大の問題です。
+その答えを得るためには既に運用されている既存サーバと設定を比較する必要があります。
+サーバ設定の比較と言っても、何の設定が入っているかわからないので、ファイルシステム全体を調査する必要があります。</p>
+
+<p>容易に想像がつくと思いますが、単純にファイルシステム全量の数十万ファイルをdiffでぶつけると、差分量が多すぎて目視でチェックするのは現実的ではありません。
+ログや一時ファイルなどで無視してよい差分もあるし、ホスト名などで差分になることが自明な設定もあるからです。</p>
+
+<h2 id="要件整理">要件整理</h2>
+
+<p>ちょっとこの辺で要件を整理してみます。
+ぼくのかんがええたさいきょうのサーバ設定diffツールの要件は以下のとおりです。</p>
+
+<ul>
+<li>背景
+
+<ul>
+<li>既存のサーバをChefのcookbookのコードに置き換えたい</li>
+<li>既存のサーバは職人の手作業で丹精込めて作られた秘伝のタレなので、取りこぼしがないか効率的に差分チェックしたい</li>
+</ul></li>
+<li>やりたいこと
+
+<ul>
+<li>指定した2つのサーバ間の設定の差分をいいかんじに比較する</li>
+</ul></li>
+<li>いいかんじとは？
+
+<ul>
+<li>ファイルシステム全体の差分を調査対象とする</li>
+<li>指定のディレクトリ配下や指定のファイルの差分を無視できる</li>
+<li>指定のファイルの既知の差分を無視できる
+
+<ul>
+<li>ホスト名などノード固有の情報が差分になることが分かっているものがある</li>
+</ul></li>
+<li>無視対象リスト自体をgitでバージョン管理したいので、無視対象リストは外部ファイルで管理できる</li>
+<li>単純な無視と、差分として認知したけど未解決のpendingを区別して管理できる</li>
+<li>全量の差分をいきなり出すと目視で確認しきれないので、ディレクトリの階層レベル、ファイル名レベル、ファイル内容レベルのdiffを使い分けられるようにする</li>
+<li>あとでCIと統合しやすいようにCLIツール
+
+<ul>
+<li>ツールのインストール環境はMac or Linuxを想定(さしあたりMacで動けばよい)</li>
+<li>チェック対象サーバはLinuxを想定(さしあたりAmazon Linuxで動けばよい)</li>
+</ul></li>
+<li>クリーン
+
+<ul>
+<li>ツールはローカルにインストールし、対象サーバにSSH鍵認証してsudoができれば使える</li>
+<li>対象サーバではリードオンリーで中間ファイルなどのゴミを生成しない</li>
+<li>オンメモリでローカルにもファイルをダウンロードしない</li>
+</ul></li>
+<li>低負荷
+
+<ul>
+<li>稼働中のサーバでも動かしたいので極力低負荷にしたい</li>
+<li>md5sumでチェックサムを取ると重くなるので、差分の検知はfindでファイルのパス/オーナー/パーミッション/サイズの差分が検知できれば、ほとんどのケースでは問題ない</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h2 id="作ったもの">作ったもの</h2>
+
+<p>欲しいものがなければ作ればいいじゃないというわけで、Ajimiというツールを作りました。</p>
+
+<p><a href="https://github.com/crowdworks/ajimi">crowdworks/ajimi</a></p>
+
+<p>それでは、さっそくAjimiを使ってChefがcookした鯖の味見をしてみましょう。</p>
+
+<p>※単に言ってみたかっただけなので、特にChefでプロビジョニングしたかどうかに限らず使えます。</p>
+
+<p>また、この記事は、本稿執筆時点のajimi v0.2.0を対象にしています。
+最新の情報は上記のGitHubのREADMEを参照して下さい。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>Ajimiはgemとして公開してあるので、手元のPCで以下のコマンドでインストールできます。</p>
+<pre><code class="highlight shell"><span class="gp">$ </span>gem install ajimi
+</code></pre>
+
+<h2 id="初期設定">初期設定</h2>
+
+<p>操作はすべて手元のPCで実行します。
+以降の説明でコマンドを実行する箇所は、比較対象のサーバではなく、手元のPCで実行して下さい。</p>
+
+<p>インストールしたら、まず設定ファイルの雛形を <code>ajimi-init</code> コマンドで作ります。</p>
+<pre><code class="highlight shell"><span class="gp">$ </span>ajimi-init
+</code></pre>
+
+<p>カレントディレクトリに <code>Ajimifile</code> という設定ファイルができるので、適当なエディタで開いて下さい。
+デフォルトで設定のサンプルが記載されています。</p>
+
+<p><code>Ajimifile</code> は、とりあえず最低限 <code>source</code> と <code>target</code> の接続設定ができていれば、
+その他の無視リストなどは、後から徐々に育てていく感じになるので、
+はじめの一歩として <code>Ajimifile</code> を以下のように設定してみました。</p>
+
+<p>設定値の各意味は後述しますが、<code>source</code> と <code>target</code> のところに適当なサーバ名と <code>ssh_options</code> のところに接続先IP(またはFQDN)、ユーザ名、SSH鍵のパスを指定して下さい。</p>
+<pre><code class="highlight ruby"><span class="n">source</span> <span class="s2">"app1.example.com"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="ss">ssh_options: </span><span class="p">{</span>
+    <span class="ss">host: </span><span class="s2">"XXX.XXX.XXX.XXX"</span><span class="p">,</span>
+    <span class="ss">user: </span><span class="s2">"morita"</span><span class="p">,</span>
+    <span class="ss">key: </span><span class="s2">"~/.ssh/id_rsa"</span>
+  <span class="p">},</span>
+  <span class="ss">enable_nice: </span><span class="kp">true</span>
+<span class="p">}</span>
+
+<span class="n">target</span> <span class="s2">"app2.example.com"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="ss">ssh_options: </span><span class="p">{</span>
+    <span class="ss">host: </span><span class="s2">"YYY.YYY.YYY.YYY"</span><span class="p">,</span>
+    <span class="ss">user: </span><span class="s2">"morita"</span><span class="p">,</span>
+    <span class="ss">key: </span><span class="s2">"~/.ssh/id_rsa"</span>
+  <span class="p">},</span>
+  <span class="ss">enable_nice: </span><span class="kp">true</span>
+<span class="p">}</span>
+
+<span class="n">check_root_path</span> <span class="s2">"/"</span>
+
+<span class="n">pruned_paths</span> <span class="o">[</span>
+  <span class="s2">"/dev"</span><span class="p">,</span>
+  <span class="s2">"/proc"</span><span class="p">,</span>
+<span class="o">]</span>
+
+<span class="n">ignored_paths</span> <span class="o">[</span>
+  <span class="o">*</span><span class="vi">@config</span><span class="o">[</span><span class="ss">:pruned_paths</span><span class="o">]</span><span class="p">,</span>
+<span class="o">]</span>
+
+<span class="n">ignored_contents</span> <span class="p">({</span>
+<span class="p">})</span>
+
+<span class="n">pending_paths</span> <span class="o">[</span>
+<span class="o">]</span>
+
+<span class="n">pending_contents</span> <span class="p">({</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>接続設定ができたら、とりあえずSSHが繋がるか接続テストをしてみましょう。
+デバッグ用に<code>ajimi exec</code> という任意のコマンドを実行するサブコマンドがあるので、試しに以下のコマンドを実行してみましょう。</p>
+<pre><code class="highlight plaintext">$ ajimi exec source hostname
+Execute command at source_host: XXX.XXX.XXX.XXX
+app1.example.com
+
+$ ajimi exec target hostname
+Execute command at target_host: YYY.YYY.YYY.YYY
+app2.example.com
+</code></pre>
+
+<p>それぞれのサーバで <code>hostname</code> コマンドの出力結果が表示されれば接続設定は問題ありません。
+接続エラーが出る場合は、ユーザや鍵の情報が正しいかを確認して下さい。</p>
+
+<p>接続が問題なければ、本題の差分チェックに進みます。</p>
+
+<h2 id="味見する">味見する</h2>
+
+<p>差分調査の全体的な流れを先に説明して、細かな設定ファイルの書き方などは後述します。</p>
+
+<p><code>ajimi</code> コマンドに <code>-d</code> オプションを付けて、まずはチェックするディレクトリの階層を3階層めまでに深さを制限して実行してみます。
+これは適切な無視設定がされていない状態で、いきなり全量チェックすると大量の差分が出てしまうためです。</p>
+<pre><code class="highlight shell"><span class="gp">$ </span>ajimi -d 3 &gt; ajimi.log
+</code></pre>
+
+<p>実行結果は以下のように出力されます。出力量が多いため、適当に省略しています。</p>
+<pre><code class="highlight plaintext">Start ajimi check with options: { (オプションの指定のdump略) }
+Finding...: XXX.XXX.XXX.XXX
+Finding...: YYY.YYY.YYY.YYY
+Checking diff entries...
+Checking ignored_paths and pending_paths...
+Diffs empty?: false
+
+###### diff entries report ######
+--- XXX.XXX.XXX.XXX
++++ YYY.YYY.YYY.YYY
+
+- 12 /bin/cpio, -rwxr-xr-x, root, root, 129832
++ 16 /bin/cpio, -rwxr-xr-x, root, root, 129912
+- 17 /bin/dbus-daemon, -rwxr-xr-x, root, root, 403480
++ 21 /bin/dbus-daemon, -rwxr-xr-x, root, root, 403416
+- 29 /bin/egrep, -rwxr-xr-x, root, root, 102456
++ 33 /bin/egrep, -rwxr-xr-x, root, root, 103240
+- 33 /bin/fgrep, -rwxr-xr-x, root, root, 66168
++ 37 /bin/fgrep, -rwxr-xr-x, root, root, 69176
+(略)
+- 330 /etc/hosts, -rw-r--r--, root, root, 463
++ 396 /etc/hosts, -rw-r--r--, root, root, 537
+- 340 /etc/httpd/ports.conf, -rw-r--r--, root, root, 129
++ 406 /etc/httpd/ports.conf, -rw-r--r--, root, root, 148
+(略)
+- 1794 /tmp/nginx/0, drwx------, nginx, nginx, 4096
+- 1795 /tmp/nginx/1, drwx------, nginx, nginx, 4096
+- 1796 /tmp/nginx/2, drwx------, nginx, nginx, 4096
+- 1798 /tmp/nginx/4, drwx------, nginx, nginx, 4096
+(略)
+
+###### diff contents report ######
+check_contents was skipped (enable_check_contents = false)
+
+###### diff summary report ######
+source: 4560 files
+target: 3961 files
+ignored_by_path: 12 files
+pending_by_path: 0 files
+ignored_by_content: 0 files
+pending_by_content: 0 files
+diff: 1059 files
+</code></pre>
+
+<p><code>diff entries report</code> セクションのところにファイルパスの差分が並んでるので、
+たとえば <code>/tmp</code> など無視して良さそうなディレクトリを見つけて <code>Ajimifile</code> の <code>pruned_paths</code> の設定に追加していきます。
+設定ファイルのフォーマットは後述しますが、無視してよいディレクトリのリストとして並べていきます。
+出力量を見ながら徐々にチェックする階層を増やして、調査範囲を広げていきます。</p>
+<pre><code class="highlight shell"><span class="gp">$ </span>ajimi -d 4 &gt; ajimi.log
+</code></pre>
+
+<p><code>Ajimifile</code> の設定で、パスの差分の無視の仕方には <code>pruned_paths</code> の他に  <code>ignored_paths</code> と <code>pending_paths</code> があり、それぞれ若干意味が異なります。</p>
+
+<ul>
+<li><code>pruned_paths</code> : 調査対象から除外するもの</li>
+<li><code>ignored_paths</code> : 差分として検知したが、既知の差分として恒久的に無視してよいもの</li>
+<li><code>pending_paths</code> : 差分として検知したが、なんらか修正が必要ですぐに対応できず、一時的にdiff出力結果を抑止したいもの</li>
+</ul>
+
+<p><code>-d</code> オプション指定なしですべての階層をチェックできるようになったら、
+<code>-c</code> オプションを付けて、ファイルの中身の差分もチェックします。
+ファイルの中身の比較は、差分のファイル数が大量にあると膨大な出力になるので、
+可能な限りファイルのパスレベルで無駄なものを除外してから有効にして下さい。</p>
+<pre><code class="highlight shell"><span class="gp">$ </span>ajimi -c &gt; ajimi.log
+</code></pre>
+
+<p>ファイルの中身の差分は <code>diff contents report</code> セクションに出力されます。
+左の数字はファイル内の行番号です。</p>
+<pre><code class="highlight plaintext">(略)
+###### diff contents report ######
+--- XXX.XXX.XXX.XXX: /etc/postfix/main.cf
++++ YYY.YYY.YYY.YYY: /etc/postfix/main.cf
+
+- 5 myhostname = app1.example.com
++ 5 myhostname = app2.example.com
+
+(略)
+
+</code></pre>
+
+<p>既知の無視して問題ない差分であれば、 <code>ignored_contents</code> や <code>pending_contents</code> などにファイル名と無視してよい差分パターンを正規表現で指定することで、
+差分として表示されなくなります。<code>ignored_contents</code> と <code>pending_contents</code> の使い分けは、パスと同様に恒久的な無視と一時的な無視の違いです。</p>
+
+<p>最後に <code>pending_paths</code> や <code>pending_contents</code> に指定した問題を解決すれば、
+「既存のサーバ」と「コードで生成したサーバ」の間に想定外の差分がなく、
+コードで置き換えられたと言える状態になります。</p>
+
+<h2 id="設定詳細">設定詳細</h2>
+
+<p><code>Ajimifile</code> の各設定項目の意味を順に説明していきます。</p>
+<pre><code class="highlight ruby"><span class="n">source</span> <span class="s2">"source.example.com"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="ss">ssh_options: </span><span class="p">{</span>
+    <span class="ss">host: </span><span class="s2">"192.168.0.1"</span><span class="p">,</span>
+    <span class="ss">user: </span><span class="s2">"ec2-user"</span><span class="p">,</span>
+    <span class="ss">key: </span><span class="s2">"~/.ssh/id_rsa"</span>
+  <span class="p">},</span>
+  <span class="ss">enable_nice: </span><span class="kp">true</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>比較元のサーバの接続情報を指定します。
+<code>host</code> に接続先のFQDNまたはIPアドレス、<code>user</code> と <code>key</code> にSSH接続で使用するユーザ名と鍵ファイルを指定します。
+指定するユーザは、対象サーバでsudoができるユーザを指定して下さい。</p>
+
+<p><code>enable_nice</code> というオプションは対象サーバで <code>find</code> コマンドを実行する際に、 <code>nice</code> と <code>ionice</code> コマンドと組み合わせて、可能な限り低負荷で実行するためのオプションです。
+このオプションはデフォルト <code>false</code> で無効です。
+比較対象のサーバが本番運用中の場合は、多少時間がかかっても極力負荷をかけずに実行したい一方で、
+リリース前のサーバであれば、全力で実行して構わないという使い分けを想定しています。</p>
+<pre><code class="highlight ruby"><span class="n">target</span> <span class="s2">"target.example.com"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="ss">ssh_options: </span><span class="p">{</span>
+    <span class="ss">user: </span><span class="s2">"ec2-user"</span><span class="p">,</span>
+    <span class="ss">key: </span><span class="s2">"~/.ssh/id_rsa"</span>
+  <span class="p">},</span>
+  <span class="ss">enable_nice: </span><span class="kp">false</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>比較先のサーバの接続情報を指定します。
+指定できるオプションは <code>source</code> の場合と同じです。
+このように <code>host</code> を省略した場合は、targetの第1引数（この場合は <code>target.example.com</code> )を接続先の <code>host</code> として使用します。
+<code>source</code> と <code>target</code> の機能的な違いはなく、diff出力結果表示の <code>-</code> と <code>+</code> の方向が変わるだけです。</p>
+<pre><code class="highlight ruby"><span class="n">check_root_path</span> <span class="s2">"/"</span>
+</code></pre>
+
+<p>チェック対象のルートパスを指定します。基本的に <code>/</code> でよいですが、
+<code>/home</code> などを指定すると <code>/home</code> 配下のみをチェックするので、デバッグ目的などで一時的に対象を絞りたいときに使います。</p>
+<pre><code class="highlight ruby"><span class="n">pruned_paths</span> <span class="o">[</span>
+  <span class="s2">"/dev"</span><span class="p">,</span>
+  <span class="s2">"/proc"</span><span class="p">,</span>
+<span class="o">]</span>
+</code></pre>
+
+<p>チェック対象から除外するパスを指定します。パスは前方一致なので、指定のディレクトリ配下をまとめて無視するのに使います。
+後述する <code>ignored_paths</code> はチェックした結果に差分が出ても無視しますが、
+ <code>pruned_paths</code> は（内部的にfindコマンドの時点で)チェック対象から除外するので、
+ 無視してよい自明なパスは <code>pruned_paths</code> で指定することでチェック処理が高速になります。</p>
+<pre><code class="highlight ruby"><span class="n">ignored_paths</span> <span class="o">[</span>
+  <span class="o">*</span><span class="vi">@config</span><span class="o">[</span><span class="ss">:pruned_paths</span><span class="o">]</span><span class="p">,</span>
+  <span class="sr">%r|^/lost</span><span class="se">\+</span><span class="sr">found/?.*|</span><span class="p">,</span>
+  <span class="sr">%r|^/media/?.*|</span><span class="p">,</span>
+  <span class="sr">%r|^/mnt/?.*|</span><span class="p">,</span>
+  <span class="sr">%r|^/run/?.*|</span><span class="p">,</span>
+  <span class="sr">%r|^/sys/?.*|</span><span class="p">,</span>
+  <span class="sr">%r|^/tmp/?.*|</span>
+<span class="o">]</span>
+</code></pre>
+
+<p>既知の差分として無視するパスを文字列または正規表現で指定します。
+正規表現のエスケープ方法などはRubyの文法に従います。というか <code>Ajimifile</code> は内部的にRubyのコードとして評価されます。
+なので、コメントを書きたい場合は<code>#</code> で行末まで無視できるので、無視した理由などをコメントとして書くこともできます。</p>
+
+<p><code>*@config[:pruned_paths]</code> の部分は <code>pruned_paths</code> をここに展開するという意味ですが、
+<code>find -path /hoge -prune</code> すると <code>/hoge</code> 配下は無視されますが、
+ <code>/hoge</code> 自体は出力に含まれてしまうという内部実装的な都合でこうなっているので、あまり深く気にしないで下さい。</p>
+<pre><code class="highlight ruby"><span class="n">ignored_contents</span> <span class="p">({</span>
+  <span class="s2">"/root/.ssh/authorized_keys"</span> <span class="o">=&gt;</span> <span class="sr">/Please login as the user \\"ec2-user\\" rather than the user \\"root\\"/</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>既知のファイルの中身の差分を無視します。
+ファイルのパスと無視する正規表現をハッシュ形式で指定します。
+ファイルに差分があることは分かっているが、ファイルごと無視せずに、ファイル内のこの文字列の差分だけ無視したいというような使い方を想定しています。</p>
+<pre><code class="highlight ruby"><span class="n">pending_paths</span> <span class="o">[</span>
+  <span class="s2">"/etc/sudoers"</span>
+<span class="o">]</span>
+</code></pre>
+
+<p><code>ignored_paths</code> と機能的には同じですが、恒久的に無視してよい差分が <code>ignored_paths</code> で、
+差分は認知したが、なんらか修正が必要ですぐに対応できず、一時的にdiff出力結果を抑止して視界から消したい場合に
+<code>pending_paths</code> を使うという意味的な使い分けを想定しています。</p>
+<pre><code class="highlight ruby"><span class="n">pending_contents</span> <span class="p">({</span>
+  <span class="s2">"/etc/hosts"</span> <span class="o">=&gt;</span> <span class="sr">/127\.0\.0\.1/</span>
+<span class="p">})</span>
+</code></pre>
+
+<p><code>ignored_contents</code> と機能的に同様ですが、一時的に無視したい場合に <code>pending_contents</code> を使います。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>「既存のサーバ」と「コードで生成したサーバ」のファイルシステム全体の差分を効率的に調査する目的で、
+任意の2つのサーバ設定を比較するAjimiというツールを作りました。</p>
+
+<p>適切な無視設定を管理することで、人間が目視でチェックできる差分量をコントロールし、
+効率的に2つのサーバの比較が可能となりました。</p>
+
+<p>Ajimiはとりあえず作ったものの、今のところ必要最小限の機能しか実装していないので、
+こんな機能も欲しいとかあれば、 <a href="https://github.com/crowdworks/ajimi">GitHub</a> にプルリいただけると助かります。</p>
+
+<p>とりあえずただの感想でも <a href="https://twitter.com/minamijoyo">@minamijoyo</a> までフィードバックいただけるとうれしいです。</p>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/5ade34f8bdf1b55c4ff82c11cf23cf42?s=32'>
+<a href="https://twitter.com/minamijoyo">Masayuki Morita</a>
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>

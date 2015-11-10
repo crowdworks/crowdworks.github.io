@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会） - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/2015/02/study-meeting-by-twada/study-scene_2.jpg' property='og:image'>
+<meta content='image/jpeg' property='og:image:type'>
+<meta content='800' property='og:image:width'>
+<meta content='600' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='article' property='og:type'>
+<meta content='クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2015/02/18/study-meeting-by-twada_2.html' property='og:url'>
+<meta content='2015-02-18T01:00:00Z' property='article:published_time'>
+<meta content='test' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2015/02/18</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p><img alt="study-scene_2" src="/images/2015/02/study-meeting-by-twada/study-scene_2.jpg" /></p>
+
+<p>こんにちは！開発の所(<a href="https://twitter.com/ctokoro_me">@ctokoro_me</a>)です。</p>
+
+<p><a href="http://engineer.crowdworks.jp/2015/02/09/study-meeting-by-twada_1.html">クラウドワークス勉強会「レガシーコード改善の戦略と戦術」前篇（戦略）</a>に続き、後篇（戦術＆懇親会）をお送りします。</p>
+
+<p>　</p>
+
+<h1 id="「レガシーコード改善の戦略と戦術」">「レガシーコード改善の戦略と戦術」</h1>
+
+<h1 id="講師：和田-卓人(@t_wada)">講師：和田 卓人(<a href="http://twitter.com/t_wada">@t_wada</a>)</h1>
+
+<blockquote>
+<p>タワーズ・クエスト株式会社 取締役社長、プログラマ、テスト駆動開発者。</p>
+
+<p>学生時代にソフトウェア工学を学び、オブジェクト指向分析/設計に傾倒。
+その後様々な縁に導かれソフトウェアパターンやXP（eXtremeProgramming）を実践する人たちと出会い、後のテスト駆動開発の誕生を知る。
+テスト駆動開発によって「完璧主義の呪い（完璧な設計を得るまではコードを書けないし良いシステムも出来ないという強迫観念）」から解かれてからは、文章や講演、ハンズオンイベント等を通じてテスト駆動開発の啓蒙に努めている。
+今日もグリーンバンド（テスト駆動開発者の証）を左手に着け、テストと共にコードを書いている。
+『プログラマが知るべき97のこと』『SQLアンチパターン』（オライリージャパン）監修。</p>
+</blockquote>
+
+<h2 id="戦術編">戦術編</h2>
+
+<h3 id="どこからやるか">どこからやるか</h3>
+
+<p>テストが無いコードベースに対して、どこから手をつけていけばよいのでしょうか？
+いくつかの切り口があります。</p>
+
+<ul>
+<li><p>重要度の高さ順</p>
+
+<p>例えば金銭が絡むロジックや個人情報を扱う部分など、業務上の重要度が高い箇所から攻めていくやり方です。機能改修等を行う上で最も壊してはならないところをまず守るという点で優れた切り口であり、経営層/ビジネスサイドからの理解も得やすそうです。</p></li>
+<li><p>困っている順</p>
+
+<p>既に大きく複雑になってしまっているクラス/モジュール等からテストを書いていくやり方です。リファクタリングの欲求が強い箇所だと考えられるので、成果を感じやすいやり方だと思います。</p></li>
+<li><p>新規機能開発</p>
+
+<p>新しく追加される機能とその機能に関連する部分から固めていく、という方法です。既存の業務に統合しやすいという点で導入しやすい方法でしょう。</p></li>
+<li><p>バグが出た順</p>
+
+<p>一見すると場当たり的に見えますが、複雑性が高い/品質が低いコードは往々にして固まっているので、実は投資対効果が高い方法です。</p></li>
+<li><p>静的コード解析</p>
+
+<p>静的コード解析<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup>ツールを用いて警告が多いクラスやスコアの低い箇所から攻めていく方法です。
+ruby/railsであれば <a href="https://github.com/bbatsov/rubocop">Rubocop</a> や <a href="https://github.com/railsbp/rails_best_practices">rails_best_practices</a> で計測したり、言語/フレームワークによっては商用のものを導入してもよいでしょう。</p></li>
+</ul>
+
+<p>チーム/プロジェクトの状態に応じて、どの切り口から攻めるか決めていきましょう。</p>
+
+<h3 id="だれとやるか">だれとやるか</h3>
+
+<p>一度に多くの人がテストを書くことは現実的に難しいでしょう。
+書ける人を育てるのではなく自ら育つような方針を取りましょう。
+例えば、ペアプログラミング<sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup>を導入してテストを書く手法が自律的にチーム内に広がり、教えられる人が自然に増えていくようなやり方をしましょう。</p>
+
+<p>また、導入の旗手として若手のホープに任せるのか・ベテランを投入するのかなど、人選も重要となるでしょう。</p>
+
+<h3 id="こだわるな">こだわるな</h3>
+
+<p>テストを導入していくことに際して、今まで出来ていなかったからこそ導入したい事がたくさんあるかもしれません。ですが、最初から全部をやろうとしてはいけません。</p>
+
+<p>必ずしもテスト駆動開発(TDD)/テストファースト<sup id="fnref3"><a href="#fn3" rel="footnote">3</a></sup>でなくても構いません。最初はテストの実行速度やカバレッジにこだわる必要もありません。
+また、「ユニット」テスト<sup id="fnref4"><a href="#fn4" rel="footnote">4</a></sup>であることにこだわりすぎるのもよくありません。ユニットの依存を追い出すためのStub/Mockの作成/メンテナンスコストが激増したりします。</p>
+
+<h3 id="こだわろう">こだわろう</h3>
+
+<p>ですが、テストを書く上で必ずこだわるべきポイントが２つだけあります。</p>
+
+<ol>
+<li><p>再現性、繰り返し可能（ Repeatable )</p>
+
+<p>環境への依存がなく、誰がいつ何度実行しても同じ結果になること。これが無いとテストの信頼性が担保できません。</p></li>
+<li><p>独立していること ( Independent )</p>
+
+<p>テスト同士の依存性（≒順序性）がないこと。テスト間に依存性がある場合、テスト単体での実行ができません。さらに将来的にテスト実行速度向上のための並列実行も不可能になります</p></li>
+</ol>
+
+<p>また、できればテストコードのDRY<sup id="fnref5"><a href="#fn5" rel="footnote">5</a></sup>も意識できたら良いでしょう。テストのメンテナンスコストを下げることにつながります。<sup id="fnref6"><a href="#fn6" rel="footnote">6</a></sup></p>
+
+<p>他の指標は、それからでも遅くありません。</p>
+
+<h3 id="「レガシーコード改善ガイド」">「レガシーコード改善ガイド」</h3>
+
+<p><a href="http://www.yodobashi.com/%E3%83%AC%E3%82%AC%E3%82%B7%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E6%94%B9%E5%96%84%E3%82%AC%E3%82%A4%E3%83%89%E2%80%95%E4%BF%9D%E5%AE%88%E9%96%8B%E7%99%BA%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-Object-Oriented-SELECTION-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000594816/"><img alt="レガシーコード改善ガイド" src="/images/2015/02/study-meeting-by-twada/legacy_code_book.jpg" /></a></p>
+
+<p><a href="http://www.yodobashi.com/%E3%83%AC%E3%82%AC%E3%82%B7%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E6%94%B9%E5%96%84%E3%82%AC%E3%82%A4%E3%83%89%E2%80%95%E4%BF%9D%E5%AE%88%E9%96%8B%E7%99%BA%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-Object-Oriented-SELECTION-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000594816/">レガシーコード改善ガイド (Object Oriented SELECTION)</a></p>
+
+<p>「何はなくとも読むべし」という和田さんオススメの一冊です。
+この本は「レガシーコードとはテストがないコード」という定義を世界に与えた程の影響があった本です。</p>
+
+<p>レガシーコード改善にいざ着手すると、「複雑なコード/仕様にテストが書けないからリファクタリングしてからテストを書きたい。しかし、テストがないとリファクタリングが難しい」というジレンマにぶつがりがちです。</p>
+
+<p>この本では、そのように複雑化したレガシーコードの内側を切り出し、テストに書き出すための方法が詳しく解説されています。その中でも、下記２つを意識するとよいでしょう。</p>
+
+<ol>
+<li><p>「仕様化テスト」（characterization test）</p>
+
+<p>「仕様化テスト」とはソフトウェアの現在の振る舞いを明らかにし、コードを変更しても振る舞いが変わらないことを確認するためのテストです。<sup id="fnref7"><a href="#fn7" rel="footnote">7</a></sup>
+仕様がわからないということは、何が正しい挙動がわからないこということです。</p>
+
+<p>こういう状況の場合、「どうあるべきか」は捨てて仕様化テストとして現在の挙動を写しとり、「現状と変わっていない」ことをテスト可能な状態にしましょう</p></li>
+<li><p>「絞り込み点」（pinch point）を探す</p>
+
+<p>「絞り込み点」とは、影響スケッチ(※)における集約された部分に相当する、ある機能群をテストするための理想的な場所です。<sup id="fnref7"><a href="#fn7" rel="footnote">7</a></sup></p>
+
+<p>※影響スケッチ(effect sketch) ：ソフトウェアを変更した時に、影響を受ける変数やメソッドの戻り値を表現する手書きの小さな図。どこにテストを書くべきかを判断するときに役立つ。<sup id="fnref7"><a href="#fn7" rel="footnote">7</a></sup></p>
+
+<p>「絞り込み点」を探してテストを書くことで、効率的に幅広い変更を担保するテストを書くことができます。詳細は書籍をご参照ください。</p></li>
+</ol>
+
+<h3 id="設計の可動域を確保する">設計の可動域を確保する</h3>
+
+<p>テストが無いということは、既に設計が悪い兆候です。
+設計/実装を変えるためにテストを書くことが前提であり、実装自体のテストを書かないことが大切です。</p>
+
+<p>粗い粒度のテストを書かないと、コード内での責務の移動（＝設計の可動域）を担保できません。
+テストがカバーする範囲に遊びを持たせ、カバー範囲内をリファクタリングしていきましょう。</p>
+
+<p>インプット(リクエスト)・事前状態(DB等)・アウトプット(レスポンス)・事後状態(DB等)の4点を抑えたテストを拡充していくことで、カバー範囲の高い全体（連結）テストのカバレッジを上げることが出来ます。
+この全体テストで外側から攻めていき、そのテストの内側にユニットテスト等を仕込んでいくのも有効なやり方です。
+状況に応じて、このようなカバー範囲の広いE2Eテスト（<a href="https://jnicklas.github.io/capybara/">Capybara</a>, <a href="http://appium.io/">Appium</a>など）も使いこなしていきましょう。</p>
+
+<h3 id="見える化">見える化</h3>
+
+<p>割れ窓理論<sup id="fnref8"><a href="#fn8" rel="footnote">8</a></sup>が示すように、割れた窓（汚いコード）を放置するといずれ全ての窓が割れていきます。たとえ自分が書いたコードでなくても、汚いコードを放置しないようにしましょう。そのためにメトリクスを取って、数字化・定量化してする「見える化」を進めましょう。例えば、<a href="https://github.com/colszowka/simplecov">SimpleCov</a> や <a href="https://coveralls.io/">Coveralls</a>を使ってテストカバレッジ率等を常に把握することができます。</p>
+
+<p>ツールを使うとたくさんの警告が出たりしますがしきい値を調整したり、最初は一部の警告を無視する設定を加えるなど、うまく使いこなしていきましょう。また、メトリクスの分子/分母の数字（ex.カバレッジ率60%など）ではなく、時間を追って変化する数字の相対値に着目することも、モチベーションを保つためのコツです。</p>
+
+<h3 id="静的解析を使いこなす">静的解析を使いこなす</h3>
+
+<p>普段プログラマの私達がテストと呼んでいるものの多くは動的テストです。動的とは、対象のコードを動かして検証を行う、ということです。動的テストとは異なり、対象のコードを動かさずに検証を行うテストが静的テストです。コードの行数や重複率、循環的複雑度等を計測してコードの質やバグ潜在リスクを検証します。レガシーコードの多くはそもそも動的テストができないような構造になっているので、対象を動かさずに検証する静的テストの重要度が増します。</p>
+
+<p>静的解析には <a href="http://pmd.sourceforge.net/">PMD</a>, <a href="https://github.com/bbatsov/rubocop">Rubocop</a>, <a href="http://www.coverity.com/">Coverity</a>といったツールや<a href="https://codeclimate.com/">Code Climate</a> のようなサービスがあります。</p>
+
+<p>コードベース全体に対して静的検証を行なって全体の質のばらつきや特に複雑なところを検出し、特に複雑な部分の改善にあたっては、さらにその部分に絞った静的検証を継続的に行い、時間を追った複雑度の変化等を追跡します。</p>
+
+<h3 id="コードレビュー">コードレビュー</h3>
+
+<p>コードの品質を上げるために、コードレビューを行うためのインフラを整備していきましょう。</p>
+
+<p>そのために <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a>, <a href="https://takezoe.github.io/gitbucket/">GitBucket</a> 等を導入したり、WIP PR<sup id="fnref9"><a href="#fn9" rel="footnote">9</a></sup> を取り入れることで、仲間のコードを見る/見せる文化を育てましょう。</p>
+
+<h3 id="シンプルさ">シンプルさ</h3>
+
+<blockquote>
+<p>シンプルさは信頼性の前提である</p>
+
+<p>by <a href="https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%89%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%80%E3%82%A4%E3%82%AF%E3%82%B9%E3%83%88%E3%83%A9">Edsger Wybe Dijkstra</a> 計算機科学者・構造化プログラミング提唱者</p>
+
+<p><img alt="Edsger Wybe Dijkstra" src="/images/2015/02/study-meeting-by-twada/225px-Edsger_Wybe_Dijkstra.jpg" /></p>
+</blockquote>
+
+<p>「シンプルさ」を貴びましょう。迷ったらシンプルな方を選ぶべきです。
+「simple と easy は異なる」（Ricky Hickyの講演「<a href="http://eed3si9n.com/ja/simplicity-matters">シンプルさの必要性</a>」より）ということも抑えておくとよりベターです。</p>
+
+<p>「シンプルさ」は、UNIX思想にも垣間見ることができます。</p>
+
+<h3 id="モジュール化の原則">モジュール化の原則</h3>
+
+<blockquote>
+<p>&ldquo;ぶざまな姿をさらさずに複雑なソフトウェアを書く唯一の方法は、全体としての複雑さの度合いを下げることだ&rdquo;</p>
+
+<p>&ldquo;つまり、適切に定義されたインターフェイスで結び付けられた単純な部品からシステムを作り上げるのだ。 こうすれば、ほとんどの問題は局所化されるし、全体を壊さずに部品だけを改良することも不可能ではなくなる。&rdquo;</p>
+
+<p>&ndash;『<a href="http://www.yodobashi.com/The-Art-of-UNIX-Programming-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000454639/">The Art of UNIX Programming</a>』より</p>
+</blockquote>
+
+<p>シンプルなものを組み合わせて複雑性に対処すべきです。
+たとえばシェルスクリプトのように、移植性の高いモジュール化された部品（コマンド）を組み合わせて、複雑な処理を実現する方針を取り入れましょう。</p>
+
+<p>参考までに、UNIX思想における原則を引用しておきます。</p>
+
+<blockquote>
+<p>モジュール化の原則 : クリーンなインターフェイスで結合される単純な部品を作れ。</p>
+
+<p>明確性の原則 : 巧妙になるより明確であれ。</p>
+
+<p>組み立て部品の原則 : 他のプログラムと組み合わせられるように作れ。</p>
+
+<p>分離の原則 : メカニズムからポリシーを切り離せ。エンジンからインターフェイスを切り離せ。</p>
+
+<p>単純性の原則 : 単純になるように設計せよ。複雑な部分を追加するのは、どうしても必要なときだけに制限せよ。</p>
+
+<p>倹約の原則 : 他のものでは代えられないことが明確に実証されない限り、大きなプログラムを書くな。</p>
+
+<p>透明性の原則 : デバッグや調査が簡単になるように、わかりやすさを目指して設計せよ。</p>
+
+<p>安定性の原則 : 安定性は、透明性と単純性から生まれる。</p>
+
+<p>&ndash; 『<a href="http://www.yodobashi.com/UNIX%E3%81%A8%E3%81%84%E3%81%86%E8%80%83%E3%81%88%E6%96%B9%E2%80%95%E3%81%9D%E3%81%AE%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3%E3%81%A8%E5%93%B2%E5%AD%A6-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000085574/">UNIXという考え方―その設計思想と哲学</a>』より</p>
+</blockquote>
+
+<h4 id="エレガント">エレガント</h4>
+
+<p>シンプルであることは「美しさ」にもつながります。</p>
+
+<blockquote>
+<p>&ldquo;Elegance is a combination of power and simplicity.&rdquo;</p>
+
+<p>エレガンスは、力と単純性が結合して生まれる。</p>
+
+<p>&ldquo;Elegant code is not only correct but visibly, transparently correct.&rdquo;</p>
+
+<p>エレガントなコードは、ただ正しいだけではなく目に見える透明な形で正しい。</p>
+
+<p>&ndash;『<a href="http://www.yodobashi.com/The-Art-of-UNIX-Programming-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000454639/">The Art of UNIX Programming</a>』より</p>
+</blockquote>
+
+<p>　</p>
+
+<p>ロジックも見た目も複雑なコードを、シンプルで美しいコードに置き換えていきましょう。</p>
+
+<blockquote>
+<p>Keep It Short and Simple</p>
+
+<p>&ndash; <a href="https://ja.wikipedia.org/wiki/KISS%E3%81%AE%E5%8E%9F%E5%89%87">KISSの原則</a></p>
+</blockquote>
+
+<h3 id="ボーイスカウトルール">ボーイスカウトルール</h3>
+
+<p>一つ一つは小さくても、積み重なれば信じられないほど大きくなります。
+日々の改善を促すために「ボーイスカウトルール」を適用してみましょう。</p>
+
+<blockquote>
+<p>&ldquo;モジュールをチェックインする際には、必ずチェックアウト時よりも美しくする&rdquo;</p>
+
+<p>by <a href="http://programmer.97things.oreilly.com/wiki/index.php/Uncle_Bob">Robert C. Martin</a> - アジャイルソフトウェア開発者  -</p>
+
+<p><img alt="UncleBob
+" src="/images/2015/02/study-meeting-by-twada/UncleBob.jpg" /></p>
+</blockquote>
+
+<p>つまり「 fetch した時より push は綺麗にする」のです。</p>
+
+<h3 id="背中を見せる">背中を見せる</h3>
+
+<p>やったことがないことに取り掛かるのは誰でも大変です。
+なので、サンプルコード/チュートリアル/デモを用意し、最初はコピペでもいいので真似してもらう土台を作りましょう。</p>
+
+<p>大事なのは「テストのある生活を体験してもらう」こと。
+その次にテストのメンテナンスを学んでいきましょう。</p>
+
+<h3 id="最後に-&quot;social-change-starts-with-you&quot;">最後に &ldquo;Social Change starts with YOU&rdquo;</h3>
+
+<blockquote>
+<p>&ldquo;できるからやるのではない やるからできるようになる</p>
+
+<p>あなたが書けるようにならなければ、誰も書けるようにはならない&rdquo;</p>
+
+<p>by <a href="https://twitter.com/t_wada">Takuto Wada</a> -テスト駆動開発の伝導師-</p>
+
+<p><img alt="twada.jpg
+" src="/images/2015/02/study-meeting-by-twada/twada.jpg" /></p>
+</blockquote>
+
+<p>　</p>
+
+<h3 id="まとめ">まとめ</h3>
+
+<p>和田さんによる「レガシーコード改善の戦略と戦術」講演は以上になります。
+前篇(戦略)でどのように考えながら導入すべきなのかに続いて、後篇(戦術)では具体的な方法や重視すべき指針が示されました。</p>
+
+<p>講演後の質疑応答でも、和田さんと弊社エンジニアとのより具体的で活発なやりとりが続き、わずか２時間程でしたが大変内容が濃い勉強会となりました。和田さん、本当にありがとうございました！！</p>
+
+<p>後篇（戦術）をまとめると、</p>
+
+<blockquote>
+<p>どこからテストを書き始めるかについていくつかの切り口がありますが、チーム/プロジェクトによって適切なものを決めていきましょう。皆で一斉に始めるのではなく、ペアプログラミング等を通じて一人ずつ・自ら育つような方針で進めましょう。</p>
+
+<p>テストを書き進めるにあたりTDDやカバレッジなどに最初からこだわる必要はありません。ですが、テストの「再現性」と「独立性」だけはこだわって進めましょう。</p>
+
+<p>実際に複雑なコードの内側に手を入れるために「レガシーコード改善ガイド」に書かれている「仕様化テスト」と「絞り込み点」に対するテストを書くことをおすすめします。また、外側の全体（結合）テストを書き進めた後に、内側のユニットテストを攻めていくいく方法もあります。設計の可動域の確保も意識し、必要に応じてE2Eテストも取り入れていきましょう。</p>
+
+<p>コードの「見える化」を進めるためにメトリクスを取り、静的解析でコードの質を検証・変化を追跡し、コードレビューを取り入れてコードの品質を上げていきましょう。</p>
+
+<p>既に複雑になっているコードにモジュール化の原則を適用し、シンプルなものを組み合わせて複雑性に対処しましょう。それは「エレガント」なコードにもつながります。</p>
+
+<p>サンプルコードやデモを用意し、まずは真似してもらって「テストのある生活を体験して」もらいましょう。ボーイスカウトルールも取り込んで、日々の改善も促していきましょう。</p>
+
+<p>&ldquo;あなたが書けるようにならなければ、誰も書けるようになりません。&rdquo;</p>
+
+<p>まずあなたからテストを書いて、レガシーコード改善を始めていきましょう！</p>
+</blockquote>
+
+<p>　
+　</p>
+
+<p>本講演のスライドと登場した書籍を、こちらでまとめてご紹介いたします。</p>
+
+<ul>
+<li>(スライド)<a href="http://twada.herokuapp.com/presentations/wewlc/wewlc.html">レガシーコード改善の戦略と戦術 - 和田卓人</a></li>
+<li><p><a href="http://www.yodobashi.com/%E3%83%AC%E3%82%AC%E3%82%B7%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E6%94%B9%E5%96%84%E3%82%AC%E3%82%A4%E3%83%89%E2%80%95%E4%BF%9D%E5%AE%88%E9%96%8B%E7%99%BA%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0-Object-Oriented-SELECTION-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000594816/">レガシーコード改善ガイド (Object Oriented SELECTION): マイケル・C・フェザーズ, ウルシステムズ株式会社, 平澤 章, 越智 典子, 稲葉 信之, 田村 友彦, 小堀 真義</a></p></li>
+<li><p><a href="http://www.yodobashi.com/%E3%83%AA%E3%83%BC%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E7%8F%BE%E5%A0%B4%E2%80%95%E3%82%AB%E3%83%B3%E3%83%90%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%A7%E8%A6%8F%E6%A8%A1%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E9%81%8B%E5%96%B6-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009001978682/">リーン開発の現場 カンバンによる大規模プロジェクトの運営: Henrik Kniberg, 角谷 信太郎, 市谷 聡啓, 藤原 大</a></p></li>
+<li><p><a href="http://www.yodobashi.com/The-Art-of-UNIX-Programming-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000454639/">The Art of UNIX Programming: Eric S.Raymond, 長尾 高弘</a></p></li>
+<li><p><a href="http://www.yodobashi.com/UNIX%E3%81%A8%E3%81%84%E3%81%86%E8%80%83%E3%81%88%E6%96%B9%E2%80%95%E3%81%9D%E3%81%AE%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3%E3%81%A8%E5%93%B2%E5%AD%A6-%E5%8D%98%E8%A1%8C%E6%9C%AC/pd/100000009000085574/">UNIXという考え方―その設計思想と哲学: Mike Gancarz, 芳尾 桂</a></p></li>
+</ul>
+
+<p>　
+　</p>
+
+<h2 id="和田さんとおいしい懇親会">和田さんとおいしい懇親会</h2>
+
+<p>貴重なご講演を頂いた和田さんへ御礼と交流を兼ねて、弊社エンジニア主催で懇親会を開催いたしました。</p>
+
+<p>スパークリングワインで「乾杯」！</p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/scene_2.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_1.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_2.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_3.jpg" /></p>
+
+<p>　
+　
+　</p>
+
+<p>美味しいワインと料理と共に、話も箸も弾みます。</p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/scene_5.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_4.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_5.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_6.jpg" /></p>
+
+<p>　
+　
+　</p>
+
+<p>昔からの友人同士である弊社CTO大場と和田さんとの一枚です！</p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/scene_3.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_7.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_8.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/food_9.jpg" /></p>
+
+<p><img src="/images/2015/02/study-meeting-by-twada/scene_4.jpg" /></p>
+
+<p>　
+　</p>
+
+<p>※今回の懇親会ではこちらのレストランを利用させていただきました。
+美味しい料理とワインを堪能させていただき、この場を借りてエンジニア一同より感謝の意を述べさせていただきますm(__)m</p>
+
+<p><a href="http://tabelog.com/tokyo/A1303/A130301/13173001/">八百屋カフェ SHIBUYA （やおやかふぇ） - 渋谷/バル・バール [食べログ]
+<img alt="八百屋カフェSHIBUYA" src="/images/2015/02/study-meeting-by-twada/yaoya-cafe.jpg" /></a></p>
+
+<p>　
+　
+　</p>
+
+<p>クラウドワークスでは内容の濃い勉強会が開催されるだけでなく、オシャレな会食にお出かけしたりもしています！
+興味をもったエンジニアやデザイナーは、<a href="https://crowdworks.co.jp/recruit/engineer/">こちら</a>でお待ちしています！</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p><a href="https://ja.wikipedia.org/wiki/%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%BC%E3%83%89%E8%A7%A3%E6%9E%90">静的コード解析 - Wikipedia</a>&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn2">
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%9A%E3%82%A2%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0">ペアプログラミング - Wikipedia</a>&nbsp;<a href="#fnref2" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn3">
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA">テスト駆動開発 - Wikipedia</a>&nbsp;<a href="#fnref3" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn4">
+<p><a href="https://ja.wikipedia.org/wiki/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88">単体テスト - Wikipedia</a>&nbsp;<a href="#fnref4" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn5">
+<p><a href="https://ja.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&rsquo;t repeat yourself - Wikipedia</a>&nbsp;<a href="#fnref5" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn6">
+<p>（補足知識）テストコードは フラット or DRY のどちらに書くべきなのかという議論が数年前にありました。これは歴史が答えを出しており、フラットに書くとコードの重複によりメンテナンスコストが高くなり、「テストの修正が大変だからプロダクトコードの修正をやめよう」といった本末転倒な事態が観測されたため、現在では「DRYに書くべき」という結論が出ています。&nbsp;<a href="#fnref6" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn7">
+<p>「レガシーコード改善ガイド」付録B用語集より&nbsp;<a href="#fnref7" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn8">
+<p><a href="https://ja.wikipedia.org/wiki/%E5%89%B2%E3%82%8C%E7%AA%93%E7%90%86%E8%AB%96">割れ窓理論 - Wikipedia</a>&nbsp;<a href="#fnref8" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn9">
+<p>Work In Progress Pull Request: <a href="http://www.slideshare.net/asuenami/wip-pr">Wip prをやってみた</a>, <a href="https://pepabo.github.io/docs/github/workflow.html">github を用いた開発フロー テンプレート</a>, <a href="https://speakerdeck.com/hotchpotch/pull-request-woli-yong-sitakai-fa-wakuhuro">pull request を利用した開発ワークフロー</a> など&nbsp;<a href="#fnref9" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/70d31d2a58c69153b84b7a0f5d648ea7?s=32'>
+<a href="https://twitter.com/ctokoro_me">Chikahiro Tokoro</a>
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>

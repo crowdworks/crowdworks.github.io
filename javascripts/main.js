@@ -1,0 +1,1 @@
+$(function(){var i=$(window).width(),w=$(window).height();$(".article-cover").css("width",i).css("height",.5*w)}),$(window).resize(function(){var i=$(window).width(),w=$(window).height();$(".article-cover").css("width",i).css("height",.5*w)});

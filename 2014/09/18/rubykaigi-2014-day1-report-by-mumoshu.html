@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10 lt-ie9" lang="en-us"> <![endif]-->
+<!--[if lt IE 10]> <html class="no-js lt-ie10" lang="en-us"> <![endif]-->
+<!--[if !IE]> > <![endif]-->
+<html class='no-js' lang='en'>
+<!-- <![endif] -->
+<head>
+<title>RubyKaigi 2014 1日目 参加レポート by @mumoshu - CrowdWorks Engineer Blog</title>
+<meta charset='utf-8' content='text/html' http-equiv='content-type'>
+<meta content='ie=edge,chrome=1' http-equiv='x-ua-compatible'>
+<meta content='' name='description'>
+<meta content='' name='author'>
+<meta content='http://engineer.crowdworks.jp/images/rubykaigi/2014/badge-for-official-sponsor@2x.png' property='og:image'>
+<meta content='image/png' property='og:image:type'>
+<meta content='250' property='og:image:width'>
+<meta content='250' property='og:image:height'>
+<meta content='ja_jp' property='og:locale'>
+<meta content='article' property='og:type'>
+<meta content='RubyKaigi 2014 1日目 参加レポート by @mumoshu' property='og:title'>
+<meta content='http://engineer.crowdworks.jp/2014/09/18/rubykaigi-2014-day1-report-by-mumoshu.html' property='og:url'>
+<meta content='2014-09-18T00:30:00Z' property='article:published_time'>
+<meta content='ruby' property='article:tag'>
+<meta content='rubykaigi' property='article:tag'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width' name='viewport'>
+<meta content='initial-scale=1.0,user-scalable=no,maximum-scale=1' media='(device-height: 568px)' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='translucent-black' name='apple-mobile-web-app-status-bar-style'>
+<link href='/images/favicon.ico' rel='shortcut icon'>
+<link href='/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='/images/apple-touch-icon-57x57-precomposed.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
+<link href='/images/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+<link href='/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<link href='/feeds.xml' rel='alternate' title='CrowdWorks Engineer Blog - Atom' type='application/atom+xml'>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blog.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/highlight-ruby.css" rel="stylesheet" type="text/css" />
+</head>
+<body class='page' data-spy='scroll' data-target='.navbar-custom' id='page-top'>
+<div id='fb-root'></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class='header'>
+<section class='article-intro container' style='margin-top: 0px'>
+<div class='row'>
+<div class='col-md-10 col-md-offset-1 blog-article clearfix'>
+<a href="http://engineer.crowdworks.jp/"><img class="header-logo" src="/images/crowdworks-logo.png" /></a>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' data-text=' CrowdWorks EngineerBlog' data-url='http://engineer.crowdworks.jp/' href='https://twitter.com/share/'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-href='http://engineer.crowdworks.jp/' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/http://engineer.crowdworks.jp/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium' href='http://engineer.crowdworks.jp/'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</section>
+</div>
+
+<div class='article-cover'></div>
+<div class='article'>
+<section class='article-intro container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2 blog-article'>
+<div class='article-info clearfix'>
+<p class='article-date'>2014/09/18</p>
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+<h1 class='article-title'>RubyKaigi 2014 1日目 参加レポート by @mumoshu</h1>
+</div>
+</div>
+</section>
+<section class='article-body container content-section' id='body'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<p>9/18(木)に開催された <a href="http://rubykaigi.org/2014">RubyKaigi 2014</a> 1日目の参加レポートです。
+弊社クラウドワークスも、<a href="http://rubykaigi.org/2014/sponsors">多くの有名企業に並んでスポンサーをさせていただいている</a>ので、全力で宣伝させていただきます！</p>
+
+<p>聴講しながら勢いてまとめているので読みづらい点もあると思いますが、全力で更新していきます！！</p>
+
+<p><img title="クラウドワークスはRubyKaigi 2014のオフィシャルスポンサーです!" alt="RubyKaigi 2014 Official Sponsor" src="/images/rubykaigi/2014/badge-for-official-sponsor@2x.png" /></p>
+
+<p></p>
+
+<ul>
+<li>
+<a href="#各種情報">各種情報</a>
+<ul>
+<li>
+<a href="#スケジュール">スケジュール</a>
+</li>
+<li>
+<a href="#ustream">Ustream</a>
+</li>
+</ul>
+
+<p></li>
+<li>
+<a href="#9:30~-入場">9:30~ 入場</a>
+</li>
+<li>
+<a href="#10:15~-オープニング">10:15~ オープニング</a>
+</li>
+<li>
+<a href="#10:30~-cruby-committers-who's-who-in-2014">10:30~ CRuby Committers Who&rsquo;s Who in 2014</a>
+<ul>
+<li>
+<a href="#tomoyuki-chikanaga,-@nagachika-さん-at-groovenauts,-inc.">Tomoyuki Chikanaga, @nagachika さん at Groovenauts, Inc.</a>
+</li>
+<li>
+<a href="#koichi-sasada-@ko1-さん-at-heroku,-inc.">Koichi Sasada @ko1 さん at Heroku, Inc.</a>
+</li>
+<li>
+<a href="#narihiro-nakamura,-@nariさん">Narihiro Nakamura, @nariさん</a>
+</li>
+<li>
+<a href="#matz">matz</a>
+</li>
+<li>
+<a href="#kazuhiro-nishiyama,-@kazuさん">Kazuhiro NISHIYAMA, @kazuさん</a>
+</li>
+<li>
+<a href="#hiroshi-shibata,-@hsbtさん-at-gmo-pepabo,-inc.">Hiroshi SHIBATA, @hsbtさん at GMO Pepabo, Inc.</a>
+</li>
+<li>
+<a href="#shota-fukumori,-@sorah-at-cookpad-inc.">Shota Fukumori, @sorah at Cookpad Inc.</a>
+</li>
+<li>
+<a href="#kouji-takao,-@kouji">Kouji takao, @kouji</a>
+</li>
+<li>
+<a href="#kazuki-tsujimoto,-@ktsj-at-nomura-research-institute,-ltd.">Kazuki Tsujimoto, @ktsj at Nomura Research Institute, Ltd.</a>
+</li>
+<li>
+<a href="#aaron-patterson,-@tenderlove-at-at&t-->-redhat,-inc.&ldquo;&gt;Aaron Patterson, @tenderlove at AT&amp;T -&gt; RedHat, Inc.</a>
+</li>
+<li>
+<a href="#keiju-ishitsuka,-@keiju">Keiju Ishitsuka, @keiju</a>
+</li>
+<li>
+<a href="#masatoshi-seki,-@seki">Masatoshi SEKI, @seki</a>
+</li>
+<li>
+<a href="#@zzak">@zzak</a>
+</li>
+<li>
+<a href="#kouhei-sutou,-@kou-at-clearcode,-inc.">Kouhei Sutou, @kou at ClearCode, Inc.</a>
+</li>
+<li>
+<a href="#aaron-at-github,-inc.">Aaron at GitHub, Inc.</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#11:00~-スポンサーアピール">11:00~ スポンサーアピール</a>
+</li>
+<li>
+<a href="#11:00~-キーノート:-build-up-ruby-interepreter---what-is-easy-and-what-is-difficult?-by-@ko1">11:00~ キーノート: Build-up Ruby interepreter - What is easy and what is difficult? by @ko1</a>
+<ul>
+<li>
+<a href="#ruby-10th-anniversary">Ruby 10th Anniversary</a>
+</li>
+<li>
+<a href="#who-am-i">Who am I</a>
+</li>
+<li>
+<a href="#本題:-ruby-developmentの何が難しくて何が易しいのか">本題: Ruby developmentの何が難しくて何が易しいのか</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#12:00~-ランチブレーク">12:00~ ランチブレーク</a>
+</li>
+<li>
+<a href="#13:30~-controller-testing:-you’re-doing-it-wrong-@-hall-b">13:30~ Controller Testing: You’re Doing It Wrong @ Hall B</a>
+<ul>
+<li>
+<a href="#before_filter">before_filter</a>
+</li>
+<li>
+<a href="#authorization">Authorization</a>
+</li>
+<li>
+<a href="#rails4-+-responedrs">Rails4 + Responedrs</a>
+</li>
+<li>
+<a href="#little-to-no-logic-in-controllers">Little to no logic in controllers</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#14:00~-continuous-delivery-at-github">14:00~ Continuous Delivery at GitHub</a>
+<ul>
+<li>
+<a href="#automation">Automation</a>
+</li>
+<li>
+<a href="#tests">Tests</a>
+</li>
+<li>
+<a href="#prs">PRs</a>
+</li>
+<li>
+<a href="#feature-flags">Feature Flags</a>
+</li>
+<li>
+<a href="#chat-ops">Chat Ops</a>
+</li>
+<li>
+<a href="#rails-3アップグレードの話">Rails 3アップグレードの話</a>
+</li>
+<li>
+<a href="#リリース後">リリース後</a>
+</li>
+<li>
+<a href="#締めのメッセージ">締めのメッセージ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#14:30~-what-is-your-app's-problem?-@-hall-b">14:30~ What is your app&rsquo;s problem? @ Hall B</a>
+<ul>
+<li>
+<a href="#h12エラー">H12エラー</a>
+</li>
+<li>
+<a href="#memory-quota-exceed">Memory quota exceed</a>
+</li>
+<li>
+<a href="#いますぐ初めて欲しいこと">いますぐ初めて欲しいこと</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#15:30~-non-linear-pattern-matching-against-unfree-data-types-in-ruby-(egison-pattern-matching-in-ruby)-@-hall-a">15:30~ Non-Linear Pattern Matching against Unfree Data Types in Ruby (Egison Pattern Matching in Ruby) @ Hall A</a>
+</li>
+<li>
+<a href="#16:00~-hypermedia:-the-missing-element-to-building-adaptable-web-apis-in-rails-@-hall-b">16:00~ Hypermedia: the Missing Element to Building Adaptable Web APIs in Rails @ Hall B</a>
+<ul>
+<li>
+<a href="#apiは変化に適用しなければならない">APIは変化に適用しなければならない</a>
+</li>
+<li>
+<a href="#apiをよくするため、密結合を避ける">APIをよくするため、密結合を避ける</a>
+</li>
+<li>
+<a href="#hypermicrodata-gem">Hypermicrodata gem</a>
+</li>
+<li>
+<a href="#まとめ">まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#16:30~-jruby-9000-project-update-@-hall-a">16:30~  JRuby 9000 Project Update @ Hall A</a>
+<ul>
+<li>
+<a href="#new-runtime-internal-representation-(ir)">New Runtime Internal Representation (IR)</a>
+</li>
+<li>
+<a href="#ioまわりの改善について">IOまわりの改善について</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#ruby-committers-versus-the-world">Ruby Committers versus the World</a>
+</li>
+<li>
+<a href="#この記事で利用している素材について">この記事で利用している素材について</a>
+</li>
+</ul></p>
+
+<h2 id="各種情報">各種情報</h2>
+
+<h3 id="スケジュール">スケジュール</h3>
+
+<p>RubyKaigiの公式サイトにスケジュールが掲載されています。</p>
+
+<p><a href="http://rubykaigi.org/2014/schedule">RubyKaigi 2014 | Schedule</a></p>
+
+<h3 id="ustream">Ustream</h3>
+
+<p>当日参加できない方向けには、USTが用意されていました。素晴らしいですね!</p>
+
+<ul>
+<li><a href="http://www.ustream.tv/channel/rubykaigi1">Hall A</a></li>
+<li><a href="http://www.ustream.tv/channel/rubykaigi2">Hall B</a></li>
+</ul>
+
+<h2 id="9:30~-入場">9:30~ 入場</h2>
+
+<p><img alt="入り口にスポンサーのロゴが貼られていました" src="http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10684117_547926005309429_67661353_n.jpg" /></p>
+
+<p>9:40頃に入場しましたが、受付がスムーズで運営力の高さを感じました！入り口にスポンサーのロゴが貼られていました。</p>
+
+<h2 id="10:15~-オープニング">10:15~ オープニング</h2>
+
+<p><img src="http://photos-c.ak.instagram.com/hphotos-ak-xaf1/10617016_810695668966858_1864048227_n.jpg" /></p>
+
+<p>角谷さんによるオープニングセッション。挨拶や、Rubyが世界中で使われていて、日本はその誕生の地であること、スポンサーの紹介と謝辞など。面白いのはWifiスポンサーで、SIDを自由に付けられる。今回はDeNAさんが「dena<em>use</em>ruby」というSIDで宣伝されてましたw</p>
+
+<p>RubyKaigiはセミインターナショナルカンファレンス。通訳あり。通訳ありのカンファレンスって運営が大変なのに、やりきるRubyKaigiすごい。</p>
+
+<h2 id="10:30~-cruby-committers-who&#39;s-who-in-2014">10:30~ CRuby Committers Who&rsquo;s Who in 2014</h2>
+
+<p><img src="http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10706650_350416291784709_1651035160_n.jpg" /></p>
+
+<p>次は近永さんにバトンタッチ。
+日本やRubyKaigiにはCRubyコミッタが多く集まるので、今回はその人達に質問できるセッションがあります。セッションは所定のはっしゅた　</p>
+
+<p>CRubyにはbotも含めると84ものアカウントがある。個人的な印象としては多い。人間だけでも50人。それぞれ紹介する時間がないので、特に面白そうな人を紹介。今年のRubyKaigiでスピーカーになっているコミッタは、15人。うち三人はキーノートスピーカー。それぞれ発表順で紹介。</p>
+
+<h3 id="tomoyuki-chikanaga,-@nagachika-さん-at-groovenauts,-inc.">Tomoyuki Chikanaga, @nagachika さん at Groovenauts, Inc.</h3>
+
+<ul>
+<li>Rubyの2.1 branch maintainer</li>
+<li>ruby-trunk-chanegs日々のRubyへの変更を日本語ブログに書く、という活動</li>
+<li>RubyPrize 2013受賞</li>
+</ul>
+
+<h3 id="koichi-sasada-@ko1-さん-at-heroku,-inc.">Koichi Sasada @ko1 さん at Heroku, Inc.</h3>
+
+<p>Ruby VMの開発がお仕事。Speed Freak, 昨年はRGenGC開発、今年はIncremental GC開発。Incremental GCはもうtrunkに入っているので、次のRubyバージョンでは使えるようになるはず。それぞれsweepを細切れ、mark&amp;sweepを細切れにする。</p>
+
+<p>ko1さん、ご結婚おめでとうございます！ちなみに、お相手の鳥居さんもスピーカー。スーパーカップルですね。</p>
+
+<h3 id="narihiro-nakamura,-@nariさん">Narihiro Nakamura, @nariさん</h3>
+
+<p>Mr. GC, Lazy Sweep/Bitmap Marking, ko1さんに対抗して、今年はSymbol GC開発。次のRailsバージョンはSymbol GCが欲しいがために、Ruby 2.2以降のみをサポートするらしい。つまり、Ruby 2.1がオワコンになるので、メンテがんばりましょう！</p>
+
+<h3 id="matz">matz</h3>
+
+<p>Yukihiro &quot;Matz&rdquo; Matsumoto</p>
+
+<p>The Creator of Ruby</p>
+
+<p>現在は言語デザイナ(Language Designer)、NaCLのフェロー、Rakutenフェロー、名誉市民、など一枚のスライドに書ききれないくらいの
+技術顧問とか行ってあ行った、親長さんもしならい</p>
+
+<p>matzのコミット。</p>
+
+<p><img src="/images/" /></p>
+
+<p>去年のRubyKaigi以降、matzのコミットはこれだけだったw
+このようにRuby自体の開発はしないものの、Rubyの新機能に関わるジャッジ(新機能を入れるべきかどうか)はmatz。</p>
+
+<h3 id="kazuhiro-nishiyama,-@kazuさん">Kazuhiro NISHIYAMA, @kazuさん</h3>
+
+<ul>
+<li>&lsquo;fiz typo&rsquo; ratio 97 / 143 = 68%。Mr, fox typo</li>
+</ul>
+
+<h3 id="hiroshi-shibata,-@hsbtさん-at-gmo-pepabo,-inc.">Hiroshi SHIBATA, @hsbtさん at GMO Pepabo, Inc.</h3>
+
+<p>Administrator of *.ruby-lang.org (www, bugs, ML)</p>
+
+<ul>
+<li>Test edge ruby (trunk) on raiils</li>
+</ul>
+
+<p>RailsがエッジなRubyで動くかどうか、率先して地雷を踏んでいる。みんな知らないうちに恩恵を受けているはずなので、あったらお礼を言ってあげてください！</p>
+
+<h3 id="shota-fukumori,-@sorah-at-cookpad-inc.">Shota Fukumori, @sorah at Cookpad Inc.</h3>
+
+<ul>
+<li>test/unit maintainer -&gt; dropped from stdlib</li>
+<li>parallel test</li>
+</ul>
+
+<p>Cookpadで発生したRubyの問題などをRubyにフィードバックする。
+最年少コミッタ、Cookpadでは非常に頼りにされるアニキ。
+今回のセッション内容はデプロイの高速化、という骨太な内容。</p>
+
+<h3 id="kouji-takao,-@kouji">Kouji takao, @kouji</h3>
+
+<ul>
+<li>Readline extension maintainer</li>
+<li>MacRuby Commiter</li>
+<li>Ruby Programming Shounendan
+
+<ul>
+<li>http://smalruby.jp/</li>
+<li>ビジュアルプログラミング環境をバックエンドRubyで作ったもの。</li>
+</ul></li>
+</ul>
+
+<h3 id="kazuki-tsujimoto,-@ktsj-at-nomura-research-institute,-ltd.">Kazuki Tsujimoto, @ktsj at Nomura Research Institute, Ltd.</h3>
+
+<ul>
+<li>VM Bug Hunter, ややこしいバグの修正パッチを投げてくださる方</li>
+<li>Pattern Maching (pattern-match)</li>
+<li>Power Assert (test-unit-power_assert)</li>
+</ul>
+
+<p>今回のセッションでも、Power Assertについて聞けるらしい。</p>
+
+<h3 id="aaron-patterson,-@tenderlove-at-at&amp;t--&gt;-redhat,-inc.">Aaron Patterson, @tenderlove at AT&amp;T -&gt; RedHat, Inc.</h3>
+
+<ul>
+<li>psynch/dl/fiddle maintainer</li>
+<li>Rails Commiter</li>
+<li>NokogiriというXMLパーサの開発者。かつてのリリースメールTakoyaki Kamenという小話がついていて、楽しみにされていたらしい.w</li>
+</ul>
+
+<p>最近RedHatに転職されたそうですが、RedHatはJRubyコミッタを擁しているので、今後の活動にも注目。</p>
+
+<h3 id="keiju-ishitsuka,-@keiju">Keiju Ishitsuka, @keiju</h3>
+
+<ul>
+<li>Rubyという名前を提案した方、Ruby&rsquo;s godfather</li>
+<li>irb author &amp; maintainer</li>
+<li>最近はirbのバグ修正などでご活躍</li>
+</ul>
+
+<h3 id="masatoshi-seki,-@seki">Masatoshi SEKI, @seki</h3>
+
+<ul>
+<li>dRuby/rinda/erb author &amp; maintainer</li>
+<li>今回紹介している15人の中で、唯一RubyKaigi以降一回もコミットがない。これらプロダクトがいかに枯れているかわかる！</li>
+<li>今回のセッションは分散処理について</li>
+</ul>
+
+<h3 id="@zzak">@zzak</h3>
+
+<ul>
+<li>Documentation maintainer</li>
+<li>rubygems, rake, rdoc contributor</li>
+<li>Conference freak
+
+<ul>
+<li>England, Singapore, Maxico, Scotland, Taiwan, Japan, Phillippines, India, Australia, South Africa Belgium, &hellip;去年のRubyKaigi以降20カ国のカンファレンスに参加し、17カ国はスピーカーとして登壇。すごい。</li>
+</ul></li>
+<li>今回のセッション内容は「Rubyのエコシステムに対してどうやって貢献していくか」</li>
+</ul>
+
+<h3 id="kouhei-sutou,-@kou-at-clearcode,-inc.">Kouhei Sutou, @kou at ClearCode, Inc.</h3>
+
+<ul>
+<li>rexml/rss/xmlrpc maintainer, XMLにかかわるところ</li>
+<li>テストがちゃんとかかれていたり、リファクタリングと変更のコミットがちゃんと分かれていたり、今どきのきれいなコミットをされる方で、毎日コミットを読む側としては大変ありがたいそうです</li>
+<li>Groonga</li>
+</ul>
+
+<h3 id="aaron-at-github,-inc.">Aaron at GitHub, Inc.</h3>
+
+<ul>
+<li>最終日のKeynoteスピーカー</li>
+<li>Rubyのコアに精通している</li>
+<li>Memory Optimizations</li>
+<li>Inspection/Profiler/Debugger</li>
+<li><code>Hash#[]</code> optimization</li>
+<li><code>ObjectSpace.dump_all</code></li>
+<li>ko1さんとコミット領域が似ていて、ko1さんの愉快な最適化仲間の一人。</li>
+<li>今回のセッション内容はたぶん「実行中Rubyプログラムの状態を見る方法」</li>
+</ul>
+
+<p>Rubyの開発にはたくさんの方が関わっている、ということが伝わると嬉しい、とのこと。</p>
+
+<h2 id="11:00~-スポンサーアピール">11:00~ スポンサーアピール</h2>
+
+<p><img src="http://photos-b.ak.instagram.com/hphotos-ak-xpa1/927442_685797834840121_1766948380_n.jpg" /></p>
+
+<p>Cookpad株式会社技術部長のたかいさん。</p>
+
+<p>Cookpadは国内最大のレシピサイト。178万レシピが投稿されているサービス。Cookpadは3つのチャレンジをしている。</p>
+
+<ol>
+<li>食のプラットフォームとしてレシピ以外のサービスを開発すること
+
+<ul>
+<li>プロのレシピ、料理動画、おでかけ情報共有</li>
+</ul></li>
+<li>Mobile First
+
+<ul>
+<li>アプリはiOS 10.1M, Android 9.9M ダウンロード</li>
+<li>＞突然のモバイルファースト＜</li>
+</ul></li>
+<li>海外展開
+
+<ul>
+<li>インドネシアのサービスを買収して、CTOが駐在している。</li>
+<li>生ハムがバナナのように売られている写真。</li>
+</ul></li>
+</ol>
+
+<ul>
+<li>RubyKaigi 2010~2014まですべてスポンサーをしている（拍手）</li>
+<li>Rubyのコアデベロッパ三人とRubinius開発者も一人。技術ブログもあり。Rubyの良き市民を目指している。</li>
+<li>今日、garageというライブラリがオープンソース化。</li>
+</ul>
+
+<p>Cookpadさんエンジニア採用中！</p>
+
+<h2 id="11:00~-キーノート:-build-up-ruby-interepreter---what-is-easy-and-what-is-difficult?-by-@ko1">11:00~ キーノート: Build-up Ruby interepreter - What is easy and what is difficult? by @ko1</h2>
+
+<p><img src="http://photos-d.ak.instagram.com/hphotos-ak-xaf1/10693380_1543984845831635_836035738_n.jpg" /></p>
+
+<p>「2014年というのは私にとってとても重要な年でした」</p>
+
+<p>「明後日、結婚記念日」</p>
+
+<p>「Rubyを通じて知り合ったので、このような場でご挨拶させていただいて光栄です」</p>
+
+<h3 id="ruby-10th-anniversary">Ruby 10th Anniversary</h3>
+
+<ul>
+<li>10年でここまで来たか、という思いと、10年でまだここまでなのか、という思い</li>
+<li>何が簡単で、何が難しかったかという話</li>
+<li>Ruby developmentのEasy partとDifficult part</li>
+<li>これからRubyがどこに進んでいくのか、どんな課題があるのか</li>
+<li>A programmer, CRuby developer since 2007</li>
+<li>Member of Heroku Matz team</li>
+<li>Fulltime CRuby developer with Matz and Nobu since 2012</li>
+<li>One of the directors of Ruby Association since 2013</li>
+<li>Herokuまでは大学の先生(!)</li>
+<li>Ruby Associationでは500,000yen/projectで3project公募しているので気軽に応募してほしい</li>
+<li>Herokuは今年のBentoスポンサー、Herokuの本も出ました</li>
+</ul>
+
+<p>Understanding Computationの日本語版を手に「この本の監訳をしました」</p>
+
+<p><img alt="この本の監訳をしました" src="http://photos-f.ak.instagram.com/hphotos-ak-xaf1/10693312_624421431011237_980164497_n.jpg" /></p>
+
+<h3 id="who-am-i">Who am I</h3>
+
+<ul>
+<li>YARV: Yet Another RubyVM (1.9-)</li>
+</ul>
+
+<p>私にはRubyはこんなふうに見えています。Ruby Intepreterの部分をつくっています</p>
+
+<p><img src="http://photos-a.ak.instagram.com/hphotos-ak-xap1/927465_1469981506611592_628093403_n.jpg" /></p>
+
+<ul>
+<li><p>2004/01/01に暇だったから始めたものが10年続いて、やってよかった。</p></li>
+<li><p>Fiber (1.9-)</p>
+
+<ul>
+<li>他の言語ではコルーチンやセミコルーチンと呼ばれるもの。</li>
+<li>Fast Context Switchを実現</li>
+</ul></li>
+<li><p>New method cache (2.0-)</p>
+
+<ul>
+<li>Flonum (on 64bit CPU) (2.0-)</li>
+<li>Embedded &ldquo;double&rdquo; into VALUE like FIxnum: About 2 times faster</li>
+</ul></li>
+<li><p>RGenGC: GEnerational GC for Ruby (2.1-)</p>
+
+<ul>
+<li>Introduce RGenGC by inventing &ldquo;WB-unprotected&rdquo; objects technique and reduce marking time dramaticaly</li>
+<li>Incremental GC by same technique (for Ruby 2.2)</li>
+<li>See Rubyist Magazine vol. 0048 or attend RubyCOnf2014</li>
+<li>About 15x speed-up!</li>
+</ul></li>
+<li><p>Performance</p>
+
+<ul>
+<li>Ruby to C compiler</li>
+<li>Ruby to C# compiler</li>
+<li>などなどの開発も研究プロジェクトでされていた</li>
+</ul></li>
+<li><p>http://www.atdot.net/~ko1/activities/ にすべてのアクテビティを書いてある。書いておくと、履歴書つくるときに役に立つ。（いつ転職するかはわからないけど・・）</p></li>
+</ul>
+
+<p>ko1さん「12月に予定がないので誰か呼んでくれないかな」
+<img alt="12月に予定がないので誰か呼んでくれないかな" src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10706647_328838620630348_1885200900_n.jpg" /></p>
+
+<h3 id="本題:-ruby-developmentの何が難しくて何が易しいのか">本題: Ruby developmentの何が難しくて何が易しいのか</h3>
+
+<ul>
+<li>ミッションは「クオリティを高めること」</li>
+<li>ちゃんと動くこと(RUn Ruby program correctly, No bugs!!)</li>
+<li>速く動いて文句言う人はいないので、なるべく速く動かす</li>
+<li>省メモリ・省エネルギー</li>
+<li>拡張性
+
+<ul>
+<li>Ruby intepreter自体がどれくらい手を入れやすいか。バグ修正やワクワクする新しい機能を実装しやすくするために。</li>
+</ul></li>
+<li>トレードオフ
+
+<ul>
+<li>Performance &lt;-&gt; Reliability</li>
+<li>Performance &lt;-&gt; Low resource</li>
+<li>Performance &lt;-&gt; Compatibility</li>
+<li>Performance &lt;-&gt; Extensibility (速度のためにコードをぐちゃらせると、手を入れづらくなる)</li>
+</ul></li>
+<li>トレードオフを知り、</li>
+<li>Rubyはlanguage powerと読みやすさ・下記やすさのトレードオフを乗り越えて生産性を向上させてきた</li>
+</ul>
+
+<h4 id="serial-execution-pperformance,-paralle-execution-performance,-gc-performanceの話">Serial execution Pperformance, Paralle execution performance, GC performanceの話</h4>
+
+<ul>
+<li>VMをシンプルにつくるだけならそんなに難しくない。それを人間が管理可能な形で置いておくとか、最適化をちゃんとやるのが難しい。Cコードとの相互運用性も難しい。</li>
+<li>Add bytecode incrementally
+
+<ul>
+<li>Increase support ruby features</li>
+<li>For YARV, ruby has an answer set! (test case)</li>
+</ul></li>
+<li>Loop fetch and execute instructionsするだけの、
+
+<ul>
+<li>&ldquo;Implementing block data structure is hell&rdquo;</li>
+</ul></li>
+</ul>
+
+<p><img alt="ブロックの実装にあたってはこういうことをちゃんと考えないといけない" src="/images/" /></p>
+
+<ul>
+<li><p>VM記述言語をつくって、それでVMを記述することで保守しやすくした</p></li>
+<li><p>Aggressive optimizations</p>
+
+<ul>
+<li>Method/block inlining</li>
+<li>Constant folding</li>
+<li>Partial redundancy elimination (PRE)</li>
+<li>Lambda lifting</li>
+<li>&hellip; (many well-known traditional optimizations)</li>
+</ul></li>
+<li><p>Key technique is DE-OPTIMIZATION</p>
+
+<ul>
+<li>90年代のJavaやSmalltakは既にやっていたが、これが難しい</li>
+<li>最適化されたコードを、必要なタイミングでまた元に戻す</li>
+</ul></li>
+<li><p>Inteoperatility with C codes</p>
+
+<ul>
+<li>C code is low-levle, faster than Ruby&rsquo;s code</li>
+<li>Howevefr, C code doesn&#39;&rsquo;t have internal details which aggressive optimization requires</li>
+<li>Most of Java class libraries are written in Java program -&gt; Rubiniuys Way</li>
+</ul></li>
+</ul>
+
+<h4 id="parallel-executionどうするか">Parallel executionどうするか</h4>
+
+<ul>
+<li>EASY: 並列スレッドを提供する
+
+<ul>
+<li>博士論文を一部はRuby上で並列スレッドをどう作るか</li>
+</ul></li>
+<li>HARD: 単純に並列スレッドを提供すると、スレッドプログラミングが大変なので、Rubyを書くことが辛くなる、プログラマハッピーでなくなる。
+
+<ul>
+<li>プログラミングモデルの改善やデバッガの提供が必要</li>
+<li>あらゆるところで動機が必要</li>
+</ul></li>
+<li>&ldquo;Why Threads Are A Bad Idea (for most purposes)&rdquo;
+
+<ul>
+<li>Quoted from John Ousterhout, 1995</li>
+</ul></li>
+</ul>
+
+<p>VisualBasicはだれでもできるだろう、C・C++はもっとwizardより、スレッドプログラミングはwizard中のwizardでないとできない</p>
+
+<p><img src="/images/" /></p>
+
+<ul>
+<li>問題は「すべての状態を共有しているので、一つでも同期を間違えるとバグる」</li>
+<li>よくあるバグ: Data race, Atomicity violation, Order violation</li>
+<li>Non-deterministic nature
+
+<ul>
+<li>Bugs are not reproducible</li>
+<li>デバッグがすごくつらくなる</li>
+</ul></li>
+<li>こういう経験をRubyでしてしまうと、RubyがFun/Happyでなくなってしまう。だからRubyに並列スレッドをそのままは入れたくない</li>
+<li>対策
+
+<ul>
+<li>Educate  programmers: しかし人類がスレッドプログラミングをできるようになるのかという問題がある</li>
+<li>他のツールを提供する</li>
+</ul></li>
+</ul>
+
+<p>工夫すればセーフコードが書ける、セーフコードしか書けない、という2種類ある。
+いまは書きやすくて安全なものをみんなが探している状態。</p>
+
+<p><img alt="他の言語でのアプローチ" src="/images/" /></p>
+
+<p>最高性能を出すためにはスレッドプログラミングは確かにはやい。ちゃんとやれば動く。でも人間はミスをするので、デバッグが大変になる。
+free() vs GCの話と同じで、わかってる人はfreeすれば速いが、人間はミスをする。RubyはGCの改良で高速になった。</p>
+
+<ul>
+<li>IDEA
+
+<ul>
+<li>プロセス間通信を良くする</li>
+<li>MVM: Multiple virtual machines
+
+<ul>
+<li>小さなRubyVMを複数動かす</li>
+</ul></li>
+<li>&ldquo;owner threads&rdquo; for each object
+
+<ul>
+<li>それはそれで、グローバルなアクセスをどうするかが難しい</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>すごく面白いテーマなので、誰か一緒に考えてくれるとうれしい。</p>
+
+<ul>
+<li>Non-deterministic behavior kills programmers</li>
+<li>Many research on thread debugging tools
+
+<ul>
+<li>detecting inter-thread conflicts</li>
+<li>Change OS scheduler to make programs deterministic</li>
+</ul></li>
+<li>GC Performace
+
+<ul>
+<li>世代別GCのアルゴリズムを書くのは簡単。100行くらいでかける。でも、でもそれをちゃんとバグ無く書くのが難しい。</li>
+<li>Write barrier technique is required for many GC algorithms, but it is difficult to insert WBs correctly because of compatibility issue</li>
+<li>Non-deterministic behavior: GC bugs appear in unexpected place.</li>
+<li>Solution: Debugging feature</li>
+<li>GC.stress: invoke GC many times forcibly</li>
+<li>CHeck assertions
+
+<ul>
+<li>List up all assertions</li>
+</ul></li>
+<li>detect write barrier miss</li>
+<li>&ldquo;Old objects should not point new objects&rdquo;</li>
+<li>バグでwriter barrierの入れ忘れによりこういう状態になる可能性があるのでassert</li>
+<li>ベンチマークの実行自体は簡単だが、何をはかるか、継続的にどうやるかが難しい。</li>
+<li>ベンチマークのため、早いマシンがねむってたら、貸してください!</li>
+<li>何をはかるか</li>
+<li>microbenchmark</li>
+<li>discourseというRailsアプリのベンチマークスイートを使っているが、これしかないのでRubyがこれに最適化されてしまうw 他の使いやすいテストスイートを提供してくれると嬉しい。</li>
+<li>Ruby 2.1以降「メモリ消費量が増えた」という話を聞くが、それはピークなのか平均なのかメディアンなのか</li>
+<li>Rubyコミッタになるのは簡単。</li>
+<li>でも、Ruby開発者になるのは難しい。
+
+<ul>
+<li>Ruby開発者とはモチベーションを保って継続的にRubyを開発する人。</li>
+<li>Ruby開発者を増やすこと。</li>
+</ul></li>
+<li>学習用のリソース
+
+<ul>
+<li>ko1さんは「Rubyソースコード完全解説」という本を読んでRuby開発者になれた。</li>
+<li>Ruby Under a Microscope。現在日本語へも翻訳中。</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p><img alt="メッセージ" src="/images/" /></p>
+
+<h2 id="12:00~-ランチブレーク">12:00~ ランチブレーク</h2>
+
+<p>午前の部は終わりです！Have a nice bento！</p>
+
+<p>ランチ画像など</p>
+
+<h2 id="13:30~-controller-testing:-you’re-doing-it-wrong-@-hall-b">13:30~ Controller Testing: You’re Doing It Wrong @ Hall B</h2>
+
+<p>By Jonathan Mukai-Heidt, @johnnymukai at Groundwork</p>
+
+<p>TDD・Testingなどの慣習がRubyにはある。その目的は:</p>
+
+<ul>
+<li>Catching regression</li>
+<li>Developing code in isolation</li>
+</ul>
+
+<p>よくあるコントローラテストのアンチパターンを紹介してから、どう解決するかを紹介。</p>
+
+<ul>
+<li><p>Controller Testing Hall of Shame</p>
+
+<ul>
+<li>Stub all the things
+
+<ul>
+<li>意味のないテストになってしまう</li>
+</ul></li>
+<li>Everything is integration
+
+<ul>
+<li>すべてがCucumberのfeatureになっているとか</li>
+</ul></li>
+<li>render_views
+
+<ul>
+<li>聞き取れなかった・・・</li>
+</ul></li>
+<li>No tests at all</li>
+</ul></li>
+<li><p>Controllers often have a big action and small details</p></li>
+<li><p>Authentication, Loeading </p></li>
+<li><p>Small converns are actually very important</p></li>
+<li><p>I was also confused</p></li>
+<li><p>Rails controllers + responders are awesomely declarative</p></li>
+<li><p>What do we really mean when we say declarative</p></li>
+<li><p>Imperative/Declarative</p></li>
+<li><p>Imperative</p>
+
+<ul>
+<li>When deleting a user, if the current iuser is an admin user, then allow the deletion; if the current user is not an admin, do not allow &hellip;</li>
+</ul></li>
+<li><p>Imperative</p>
+
+<ul>
+<li>When a request fora resource comes in , if the rquesit is for JSON &hellip;.</li>
+</ul></li>
+<li><p>Declarative
+this conroller restusn a resource erepstened as jONS or HTML
+Look at how declarative Rails controlelrs can be</p></li>
+</ul>
+
+<h3 id="before_filter">before_filter</h3>
+<pre><code class="highlight plaintext">before_filer :authenticate_user!, except: :show
+before_filter ::load_some_model, ...
+</code></pre>
+
+<h3 id="authorization">Authorization</h3>
+<pre><code class="highlight plaintext">authorize_actions_for SomeResource
+load_and_authorize_resource :foo
+</code></pre>
+
+<h3 id="rails4-+-responedrs">Rails4 + Responedrs</h3>
+
+<h4 id="respond_to">respond_to</h4>
+<pre><code class="highlight plaintext">respond_to :html, :json
+</code></pre>
+<pre><code class="highlight plaintext">def new
+  respond_with @foo
+end
+</code></pre>
+
+<h3 id="little-to-no-logic-in-controllers">Little to no logic in controllers</h3>
+
+<ul>
+<li>Skinny controllerを目指す。</li>
+<li>&ldquo;It&rsquo;s not what 90% of the controllers I come across look like.&rdquo;</li>
+<li>What do we really care about in controllers?
+
+<ul>
+<li>Authentication</li>
+<li>Authorization</li>
+<li>Presence of resource</li>
+<li>What resource are we working with</li>
+<li>Response</li>
+<li>HMTML, jSON, PDF</li>
+</ul></li>
+<li>Tests should help us write better code</li>
+<li>Shared examples cover the small details</li>
+<li>Big actions can be simple</li>
+</ul>
+<pre><code class="highlight plaintext">it { should assign(:some_resource) }
+it { should change(Pizza, :count).by(+1) }
+</code></pre>
+
+<p>Authentication</p>
+
+<p>各controllerのspecで個別にやるのではなく、shared_examplesを使う</p>
+<pre><code class="highlight plaintext">shared_examples_for "an action that requires a login" do
+  # ...
+  before { sign_out :user }
+    it should { ... }
+  end
+</code></pre>
+
+<p>以下のように使う。</p>
+<pre><code class="highlight plaintext">before { sign_in(:user, current_user) }
+
+...
+it should_behave_like "an action that requires a login"
+</code></pre>
+
+<p>Response</p>
+
+<p>Authenticationをshared<em>examplesを使ってテストする方法と同様に、HTMLなどに応答するということをshould</em>behaves_like&hellip;で表現。</p>
+
+<p>Ever since I began Rails work people </p>
+
+<p>What about</p>
+
+<p>ActiveModel is awesome. ActiveModelを使ってSkinny Controllerを実現。</p>
+
+<p>DBとやりとりしないModelはCheap。</p>
+
+<p>Password Resetの例</p>
+
+<ul>
+<li>Client wanted to overhaul a legacy password reset workflow</li>
+<li>Email間違った時にエラーにどうしたい</li>
+<li>既に退会していたらどうしたい</li>
+<li>&gt;突然のFat Controller&lt;</li>
+</ul>
+
+<p>&ldquo;Think nouns, not verbs&rdquo;</p>
+
+<p>Footwork</p>
+
+<ul>
+<li>No gem!</li>
+<li>This will vary from project to project</li>
+<li>Figure out how your project will handle these situations</li>
+</ul>
+
+<p>Habbits</p>
+
+<p>Controller Checklist</p>
+
+<ul>
+<li>Rewards
+
+<ul>
+<li>Easier to test</li>
+<li>Drives good design</li>
+<li>Uniform controllers == Less dev time</li>
+</ul></li>
+</ul>
+
+<h2 id="14:00~-continuous-delivery-at-github">14:00~ Continuous Delivery at GitHub</h2>
+
+<p>By @rsanheim</p>
+
+<ul>
+<li>どうやって一日に50回ダウンタイムなしでデプロイするか</li>
+<li>https://github.com/blog/1110-rob-sanheim-is-a-githubber</li>
+<li>What is Continuous Delivery?</li>
+<li>Key Point is: &ldquo;Software ready to be deployed at any time&rdquo;</li>
+<li>Ship more frequently</li>
+<li>Why should we care?</li>
+<li>All the things are changing quickly</li>
+<li>Besides&hellip; Shipping is fun</li>
+<li>CI is way more fun</li>
+<li>サイクルが長いと、使われないもの開発に時間をかけてしまうことになる可能性が高まる。サイクルが短い方が、Changingな世界では有効。</li>
+</ul>
+
+<p>ポイント</p>
+
+<ul>
+<li>Automation</li>
+<li>Tests</li>
+<li>PRs</li>
+<li>Feature Flags</li>
+<li>Chat Ops</li>
+</ul>
+
+<h3 id="automation">Automation</h3>
+
+<p>プラクティス：同じことを2回やったら、自動化すべき</p>
+
+<h3 id="tests">Tests</h3>
+
+<ul>
+<li>test/models</li>
+<li>test/integration</li>
+<li>test/controllers</li>
+<li>test/lib</li>
+<li>test/view_models</li>
+<li>test/jobs</li>
+<li>test/mailers</li>
+</ul>
+
+<h3 id="prs">PRs</h3>
+
+<p>フィードバックは早く受けられれば受けられるほどいい。
+例えば、6行しか変更がない状態でPRを開く。そしてディスカッションしながらPRを育てる。</p>
+
+<h3 id="feature-flags">Feature Flags</h3>
+<pre><code class="highlight plaintext">def live_update_enabed?
+  logged_in? &amp;&amp; current_user.staff?
+end
+</code></pre>
+
+<p>全公開するときは、Feature Flagのメソッドで必ずtrueを返すようにする。</p>
+
+<h3 id="chat-ops">Chat Ops</h3>
+
+<p>Hubotでつくりこむ。</p>
+
+<h3 id="rails-3アップグレードの話">Rails 3アップグレードの話</h3>
+
+<ul>
+<li>Long lived branches are a smell</li>
+<li>timeboxを区切ってリリースしてみる。必要ないものだとわかったらkillする。</li>
+<li>rails3-reduxブランチをつくって長々と育てるのではなく、早めにmasterにマージ。</li>
+<li>RAILS_VERSION環境変数によってrails 2、3どちらでもbootstrapできるようした。</li>
+<li>Gemfile内でも<code>if rails3?</code>でロードするgemを切り替え。</li>
+</ul>
+
+<h3 id="リリース後">リリース後</h3>
+
+<ul>
+<li>github/dat-scienceでPDCAをまわす</li>
+<li>リリース後はtwitterでユーザの声に耳を傾ける</li>
+<li>&ldquo;Collect Feedback …and act on it&rdquo; 正しいフィードバックを受けて、それに対応することが重要。</li>
+</ul>
+
+<h3 id="締めのメッセージ">締めのメッセージ</h3>
+
+<p>&ldquo;Getting started today&rdquo;</p>
+
+<p>&ldquo;More flexible, more adaptable, more money, more fun&rdquo;</p>
+
+<h2 id="14:30~-what-is-your-app&#39;s-problem?-@-hall-b">14:30~ What is your app&rsquo;s problem? @ Hall B</h2>
+
+<p>By Keiko Odeira, @keiko713 at Heroku, Inc.</p>
+
+<ul>
+<li>サポートチームのメンバー紹介
+
+<ul>
+<li>matz、ko1、nobu、HerokuのRuby、Japanに強いメンバー紹介</li>
+</ul></li>
+<li>HerokuはZendeskを使っているが、&quot;my app is down&quot;で検索してみたら263 resultsもヒットした。今回はアプリが&quot;down&quot;した理由のトップを紹介</li>
+<li>先にネタばらしをしてしまうと、大抵の場合、アプリが何か間違ったことをしていることが原因</li>
+</ul>
+
+<h3 id="h12エラー">H12エラー</h3>
+
+<p>= &ldquo;request timeout error&rdquo;</p>
+
+<ul>
+<li>原因は遅いリクエスト
+
+<ul>
+<li>NeRelicやログをみる。コード、外部サービス、DBの問題がないか調べる。</li>
+</ul></li>
+<li>突発的なトラフィック
+
+<ul>
+<li>&ldquo;Sudden traffic spike can cause downtime&rdquo;</li>
+<li>dynoを増やす。裏側のDBが増えたdynoに対応できるだけのキャパシティをもってることを確認しておく。</li>
+</ul></li>
+</ul>
+
+<h3 id="memory-quota-exceed">Memory quota exceed</h3>
+
+<ul>
+<li>アプリが制限以上のメモリを使うと超遅くなる</li>
+<li>短期的にはアプリを再起動する。</li>
+<li>Ruby 2.1からメモリ消費が増えた。</li>
+<li>メモリリークの可能性もあるので、ツールで見る。</li>
+</ul>
+
+<h3 id="いますぐ初めて欲しいこと">いますぐ初めて欲しいこと</h3>
+
+<h4 id="loggingしましょう">Loggingしましょう</h4>
+
+<ul>
+<li>Herokuは1500行しかログを保存しないので、logging add-onsを使いましょう。</li>
+</ul>
+
+<h4 id="モニタリングしましょう">モニタリングしましょう</h4>
+
+<ul>
+<li>まずNewRelicから始めることをお勧めします。</li>
+</ul>
+
+<h2 id="15:30~-non-linear-pattern-matching-against-unfree-data-types-in-ruby-(egison-pattern-matching-in-ruby)-@-hall-a">15:30~ Non-Linear Pattern Matching against Unfree Data Types in Ruby (Egison Pattern Matching in Ruby) @ Hall A</h2>
+
+<p>バッテリー切れでメモできず(´・ω・｀)
+InfoWorldで&quot;Top 10 programming languages on the rise&quot;にも選出されたプログラミング言語<a href="http://www.egison.org/">Egison</a>と、そのパターンマッチ部分をRubyに移植した<a href="https://github.com/egison/egison-ruby">egison-ruby</a>の紹介。</p>
+
+<p>質問では、</p>
+
+<ul>
+<li>速度はどうなのか? → 大丈夫ではないか</li>
+<li>実際どれくらい読みやすいのか? → 知り合いのプログラマは3時間で読めるようになった</li>
+</ul>
+
+<p>というやりとりがされてました。</p>
+
+<h2 id="16:00~-hypermedia:-the-missing-element-to-building-adaptable-web-apis-in-rails-@-hall-b">16:00~ Hypermedia: the Missing Element to Building Adaptable Web APIs in Rails @ Hall B</h2>
+
+<h3 id="apiは変化に適用しなければならない">APIは変化に適用しなければならない</h3>
+
+<ul>
+<li>APIには2種類ある
+
+<ul>
+<li>Public</li>
+<li>Private</li>
+</ul></li>
+<li>変化は避けられない。Web APIは変化に適応しなければならない</li>
+<li>Changeには2種類ある
+
+<ul>
+<li>バージョンのあり・なし</li>
+<li>後方互換性のあり・なし</li>
+<li>クライアントを壊す・壊さない</li>
+</ul></li>
+<li>後方互換性のない変更はNG
+
+<ul>
+<li>クライアントに変更を強要してしまう</li>
+</ul></li>
+<li>密結合
+
+<ul>
+<li>本当はAPIの変更がクライアントに自動的に反映されてほしい</li>
+</ul></li>
+<li>API Callの考え方は危険。</li>
+</ul>
+
+<h3 id="apiをよくするため、密結合を避ける">APIをよくするため、密結合を避ける</h3>
+
+<ul>
+<li>Hypermediaの考え方を取り入れて、最初にリクエストしたURLが返したレスポンスに含まれるlinkをfollowするだけにする。</li>
+<li>HTMLの例。HTMLではリンクとフォームでワークフローが表現されている。Hypermediaがワークフローを表している。例えば、各画面にはブラウザが次に何をできるかがメニューのようにすべて書かれている。</li>
+<li>クローラの例。クローラはリンクをfollowしたり、フォームをsubmitしたりできる。クローラはHTMLドキュメントの意味を理解している。どうやっているのか?</li>
+<li>Microdataの例。itemtype・itemprop属性でHTMLドキュメント内に構造化されたデータを埋め込むことができる。これにより、データを変えること無くドキュメントの構造を変えることができる。</li>
+<li>schema.org。Bing, Google, Yahoo!, Yandexなどが進めているプロジェクト。</li>
+<li>MicrodataのJSクライアントもあるが、たぶんJSON Web APIにしたいはず。どうすればいいか?</li>
+<li>一般的なJSON Web APIにはlinkとformの概念が足りない。</li>
+<li>JSON + Link header, HAL, JSON+LDなどのJSONの拡張を使う?</li>
+</ul>
+
+<h3 id="hypermicrodata-gem">Hypermicrodata gem</h3>
+
+<ul>
+<li>Hypermicrodata gemを使う。
+
+<ul>
+<li>HypermicrodataはHTMLをサーバサイドでJSONに変換する。</li>
+</ul></li>
+<li>Hypermicrodata gemを使ってRailsでAPIを実装する例
+
+<ul>
+<li>Design resources: 普通に<code>rails g model Note text:text published_at:datetime</code></li>
+<li>Draw a state diagram: クライアントの視点から状態遷移図を書く。</li>
+<li>状態遷移図ではunsafe(安全でない)、non-idempotent(べき等でない)な遷移を区別する</li>
+</ul></li>
+<li>rel属性がpublish、next、prevのようなlinkやbutton要素を場合によってドキュメントに含める。これにより、クライアントは次に何ができるかがわかる。</li>
+<li>この手法の利点
+
+<ul>
+<li>DRY: HTMLとJSONを同時に提供できる</li>
+<li>リンクとフォームがある</li>
+<li>Constraints</li>
+</ul></li>
+<li>この方法を使わず、JSONを直接書きたいときでも、まだやれることはある
+
+<ul>
+<li>link/formパターンを意識するため、状態遷移図を書く</li>
+<li>APIを疎結合にする。そのために、model.to_jsonの代わりにViewテンプレートやJbuilderやRABLを使う。</li>
+<li>&ldquo;Webを支える技術&rdquo;</li>
+</ul></li>
+</ul>
+
+<h3 id="まとめ">まとめ</h3>
+
+<ul>
+<li>Web APIは特別なものではない</li>
+<li>JSONにはデファクトスタンダードなフォーマットはない。</li>
+<li>RESTの原理原則と制約を意識することで、少し良くできる</li>
+<li>HypermediaはRESTの重要な要素の一つ</li>
+<li>&ldquo;Build a Better &amp; Adaptable Web API!&rdquo;</li>
+</ul>
+
+<h2 id="16:30~-jruby-9000-project-update-@-hall-a">16:30~  JRuby 9000 Project Update @ Hall A</h2>
+
+<p>By Thomas E. Enebo (@tom_enebo)</p>
+
+<ul>
+<li>JRuby 9000はJRuby 1.7系とは別で、CRuby 2.2と互換。</li>
+<li>JRuby 9000
+
+<ul>
+<li>Ruby 2.2</li>
+<li>New runtime (IR)</li>
+<li>Major IO and Encodings overhaul</li>
+<li>Code removal/deprecations</li>
+</ul></li>
+</ul>
+
+<h3 id="new-runtime-internal-representation-(ir)">New Runtime Internal Representation (IR)</h3>
+
+<ul>
+<li>IR導入の理由
+
+<ul>
+<li>AST to semantic representation</li>
+<li>Traditional Compiler Design</li>
+<li>Wanted Architectual longevity</li>
+</ul></li>
+<li>意味解析がCFGからIR Instructionsを生成、最適化はCFGをみる、Byte code生成(JVM、Dalkvik向けそれぞれなど)はこれらと別</li>
+<li>それまでのJRubyでは密結合だった</li>
+<li>意味解析が例えば何をやるか
+
+<ul>
+<li>superの簡単化。</li>
+</ul></li>
+<li>set<em>trace</em>func
+
+<ul>
+<li>On-demand instrumentation possible</li>
+<li>Trivial to JIT</li>
+<li>Very easy to understand in source</li>
+</ul></li>
+<li>最適化
+
+<ul>
+<li>Dead Code Elimination</li>
+<li>Constant Propagation</li>
+<li>Method+Block Inlining</li>
+<li>Unboxing wrapped types</li>
+<li>それぞれプラガブルなコンパイラーパス（プラグインのようなもの?）で対応</li>
+</ul></li>
+<li>IRとJVMのミスマッチ。IRよりJVMのほうが制約が強い。
+
+<ul>
+<li>Javaの場合、tryブロックのローカル変数はfinallyブロック内から見えない。Rubyの場合、beginとrescueは同じスコープ。</li>
+</ul></li>
+</ul>
+
+<h3 id="ioまわりの改善について">IOまわりの改善について</h3>
+
+<ul>
+<li>JRubyの問題
+
+<ul>
+<li>JRuby 1.7xはRuby 1.8.xと1.9.xの両対応。M17n対応の違い、それぞれのコードが混在してしまう。</li>
+<li>byte[] -&gt; char[] -&gt; byte[]というJDKのtranscodingが非効率的</li>
+</ul></li>
+<li>解決方法
+
+<ul>
+<li>Port: MRI IOサブシステムをポートする</li>
+<li>MRIのIOと同じバッファリング戦略等</li>
+<li>結果: JRuby 1.7.xと比べて高速なTranscoding・IOも高速化</li>
+</ul></li>
+<li>9000のTODO
+
+<ul>
+<li>起動高速化。現状は1.7.xと比べて最大30%起動が遅い。</li>
+<li>Parser高速化(10~20%)</li>
+</ul></li>
+<li>MRIとの互換性
+
+<ul>
+<li>Refinements</li>
+<li>freezeされた文字列</li>
+<li>coreにある85個くらいのメソッドがまだない</li>
+</ul></li>
+<li>Java Heap != Ruby Heap
+
+<ul>
+<li>Java Heap (hprof) -&gt; Ruby Heap (JSON)に変換するalienistというgem</li>
+<li>そのビュワーalienist_viewer(Railsアプリ)</li>
+<li>Rubyのヒープの内容（オブジェクト）をWebアプリ上で見ることができる</li>
+</ul></li>
+</ul>
+
+<h2 id="ruby-committers-versus-the-world">Ruby Committers versus the World</h2>
+
+<p>Twitterや会場で集めた質問にRubyコミッタの皆さんが答えるコーナー。</p>
+
+<blockquote class="twitter-tweet" lang="ja"><p>bundler が標準添付ライブラリになると便利ですが、可能性はありますか? <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a></p>&mdash; SHIBATA Hiroshi (@hsbt) <a href="https://twitter.com/hsbt/status/504875991500480512">2014, 8月 28</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" lang="ja"><p>数理統計解析の分野においては比較的Rubyと言語的に近いPythonが幅を利かせRubyの陰はほぼ拝見されない様に思われますが、どのようにお考えですか（ex. いや数値解析でも多いに使われている、そもそもその分野での飛躍は目指していない、&hellip;） <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; Gogo tanaka (@gogo_tanaka) <a href="https://twitter.com/gogo_tanaka/status/504455372493447168">2014, 8月 27</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li><a href="http://sciruby.com/">SciRuby</a></li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>ruby に perl の use strict のようなものは入りませんか？ <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; そのっつ (SEO Naotoshi) (@sonots) <a href="https://twitter.com/sonots/status/505367160806326273">2014, 8月 29</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" lang="ja"><p><a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> プロ・コミッターになる方法は？</p>&mdash; がちゃぴん1000世 (@kosaki55tea) <a href="https://twitter.com/kosaki55tea/status/504447541719879680">2014, 8月 27</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Ruby 3.0 で入れたい大きな変更はありますか? <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; SHIBATA Hiroshi (@hsbt) <a href="https://twitter.com/hsbt/status/504447920217677824">2014, 8月 27</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>明日のキーノートで公開?!</li>
+</ul>
+
+<p>会場から質問</p>
+
+<ul>
+<li>Perlのローカル変数/ダイナミックスコープがRubyに入ることはありませんか? </li>
+<li>matz「人類には早すぎた。諦めてください」</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>コミットログを書く時に最も重視していることは何ですか? <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; elcondor (@elcondor) <a href="https://twitter.com/elcondor/status/512485175322636288">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>@nagachikaさん「理由を書いて欲しい。あと、ついでにインデント修正とかはやめていただきたい！」</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>How do you maintain 4k lines configure.in? Any techniques or tools? <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; Jian Weihang (@tonytonyjan) <a href="https://twitter.com/tonytonyjan/status/512508811735617536">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>「一人天才がいるので、その人がメンテしてます」(!)</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Where should the ruby-core team focus, better threading data structures or new concurrency primitives like actors? <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; Aaron Patterson (@tenderlove) <a href="https://twitter.com/tenderlove/status/512518996944375808">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>matzはぼんやりとActorを考えているが、いつ入るかとかは決まってない</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>When will we have macros in the language? (please don’t say never) <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; Laurent Sansonetti (@lrz) <a href="https://twitter.com/lrz/status/512525641804050432">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>matz「macroは入りません。neverっていうな、って書いてるから、<em>絶対</em>」</li>
+<li>matz「macro書くくらいなら、Rubyの場合はコードジェネレータ書いてください」</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Ematzでリリースいつですか <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a></p>&mdash; Zachary Scott (@_zzak) <a href="https://twitter.com/_zzak/status/504450147733221377">2014, 8月 27</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>matz「とりかかってもいないプロジェクトの完成予定はわかりません！」</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Does CRuby still looking for maintainer for specific platform? What are the requirements to be a platform maintainer? <a href="https://twitter.com/hashtag/RubyKaigi?src=hash">#RubyKaigi</a> <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a></p>&mdash; Prem Sichanugrist (@sikachu) <a href="https://twitter.com/sikachu/status/512524474038501377">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>そういえばMac版Rubyのメンテナがいない</li>
+<li>ARM版まじめにメンテしたほうがいいよね</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>日本で Ruby Summer of Code みたいなことやりませんか? お世話になったので今度は出資する側に回りたいです <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> <a href="https://twitter.com/hashtag/rubysoc?src=hash">#rubysoc</a></p>&mdash; 斎藤ただし, Tadashi Saito (@_tad_) <a href="https://twitter.com/_tad_/status/512526627431936000">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>Ruby Associationでやってます</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>rubyのリリース予定は？ <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; usa (@unak) <a href="https://twitter.com/unak/status/512529600404922369">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>さっきRuby 2.2のPreview 1がでました（会場拍手）</li>
+<li>今のうちに各自の環境で2.2 Preview1を動かしてみてください。このままリリースされるとお正月くらいに大変なことになりますよ！</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>そう言えばなんで未定義のインスタンス変数を参照してもエラーにならないっていう仕様にしたんでしょうか…&#10;<a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a></p>&mdash; Yamamoto, Yuji: 山本悠滋 (@igrep) <a href="https://twitter.com/igrep/status/512530666869641216">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>警告は出る?</li>
+<li>エラーにするようなモードがRubyにあってもいいかも。さっき話題にでたstrictモードとか?</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>真偽を反転させる ! に相当する、メソッド版の .not メソッドが欲しいのですが、入る可能性はありますか？<a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a></p>&mdash; igaiga (@igaiga555) <a href="https://twitter.com/igaiga555/status/512531231532015616">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>既に<code>.!</code>メソッドがある (もう何年も前からあったようです)</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p><a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a> 互換性保つためにいろいろ苦労されてるとおもいますが、先ほどの後悔以外にどういうところが苦しいですか？</p>&mdash; #虹のBASHさん (@bash0C7) <a href="https://twitter.com/bash0C7/status/512532635583672320">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>キーワード引数の後方互換性</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Rubyを上手に書くには何に気をつければいいですか？（具体的でなくてすいません） <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/rubykaigi?src=hash">#rubykaigi</a></p>&mdash; blue (@blue_emc2) <a href="https://twitter.com/blue_emc2/status/512532780362637312">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>&ldquo;Write lots of tests&rdquo;</li>
+<li>他の人にコードを見られる環境に身をおくこと。ちゃんとしたものを書くモチベーション</li>
+<li>拡張しようとするとハマるので、最初からプラグイン機構をつけておくこと</li>
+<li>Rubyで上手に書く方法と、他の言語で上手に書く方法にあまり違いはない</li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Ruby community shouldn&rsquo;t give more attention to mruby? Maybe We need a project as Rails for mruby? <a href="https://twitter.com/hashtag/ama?src=hash">#ama</a> <a href="https://twitter.com/hashtag/RubyKaigi?src=hash">#RubyKaigi</a></p>&mdash; Thiago Scalone (@scalone) <a href="https://twitter.com/scalone/status/512532968913371137">2014, 9月 18</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<ul>
+<li>開発者のレベルではmrubyにもアテンションがある</li>
+</ul>
+
+<h2 id="この記事で利用している素材について">この記事で利用している素材について</h2>
+
+<p>この記事でも利用しているRubyKaigiのロゴ・バッジ・バナー画像は、RubyKaigiの公式サイトで配布されています。</p>
+
+<p><a href="http://rubykaigi.org/2014/goodies">RubyKaigi 2014 | Goodies</a></p>
+
+<p>様々なサイズが揃っていて嬉しいですね！
+記事を書く際にライセンス的に利用して問題ない画像を探すのに時間をかけなくて済むのは大変ありがたいです。</p>
+
+<div class='article-info-bottom clearfix'>
+<div class='author'>
+Written by
+<img class='author-gravatar gravatar' src='http://s.gravatar.com/avatar/8e045bf747ca7a90b1d955dc30217271?s=32'>
+<a href="https://twitter.com/mumoshu">Yusuke Kuoka</a>
+</div>
+
+<ul class='share-buttons'>
+<li>
+<a class='twitter-share-button' href='https://twitter.com/share'>Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='fb-like' data-action='like' data-layout='button_count' data-share='false' data-show-faces='false'></div>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<a class='hatena-bookmark-button' data-hatena-bookmark-lang='ja' data-hatena-bookmark-layout='standard-balloon' href='http://b.hatena.ne.jp/entry/' title='このエントリーをはてなブックマークに追加'>
+<img alt='このエントリーをはてなブックマークに追加' height='20' src='http://b.st-hatena.com/images/entry-button/button-only@2x.png' style='border: none;' width='20'>
+</a>
+<script async='async' charset='utf-8' src='http://b.st-hatena.com/js/bookmark_button.js' type='text/javascript'></script>
+</li>
+<li class='article__body__share-buttons__share-button'>
+<div class='g-plusone' data-size='medium'></div>
+<script>
+  window.___gcfg = {lang: 'ja'};
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+<section class='content-section container'>
+<div class='row'>
+<div class='col-md-8 col-md-offset-2'>
+<h2 class='section-title'>
+最近の記事
+</h2>
+<ul class='archive'>
+<li class='archive__article'>
+<a href='/2015/11/06/slack-bot-with-lambda-and-scheduled-event.html'>re:Invent 2015で発表されたAWS Lambdaの新機能を使って、サーバレスなSlackボットをつくりました</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/30/how-to-use-ajimi.html'>サーバ設定diffツールAjimi入門</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/29/surveyed-about-flocker-docker-plugin.html'>re:Inventのブースで知ったDockerのデータボリュームをポータブルにするFlockerについて</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/16/interesting-services-found-at-reinvent-2015-2.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（中編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/15/interesting-services-found-at-reinvent-2015-1.html'>AWS re:Invent 2015で見つけた注目サービスまとめ（前編）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/10/14/reinvent-2015.html'>初めてのAWS re:Invent 2015参戦を写真で振り返る</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/06/01/sezemi-events.html'>【お知らせ】SEゼミ主催イベントに協賛します</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/05/26/engineer-lt.html'>社内LT大会を開催しました！</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/04/08/engineer-intern.html'>クラウドワークス短期エンジニアインターンシップ開催のお知らせ</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/18/study-meeting-by-twada_2.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（後篇：戦術＆懇親会）</a>
+</li>
+<li class='archive__article'>
+<a href='/2015/02/09/study-meeting-by-twada_1.html'>クラウドワークス勉強会「レガシーコード改善の戦略と戦術」（前篇：戦略）</a>
+</li>
+<li class='archive__article'>
+<a href='/2014/10/30/development-camp-2014.html'>クラウドワークス開発合宿 in 美保関</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<section class='content-section text-center' id='download'>
+<div class='download-section'>
+<div class='container'>
+<div class='col-md-8 col-md-offset-2 copyright'>
+<div>© 2014 CrowdWorks, Inc., All rights reserved.</div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/dagre-d3/latest/dagre-d3.min.js" type="text/javascript"></script>
+<script src="//cpettitt.github.io/project/graphlib-dot/latest/graphlib-dot.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-27177676-8","crowdworks.jp"),ga("send","pageview");</script>
+</body>
+</html>
